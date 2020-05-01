@@ -10,8 +10,14 @@
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>A Kotlin port of Github's Scientist library for refactoring critical code paths</description>
-    <url>https://www.github.com/squirrelgrip/Scientist4K</url>
+    <description>A maven root project for SquirrelGrip projects</description>
+    <url>https://www.github.com/squirrelgrip/root</url>
+
+    <scm>
+        <connection>scm:git:https://github.com/SquirrelGrip/root.git</connection>
+        <developerConnection>scm:git:https://github.com/SquirrelGrip/root.git</developerConnection>
+        <url>https://github.com/SquirrelGrip/root</url>
+    </scm>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
