@@ -181,6 +181,7 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
+
     <pluginRepositories>
         <pluginRepository>
             <id>jcenter</id>
