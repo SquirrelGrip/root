@@ -4,7 +4,7 @@
 
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -30,6 +30,7 @@
         <maven-scm-plugin.version>1.11.2</maven-scm-plugin.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+        <travis-maven-plugin.version>1.0.0</travis-maven-plugin.version>
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
 
         <awaitility.version>4.0.2</awaitility.version>
@@ -368,6 +369,16 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.squirrelgrip</groupId>
+                    <artifactId>travis-maven-plugin</artifactId>
+                    <version>${travis-maven-plugin.version}</version>
+                    <configuration>
+                        <token>${env.TRAVIS_TOKEN}</token>
+                        <slug>${project.artifactId}</slug>
+                        <user>SquirrelGrip</user>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
