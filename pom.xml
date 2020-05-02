@@ -4,7 +4,7 @@
 
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -34,7 +34,9 @@
 
         <awaitility.version>4.0.2</awaitility.version>
         <assertj.version>3.15.0</assertj.version>
+        <bouncycastle.version>1.65</bouncycastle.version>
         <cheti.version>1.1.8</cheti.version>
+        <commons-collections.version>4.4</commons-collections.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
         <extensions.version>1.0.15</extensions.version>
         <httpclient.version>4.5.12</httpclient.version>
@@ -52,6 +54,7 @@
         <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
         <spring-framework.version>5.2.5.RELEASE</spring-framework.version>
         <spring-integration.version>5.2.4.RELEASE</spring-integration.version>
+        <velocity.version>1.7</velocity.version>
     </properties>
 
     <dependencyManagement>
@@ -116,9 +119,19 @@
                 <version>${javax.servlet-api.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
@@ -129,6 +142,16 @@
                 <groupId>org.awaitility</groupId>
                 <artifactId>awaitility</artifactId>
                 <version>${awaitility.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>${bouncycastle.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlinx</groupId>
