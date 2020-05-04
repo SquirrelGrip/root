@@ -39,7 +39,6 @@
         <cheti.version>1.1.8</cheti.version>
         <commons-collections.version>4.4</commons-collections.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <extensions.version>1.0.15</extensions.version>
         <httpclient.version>4.5.12</httpclient.version>
         <guava.version>29.0-jre</guava.version>
         <jackson.version>2.11.0</jackson.version>
