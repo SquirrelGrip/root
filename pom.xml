@@ -7,7 +7,7 @@
     <version>1.0.11-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>A maven root project for SquirrelGrip projects</description>
     <url>https://www.github.com/squirrelgrip/root</url>
 
