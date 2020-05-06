@@ -175,6 +175,11 @@
                 <version>${junit-jupiter.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
                 <version>${mockito.version}</version>
@@ -347,6 +352,20 @@
                     </dependencies>
                 </plugin>
                 <plugin>
+                    <groupId>org.jetbrains.dokka</groupId>
+                    <artifactId>dokka-maven-plugin</artifactId>
+                    <version>${dokka.version}</version>
+                    <executions>
+                        <execution>
+                            <id>javadocJar</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>javadocJar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin.version}</version>
@@ -365,20 +384,6 @@
                         <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                         <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.jetbrains.dokka</groupId>
-                    <artifactId>dokka-maven-plugin</artifactId>
-                    <version>${dokka.version}</version>
-                    <executions>
-                        <execution>
-                            <id>javadocJar</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>javadocJar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>com.github.squirrelgrip</groupId>
