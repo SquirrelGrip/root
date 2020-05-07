@@ -4,7 +4,7 @@
 
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.0.11</version>
+    <version>1.0.12</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
@@ -286,7 +286,7 @@
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
-                            <phase>verify</phase>
+                            <phase>deploy</phase>
                             <goals>
                                 <goal>sign</goal>
                             </goals>
@@ -400,10 +400,6 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
             <plugin>
@@ -421,6 +417,10 @@
             <plugin>
                 <groupId>org.jetbrains.dokka</groupId>
                 <artifactId>dokka-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
