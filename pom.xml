@@ -45,7 +45,7 @@
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jersey.version>3.0.0</jersey.version>
         <junit-jupiter.version>5.7.0</junit-jupiter.version>
-        <kotlin.version>1.4.10</kotlin.version>
+        <kotlin.version>1.4.20</kotlin.version>
         <kotlinx-coroutines.version>1.4.2</kotlinx-coroutines.version>
         <logback.version>1.2.3</logback.version>
         <micrometer.version>1.6.2</micrometer.version>
