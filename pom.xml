@@ -24,11 +24,14 @@
 
         <dokka.version>0.10.1</dokka.version>
         <jgitflow-maven-plugin.version>1.0.0</jgitflow-maven-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-scm-plugin.version>1.11.2</maven-scm-plugin.version>
+        <maven-clean-plugin.version>2.6</maven-clean-plugin.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-install-plugin.version>2.5</maven-install-plugin.version>
+        <maven-scm-plugin.version>1.11.2</maven-scm-plugin.version>
+        <maven-site-plugin.version>3.4</maven-site-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
         <travis-maven-plugin.version>1.0.0</travis-maven-plugin.version>
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
@@ -45,7 +48,7 @@
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jersey.version>3.0.0</jersey.version>
         <junit-jupiter.version>5.7.0</junit-jupiter.version>
-        <kotlin.version>1.4.20</kotlin.version>
+        <kotlin.version>1.4.21</kotlin.version>
         <kotlinx-coroutines.version>1.4.2</kotlinx-coroutines.version>
         <logback.version>1.2.3</logback.version>
         <micrometer.version>1.6.3</micrometer.version>
@@ -53,8 +56,8 @@
         <mockito-kotlin.version>2.2.0</mockito-kotlin.version>
         <slf4j.version>1.7.30</slf4j.version>
         <spring-boot.version>2.4.2</spring-boot.version>
-        <spring-framework.version>5.3.2</spring-framework.version>
-        <spring-integration.version>5.4.2</spring-integration.version>
+        <spring-framework.version>5.3.3</spring-framework.version>
+        <spring-integration.version>5.4.3</spring-integration.version>
         <velocity.version>1.7</velocity.version>
     </properties>
 
@@ -380,6 +383,21 @@
                         <deployAtEnd>true</deployAtEnd>
                         <retryFailedDeploymentCount>3</retryFailedDeploymentCount>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven-clean-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
