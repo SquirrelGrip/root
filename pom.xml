@@ -595,7 +595,7 @@
                 <executions>
                     <execution>
                         <id>add-readme-md</id>
-                        <phase>process-resources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>add</goal>
                         </goals>
