@@ -46,5 +46,5 @@ curl -s -X POST \
 # Cleaning a Failed Deploy
 There are situations where the artifact has been deployed, however the changes have not been merged into devloper and master branches. To achieve the branch consistency the follow commands are required...
 ```
-mvn --batch-mode -U clean jgitflow:release-finish -Dmaven.deploy.skip=true
+mvn --batch-mode -U clean jgitflow:release-finish -DnoDeploy=true
 ```
