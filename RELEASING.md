@@ -42,3 +42,9 @@ curl -s -X POST \
    -d "$BODY" \
    https://api.travis-ci.com/repo/$SLUG/requests
 ```
+
+# Cleaning a Failed Deploy
+There are situations where the artifact has been deployed, however the changes have not been merged into devloper and master branches. To achieve the branch consistency the follow commands are required...
+```
+mvn --batch-mode -U clean jgitflow:release-finish -Dmaven.deploy.skip=true
+```
