@@ -22,7 +22,8 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <dokka.version>1.4.20</dokka.version>
+        <dokka-maven-plugin.version>1.4.20</dokka-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
         <jgitflow-maven-plugin.version>1.0.0</jgitflow-maven-plugin.version>
         <kotlin-maven-plugin.version>1.4.21-2</kotlin-maven-plugin.version>
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
@@ -40,6 +41,8 @@
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+        <pitest-maven-plugin.version>1.6.2</pitest-maven-plugin.version>
+        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
         <travis-maven-plugin.version>1.0.0</travis-maven-plugin.version>
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
 
@@ -66,8 +69,6 @@
         <spring-framework.version>5.3.3</spring-framework.version>
         <spring-integration.version>5.4.3</spring-integration.version>
         <velocity.version>1.7</velocity.version>
-        <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
-        <pitest-maven.version>1.6.2</pitest-maven.version>
     </properties>
 
     <dependencyManagement>
@@ -399,7 +400,7 @@
                 <plugin>
                     <groupId>org.jetbrains.dokka</groupId>
                     <artifactId>dokka-maven-plugin</artifactId>
-                    <version>${dokka.version}</version>
+                    <version>${dokka-maven-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>javadocJar</id>
@@ -448,9 +449,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>${maven-site-plugin.version}</version>
-                    <configuration>
-                        <tempWebappDirectory>${basedir}/target/site/tempdir</tempWebappDirectory>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -491,7 +489,7 @@
                 <plugin>
                     <groupId>org.pitest</groupId>
                     <artifactId>pitest-maven</artifactId>
-                    <version>${pitest-maven.version}</version>
+                    <version>${pitest-maven-plugin.version}</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.pitest</groupId>
@@ -518,6 +516,11 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -557,6 +560,10 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
