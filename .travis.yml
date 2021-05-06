@@ -17,11 +17,11 @@ before_install:
 jobs:
   include:
   - stage: build
-    script: mvn --batch-mode -U clean install
+    script: ./mvnw --batch-mode -U clean install
   - stage: startRelease
-    script: mvn --batch-mode -U clean jgitflow:release-start -PgitflowStart
+    script: ./mvnw --batch-mode -U clean jgitflow:release-start -PgitflowStart
   - stage: finishRelease
-    script: mvn --batch-mode -U clean jgitflow:release-finish
+    script: ./mvnw --batch-mode -U clean jgitflow:release-finish
 stages:
 - name: build
   if: branch !~ ^release.*$
