@@ -16,7 +16,7 @@ before_install:
 jobs:
   include:
     - stage: build
-      script: ./mvnw --batch-mode -s travis/settings.xml -U clean i
+      script: ./mvnw --batch-mode -s travis/settings.xml -U clean install
     - stage: startRelease
       script: ./mvnw --batch-mode -s travis/settings.xml -U clean jgitflow:release-start -PgitflowStart
     - stage: finishRelease
