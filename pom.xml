@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.1.13</version>
+    <version>1.1.14</version>
+    <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
-    <description>A maven root project for SquirrelGrip projects</description>
-    <url>https://www.github.com/squirrelgrip/root</url>
+    <url>${project.scm.url}</url>
 
     <scm>
         <connection>scm:git:https://github.com/SquirrelGrip/root.git</connection>
@@ -617,6 +616,9 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+                <configuration>
+                    <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
