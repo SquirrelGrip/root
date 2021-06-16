@@ -28,7 +28,7 @@
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
         <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
-        <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
+        <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
@@ -47,8 +47,8 @@
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
 
         <awaitility.version>4.1.0</awaitility.version>
-        <assertj.version>3.19.0</assertj.version>
-        <bouncycastle.version>1.68</bouncycastle.version>
+        <assertj.version>3.20.1</assertj.version>
+        <bouncycastle.version>1.69</bouncycastle.version>
         <cheti.version>1.1.13</cheti.version>
         <commons-collections.version>4.4</commons-collections.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
@@ -57,17 +57,18 @@
         <jackson.version>2.12.3</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jersey.version>3.0.0</jersey.version>
+        <jersey-hk2.version>3.0.2</jersey-hk2.version>
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
         <kotlin.version>1.5.10</kotlin.version>
-        <kotlinx-coroutines.version>1.4.3</kotlinx-coroutines.version>
+        <kotlinx-coroutines.version>1.5.0</kotlinx-coroutines.version>
         <logback.version>1.2.3</logback.version>
-        <micrometer.version>1.6.6</micrometer.version>
-        <mockito.version>3.9.0</mockito.version>
+        <micrometer.version>1.7.0</micrometer.version>
+        <mockito.version>3.11.1</mockito.version>
         <mockito-kotlin.version>2.2.0</mockito-kotlin.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <spring-boot.version>2.4.5</spring-boot.version>
-        <spring-framework.version>5.3.6</spring-framework.version>
-        <spring-integration.version>5.4.6</spring-integration.version>
+        <spring-boot.version>2.5.1</spring-boot.version>
+        <spring-framework.version>5.3.8</spring-framework.version>
+        <spring-integration.version>5.5.0</spring-integration.version>
         <velocity.version>1.7</velocity.version>
         <zjsonpatch.version>0.4.11</zjsonpatch.version>
     </properties>
@@ -202,7 +203,7 @@
             <dependency>
                 <groupId>org.glassfish.jersey.inject</groupId>
                 <artifactId>jersey-hk2</artifactId>
-                <version>3.0.1</version>
+                <version>${jersey-hk2.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlinx</groupId>
