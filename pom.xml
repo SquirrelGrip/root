@@ -24,7 +24,7 @@
         <dokka-maven-plugin.version>1.4.32</dokka-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <jgitflow-maven-plugin.version>1.0.0</jgitflow-maven-plugin.version>
-        <kotlin-maven-plugin.version>1.5.10</kotlin-maven-plugin.version>
+        <kotlin-maven-plugin.version>1.5.20</kotlin-maven-plugin.version>
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
         <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
@@ -59,7 +59,7 @@
         <jersey.version>3.0.0</jersey.version>
         <jersey-hk2.version>3.0.2</jersey-hk2.version>
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
-        <kotlin.version>1.5.10</kotlin.version>
+        <kotlin.version>1.5.20</kotlin.version>
         <kotlinx-coroutines.version>1.5.0</kotlinx-coroutines.version>
         <logback.version>1.2.3</logback.version>
         <micrometer.version>1.7.1</micrometer.version>

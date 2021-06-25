@@ -20,7 +20,7 @@ jobs:
     - stage: startRelease
       script: ./mvnw --batch-mode -s travis/settings.xml -U clean jgitflow:release-start -PgitflowStart
     - stage: finishRelease
-      script: ./mvnw --batch-mode -s travis/settings.xml -U clean jgitflow:release-finish
+      script: ./mvnw --batch-mode -s travis/settings.xml -U jgitflow:release-finish site
 stages:
   - name: build
     if: branch !~ ^release.*$
