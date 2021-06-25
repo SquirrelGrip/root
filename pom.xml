@@ -62,15 +62,16 @@
         <kotlin.version>1.5.10</kotlin.version>
         <kotlinx-coroutines.version>1.5.0</kotlinx-coroutines.version>
         <logback.version>1.2.3</logback.version>
-        <micrometer.version>1.7.0</micrometer.version>
+        <micrometer.version>1.7.1</micrometer.version>
         <mockito.version>3.11.2</mockito.version>
         <mockito-kotlin.version>2.2.0</mockito-kotlin.version>
         <slf4j.version>1.7.31</slf4j.version>
-        <spring-boot.version>2.5.1</spring-boot.version>
+        <spring-boot.version>2.5.2</spring-boot.version>
         <spring-framework.version>5.3.8</spring-framework.version>
-        <spring-integration.version>5.5.0</spring-integration.version>
+        <spring-integration.version>5.5.1</spring-integration.version>
         <velocity.version>1.7</velocity.version>
         <zjsonpatch.version>0.4.11</zjsonpatch.version>
+        <spring-batch.version>4.3.3</spring-batch.version>
     </properties>
 
     <dependencyManagement>
@@ -231,6 +232,11 @@
                 <version>${slf4j.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework.batch</groupId>
+                <artifactId>spring-batch-core</artifactId>
+                <version>${spring-batch.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jetty</artifactId>
                 <version>${spring-boot.version}</version>
@@ -249,6 +255,10 @@
     </dependencyManagement>
 
     <distributionManagement>
+        <site>
+            <id>root</id>
+            <url>http://localhost</url>
+        </site>
         <snapshotRepository>
             <id>oss-snapshot</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
