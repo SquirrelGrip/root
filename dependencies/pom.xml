@@ -4,10 +4,11 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.0</version>
+        <version>1.2.1</version>
     </parent>
 
     <artifactId>dependencies</artifactId>
+    <packaging>pom</packaging>
 
     <properties>
         <awaitility.version>4.1.0</awaitility.version>
