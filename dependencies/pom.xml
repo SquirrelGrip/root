@@ -8,6 +8,7 @@
     </parent>
 
     <artifactId>dependencies</artifactId>
+    <packaging>pom</packaging>
 
     <properties>
         <awaitility.version>4.1.0</awaitility.version>
