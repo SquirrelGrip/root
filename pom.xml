@@ -71,13 +71,6 @@
         </repository>
     </distributionManagement>
 
-<!--    <pluginRepositories>-->
-<!--        <pluginRepository>-->
-<!--            <id>jcenter</id>-->
-<!--            <url>https://jcenter.bintray.com/</url>-->
-<!--        </pluginRepository>-->
-<!--    </pluginRepositories>-->
-
     <build>
         <pluginManagement>
             <plugins>
