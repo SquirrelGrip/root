@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.2.5</version>
+    <version>1.2.7</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
@@ -21,8 +21,7 @@
     </scm>
 
     <properties>
-        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
-        <maven.compiler.source>11</maven.compiler.source>
+       <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -53,6 +52,8 @@
         <sonar-maven-plugin.version>3.9.0.2155</sonar-maven-plugin.version>
         <travis-maven-plugin.version>1.0.0</travis-maven-plugin.version>
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+
+        <kotlin.version>1.5.21</kotlin.version>
     </properties>
 
     <distributionManagement>
@@ -69,13 +70,6 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
-
-<!--    <pluginRepositories>-->
-<!--        <pluginRepository>-->
-<!--            <id>jcenter</id>-->
-<!--            <url>https://jcenter.bintray.com/</url>-->
-<!--        </pluginRepository>-->
-<!--    </pluginRepositories>-->
 
     <build>
         <pluginManagement>
