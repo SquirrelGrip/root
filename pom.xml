@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.2.8</version>
+    <version>1.2.9</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
@@ -421,17 +421,6 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-maven</artifactId>
                 <reportSets>
                     <reportSet>
                         <reports>
