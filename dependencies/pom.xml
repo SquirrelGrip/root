@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.9</version>
+        <version>1.2.10</version>
     </parent>
 
     <artifactId>dependencies</artifactId>
@@ -26,13 +26,13 @@
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
         <kotlinx-coroutines.version>1.5.1</kotlinx-coroutines.version>
         <logback.version>1.2.5</logback.version>
-        <micrometer.version>1.7.2</micrometer.version>
-        <mockito.version>3.11.2</mockito.version>
+        <micrometer.version>1.7.3</micrometer.version>
+        <mockito.version>3.12.1</mockito.version>
         <mockito-kotlin.version>2.2.0</mockito-kotlin.version>
         <slf4j.version>1.7.32</slf4j.version>
-        <spring-boot.version>2.5.3</spring-boot.version>
+        <spring-boot.version>2.5.4</spring-boot.version>
         <spring-framework.version>5.3.9</spring-framework.version>
-        <spring-integration.version>5.5.2</spring-integration.version>
+        <spring-integration.version>5.5.3</spring-integration.version>
         <velocity.version>1.7</velocity.version>
         <zjsonpatch.version>0.4.11</zjsonpatch.version>
         <spring-batch.version>4.3.3</spring-batch.version>
