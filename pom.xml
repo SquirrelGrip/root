@@ -21,7 +21,7 @@
     </scm>
 
     <properties>
-        <kotlin.version>1.5.21</kotlin.version>
+        <kotlin.version>1.5.30</kotlin.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,7 +29,7 @@
         <dokka-maven-plugin.version>1.5.0</dokka-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <jgitflow-maven-plugin.version>1.0.0</jgitflow-maven-plugin.version>
-        <kotlin-maven-plugin.version>1.5.21</kotlin-maven-plugin.version>
+        <kotlin-maven-plugin.version>1.5.30</kotlin-maven-plugin.version>
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
         <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
