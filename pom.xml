@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.2.11</version>
+    <version>1.2.12</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
@@ -49,7 +49,7 @@
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <pitest-junit5-plugin.version>0.13</pitest-junit5-plugin.version>
+        <pitest-junit5-plugin.version>0.14</pitest-junit5-plugin.version>
         <pitest-maven-plugin.version>1.6.8</pitest-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.0.2155</sonar-maven-plugin.version>
         <spring-boot-maven-plugin.version>2.5.3</spring-boot-maven-plugin.version>

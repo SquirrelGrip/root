@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.11</version>
+        <version>1.2.12</version>
     </parent>
 
     <artifactId>dependencies</artifactId>
@@ -19,10 +19,9 @@
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
         <httpclient.version>4.5.13</httpclient.version>
         <guava.version>30.1-jre</guava.version>
-        <jackson.version>2.12.4</jackson.version>
+        <jackson.version>2.12.5</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-        <jersey.version>3.0.0</jersey.version>
-        <jersey-hk2.version>3.0.2</jersey-hk2.version>
+        <jersey.version>2.31</jersey.version>
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
         <kotlinx-coroutines.version>1.5.1</kotlinx-coroutines.version>
         <logback.version>1.2.5</logback.version>
@@ -168,7 +167,7 @@
             <dependency>
                 <groupId>org.glassfish.jersey.inject</groupId>
                 <artifactId>jersey-hk2</artifactId>
-                <version>${jersey-hk2.version}</version>
+                <version>${jersey.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlinx</groupId>
