@@ -3,12 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.2.12</version>
+    <version>1.2.13</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
     <modules>
         <module>dependencies</module>
+        <module>update-maven-plugin</module>
     </modules>
 
     <name>${project.artifactId}</name>
@@ -21,7 +22,7 @@
     </scm>
 
     <properties>
-        <kotlin.version>1.5.30</kotlin.version>
+        <kotlin.version>1.5.31</kotlin.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -44,12 +45,12 @@
         <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
         <maven-release-plugin.version>3.0.0-M4</maven-release-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
-        <maven-scm-plugin.version>1.11.2</maven-scm-plugin.version>
+        <maven-scm-plugin.version>1.12.0</maven-scm-plugin.version>
         <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <pitest-junit5-plugin.version>0.14</pitest-junit5-plugin.version>
+        <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
         <pitest-maven-plugin.version>1.6.8</pitest-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.0.2155</sonar-maven-plugin.version>
         <spring-boot-maven-plugin.version>2.5.3</spring-boot-maven-plugin.version>
@@ -169,6 +170,7 @@
                     <configuration>
                         <processPlugins>false</processPlugins>
                         <processDependencies>false</processDependencies>
+                        <formats>xml</formats>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -408,6 +410,7 @@
                 </reportSets>
                 <configuration>
                     <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
+                    <formats>html,xml</formats>
                 </configuration>
             </plugin>
             <plugin>
