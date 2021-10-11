@@ -1,3 +1,8 @@
+# Manual Release
+```
+./mvnw --batch-mode -s travis/settings.xml -U clean jgitflow:release-start -PgitflowStart && ./mvnw --batch-mode -s travis/settings.xml -U jgitflow:release-finish
+```
+
 # Prepare CI
 ```
 travis login --com --github-token $GIT_TOKEN
