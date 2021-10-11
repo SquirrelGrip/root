@@ -1,10 +1,7 @@
 package com.github.squirrelgrip.dependency
 
 import com.fasterxml.jackson.databind.module.SimpleModule
-import com.github.squirrelgrip.dependency.model.DependencyUpdatesReport
-import com.github.squirrelgrip.dependency.model.PluginUpdatesReport
-import com.github.squirrelgrip.dependency.model.UpdateArtifact
-import com.github.squirrelgrip.dependency.model.Version
+import com.github.squirrelgrip.dependency.model.*
 import com.github.squirrelgrip.dependency.serial.VersionDeserializer
 import com.github.squirrelgrip.extension.xml.Xml
 import com.github.squirrelgrip.extension.xml.toInstance
@@ -70,7 +67,7 @@ class UpdateReportMojo : AbstractMavenReport() {
         sink.footer_()
     }
 
-    private fun reportTable(tableHeading: String, artifacts: List<UpdateArtifact>) {
+    private fun reportTable(tableHeading: String, artifacts: Collection<ArtifactDetails>) {
         sink.paragraph()
         sink.sectionTitle2()
         sink.text(tableHeading)
@@ -85,7 +82,7 @@ class UpdateReportMojo : AbstractMavenReport() {
         sink.tableRow_()
         artifacts.forEach { artifact ->
             sink.tableRow()
-            artifact.values(project.properties).toTypedArray().forEach {
+            artifact.values.forEach {
                 sink.tableCell()
                 sink.text(it)
                 sink.tableCell_()
@@ -96,17 +93,21 @@ class UpdateReportMojo : AbstractMavenReport() {
         sink.paragraph_()
     }
 
-    fun getDependencyArtifacts(): List<UpdateArtifact> =
+    fun getDependencyArtifacts(): Collection<ArtifactDetails> =
         File(
             outputDirectory.parentFile,
             "dependency-updates-report.xml"
-        ).toInstance<DependencyUpdatesReport>().getDependencies()
+        ).toInstance<DependencyUpdatesReport>().getDependencies(getProperties())
 
-    fun getPluginArtifacts(): List<UpdateArtifact> =
+    fun getPluginArtifacts(): Collection<ArtifactDetails> =
         File(
             outputDirectory.parentFile,
             "plugin-updates-report.xml"
-        ).toInstance<PluginUpdatesReport>().getDependencies()
+        ).toInstance<PluginUpdatesReport>().getDependencies(getProperties())
+
+    private fun getProperties(): Map<String, String> =
+        project.properties.map { it.key.toString() to it.value.toString() }.toMap()
+
 
     override fun getOutputName(): String {
         return "update-report"

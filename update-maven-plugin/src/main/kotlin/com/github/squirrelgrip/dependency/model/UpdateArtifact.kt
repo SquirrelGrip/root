@@ -30,77 +30,12 @@ data class UpdateArtifact(
     @JacksonXmlElementWrapper(useWrapping = true, localName = "majors")
     @JsonProperty("majors")
     val majors: List<Version>? = emptyList(),
-) : Comparable<UpdateArtifact> {
-    companion object {
-        val regex = Regex(".*\\$\\{(.*)\\}.*")
-    }
-
-    fun values(properties: Properties): List<String> {
-        val version = currentVersion.resolve(properties)
-        return listOf(
+) {
+    fun toArtifactDetails(properties: Map<String, String>): ArtifactDetails =
+        ArtifactDetails(
             groupId,
             artifactId,
-            version.toString(),
-            getNewerNextVersion(version).toString(),
-            getLatestIncremental(version).toString(),
-            getLatestMinor(version).toString(),
-            getEarliestMajor(version).toString(),
-            getLatestMajor(version).toString()
+            currentVersion.resolve(properties),
+            (incrementals ?: emptyList()) + (minors ?: emptyList()) + (majors ?: emptyList())
         )
-    }
-
-    fun getNewerNextVersion(version: Version): Version {
-        val allVersions = getAllVersions()
-        return allVersions.sorted().firstOrNull {
-            it.isValid() && it > version
-        } ?: Version.NO_VERSION
-    }
-
-    fun getAllVersions(): List<Version> =
-        getIncrementalVersions() + getMinorVersions() + getMajorVersions()
-
-    fun getIncrementalVersions(): List<Version> =
-        incrementals?.sorted() ?: emptyList()
-
-    fun getMinorVersions(): List<Version> =
-        minors?.sorted() ?: emptyList()
-
-    fun getMajorVersions(): List<Version> =
-        majors?.sorted() ?: emptyList()
-
-    fun getEarliestIncremental(): Version =
-        getIncrementalVersions().firstOrNull {
-            it.isValid() && it > currentVersion
-        } ?: Version.NO_VERSION
-
-    fun getLatestIncremental(version: Version): Version =
-        getAllVersions().lastOrNull {
-            it.isValid() && it > version && it.major == version.major && it.minor == version.minor && it.increment > version.increment
-        } ?: Version.NO_VERSION
-
-    fun getLatestMinor(version: Version): Version =
-        getAllVersions().lastOrNull {
-            it.isValid() && it > version && it.major == version.major && it.minor > version.minor
-        } ?: Version.NO_VERSION
-
-    fun getEarliestMajor(version: Version): Version =
-        getAllVersions().firstOrNull {
-            it.isValid() && it > version && it.major > version.major
-        } ?: Version.NO_VERSION
-
-    fun getLatestMajor(version: Version): Version =
-        getAllVersions().lastOrNull {
-            it.isValid() && it > version
-        } ?: Version.NO_VERSION
-
-    override fun compareTo(other: UpdateArtifact): Int {
-        val primaryComparison = artifactId.compareTo(other.artifactId)
-        return if (primaryComparison == 0) {
-            val secondaryComparison = groupId.compareTo(other.groupId)
-            secondaryComparison
-        } else {
-            primaryComparison
-        }
-    }
-
 }

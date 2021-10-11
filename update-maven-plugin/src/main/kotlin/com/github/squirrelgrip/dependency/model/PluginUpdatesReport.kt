@@ -9,7 +9,9 @@ data class PluginUpdatesReport (
     var pluginManagements: PluginManagements?,
     @JsonProperty("plugins")
     var plugins: Plugins?,
-){
-    fun getDependencies() : List<UpdateArtifact> =
-        ((pluginManagements?.pluginManagement ?: emptyList()) + (plugins?.plugin ?: emptyList())).sorted()
+) {
+    fun getDependencies(properties: Map<String, String>): Collection<ArtifactDetails> =
+        ((pluginManagements?.pluginManagement ?: emptyList()) + (plugins?.plugin ?: emptyList())).map {
+            it.toArtifactDetails(properties)
+        }
 }

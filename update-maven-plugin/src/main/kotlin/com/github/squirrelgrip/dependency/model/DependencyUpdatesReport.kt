@@ -10,6 +10,9 @@ data class DependencyUpdatesReport(
     @JsonProperty("dependencies")
     val dependencies: Dependencies,
 ) {
-    fun getDependencies() : List<UpdateArtifact> =
-        ((dependencyManagements.dependencyManagement ?: emptyList()) + (dependencies.dependency ?: emptyList())).sorted()
+    fun getDependencies(properties: Map<String, String>): Collection<ArtifactDetails> =
+        ((dependencyManagements.dependencyManagement ?: emptyList()) + (dependencies.dependency ?: emptyList())).map {
+            it.toArtifactDetails(properties)
+        }
 }
+

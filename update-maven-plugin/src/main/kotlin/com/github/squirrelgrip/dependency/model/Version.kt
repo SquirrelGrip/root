@@ -1,14 +1,46 @@
 package com.github.squirrelgrip.dependency.model
 
-import java.util.*
-
 data class Version(
     val value: String
 ) : Comparable<Version> {
     companion object {
         val NO_VERSION = Version("")
         val VALID_CHARS = (0..9).map { it.toString()[0] }
-        val REGEX = Regex("\\D+")
+        val VERSION_REGEX = Regex("\\D+")
+        val PROPERTY_REGEX = Regex(".*\\$\\{(.*)\\}.*")
+
+        fun versionCompare(v1: String, v2: String): Int {
+            // vnum stores each numeric part of version
+            var vnum1 = 0
+            var vnum2 = 0
+
+            // loop until both String are processed
+            var i = 0
+            var j = 0
+            while (i < v1.length || j < v2.length) {
+                // Storing numeric part of version 1 in vnum1
+
+                while (i < v1.length && v1[i] in VALID_CHARS) {
+                    vnum1 = (vnum1 * 10 + (v1[i] - '0'))
+                    i++
+                }
+
+                // Storing numeric part of version 2 in vnum2
+                while (j < v2.length && v2[j] in VALID_CHARS) {
+                    vnum2 = (vnum2 * 10 + (v2[j] - '0'))
+                    j++
+                }
+                if (vnum1 > vnum2) return 1
+                if (vnum2 > vnum1) return -1
+
+                // if equal, reset variables and go for next numeric part
+                vnum1 = 0
+                vnum2 = 0
+                i++
+                j++
+            }
+            return 0
+        }
     }
 
     val major: Int by lazy { index(0) }
@@ -16,7 +48,7 @@ data class Version(
     val increment: Int by lazy { index(2) }
 
     private fun index(index: Int) = try {
-        value.split(REGEX)[index].toInt()
+        value.split(VERSION_REGEX)[index].toInt()
     } catch (e: Exception) {
         0
     }
@@ -25,57 +57,26 @@ data class Version(
         value
 
     fun isValid(): Boolean =
-        !value.contains("alpha") &&
-                !value.contains("android") &&
-                !value.contains("b") &&
-                !value.contains("beta") &&
-                !value.contains("M") &&
-                !value.contains("native") &&
-                !value.contains("RC") &&
-                !value.contains("r")
+        !value.contains("lpha") &&
+        !value.contains("ndroid") &&
+        !value.contains("b") &&
+        !value.contains("eta") &&
+        !value.contains("enkin") &&
+        !value.contains("M") &&
+        !value.contains("ative") &&
+        !value.contains("RC") &&
+        !value.contains("r")
 
-    fun resolve(properties: Properties): Version =
-        if (value.matches(UpdateArtifact.regex)) {
-            val matchResult = UpdateArtifact.regex.find(value)!!
-            Version(value.replace(UpdateArtifact.regex, properties[matchResult.groupValues[1].trim()].toString()))
+    fun resolve(properties: Map<String, String>): Version {
+        val matchResult = PROPERTY_REGEX.find(value)
+        return if(matchResult != null) {
+            Version(value.replace(PROPERTY_REGEX, properties[matchResult.groupValues[1].trim()] ?: value))
         } else {
             this
         }
+    }
 
     override fun compareTo(other: Version): Int =
         versionCompare(value, other.value)
-
-    fun versionCompare(v1: String, v2: String): Int {
-        // vnum stores each numeric part of version
-        var vnum1 = 0
-        var vnum2 = 0
-
-        // loop until both String are processed
-        var i = 0
-        var j = 0
-        while (i < v1.length || j < v2.length) {
-            // Storing numeric part of version 1 in vnum1
-
-            while (i < v1.length && v1[i] in VALID_CHARS) {
-                vnum1 = (vnum1 * 10 + (v1[i] - '0'))
-                i++
-            }
-
-            // Storing numeric part of version 2 in vnum2
-            while (j < v2.length && v2[j] in VALID_CHARS) {
-                vnum2 = (vnum2 * 10 + (v2[j] - '0'))
-                j++
-            }
-            if (vnum1 > vnum2) return 1
-            if (vnum2 > vnum1) return -1
-
-            // if equal, reset variables and go for next numeric part
-            vnum1 = 0
-            vnum2 = 0
-            i++
-            j++
-        }
-        return 0
-    }
 
 }
