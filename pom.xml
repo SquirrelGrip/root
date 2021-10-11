@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.2.13</version>
+    <version>1.2.14</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
     <modules>
-        <module>dependencies</module>
         <module>update-maven-plugin</module>
+        <module>dependencies</module>
     </modules>
 
     <name>${project.artifactId}</name>

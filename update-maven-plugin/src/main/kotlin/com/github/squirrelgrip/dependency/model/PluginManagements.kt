@@ -6,5 +6,5 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 data class PluginManagements (
     @JsonProperty("pluginManagement")
     @JacksonXmlElementWrapper(useWrapping = false)
-    val pluginManagement: List<Artifact>? = emptyList()
+    val pluginManagement: List<UpdateArtifact>? = emptyList()
 )

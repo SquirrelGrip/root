@@ -35,9 +35,9 @@ data class Version(
                 !value.contains("r")
 
     fun resolve(properties: Properties): Version =
-        if (value.matches(Artifact.regex)) {
-            val matchResult = Artifact.regex.find(value)!!
-            Version(value.replace(Artifact.regex, properties[matchResult.groupValues[1].trim()].toString()))
+        if (value.matches(UpdateArtifact.regex)) {
+            val matchResult = UpdateArtifact.regex.find(value)!!
+            Version(value.replace(UpdateArtifact.regex, properties[matchResult.groupValues[1].trim()].toString()))
         } else {
             this
         }
