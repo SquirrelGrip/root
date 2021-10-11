@@ -8,8 +8,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>dependencies</module>
         <module>update-maven-plugin</module>
+        <module>dependencies</module>
     </modules>
 
     <name>${project.artifactId}</name>
