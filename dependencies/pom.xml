@@ -13,6 +13,7 @@
     <properties>
         <assertj.version>3.21.0</assertj.version>
         <awaitility.version>4.1.0</awaitility.version>
+        <beanutils.version>1.9.4</beanutils.version>
         <bouncycastle.version>1.69</bouncycastle.version>
         <commons-collections.version>4.4</commons-collections.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
@@ -107,6 +108,11 @@
                 <groupId>com.nhaarman.mockitokotlin2</groupId>
                 <artifactId>mockito-kotlin</artifactId>
                 <version>${mockito-kotlin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${beanutils.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.dropwizard.metrics5</groupId>
