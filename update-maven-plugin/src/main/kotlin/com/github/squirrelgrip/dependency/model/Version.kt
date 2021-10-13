@@ -57,15 +57,16 @@ data class Version(
         value
 
     fun isValid(): Boolean =
-        !value.contains("lpha") &&
+        !value.uppercase().contains("LPHA") &&
         !value.contains("ndroid") &&
-        !value.contains("b") &&
-        !value.contains("eta") &&
+        !value.uppercase().contains("B") &&
+        !value.uppercase().contains("ETA") &&
         !value.contains("enkin") &&
-        !value.contains("M") &&
+        !value.uppercase().contains("M") &&
         !value.contains("ative") &&
-        !value.contains("RC") &&
-        !value.contains("r")
+        !value.uppercase().contains("RC") &&
+        !value.contains("r") &&
+        !value.contains("SNAPSHOT")
 
     fun resolve(properties: Map<String, String>): Version {
         val matchResult = PROPERTY_REGEX.find(value)

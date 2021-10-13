@@ -1,20 +1,16 @@
 package com.github.squirrelgrip.dependency
 
 import com.fasterxml.jackson.databind.module.SimpleModule
-import com.github.squirrelgrip.dependency.model.*
+import com.github.squirrelgrip.dependency.model.ArtifactDetails
+import com.github.squirrelgrip.dependency.model.Version
 import com.github.squirrelgrip.dependency.serial.VersionDeserializer
 import com.github.squirrelgrip.extension.xml.Xml
-import com.github.squirrelgrip.extension.xml.toInstance
-import org.apache.maven.artifact.DefaultArtifact
-import org.apache.maven.artifact.handler.DefaultArtifactHandler
 import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
-import org.apache.maven.model.Dependency
-import org.apache.maven.model.Plugin
+import org.apache.maven.execution.MavenSession
 import org.apache.maven.plugins.annotations.*
 import org.apache.maven.reporting.AbstractMavenReport
 import org.apache.maven.reporting.MavenReportException
-import java.io.File
 import java.util.*
 
 @Mojo(
@@ -22,10 +18,13 @@ import java.util.*
     defaultPhase = LifecyclePhase.SITE,
     requiresDependencyResolution = ResolutionScope.RUNTIME,
     requiresProject = true,
-    threadSafe = true
+    threadSafe = true,
+    aggregator = true
 )
 class UpdateReportMojo : AbstractMavenReport() {
     companion object {
+        val reportHeading = "Update Report"
+
         val headings = listOf(
             "Group Id",
             "Artifact Id",
@@ -39,8 +38,6 @@ class UpdateReportMojo : AbstractMavenReport() {
         )
     }
 
-    val useVersionsReport = false
-
     @Component
     lateinit var artifactMetadataSource: ArtifactMetadataSource
 
@@ -53,6 +50,25 @@ class UpdateReportMojo : AbstractMavenReport() {
     @Parameter(defaultValue = "\${project.pluginArtifactRepositories}", readonly = true)
     lateinit var pluginArtifactRepositories: List<ArtifactRepository>
 
+    @Parameter(defaultValue = "\${session}", readonly = true)
+    lateinit var session: MavenSession
+
+    @Parameter(property = "update.useVersionsReport", name = "useVersionsReport", defaultValue = "false")
+    var useVersionsReport = false
+
+    val dependencyResolver: DependencyResolver by lazy {
+        if (useVersionsReport)
+            VersionsDependencyResolver(outputDirectory)
+        else
+            MavenDependencyResolver(
+                artifactMetadataSource,
+                localRepository,
+                remoteRepositories,
+                pluginArtifactRepositories,
+                session
+            )
+    }
+
     override fun executeReport(locale: Locale) {
         Xml.xmlMapper.registerModule(SimpleModule().apply {
             addDeserializer(
@@ -60,10 +76,10 @@ class UpdateReportMojo : AbstractMavenReport() {
                 VersionDeserializer()
             )
         })
+
         if (sink == null) {
             throw MavenReportException("Could not get the Doxia sink")
         }
-        val reportHeading = "Update Report"
 
         sink.head()
         sink.title()
@@ -75,8 +91,8 @@ class UpdateReportMojo : AbstractMavenReport() {
         sink.sectionTitle1()
         sink.text(reportHeading)
         sink.sectionTitle1_()
-        reportTable("Dependencies", getDependencyArtifacts())
-        reportTable("Plugins", getPluginArtifacts())
+        reportTable("Dependencies", dependencyResolver.getDependencyArtifacts(project))
+        reportTable("Plugins", dependencyResolver.getPluginArtifacts(project))
         sink.section1_()
         sink.body_()
         sink.footer()
@@ -109,51 +125,6 @@ class UpdateReportMojo : AbstractMavenReport() {
         sink.paragraph_()
     }
 
-    fun getDependencyArtifacts(): Collection<ArtifactDetails> =
-        if (useVersionsReport) {
-            File(
-                outputDirectory.parentFile,
-                "dependency-updates-report.xml"
-            ).toInstance<DependencyUpdatesReport>().getDependencies(getProperties())
-        } else {
-            ((project.dependencies) + (project.dependencyManagement?.dependencies ?: emptyList())).map {
-                it.dependency()
-            }
-        }
-
-    fun getPluginArtifacts(): Collection<ArtifactDetails> =
-        if (useVersionsReport) {
-            File(
-                outputDirectory.parentFile,
-                "plugin-updates-report.xml"
-            ).toInstance<PluginUpdatesReport>().getDependencies(getProperties())
-        } else {
-            ((project.buildPlugins) + (project.pluginManagement?.plugins ?: emptyList())).map {
-                it.dependency()
-            }
-        }
-
-    private fun Dependency.dependency() = getArtifactDetails(groupId, artifactId, version, false)
-    private fun Plugin.dependency() = getArtifactDetails(groupId, artifactId, version, true)
-
-    fun getArtifactDetails(
-        groupId: String,
-        artifactId: String,
-        version: String,
-        usePluginRepositories: Boolean
-    ): ArtifactDetails {
-        val artifact = DefaultArtifact(groupId, artifactId, version, "", "", "", DefaultArtifactHandler())
-        val remoteRepositories = if (usePluginRepositories) pluginArtifactRepositories else remoteRepositories
-        val versions =
-            artifactMetadataSource.retrieveAvailableVersions(artifact, localRepository, remoteRepositories).map {
-                Version(it.toString())
-            }
-        return ArtifactDetails(groupId, artifactId, Version(version), versions)
-    }
-
-    private fun getProperties(): Map<String, String> =
-        project.properties.map { it.key.toString() to it.value.toString() }.toMap()
-
 
     override fun getOutputName(): String {
         return "update-report"
@@ -166,9 +137,4 @@ class UpdateReportMojo : AbstractMavenReport() {
     override fun getDescription(locale: Locale): String {
         return "Builds a update report"
     }
-
 }
-
-
-
-
