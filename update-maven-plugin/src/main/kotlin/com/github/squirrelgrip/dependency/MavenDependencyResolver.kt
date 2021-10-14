@@ -37,7 +37,7 @@ class MavenDependencyResolver(
     fun getProjectDependencyArtifacts(project: MavenProject): Collection<ArtifactDetails> =
         ((project.dependencies) + (project.dependencyManagement?.dependencies ?: emptyList()))
             .map {
-                getArtifactDetails(it.groupId, it.artifactId, it.version ?: "", false)
+                getArtifactDetails(it.groupId, it.artifactId, it.version ?: "0", false)
             }
             .distinctBy {
                 "${it.groupId}:${it.artifactId}"
@@ -46,7 +46,7 @@ class MavenDependencyResolver(
     fun getProjectPluginArtifacts(project: MavenProject): Collection<ArtifactDetails> =
         ((project.buildPlugins) + (project.pluginManagement?.plugins ?: emptyList()))
             .map {
-                getArtifactDetails(it.groupId, it.artifactId, it.version ?: "", true)
+                getArtifactDetails(it.groupId, it.artifactId, it.version ?: "0", true)
             }
             .distinctBy {
                 "${it.groupId}:${it.artifactId}"
