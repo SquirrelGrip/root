@@ -237,12 +237,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>com.github.squirrelgrip</groupId>
-                <artifactId>update-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
     <reporting>
         <plugins>

@@ -10,6 +10,7 @@
     <modules>
         <module>update-maven-plugin</module>
         <module>dependencies</module>
+<!--        <module>update-maven-plugin-test</module>-->
     </modules>
 
     <name>${project.artifactId}</name>
