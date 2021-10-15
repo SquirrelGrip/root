@@ -1,10 +1,13 @@
-package com.github.squirrelgrip.dependency
+package com.github.squirrelgrip.plugin
 
 import com.fasterxml.jackson.databind.module.SimpleModule
-import com.github.squirrelgrip.dependency.model.ArtifactDetails
-import com.github.squirrelgrip.dependency.model.Version
-import com.github.squirrelgrip.dependency.serial.VersionDeserializer
+import com.github.squirrelgrip.plugin.model.ArtifactDetails
+import com.github.squirrelgrip.plugin.model.Version
+import com.github.squirrelgrip.plugin.serial.VersionDeserializer
 import com.github.squirrelgrip.extension.xml.Xml
+import com.github.squirrelgrip.plugin.resolver.DependencyResolver
+import com.github.squirrelgrip.plugin.resolver.MavenDependencyResolver
+import com.github.squirrelgrip.plugin.resolver.VersionsDependencyResolver
 import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
@@ -29,8 +32,6 @@ class UpdateReportMojo : AbstractMavenReport() {
             "GroupId",
             "ArtifactId",
             "Version",
-            "Projects",
-            "Type",
             "Next Version",
             "Latest Incremental",
             "Next Minor",

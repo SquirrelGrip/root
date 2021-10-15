@@ -25,13 +25,13 @@
         <junit-jupiter.version>5.8.1</junit-jupiter.version>
         <kotlinx-coroutines.version>1.5.2</kotlinx-coroutines.version>
         <logback.version>1.2.6</logback.version>
-        <micrometer.version>1.7.4</micrometer.version>
+        <micrometer.version>1.7.5</micrometer.version>
         <mockito.version>4.0.0</mockito.version>
         <mockito-kotlin.version>2.2.0</mockito-kotlin.version>
         <slf4j.version>1.7.32</slf4j.version>
         <spring-batch.version>4.3.3</spring-batch.version>
         <spring-boot.version>2.5.5</spring-boot.version>
-        <spring-framework.version>5.3.10</spring-framework.version>
+        <spring-framework.version>5.3.11</spring-framework.version>
         <spring-integration.version>5.5.4</spring-integration.version>
         <velocity.version>1.7</velocity.version>
         <zjsonpatch.version>0.4.11</zjsonpatch.version>

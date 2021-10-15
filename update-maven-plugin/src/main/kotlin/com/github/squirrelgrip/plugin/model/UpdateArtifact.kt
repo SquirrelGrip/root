@@ -1,9 +1,8 @@
-package com.github.squirrelgrip.dependency.model
+package com.github.squirrelgrip.plugin.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import org.apache.maven.project.MavenProject
-import java.util.*
 
 data class UpdateArtifact(
     @JsonProperty("groupId")
@@ -37,8 +36,6 @@ data class UpdateArtifact(
             groupId,
             artifactId,
             currentVersion.resolve(project),
-            project.artifactId,
-            DependencyType.DEPENDENCY,
             (incrementals ?: emptyList()) + (minors ?: emptyList()) + (majors ?: emptyList())
         )
 }

@@ -1,10 +1,10 @@
-package com.github.squirrelgrip.dependency.model
+package com.github.squirrelgrip.plugin.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 
-data class Dependencies(
-    @JsonProperty("dependency")
+data class Plugins (
+    @JsonProperty("plugin")
     @JacksonXmlElementWrapper(useWrapping = false)
-    val dependency: List<UpdateArtifact>? = emptyList()
+    val plugin: List<UpdateArtifact>? = emptyList()
 )

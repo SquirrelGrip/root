@@ -1,9 +1,9 @@
-package com.github.squirrelgrip.dependency.serial
+package com.github.squirrelgrip.plugin.serial
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
-import com.github.squirrelgrip.dependency.model.Version
+import com.github.squirrelgrip.plugin.model.Version
 import com.github.squirrelgrip.extension.xml.Xml
 import com.github.squirrelgrip.extension.xml.toInstance
 import org.assertj.core.api.Assertions.assertThat
