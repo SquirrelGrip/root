@@ -1,4 +1,4 @@
-package com.github.squirrelgrip.dependency.model
+package com.github.squirrelgrip.plugin.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

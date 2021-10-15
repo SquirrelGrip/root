@@ -1,4 +1,4 @@
-package com.github.squirrelgrip.dependency.model
+package com.github.squirrelgrip.plugin.model
 
 import org.apache.maven.project.MavenProject
 
