@@ -9,7 +9,7 @@ import com.github.squirrelgrip.dependency.model.Version
 class VersionDeserializer : StdDeserializer<Version>(Version::class.java) {
     override fun deserialize(parser: JsonParser, deserializer: DeserializationContext): Version {
         val node: JsonNode = parser.codec.readTree(parser)
-        val value = node.asText()
+        val value: String = node.asText()
         return if (value.isBlank()) Version.NO_VERSION else Version(value)
     }
 

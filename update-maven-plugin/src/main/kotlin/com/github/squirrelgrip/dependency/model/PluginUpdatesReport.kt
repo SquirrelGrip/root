@@ -1,6 +1,7 @@
 package com.github.squirrelgrip.dependency.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.apache.maven.project.MavenProject
 
 data class PluginUpdatesReport (
     @JsonProperty("summary")
@@ -10,8 +11,8 @@ data class PluginUpdatesReport (
     @JsonProperty("plugins")
     var plugins: Plugins?,
 ) {
-    fun getDependencies(properties: Map<String, String>): Collection<ArtifactDetails> =
+    fun getDependencies(project: MavenProject): Collection<ArtifactDetails> =
         ((pluginManagements?.pluginManagement ?: emptyList()) + (plugins?.plugin ?: emptyList())).map {
-            it.toArtifactDetails(properties)
+            it.toArtifactDetails(project)
         }
 }

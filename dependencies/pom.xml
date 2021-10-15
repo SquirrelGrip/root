@@ -243,7 +243,6 @@
             <plugin>
                 <groupId>com.github.squirrelgrip</groupId>
                 <artifactId>update-maven-plugin</artifactId>
-                <version>RELEASE</version>
             </plugin>
         </plugins>
     </reporting>
