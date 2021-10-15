@@ -1,5 +1,7 @@
 package com.github.squirrelgrip.dependency.model
 
+import org.apache.maven.project.MavenProject
+
 data class Version(
     val value: String
 ) : Comparable<Version> {
@@ -7,7 +9,7 @@ data class Version(
         val NO_VERSION = Version("")
         val VALID_CHARS = (0..9).map { it.toString()[0] }
         val VERSION_REGEX = Regex("\\D+")
-        val PROPERTY_REGEX = Regex(".*\\$\\{(.*)\\}.*")
+        val PROPERTY_REGEX = Regex(".*\\$\\{(.+?)\\}.*")
 
         fun versionCompare(v1: String, v2: String): Int {
             // vnum stores each numeric part of version
@@ -68,14 +70,12 @@ data class Version(
         !value.contains("r") &&
         !value.contains("SNAPSHOT")
 
-    fun resolve(properties: Map<String, String>): Version {
-        val matchResult = PROPERTY_REGEX.find(value)
-        return if(matchResult != null) {
-            Version(value.replace(PROPERTY_REGEX, properties[matchResult.groupValues[1].trim()] ?: value))
-        } else {
-            this
-        }
-    }
+    fun resolve(project: MavenProject): Version =
+        Version(value.replace(PROPERTY_REGEX) {
+            val key = it.groupValues[1]
+            val replacement = project.properties[key.trim()]?.toString() ?: "\${$key}"
+            value.replace(PROPERTY_REGEX, replacement)
+        })
 
     override fun compareTo(other: Version): Int =
         versionCompare(value, other.value)

@@ -9,7 +9,11 @@ data class ArtifactDetails(
     val artifactId: String,
     @JsonProperty("currentVersion")
     val currentVersion: Version,
-    @JsonProperty("version")
+    @JsonProperty("project")
+    val project: String,
+    @JsonProperty("type")
+    val type: DependencyType,
+    @JsonProperty("versions")
     val versions: Collection<Version> = emptyList(),
 ) : Comparable<ArtifactDetails> {
 
@@ -60,6 +64,8 @@ data class ArtifactDetails(
             groupId,
             artifactId,
             currentVersion.toString(),
+            project,
+            type.name,
             nextVersion.toString(),
             latestIncremental.toString(),
             nextMinor.toString(),

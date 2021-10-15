@@ -2,6 +2,7 @@ package com.github.squirrelgrip.dependency.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+import org.apache.maven.project.MavenProject
 import java.util.*
 
 data class UpdateArtifact(
@@ -31,11 +32,13 @@ data class UpdateArtifact(
     @JsonProperty("majors")
     val majors: List<Version>? = emptyList(),
 ) {
-    fun toArtifactDetails(properties: Map<String, String>): ArtifactDetails =
+    fun toArtifactDetails(project: MavenProject): ArtifactDetails =
         ArtifactDetails(
             groupId,
             artifactId,
-            currentVersion.resolve(properties),
+            currentVersion.resolve(project),
+            project.artifactId,
+            DependencyType.DEPENDENCY,
             (incrementals ?: emptyList()) + (minors ?: emptyList()) + (majors ?: emptyList())
         )
 }

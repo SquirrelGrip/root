@@ -26,9 +26,11 @@ class UpdateReportMojo : AbstractMavenReport() {
         val reportHeading = "Update Report"
 
         val headings = listOf(
-            "Group Id",
-            "Artifact Id",
-            "Current Version",
+            "GroupId",
+            "ArtifactId",
+            "Version",
+            "Projects",
+            "Type",
             "Next Version",
             "Latest Incremental",
             "Next Minor",
