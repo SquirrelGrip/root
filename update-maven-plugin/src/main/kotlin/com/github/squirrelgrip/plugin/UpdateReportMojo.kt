@@ -57,10 +57,14 @@ class UpdateReportMojo : AbstractMavenReport() {
     lateinit var session: MavenSession
 
     @Parameter(property = "update.useVersionsReport", name = "useVersionsReport", defaultValue = "false")
-    var useVersionsReport = false
+    var useVersionsReport = "false"
+
+    @Parameter(property = "update.includeDependencyManagement", name = "includeDependencyManagement", defaultValue = "true")
+
+    var includeDependencyManagement = "true"
 
     val dependencyResolver: DependencyResolver by lazy {
-        if (useVersionsReport)
+        if (useVersionsReport.toBoolean())
             VersionsDependencyResolver(outputDirectory)
         else
             MavenDependencyResolver(
@@ -68,7 +72,8 @@ class UpdateReportMojo : AbstractMavenReport() {
                 localRepository,
                 remoteRepositories,
                 pluginArtifactRepositories,
-                session
+                session,
+                includeDependencyManagement.toBoolean()
             )
     }
 

@@ -1,5 +1,6 @@
 package com.github.squirrelgrip.plugin.resolver
 
+import com.github.squirrelgrip.extension.json.toJson
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.DependencyType
 import com.github.squirrelgrip.plugin.model.Version
@@ -8,19 +9,22 @@ import org.apache.maven.artifact.handler.DefaultArtifactHandler
 import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
+import org.apache.maven.model.Dependency
 import org.apache.maven.project.MavenProject
+import java.io.FileWriter
 
 class MavenDependencyResolver(
     private val artifactMetadataSource: ArtifactMetadataSource,
     private val localRepository: ArtifactRepository,
     private val remoteRepositories: List<ArtifactRepository>,
     private val pluginArtifactRepositories: List<ArtifactRepository>,
-    private val session: MavenSession
+    private val session: MavenSession,
+    private val includeDependencyManagement: Boolean
 ) : DependencyResolver {
     override fun getDependencyArtifacts(project: MavenProject): Collection<ArtifactDetails> =
         session.projects
             .flatMap {
-                (it.dependencies ?: emptyList()) + (it.dependencyManagement?.dependencies ?: emptyList())
+                it.getDependencies(includeDependencyManagement)
             }
             .distinctBy {
                 "${it.groupId}:${it.artifactId}"
@@ -73,5 +77,15 @@ class MavenDependencyResolver(
         return ArtifactDetails(groupId, artifactId, Version(version), versions)
     }
 
+    fun MavenProject.getDependencies(includeDependencyManagement: Boolean): List<Dependency> {
+        val dependencies = mutableListOf<Dependency>()
+        dependencies.addAll(this.dependencies)
+        if (includeDependencyManagement) {
+            dependencies.addAll(this.dependencyManagement.dependencies)
+        }
+        return dependencies.toList()
+    }
 }
+
+
 
