@@ -235,7 +235,7 @@
                     <artifactId>update-maven-plugin</artifactId>
                     <version>1.2.23-SNAPSHOT</version>
                     <configuration>
-                        <includeDependencyManagement>false</includeDependencyManagement>
+                        <includeManagement>false</includeManagement>
                     </configuration>
                 </plugin>
             </plugins>
@@ -247,7 +247,7 @@
                 <groupId>com.github.squirrelgrip</groupId>
                 <artifactId>update-maven-plugin</artifactId>
                 <configuration>
-                    <includeDependencyManagement>false</includeDependencyManagement>
+                    <includeManagement>false</includeManagement>
                 </configuration>
             </plugin>
         </plugins>

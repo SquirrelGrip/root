@@ -1,33 +1,18 @@
 package com.github.squirrelgrip.plugin
 
-import com.fasterxml.jackson.databind.module.SimpleModule
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
-import com.github.squirrelgrip.plugin.model.Version
-import com.github.squirrelgrip.plugin.serial.VersionDeserializer
-import com.github.squirrelgrip.extension.xml.Xml
+import com.github.squirrelgrip.plugin.resolver.AbstractMavenDependencyResolver
 import com.github.squirrelgrip.plugin.resolver.DependencyResolver
-import com.github.squirrelgrip.plugin.resolver.MavenDependencyResolver
+import com.github.squirrelgrip.plugin.resolver.SessionDependencyResolver
 import com.github.squirrelgrip.plugin.resolver.VersionsDependencyResolver
 import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
 import org.apache.maven.plugins.annotations.*
-import org.apache.maven.reporting.AbstractMavenReport
-import org.apache.maven.reporting.MavenReportException
 import java.util.*
 
-@Mojo(
-    name = "report",
-    defaultPhase = LifecyclePhase.SITE,
-    requiresDependencyResolution = ResolutionScope.RUNTIME,
-    requiresProject = true,
-    threadSafe = true,
-    aggregator = true
-)
-class UpdateReportMojo : AbstractMavenReport() {
+abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     companion object {
-        val reportHeading = "Update Report"
-
         val headings = listOf(
             "GroupId",
             "ArtifactId",
@@ -59,52 +44,21 @@ class UpdateReportMojo : AbstractMavenReport() {
     @Parameter(property = "update.useVersionsReport", name = "useVersionsReport", defaultValue = "false")
     var useVersionsReport = "false"
 
-    @Parameter(property = "update.includeDependencyManagement", name = "includeDependencyManagement", defaultValue = "true")
+    @Parameter(property = "update.includeManagement", name = "includeManagement", defaultValue = "true")
+    var includeManagement = "true"
 
-    var includeDependencyManagement = "true"
-
-    val dependencyResolver: DependencyResolver by lazy {
+    private val dependencyResolver: DependencyResolver by lazy {
         if (useVersionsReport.toBoolean())
             VersionsDependencyResolver(outputDirectory)
         else
-            MavenDependencyResolver(
-                artifactMetadataSource,
-                localRepository,
-                remoteRepositories,
-                pluginArtifactRepositories,
-                session,
-                includeDependencyManagement.toBoolean()
-            )
+            getMavenDependencyResolver()
     }
 
-    override fun executeReport(locale: Locale) {
-        Xml.xmlMapper.registerModule(SimpleModule().apply {
-            addDeserializer(
-                Version::class.java,
-                VersionDeserializer()
-            )
-        })
+    abstract fun getMavenDependencyResolver(): AbstractMavenDependencyResolver
 
-        if (sink == null) {
-            throw MavenReportException("Could not get the Doxia sink")
-        }
-
-        sink.head()
-        sink.title()
-        sink.text(reportHeading)
-        sink.title_()
-        sink.head_()
-        sink.body()
-        sink.section1()
-        sink.sectionTitle1()
-        sink.text(reportHeading)
-        sink.sectionTitle1_()
+    override fun body(locale: Locale) {
         reportTable("Dependencies", dependencyResolver.getDependencyArtifacts(project))
         reportTable("Plugins", dependencyResolver.getPluginArtifacts(project))
-        sink.section1_()
-        sink.body_()
-        sink.footer()
-        sink.footer_()
     }
 
     private fun reportTable(tableHeading: String, artifacts: Collection<ArtifactDetails>) {
@@ -133,16 +87,4 @@ class UpdateReportMojo : AbstractMavenReport() {
         sink.paragraph_()
     }
 
-
-    override fun getOutputName(): String {
-        return "update-report"
-    }
-
-    override fun getName(locale: Locale): String {
-        return "Update Report"
-    }
-
-    override fun getDescription(locale: Locale): String {
-        return "Builds a update report"
-    }
 }
