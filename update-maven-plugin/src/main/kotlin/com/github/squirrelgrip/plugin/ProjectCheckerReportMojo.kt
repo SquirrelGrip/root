@@ -6,8 +6,6 @@ import org.apache.maven.plugins.annotations.LifecyclePhase
 import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.plugins.annotations.ResolutionScope
-import org.apache.maven.reporting.AbstractMavenReport
-import org.apache.maven.reporting.MavenReportException
 import java.util.*
 
 @Mojo(
@@ -17,10 +15,8 @@ import java.util.*
     requiresProject = true,
     threadSafe = true,
 )
-class ProjectCheckerReportMojo : AbstractMavenReport() {
-    companion object {
-        val reportHeading = "Project Checker Report"
-    }
+class ProjectCheckerReportMojo : AbstractDoxiaReport() {
+    override val reportHeading = "Project Checker Report"
 
     @Parameter(defaultValue = "\${project.remoteArtifactRepositories}", readonly = true)
     lateinit var remoteRepositories: List<ArtifactRepository>
@@ -31,22 +27,7 @@ class ProjectCheckerReportMojo : AbstractMavenReport() {
     @Parameter(defaultValue = "\${session}", readonly = true)
     lateinit var session: MavenSession
 
-    override fun executeReport(locale: Locale) {
-        if (sink == null) {
-            throw MavenReportException("Could not get the Doxia sink")
-        }
-
-        sink.head()
-        sink.title()
-        sink.text(reportHeading)
-        sink.title_()
-        sink.head_()
-        sink.body()
-        sink.section1()
-        sink.sectionTitle1()
-        sink.text(reportHeading)
-        sink.sectionTitle1_()
-
+    override fun body(locale: Locale) {
         /// This is the content
         //More information
         //CIManagement not defined
@@ -64,22 +45,12 @@ class ProjectCheckerReportMojo : AbstractMavenReport() {
         //Unused dependency managements
         //Unused plugin managements
         //Duplicate repositories
-        duplicateRepositories()
+        duplicateRepositoriesSection()
 
-//        project.
-
-        sink.section1_()
-        sink.body_()
     }
 
-    private fun duplicateRepositories() {
-        val duplicateRepositories = remoteRepositories.groupBy {
-            it.url
-        }.filter {
-            it.value.size > 1
-        }.flatMap {
-            it.value
-        }
+    private fun duplicateRepositoriesSection() {
+        val duplicateRepositories = getDuplicateRepositories()
         sink.sectionTitle2()
         sink.text("Duplicate Repositories")
         sink.sectionTitle2_()
@@ -94,6 +65,17 @@ class ProjectCheckerReportMojo : AbstractMavenReport() {
         } else {
             sink.text("No Duplicate Repositories")
         }
+    }
+
+    private fun getDuplicateRepositories(): List<ArtifactRepository> {
+        val duplicateRepositories = remoteRepositories.groupBy {
+            it.url
+        }.filter {
+            it.value.size > 1
+        }.flatMap {
+            it.value
+        }
+        return duplicateRepositories
     }
 
     override fun getOutputName(): String {
