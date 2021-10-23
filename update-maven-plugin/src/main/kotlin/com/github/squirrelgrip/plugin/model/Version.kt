@@ -62,11 +62,11 @@ data class Version(
         !value.uppercase().contains("LPHA") &&
         !value.contains("ndroid") &&
         !value.uppercase().contains("B") &&
+        !value.uppercase().contains("C") &&
         !value.uppercase().contains("ETA") &&
         !value.contains("enkin") &&
         !value.uppercase().contains("M") &&
         !value.contains("ative") &&
-        !value.uppercase().contains("RC") &&
         !value.contains("r") &&
         !value.contains("SNAPSHOT")
 
