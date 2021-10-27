@@ -247,7 +247,7 @@
                 <groupId>com.github.squirrelgrip</groupId>
                 <artifactId>update-maven-plugin</artifactId>
                 <configuration>
-                    <includeManagement>false</includeManagement>
+                    <processTransitive>false</processTransitive>
                 </configuration>
             </plugin>
         </plugins>

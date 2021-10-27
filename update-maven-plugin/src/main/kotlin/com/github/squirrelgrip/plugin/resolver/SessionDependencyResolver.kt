@@ -12,28 +12,35 @@ class SessionDependencyResolver(
     private val dependencyRepositories: List<ArtifactRepository>,
     private val pluginRepositories: List<ArtifactRepository>,
     private val session: MavenSession,
-    includeManagement: Boolean
 ) : AbstractMavenDependencyResolver(
     artifactMetadataSource,
-    localRepository,
-    includeManagement
+    localRepository
 ) {
-    override fun getDependencyArtifacts(project: MavenProject): List<ArtifactDetails> {
+    override fun getDependencyArtifacts(
+        project: MavenProject,
+        processDependencies: Boolean,
+        processDependencyManagement: Boolean,
+        processTransitive: Boolean
+    ): List<ArtifactDetails> {
         val dependencies = session.projects.flatMap {
-            it.getProjectDependencies()
+            it.getProjectDependencies(processDependencies, processTransitive)
         }
         val managedDependencies = session.projects.flatMap {
-            it.getProjectManagedDependencies()
+            it.getProjectManagedDependencies(processDependencyManagement, processTransitive)
         }
         return getArtifactDetails(dependencies, managedDependencies).toArtifactDetails(dependencyRepositories)
     }
 
-    override fun getPluginArtifacts(project: MavenProject): List<ArtifactDetails> {
+    override fun getPluginArtifacts(
+        project: MavenProject,
+        processPluginDependencies: Boolean,
+        processPluginDependenciesInPluginManagement: Boolean
+    ): List<ArtifactDetails> {
         val plugins = session.projects.flatMap {
-            it.getProjectPlugins()
+            it.getProjectPlugins(processPluginDependencies)
         }
         val managedPlugins = session.projects.flatMap {
-            it.getProjectManagedPlugins()
+            it.getProjectManagedPlugins(processPluginDependenciesInPluginManagement)
         }
         return getArtifactDetails(plugins, managedPlugins).toArtifactDetails(pluginRepositories)
     }

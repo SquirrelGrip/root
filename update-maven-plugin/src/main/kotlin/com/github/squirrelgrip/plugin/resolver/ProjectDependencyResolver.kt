@@ -9,24 +9,31 @@ class ProjectDependencyResolver(
     artifactMetadataSource: ArtifactMetadataSource,
     localRepository: ArtifactRepository,
     private val dependencyRepositories: List<ArtifactRepository>,
-    private val pluginRepositories: List<ArtifactRepository>,
-    includeManagement: Boolean
+    private val pluginRepositories: List<ArtifactRepository>
 ) : AbstractMavenDependencyResolver(
     artifactMetadataSource,
     localRepository,
-    includeManagement
 ) {
 
-    override fun getDependencyArtifacts(project: MavenProject): List<ArtifactDetails> =
+    override fun getDependencyArtifacts(
+        project: MavenProject,
+        processDependencies: Boolean,
+        processDependencyManagement: Boolean,
+        processTransitive: Boolean
+    ): List<ArtifactDetails> =
         getArtifactDetails(
-            project.getProjectDependencies(),
-            project.getProjectManagedDependencies()
+            project.getProjectDependencies(processDependencies, processTransitive),
+            project.getProjectManagedDependencies(processDependencyManagement, processTransitive)
         ).toArtifactDetails(dependencyRepositories)
 
-    override fun getPluginArtifacts(project: MavenProject): List<ArtifactDetails> =
+    override fun getPluginArtifacts(
+        project: MavenProject,
+        processPluginDependencies: Boolean,
+        processPluginDependenciesInPluginManagement: Boolean
+    ): List<ArtifactDetails> =
         getArtifactDetails(
-            project.getProjectPlugins(),
-            project.getProjectManagedPlugins()
+            project.getProjectPlugins(processPluginDependencies),
+            project.getProjectManagedPlugins(processPluginDependenciesInPluginManagement)
         ).toArtifactDetails(pluginRepositories)
 
 }

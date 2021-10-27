@@ -13,9 +13,8 @@ import org.apache.maven.project.MavenProject
 
 abstract class AbstractMavenDependencyResolver(
     private val artifactMetadataSource: ArtifactMetadataSource,
-    private val localRepository: ArtifactRepository,
-    private val includeManagement: Boolean
-): DependencyResolver {
+    private val localRepository: ArtifactRepository
+) : DependencyResolver {
     companion object {
         val defaultArtifactHandler = DefaultArtifactHandler()
     }
@@ -26,27 +25,57 @@ abstract class AbstractMavenDependencyResolver(
     fun Dependency.toArtifact(): Artifact =
         DefaultArtifact(groupId, artifactId, version ?: "0.0", "", "", "", defaultArtifactHandler)
 
-    fun MavenProject.getProjectDependencies() =
-        dependencies.map { it.toArtifact() }
+    fun MavenProject.getProjectDependencies(
+        processDependencies: Boolean,
+        processTransitive: Boolean
+    ): List<Artifact> =
+        if (processDependencies) {
+            if (processTransitive) {
+                dependencies
+            } else {
+                originalModel.dependencies
+            }.map { it.toArtifact() }
+        } else {
+            emptyList()
+        }
 
-    fun MavenProject.getProjectManagedDependencies() =
-        (dependencyManagement?.dependencies ?: emptyList()).map { it.toArtifact() }
+    fun MavenProject.getProjectManagedDependencies(
+        processDependencyManagement: Boolean,
+        processTransitive: Boolean
+    ): List<Artifact> =
+        if (processDependencyManagement) {
+            if (processTransitive) {
+                (dependencyManagement?.dependencies ?: emptyList()).map { it.toArtifact() }
+            } else {
+                (originalModel.dependencyManagement?.dependencies ?: emptyList()).map { it.toArtifact() }
+            }
+        } else {
+            emptyList()
+        }
 
-    fun MavenProject.getProjectPlugins() =
-        buildPlugins.map { it.toArtifact() }
+    fun MavenProject.getProjectPlugins(
+        processPluginDependencies: Boolean
+    ): List<Artifact> =
+        if (processPluginDependencies) {
+            buildPlugins.map { it.toArtifact() }
+        } else {
+            emptyList()
+        }
 
-    fun MavenProject.getProjectManagedPlugins() =
-        (pluginManagement?.plugins ?: emptyList()).map { it.toArtifact() }
+    fun MavenProject.getProjectManagedPlugins(
+        processPluginDependenciesInPluginManagement: Boolean,
+    ): List<Artifact> =
+        if (processPluginDependenciesInPluginManagement) {
+            (pluginManagement?.plugins ?: emptyList()).map { it.toArtifact() }
+        } else {
+            emptyList()
+        }
 
     fun getArtifactDetails(
         artifacts: List<Artifact>,
         managedArtifacts: List<Artifact>
     ): List<Artifact> =
-        artifacts.toMutableList().also {
-            if (includeManagement) {
-                it.addAll(managedArtifacts)
-            }
-        }.toList()
+        artifacts + managedArtifacts
 
     fun List<Artifact>.toArtifactDetails(
         artifactRepositories: List<ArtifactRepository>

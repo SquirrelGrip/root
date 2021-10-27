@@ -3,12 +3,12 @@ package com.github.squirrelgrip.plugin
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.resolver.AbstractMavenDependencyResolver
 import com.github.squirrelgrip.plugin.resolver.DependencyResolver
-import com.github.squirrelgrip.plugin.resolver.SessionDependencyResolver
 import com.github.squirrelgrip.plugin.resolver.VersionsDependencyResolver
 import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
-import org.apache.maven.plugins.annotations.*
+import org.apache.maven.plugins.annotations.Component
+import org.apache.maven.plugins.annotations.Parameter
 import java.util.*
 
 abstract class AbstractUpdateReport : AbstractDoxiaReport() {
@@ -41,14 +41,29 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     @Parameter(defaultValue = "\${session}", readonly = true)
     lateinit var session: MavenSession
 
-    @Parameter(property = "update.useVersionsReport", name = "useVersionsReport", defaultValue = "false")
-    var useVersionsReport = "false"
+    @Parameter(property = "processDependencies", defaultValue = "true")
+    private var processDependencies = true
 
-    @Parameter(property = "update.includeManagement", name = "includeManagement", defaultValue = "true")
-    var includeManagement = "true"
+    @Parameter(property = "processDependencyManagement", defaultValue = "true")
+    private var processDependencyManagement = true
+
+    @Parameter(property = "processPluginDependencies", defaultValue = "true")
+    private var processPluginDependencies = true
+
+    @Parameter(property = "processPluginDependenciesInPluginManagement", defaultValue = "true")
+    private var processPluginDependenciesInPluginManagement = true
+
+    @Parameter(property = "processTransitive", defaultValue = "true")
+    private var processTransitive = true
+
+    @Parameter(property = "processParent", defaultValue = "false")
+    private var processParent = false
+
+    @Parameter(property = "useVersionsReport", defaultValue = "false")
+    var useVersionsReport = false
 
     private val dependencyResolver: DependencyResolver by lazy {
-        if (useVersionsReport.toBoolean())
+        if (useVersionsReport)
             VersionsDependencyResolver(outputDirectory)
         else
             getMavenDependencyResolver()
@@ -57,8 +72,8 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     abstract fun getMavenDependencyResolver(): AbstractMavenDependencyResolver
 
     override fun body(locale: Locale) {
-        reportTable("Dependencies", dependencyResolver.getDependencyArtifacts(project))
-        reportTable("Plugins", dependencyResolver.getPluginArtifacts(project))
+        reportTable("Dependencies", dependencyResolver.getDependencyArtifacts(project, processDependencies, processDependencyManagement, processTransitive))
+        reportTable("Plugins", dependencyResolver.getPluginArtifacts(project, processPluginDependencies, processPluginDependenciesInPluginManagement))
     }
 
     private fun reportTable(tableHeading: String, artifacts: Collection<ArtifactDetails>) {
