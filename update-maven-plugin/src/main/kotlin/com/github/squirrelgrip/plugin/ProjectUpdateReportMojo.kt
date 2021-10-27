@@ -18,7 +18,7 @@ class ProjectUpdateReportMojo : AbstractUpdateReport() {
     override val reportHeading = "Project Update Report"
 
     override fun getMavenDependencyResolver(): AbstractMavenDependencyResolver =
-        ProjectDependencyResolver(artifactMetadataSource, localRepository, remoteRepositories, pluginArtifactRepositories, includeManagement.toBoolean())
+        ProjectDependencyResolver(artifactMetadataSource, localRepository, remoteRepositories, pluginArtifactRepositories)
 
     override fun getOutputName(): String {
         return "update-report"
