@@ -5,19 +5,23 @@ import com.github.squirrelgrip.plugin.model.Version
 import org.apache.maven.artifact.Artifact
 import org.apache.maven.artifact.DefaultArtifact
 import org.apache.maven.artifact.handler.DefaultArtifactHandler
-import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.model.Dependency
 import org.apache.maven.model.Plugin
 import org.apache.maven.project.MavenProject
 
+
 abstract class AbstractMavenDependencyResolver(
-    private val artifactMetadataSource: ArtifactMetadataSource,
-    private val localRepository: ArtifactRepository
+    localRepository: ArtifactRepository,
+    remoteRepositories: List<ArtifactRepository>,
+    pluginRepositories: List<ArtifactRepository>
 ) : DependencyResolver {
     companion object {
         val defaultArtifactHandler = DefaultArtifactHandler()
     }
+
+    val artifactDetailsFactory =
+        LocalArtifactDetailsFactory(localRepository)
 
     fun Plugin.toArtifact(): Artifact =
         DefaultArtifact(groupId, artifactId, version ?: "0.0", "", "", "", defaultArtifactHandler)
@@ -77,29 +81,23 @@ abstract class AbstractMavenDependencyResolver(
     ): List<Artifact> =
         artifacts + managedArtifacts
 
-    fun List<Artifact>.toArtifactDetails(
-        artifactRepositories: List<ArtifactRepository>
-    ): List<ArtifactDetails> =
+    fun List<Artifact>.toArtifactDetails(): List<ArtifactDetails> =
         distinctBy {
             "${it.groupId}:${it.artifactId}"
         }.sortedBy {
             "${it.groupId}:${it.artifactId}"
         }.map {
-            it.getArtifactDetails(artifactRepositories)
+            it.getArtifactDetails()
         }
 
-    private fun Artifact.getArtifactDetails(
-        remoteRepositories: List<ArtifactRepository>,
-    ) =
-        ArtifactDetails(
-            groupId,
-            artifactId,
-            Version(version),
-            artifactMetadataSource.retrieveAvailableVersions(
-                this,
-                localRepository,
-                remoteRepositories
-            ).map { Version(it.toString()) }
-        )
+    private fun Artifact.getArtifactDetails(): ArtifactDetails =
+        artifactDetailsFactory.create(groupId, artifactId, version)
+
+    private fun ArtifactDetails.enrich(): ArtifactDetails {
+        return this.copy(versions = artifactDetailsFactory.getAvailableVersions(this))
+    }
 
 }
+
+
+

@@ -4,15 +4,16 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.26</version>
+        <version>1.2.27</version>
     </parent>
 
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
     <properties>
+        <annotations.version>13.0</annotations.version>
         <assertj.version>3.21.0</assertj.version>
-        <awaitility.version>4.1.0</awaitility.version>
+        <awaitility.version>4.1.1</awaitility.version>
         <beanutils.version>1.9.4</beanutils.version>
         <bouncycastle.version>1.69</bouncycastle.version>
         <commons-collections.version>4.4</commons-collections.version>
@@ -66,6 +67,11 @@
                 <version>${kotlin.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${annotations.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -233,9 +239,9 @@
                 <plugin>
                     <groupId>com.github.squirrelgrip</groupId>
                     <artifactId>update-maven-plugin</artifactId>
-                    <version>1.2.26</version>
+                    <version>1.2.27</version>
                     <configuration>
-                        <includeManagement>false</includeManagement>
+                        <processTransitive>true</processTransitive>
                     </configuration>
                 </plugin>
             </plugins>
@@ -247,7 +253,7 @@
                 <groupId>com.github.squirrelgrip</groupId>
                 <artifactId>update-maven-plugin</artifactId>
                 <configuration>
-                    <processTransitive>false</processTransitive>
+                    <processTransitive>true</processTransitive>
                 </configuration>
             </plugin>
         </plugins>

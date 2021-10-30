@@ -7,14 +7,14 @@ import org.apache.maven.execution.MavenSession
 import org.apache.maven.project.MavenProject
 
 class SessionDependencyResolver(
-    artifactMetadataSource: ArtifactMetadataSource,
     localRepository: ArtifactRepository,
-    private val dependencyRepositories: List<ArtifactRepository>,
-    private val pluginRepositories: List<ArtifactRepository>,
+    remoteRepositories: List<ArtifactRepository>,
+    pluginRepositories: List<ArtifactRepository>,
     private val session: MavenSession,
 ) : AbstractMavenDependencyResolver(
-    artifactMetadataSource,
-    localRepository
+    localRepository,
+    remoteRepositories,
+    pluginRepositories
 ) {
     override fun getDependencyArtifacts(
         project: MavenProject,
@@ -28,7 +28,7 @@ class SessionDependencyResolver(
         val managedDependencies = session.projects.flatMap {
             it.getProjectManagedDependencies(processDependencyManagement, processTransitive)
         }
-        return getArtifactDetails(dependencies, managedDependencies).toArtifactDetails(dependencyRepositories)
+        return getArtifactDetails(dependencies, managedDependencies).toArtifactDetails()
     }
 
     override fun getPluginArtifacts(
@@ -42,7 +42,7 @@ class SessionDependencyResolver(
         val managedPlugins = session.projects.flatMap {
             it.getProjectManagedPlugins(processPluginDependenciesInPluginManagement)
         }
-        return getArtifactDetails(plugins, managedPlugins).toArtifactDetails(pluginRepositories)
+        return getArtifactDetails(plugins, managedPlugins).toArtifactDetails()
     }
 }
 
