@@ -24,14 +24,26 @@
         <maven-reporting-api.version>3.0</maven-reporting-api.version>
         <maven-reporting-impl.version>3.0.0</maven-reporting-impl.version>
         <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
+        <jersey.version>2.35</jersey.version>
+        <activation.version>1.1.1</activation.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>com.github.squirrelgrip</groupId>
+                <artifactId>kotlin-extensions</artifactId>
+                <version>${kotlin-extensions.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
                 <version>${commons-beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>${activation.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven.doxia</groupId>
@@ -85,9 +97,19 @@
                 <version>${kotlin.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.squirrelgrip</groupId>
-                <artifactId>kotlin-extensions</artifactId>
-                <version>${kotlin-extensions.version}</version>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.inject</groupId>
+                <artifactId>jersey-hk2</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>${activation.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -147,6 +169,18 @@
         <dependency>
             <groupId>com.github.squirrelgrip</groupId>
             <artifactId>kotlin-extensions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

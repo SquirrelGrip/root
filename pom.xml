@@ -428,21 +428,15 @@
     <reporting>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
                 <reportSets>
                     <reportSet>
                         <reports>
-                            <report>dependency-updates-report</report>
-                            <report>plugin-updates-report</report>
-                            <report>property-updates-report</report>
+                            <report>analyze-report</report>
                         </reports>
                     </reportSet>
                 </reportSets>
-                <configuration>
-                    <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
-                    <formats>html,xml</formats>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

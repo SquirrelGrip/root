@@ -10,6 +10,7 @@ interface DependencyResolver {
         processDependencyManagement: Boolean,
         processTransitive: Boolean
     ): Collection<ArtifactDetails>
+
     fun getPluginArtifacts(
         project: MavenProject,
         processPluginDependencies: Boolean,

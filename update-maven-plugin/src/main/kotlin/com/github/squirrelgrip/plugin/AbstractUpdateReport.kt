@@ -26,9 +26,6 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
         )
     }
 
-    @Component
-    lateinit var artifactMetadataSource: ArtifactMetadataSource
-
     @Parameter(defaultValue = "\${localRepository}", readonly = true)
     lateinit var localRepository: ArtifactRepository
 

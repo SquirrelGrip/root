@@ -17,7 +17,12 @@ import java.util.*
 )
 class AggregateUpdateReportMojo : AbstractUpdateReport() {
     override fun getMavenDependencyResolver(): AbstractMavenDependencyResolver =
-        SessionDependencyResolver(artifactMetadataSource, localRepository, remoteRepositories, pluginArtifactRepositories, session)
+        SessionDependencyResolver(
+            localRepository,
+            remoteRepositories,
+            pluginArtifactRepositories,
+            session
+        )
 
     override val reportHeading = "Aggregated Update Report"
 

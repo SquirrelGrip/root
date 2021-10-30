@@ -6,13 +6,13 @@ import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.project.MavenProject
 
 class ProjectDependencyResolver(
-    artifactMetadataSource: ArtifactMetadataSource,
     localRepository: ArtifactRepository,
-    private val dependencyRepositories: List<ArtifactRepository>,
-    private val pluginRepositories: List<ArtifactRepository>
+    remoteRepositories: List<ArtifactRepository>,
+    pluginRepositories: List<ArtifactRepository>
 ) : AbstractMavenDependencyResolver(
-    artifactMetadataSource,
     localRepository,
+    remoteRepositories,
+    pluginRepositories
 ) {
 
     override fun getDependencyArtifacts(
@@ -24,7 +24,7 @@ class ProjectDependencyResolver(
         getArtifactDetails(
             project.getProjectDependencies(processDependencies, processTransitive),
             project.getProjectManagedDependencies(processDependencyManagement, processTransitive)
-        ).toArtifactDetails(dependencyRepositories)
+        ).toArtifactDetails()
 
     override fun getPluginArtifacts(
         project: MavenProject,
@@ -34,7 +34,7 @@ class ProjectDependencyResolver(
         getArtifactDetails(
             project.getProjectPlugins(processPluginDependencies),
             project.getProjectManagedPlugins(processPluginDependenciesInPluginManagement)
-        ).toArtifactDetails(pluginRepositories)
+        ).toArtifactDetails()
 
 }
 
