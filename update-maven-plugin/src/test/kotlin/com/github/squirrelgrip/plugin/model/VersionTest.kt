@@ -7,7 +7,7 @@ class VersionTest {
 
     @Test
     fun compare() {
-        assertThat("0", "0")
+        assertThat("0", "0.1")
         assertThat("0", "1")
         assertThat("1", "10")
         assertThat("2", "10")
@@ -17,6 +17,11 @@ class VersionTest {
         assertThat("2.31", "3.0.0")
         assertThat("2.31.0", "3.0.0")
         assertThat("5.8.0-RC1", "5.8.1")
+        assertThat("30.0-jre", "31.0.1-jre")
+        assertThat("30.1-jre", "31.0-jre")
+        assertThat("30.1-jre", "31.0.1-jre")
+        assertThat("30.1-jre", "30.1.1-jre")
+        assertThat("30.1-jre", "30.1.0-jre")
     }
 
     @Test
@@ -54,6 +59,8 @@ class VersionTest {
         partsEquals("2.31.1", 2,31,1)
         partsEquals("5.8.0-RC1", 5,8,0)
         partsEquals("5.8.1-RC1", 5,8,1)
+        partsEquals("31.0.1-jre", 31,0,1)
+        partsEquals("31.1-jre", 31,1,0)
     }
 
     fun partsEquals(version: String, major: Int, minor: Int, increment: Int) {
