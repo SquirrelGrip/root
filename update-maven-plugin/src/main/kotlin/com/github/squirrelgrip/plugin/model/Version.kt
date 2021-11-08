@@ -67,7 +67,7 @@ data class Version(
         !value.contains("enkin") &&
         !value.uppercase().contains("M") &&
         !value.contains("ative") &&
-        !value.contains("r") &&
+        !(value.contains("r") && !value.contains("jre")) &&
         !value.contains("SNAPSHOT")
 
     fun resolve(project: MavenProject): Version =
