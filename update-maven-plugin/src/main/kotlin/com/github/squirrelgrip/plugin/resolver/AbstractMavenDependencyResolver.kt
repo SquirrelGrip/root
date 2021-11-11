@@ -1,7 +1,6 @@
 package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
-import com.github.squirrelgrip.plugin.model.Version
 import org.apache.maven.artifact.Artifact
 import org.apache.maven.artifact.DefaultArtifact
 import org.apache.maven.artifact.handler.DefaultArtifactHandler
@@ -20,8 +19,11 @@ abstract class AbstractMavenDependencyResolver(
         val defaultArtifactHandler = DefaultArtifactHandler()
     }
 
-    val artifactDetailsFactory =
+    val localArtifactDetailsFactory =
         LocalArtifactDetailsFactory(localRepository)
+
+    val remoteArtifactDetailsFactory =
+        RemoteArtifactDetailsFactory(localRepository, remoteRepositories)
 
     fun Plugin.toArtifact(): Artifact =
         DefaultArtifact(groupId, artifactId, version ?: "0.0", "", "", "", defaultArtifactHandler)
@@ -91,10 +93,13 @@ abstract class AbstractMavenDependencyResolver(
         }
 
     private fun Artifact.getArtifactDetails(): ArtifactDetails =
-        artifactDetailsFactory.create(groupId, artifactId, version)
+        localArtifactDetailsFactory.create(groupId, artifactId, version).enrich()
 
     private fun ArtifactDetails.enrich(): ArtifactDetails {
-        return this.copy(versions = artifactDetailsFactory.getAvailableVersions(this))
+        if (localArtifactDetailsFactory.hasMetaData(this)) {
+            return this.copy(versions = localArtifactDetailsFactory.getAvailableVersions(this))
+        }
+        return this.copy(versions = remoteArtifactDetailsFactory.getAvailableVersions(this))
     }
 
 }

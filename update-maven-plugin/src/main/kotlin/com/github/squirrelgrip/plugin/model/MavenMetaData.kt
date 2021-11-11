@@ -2,7 +2,7 @@ package com.github.squirrelgrip.plugin.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class MavenMetaData(
+data class MavenMetaData(
     @JsonProperty("groupId")
     val groupId: String,
     @JsonProperty("artifactId")
@@ -13,4 +13,7 @@ class MavenMetaData(
     val version: String?,
     @JsonProperty("versioning")
     val versioning: Versioning
-)
+) {
+    fun updateTime(): MavenMetaData =
+        copy(versioning = versioning.updateTime())
+}
