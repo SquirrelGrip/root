@@ -11,19 +11,19 @@ import org.junit.jupiter.api.Test
 
 internal class ArtifactDetailsFactoryTest {
     val artifact = ArtifactDetails("com.github.squirrelgrip", "extensions", Version("1.2.6"))
+    val localRepository: ArtifactRepository = MavenArtifactRepository("local", "file:///Users/adrian/.m2/repository", DefaultRepositoryLayout(), ArtifactRepositoryPolicy(true, null, null), ArtifactRepositoryPolicy(true, null, null))
 
     @Test
     fun getRemoteAvailableVersions() {
         val repository: ArtifactRepository = MavenArtifactRepository("remote", "https://repo1.maven.org/maven2", DefaultRepositoryLayout(), ArtifactRepositoryPolicy(true, null, null), ArtifactRepositoryPolicy(true, null, null))
-        val testSubject = RemoteArtifactDetailsFactory(listOf(repository))
+        val testSubject = RemoteArtifactDetailsFactory(localRepository, listOf(repository))
         val availableVersions = testSubject.getAvailableVersions(artifact)
         assertThat(availableVersions).isNotEmpty
     }
 
     @Test
     fun getLocalAvailableVersions() {
-        val repository: ArtifactRepository = MavenArtifactRepository("local", "file:///Users/adrian/.m2/repository", DefaultRepositoryLayout(), ArtifactRepositoryPolicy(true, null, null), ArtifactRepositoryPolicy(true, null, null))
-        val testSubject = LocalArtifactDetailsFactory(repository)
+        val testSubject = LocalArtifactDetailsFactory(localRepository)
         val availableVersions = testSubject.getAvailableVersions(artifact)
         assertThat(availableVersions).isNotEmpty
     }

@@ -11,7 +11,8 @@
     <packaging>pom</packaging>
 
     <properties>
-        <annotations.version>13.0</annotations.version>
+        <annotations.version>23.0.0</annotations.version>
+        <antlr4.version>4.9.3</antlr4.version>
         <assertj.version>3.21.0</assertj.version>
         <awaitility.version>4.1.1</awaitility.version>
         <beanutils.version>1.9.4</beanutils.version>
@@ -32,7 +33,7 @@
         <slf4j.version>1.7.32</slf4j.version>
         <spring-batch.version>4.3.3</spring-batch.version>
         <spring-boot.version>2.5.6</spring-boot.version>
-        <spring-framework.version>5.3.12</spring-framework.version>
+        <spring-framework.version>5.3.13</spring-framework.version>
         <spring-integration.version>5.5.5</spring-integration.version>
         <velocity.version>1.7</velocity.version>
         <zjsonpatch.version>0.4.11</zjsonpatch.version>
@@ -72,6 +73,16 @@
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
                 <version>${annotations.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4</artifactId>
+                <version>${antlr4.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-runtime</artifactId>
+                <version>${antlr4.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
