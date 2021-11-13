@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.29</version>
+        <version>1.2.30</version>
     </parent>
 
     <artifactId>dependencies</artifactId>
@@ -30,6 +30,7 @@
         <micrometer.version>1.7.5</micrometer.version>
         <mockito.version>4.0.0</mockito.version>
         <mockito-kotlin.version>2.2.0</mockito-kotlin.version>
+        <reactor.version>2020.0.13</reactor.version>
         <slf4j.version>1.7.32</slf4j.version>
         <spring-batch.version>4.3.3</spring-batch.version>
         <spring-boot.version>2.5.6</spring-boot.version>
@@ -61,6 +62,13 @@
                         <artifactId>jackson-module-scala_2.13</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-bom</artifactId>
+                <version>${reactor.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -250,7 +258,7 @@
                 <plugin>
                     <groupId>com.github.squirrelgrip</groupId>
                     <artifactId>update-maven-plugin</artifactId>
-                    <version>1.2.29</version>
+                    <version>1.2.30</version>
                     <configuration>
                         <processTransitive>true</processTransitive>
                     </configuration>
