@@ -8,6 +8,13 @@ import com.github.squirrelgrip.plugin.model.Version
 import com.github.squirrelgrip.plugin.model.Versioning
 import org.apache.maven.artifact.repository.ArtifactRepository
 import java.io.File
+import java.security.SecureRandom
+import java.security.cert.X509Certificate
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSession
+import javax.net.ssl.X509TrustManager
+import javax.ws.rs.client.Client
 import javax.ws.rs.client.ClientBuilder
 
 class RemoteArtifactDetailsFactory(
@@ -15,7 +22,10 @@ class RemoteArtifactDetailsFactory(
     val remoteRepositories: List<ArtifactRepository>,
 ) : ArtifactDetailsFactory {
     companion object {
-        val client = ClientBuilder.newClient()
+        val sslContext = SSLContext.getInstance("TLSv1.2").also {
+            it.init(null, arrayOf(InsecureTrustManager()), SecureRandom())
+        }
+        val client: Client = ClientBuilder.newBuilder().sslContext(sslContext).hostnameVerifier(InsecureHostnameVerifier()).build()
     }
 
     override fun getAvailableVersions(artifact: ArtifactDetails): List<Version> =
@@ -48,4 +58,20 @@ class RemoteArtifactDetailsFactory(
     override fun hasMetaData(artifact: ArtifactDetails): Boolean =
         true
 
+}
+
+class InsecureHostnameVerifier : HostnameVerifier {
+    override fun verify(hostname: String, session: SSLSession): Boolean = true
+}
+
+class InsecureTrustManager : X509TrustManager {
+    override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+        // Everyone is trusted!
+    }
+
+    override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+        // Everyone is trusted!
+    }
+
+    override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
 }
