@@ -29,7 +29,15 @@ class RemoteArtifactDetailsFactory(
         }.map {(repository, target) ->
             target.path(artifact.getMavenMetaDataFile()).request().get().use {
                 it.readEntity(String::class.java).toInstance<MavenMetaData>().also {
-                    it.updateTime().toXml(File(localRepository.basedir, artifact.getMavenMetaDataFile(repository.id)))
+                    try {
+                        val file = File(localRepository.basedir, artifact.getMavenMetaDataFile(repository.id))
+                        if (!file.parentFile.exists()) {
+                            file.parentFile.mkdirs()
+                        }
+                        it.updateTime().toXml(file)
+                    } catch(e: Exception) {
+
+                    }
                 }
             }
         }.toVersions()
