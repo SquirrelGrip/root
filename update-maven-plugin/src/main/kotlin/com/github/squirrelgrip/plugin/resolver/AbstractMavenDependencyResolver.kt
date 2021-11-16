@@ -96,7 +96,7 @@ abstract class AbstractMavenDependencyResolver(
         localArtifactDetailsFactory.create(groupId, artifactId, version).enrich()
 
     private fun ArtifactDetails.enrich(): ArtifactDetails {
-        if (localArtifactDetailsFactory.hasMetaData(this)) {
+        if (localArtifactDetailsFactory.hasMetaData(this) && localArtifactDetailsFactory.metaDataUp2Date(this)) {
             return this.copy(versions = localArtifactDetailsFactory.getAvailableVersions(this))
         }
         return this.copy(versions = remoteArtifactDetailsFactory.getAvailableVersions(this))

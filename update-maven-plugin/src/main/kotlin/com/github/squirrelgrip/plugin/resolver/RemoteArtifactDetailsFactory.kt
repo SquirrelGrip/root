@@ -58,6 +58,10 @@ class RemoteArtifactDetailsFactory(
     override fun hasMetaData(artifact: ArtifactDetails): Boolean =
         true
 
+    override fun metaDataUp2Date(artifact: ArtifactDetails): Boolean =
+        false
+
+
 }
 
 class InsecureHostnameVerifier : HostnameVerifier {
