@@ -1,14 +1,13 @@
 package com.github.squirrelgrip.plugin.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import com.github.squirrelgrip.extension.time.toOffsetDateTime
 import java.time.Instant
 import java.time.ZoneOffset
-import java.time.chrono.IsoChronology
-import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
-import java.time.format.ResolverStyle
 import java.time.format.SignStyle
 import java.time.temporal.ChronoField
 
@@ -30,7 +29,8 @@ data class Versioning(
             .appendValue(ChronoField.DAY_OF_MONTH, 2)
             .appendValue(ChronoField.HOUR_OF_DAY, 2)
             .appendValue(ChronoField.MINUTE_OF_HOUR, 2)
-            .appendValue(ChronoField.SECOND_OF_MINUTE, 2).toFormatter()
+            .appendValue(ChronoField.SECOND_OF_MINUTE, 2)
+            .toFormatter()
     }
 
     fun updateTime(): Versioning =
@@ -38,5 +38,15 @@ data class Versioning(
 
     private fun getCurrentTimeStamp(): String =
         dateTimeFormatter.format(Instant.now().toOffsetDateTime(ZoneOffset.UTC))
+
+    @get:JsonIgnore
+    val updatedDateTime: Instant
+        get() {
+            return try {
+                dateTimeFormatter.parse(lastUpdated, Instant::from)
+            } catch (e: Exception) {
+                Instant.MIN
+            }
+        }
 
 }

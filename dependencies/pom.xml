@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.33</version>
+        <version>1.2.34</version>
     </parent>
 
     <artifactId>dependencies</artifactId>
@@ -25,9 +25,10 @@
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jersey.version>2.35</jersey.version>
         <junit-jupiter.version>5.8.1</junit-jupiter.version>
+        <junit-pioneer.version>1.5.0</junit-pioneer.version>
         <kotlinx-coroutines.version>1.5.2</kotlinx-coroutines.version>
-        <logback.version>1.2.6</logback.version>
-        <micrometer.version>1.7.5</micrometer.version>
+        <logback.version>1.2.7</logback.version>
+        <micrometer.version>1.8.0</micrometer.version>
         <mockito.version>4.0.0</mockito.version>
         <mockito-kotlin.version>2.2.0</mockito-kotlin.version>
         <reactor.version>2020.0.13</reactor.version>
@@ -210,6 +211,11 @@
                 <version>${kotlinx-coroutines.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.junit-pioneer</groupId>
+                <artifactId>junit-pioneer</artifactId>
+                <version>${junit-pioneer.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
                 <version>${mockito.version}</version>
@@ -258,7 +264,7 @@
                 <plugin>
                     <groupId>com.github.squirrelgrip</groupId>
                     <artifactId>update-maven-plugin</artifactId>
-                    <version>1.2.33</version>
+                    <version>1.2.34</version>
                     <configuration>
                         <processTransitive>true</processTransitive>
                     </configuration>
