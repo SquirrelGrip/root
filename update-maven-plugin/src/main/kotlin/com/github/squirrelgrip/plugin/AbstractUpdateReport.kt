@@ -66,6 +66,14 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
             getMavenDependencyResolver()
     }
 
+    override fun logParameters() {
+        log.info("processDependencies: $processDependencies")
+        log.info("processDependencyManagement: $processDependencyManagement")
+        log.info("processPluginDependencies: $processPluginDependencies")
+        log.info("processPluginDependenciesInPluginManagement: $processPluginDependenciesInPluginManagement")
+        log.info("processTransitive: $processTransitive")
+    }
+
     abstract fun getMavenDependencyResolver(): AbstractMavenDependencyResolver
 
     override fun body(locale: Locale) {

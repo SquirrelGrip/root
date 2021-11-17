@@ -15,7 +15,7 @@ abstract class AbstractMavenDependencyResolver(
     localRepository: ArtifactRepository,
     remoteRepositories: List<ArtifactRepository>,
     pluginRepositories: List<ArtifactRepository>,
-    val log: Log
+    val log: Log,
 ) : DependencyResolver {
     companion object {
         val defaultArtifactHandler = DefaultArtifactHandler()
@@ -35,34 +35,49 @@ abstract class AbstractMavenDependencyResolver(
 
     fun MavenProject.getProjectDependencies(
         processDependencies: Boolean,
-        processTransitive: Boolean
+        processTransitive: Boolean,
     ): List<Artifact> =
         if (processDependencies) {
             if (processTransitive) {
                 dependencies
             } else {
-                originalModel.dependencies
-            }.map { it.toArtifact() }
+                originalModel.dependencies.map {
+                    it.getEquivalentDependency(this.dependencies)
+                }
+            }.map {
+                it.toArtifact()
+            }
         } else {
             emptyList()
         }
 
+    private fun Dependency.getEquivalentDependency(dependencies: List<Dependency>): Dependency =
+        dependencies.firstOrNull {
+            it.groupId == groupId && it.artifactId == artifactId
+        } ?: this
+
     fun MavenProject.getProjectManagedDependencies(
         processDependencyManagement: Boolean,
-        processTransitive: Boolean
+        processTransitive: Boolean,
     ): List<Artifact> =
         if (processDependencyManagement) {
             if (processTransitive) {
-                (dependencyManagement?.dependencies ?: emptyList()).map { it.toArtifact() }
+                (dependencyManagement?.dependencies ?: emptyList()).map {
+                    it.toArtifact()
+                }
             } else {
-                (originalModel.dependencyManagement?.dependencies ?: emptyList()).map { it.toArtifact() }
+                (originalModel.dependencyManagement?.dependencies ?: emptyList()).map {
+                    it.getEquivalentDependency(this.dependencies)
+                }.map {
+                    it.toArtifact()
+                }
             }
         } else {
             emptyList()
         }
 
     fun MavenProject.getProjectPlugins(
-        processPluginDependencies: Boolean
+        processPluginDependencies: Boolean,
     ): List<Artifact> =
         if (processPluginDependencies) {
             buildPlugins.map { it.toArtifact() }
@@ -74,14 +89,16 @@ abstract class AbstractMavenDependencyResolver(
         processPluginDependenciesInPluginManagement: Boolean,
     ): List<Artifact> =
         if (processPluginDependenciesInPluginManagement) {
-            (pluginManagement?.plugins ?: emptyList()).map { it.toArtifact() }
+            (pluginManagement?.plugins ?: emptyList()).map {
+                it.toArtifact()
+            }
         } else {
             emptyList()
         }
 
     fun getArtifactDetails(
         artifacts: List<Artifact>,
-        managedArtifacts: List<Artifact>
+        managedArtifacts: List<Artifact>,
     ): List<Artifact> =
         artifacts + managedArtifacts
 

@@ -13,7 +13,10 @@ abstract class AbstractDoxiaReport() : AbstractMavenReport() {
 
     abstract fun body(locale: Locale)
 
+    abstract fun logParameters()
+
     override fun executeReport(locale: Locale) {
+        logParameters()
         if (sink == null) {
             throw MavenReportException("Could not get the Doxia sink")
         }
