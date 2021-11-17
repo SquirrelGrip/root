@@ -4,6 +4,7 @@ import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
+import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
 
 class SessionDependencyResolver(
@@ -11,10 +12,12 @@ class SessionDependencyResolver(
     remoteRepositories: List<ArtifactRepository>,
     pluginRepositories: List<ArtifactRepository>,
     private val session: MavenSession,
+    log: Log
 ) : AbstractMavenDependencyResolver(
     localRepository,
     remoteRepositories,
-    pluginRepositories
+    pluginRepositories,
+    log
 ) {
     override fun getDependencyArtifacts(
         project: MavenProject,
