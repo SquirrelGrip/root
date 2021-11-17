@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 
 internal class VersioningTest {
-
     @Test
     fun updateTime() {
-        val lastUpdated = Versioning().updateTime().lastUpdated
+        val versioning = Versioning().updateTime()
+        val lastUpdated = versioning.lastUpdated
         assertThat(lastUpdated).hasSize(14)
     }
 }

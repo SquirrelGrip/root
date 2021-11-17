@@ -5,11 +5,13 @@ import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.MavenMetaData
 import com.github.squirrelgrip.plugin.model.Version
 import org.apache.maven.artifact.repository.ArtifactRepository
+import org.apache.maven.plugin.logging.Log
 import java.io.File
 import java.time.Instant
 
 class LocalArtifactDetailsFactory(
     val localRepository: ArtifactRepository,
+    val log: Log
 ) : ArtifactDetailsFactory {
     companion object {
         val regex = "maven-metadata-.*\\.xml".toRegex()
@@ -37,10 +39,10 @@ class LocalArtifactDetailsFactory(
         getFiles(artifact).isNotEmpty()
 
     override fun metaDataUp2Date(artifact: ArtifactDetails): Boolean {
-        val lastUpdate = getMavenMetaData(artifact).map {
+        val lastUpdateInstant = getMavenMetaData(artifact).map {
             it.versioning.updatedDateTime
         }.maxOrNull() ?: Instant.MIN
-        return lastUpdate.isAfter(Instant.now().minusSeconds(3600))
+        return lastUpdateInstant.plusSeconds(3600).isAfter(Instant.now())
     }
 
 }

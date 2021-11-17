@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import com.github.squirrelgrip.extension.time.toOffsetDateTime
 import java.time.Instant
+import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.SignStyle
 import java.time.temporal.ChronoField
@@ -43,7 +45,7 @@ data class Versioning(
     val updatedDateTime: Instant
         get() {
             return try {
-                dateTimeFormatter.parse(lastUpdated, Instant::from)
+                dateTimeFormatter.parse(lastUpdated, LocalDateTime::from).toInstant(ZoneOffset.UTC)
             } catch (e: Exception) {
                 Instant.MIN
             }

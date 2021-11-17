@@ -21,7 +21,8 @@ class ProjectUpdateReportMojo : AbstractUpdateReport() {
         ProjectDependencyResolver(
             localRepository,
             remoteRepositories,
-            pluginArtifactRepositories
+            pluginArtifactRepositories,
+            log
         )
 
     override fun getOutputName(): String {

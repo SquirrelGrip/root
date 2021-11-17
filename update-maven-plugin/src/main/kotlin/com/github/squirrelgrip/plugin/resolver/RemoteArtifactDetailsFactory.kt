@@ -7,6 +7,7 @@ import com.github.squirrelgrip.plugin.model.MavenMetaData
 import com.github.squirrelgrip.plugin.model.Version
 import com.github.squirrelgrip.plugin.model.Versioning
 import org.apache.maven.artifact.repository.ArtifactRepository
+import org.apache.maven.plugin.logging.Log
 import java.io.File
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -20,6 +21,7 @@ import javax.ws.rs.client.ClientBuilder
 class RemoteArtifactDetailsFactory(
     val localRepository: ArtifactRepository,
     val remoteRepositories: List<ArtifactRepository>,
+    val log: Log
 ) : ArtifactDetailsFactory {
     companion object {
         val sslContext = SSLContext.getInstance("TLSv1.2").also {
@@ -60,8 +62,6 @@ class RemoteArtifactDetailsFactory(
 
     override fun metaDataUp2Date(artifact: ArtifactDetails): Boolean =
         false
-
-
 }
 
 class InsecureHostnameVerifier : HostnameVerifier {

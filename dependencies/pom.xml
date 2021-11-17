@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.34</version>
+        <version>1.2.35</version>
     </parent>
 
     <artifactId>dependencies</artifactId>
@@ -264,7 +264,7 @@
                 <plugin>
                     <groupId>com.github.squirrelgrip</groupId>
                     <artifactId>update-maven-plugin</artifactId>
-                    <version>1.2.34</version>
+                    <version>1.2.35</version>
                     <configuration>
                         <processTransitive>true</processTransitive>
                     </configuration>

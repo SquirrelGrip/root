@@ -7,23 +7,25 @@ import org.apache.maven.artifact.handler.DefaultArtifactHandler
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.model.Dependency
 import org.apache.maven.model.Plugin
+import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
 
 
 abstract class AbstractMavenDependencyResolver(
     localRepository: ArtifactRepository,
     remoteRepositories: List<ArtifactRepository>,
-    pluginRepositories: List<ArtifactRepository>
+    pluginRepositories: List<ArtifactRepository>,
+    val log: Log
 ) : DependencyResolver {
     companion object {
         val defaultArtifactHandler = DefaultArtifactHandler()
     }
 
     val localArtifactDetailsFactory =
-        LocalArtifactDetailsFactory(localRepository)
+        LocalArtifactDetailsFactory(localRepository, log)
 
     val remoteArtifactDetailsFactory =
-        RemoteArtifactDetailsFactory(localRepository, remoteRepositories)
+        RemoteArtifactDetailsFactory(localRepository, remoteRepositories, log)
 
     fun Plugin.toArtifact(): Artifact =
         DefaultArtifact(groupId, artifactId, version ?: "0.0", "", "", "", defaultArtifactHandler)
@@ -96,6 +98,7 @@ abstract class AbstractMavenDependencyResolver(
         localArtifactDetailsFactory.create(groupId, artifactId, version).enrich()
 
     private fun ArtifactDetails.enrich(): ArtifactDetails {
+        log.debug("Enrich: $groupId:$artifactId")
         if (localArtifactDetailsFactory.hasMetaData(this) && localArtifactDetailsFactory.metaDataUp2Date(this)) {
             return this.copy(versions = localArtifactDetailsFactory.getAvailableVersions(this))
         }
