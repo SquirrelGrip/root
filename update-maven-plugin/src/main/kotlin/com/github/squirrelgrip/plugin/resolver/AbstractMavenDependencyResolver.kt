@@ -10,7 +10,6 @@ import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
 
-
 abstract class AbstractMavenDependencyResolver(
     localRepository: ArtifactRepository,
     remoteRepositories: List<ArtifactRepository>,
@@ -26,6 +25,9 @@ abstract class AbstractMavenDependencyResolver(
 
     val remoteArtifactDetailsFactory =
         RemoteArtifactDetailsFactory(localRepository, remoteRepositories, log)
+
+    val pluginArtifactDetailsFactory =
+        RemoteArtifactDetailsFactory(localRepository, pluginRepositories, log)
 
     fun Plugin.toArtifact(): Artifact =
         DefaultArtifact(groupId, artifactId, version ?: "0.0", "", "", "", defaultArtifactHandler)
@@ -49,6 +51,8 @@ abstract class AbstractMavenDependencyResolver(
             }
         } else {
             emptyList()
+        }.also {
+            log.debug("$it")
         }
 
     private fun Dependency.getEquivalentDependency(dependencies: List<Dependency>): Dependency =
@@ -102,24 +106,28 @@ abstract class AbstractMavenDependencyResolver(
     ): List<Artifact> =
         artifacts + managedArtifacts
 
-    fun List<Artifact>.toArtifactDetails(): List<ArtifactDetails> =
+    fun List<Artifact>.toArtifactDetails(pluginArtifact: Boolean): List<ArtifactDetails> =
         distinctBy {
             "${it.groupId}:${it.artifactId}"
         }.sortedBy {
             "${it.groupId}:${it.artifactId}"
         }.map {
-            it.getArtifactDetails()
+            it.getArtifactDetails(pluginArtifact)
         }
 
-    private fun Artifact.getArtifactDetails(): ArtifactDetails =
-        localArtifactDetailsFactory.create(groupId, artifactId, version).enrich()
+    private fun Artifact.getArtifactDetails(pluginArtifact: Boolean): ArtifactDetails =
+        localArtifactDetailsFactory.create(groupId, artifactId, version).enrich(pluginArtifact)
 
-    private fun ArtifactDetails.enrich(): ArtifactDetails {
+    private fun ArtifactDetails.enrich(pluginArtifact: Boolean): ArtifactDetails {
         log.debug("Enrich: $groupId:$artifactId")
         if (localArtifactDetailsFactory.hasMetaData(this) && localArtifactDetailsFactory.metaDataUp2Date(this)) {
             return this.copy(versions = localArtifactDetailsFactory.getAvailableVersions(this))
         }
-        return this.copy(versions = remoteArtifactDetailsFactory.getAvailableVersions(this))
+        return if (pluginArtifact) {
+            this.copy(versions = pluginArtifactDetailsFactory.getAvailableVersions(this))
+        } else {
+            this.copy(versions = remoteArtifactDetailsFactory.getAvailableVersions(this))
+        }
     }
 
 }

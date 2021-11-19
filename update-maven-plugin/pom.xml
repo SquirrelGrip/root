@@ -18,7 +18,7 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <doxia.version>1.10</doxia.version>
         <junit-jupiter.version>5.8.1</junit-jupiter.version>
-        <kotlin-extensions.version>1.2.6</kotlin-extensions.version>
+        <kotlin-extensions.version>1.2.8</kotlin-extensions.version>
         <maven-plugin-annotations.version>3.6.1</maven-plugin-annotations.version>
         <maven-plugin-api.version>3.8.3</maven-plugin-api.version>
         <maven-reporting-api.version>3.0</maven-reporting-api.version>
@@ -105,11 +105,6 @@
                 <groupId>org.glassfish.jersey.inject</groupId>
                 <artifactId>jersey-hk2</artifactId>
                 <version>${jersey.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>activation</artifactId>
-                <version>${activation.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -212,6 +207,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
+                <version>${maven-plugin-plugin.version}</version>
                 <configuration>
                     <goalPrefix>update</goalPrefix>
                 </configuration>
@@ -231,6 +227,7 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin-maven-plugin.version}</version>
                 <configuration>
                     <jvmTarget>${maven.compiler.target}</jvmTarget>
                 </configuration>
@@ -238,6 +235,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <compilerVersion>${maven.compiler.target}</compilerVersion>
                 </configuration>

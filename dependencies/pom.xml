@@ -6,7 +6,6 @@
         <groupId>com.github.squirrelgrip</groupId>
         <version>1.2.37-SNAPSHOT</version>
     </parent>
-
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
@@ -34,7 +33,7 @@
         <reactor.version>2020.0.13</reactor.version>
         <slf4j.version>1.7.32</slf4j.version>
         <spring-batch.version>4.3.4</spring-batch.version>
-        <spring-boot.version>2.5.6</spring-boot.version>
+        <spring-boot.version>2.5.7</spring-boot.version>
         <spring-framework.version>5.3.13</spring-framework.version>
         <spring-integration.version>5.5.6</spring-integration.version>
         <velocity.version>1.7</velocity.version>
@@ -265,9 +264,6 @@
                     <groupId>com.github.squirrelgrip</groupId>
                     <artifactId>update-maven-plugin</artifactId>
                     <version>1.2.37-SNAPSHOT</version>
-                    <configuration>
-                        <processTransitive>true</processTransitive>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -277,6 +273,7 @@
             <plugin>
                 <groupId>com.github.squirrelgrip</groupId>
                 <artifactId>update-maven-plugin</artifactId>
+                <version>1.2.37-SNAPSHOT</version>
                 <configuration>
                     <processTransitive>true</processTransitive>
                 </configuration>

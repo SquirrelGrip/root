@@ -1,7 +1,6 @@
 package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
-import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
 import org.apache.maven.plugin.logging.Log
@@ -31,7 +30,7 @@ class SessionDependencyResolver(
         val managedDependencies = session.projects.flatMap {
             it.getProjectManagedDependencies(processDependencyManagement, processTransitive)
         }
-        return getArtifactDetails(dependencies, managedDependencies).toArtifactDetails()
+        return getArtifactDetails(dependencies, managedDependencies).toArtifactDetails(false)
     }
 
     override fun getPluginArtifacts(
@@ -45,7 +44,7 @@ class SessionDependencyResolver(
         val managedPlugins = session.projects.flatMap {
             it.getProjectManagedPlugins(processPluginDependenciesInPluginManagement)
         }
-        return getArtifactDetails(plugins, managedPlugins).toArtifactDetails()
+        return getArtifactDetails(plugins, managedPlugins).toArtifactDetails(true)
     }
 }
 

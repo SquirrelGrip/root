@@ -1,8 +1,8 @@
 package com.github.squirrelgrip.plugin.resolver
 
+import com.github.squirrelgrip.extension.xml.toInstance
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.PluginUpdatesReport
-import com.github.squirrelgrip.extension.xml.toInstance
 import org.apache.maven.project.MavenProject
 import java.io.File
 
