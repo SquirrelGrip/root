@@ -27,8 +27,7 @@ class ProjectCheckerReportMojo : AbstractDoxiaReport() {
     @Parameter(defaultValue = "\${session}", readonly = true)
     lateinit var session: MavenSession
 
-    override fun logParameters() {
-    }
+    override fun logParameters() {}
 
     override fun body(locale: Locale) {
         /// This is the content

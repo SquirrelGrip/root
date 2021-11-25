@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.36</version>
+        <version>1.2.40</version>
     </parent>
     <artifactId>update-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
@@ -14,18 +14,19 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <activation.version>1.1.1</activation.version>
         <assertj.version>3.21.0</assertj.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <doxia.version>1.10</doxia.version>
+        <jersey.version>2.35</jersey.version>
         <junit-jupiter.version>5.8.1</junit-jupiter.version>
-        <kotlin-extensions.version>1.2.6</kotlin-extensions.version>
+        <kotlin-extensions.version>1.2.8</kotlin-extensions.version>
         <maven-plugin-annotations.version>3.6.1</maven-plugin-annotations.version>
-        <maven-plugin-api.version>3.8.3</maven-plugin-api.version>
+        <maven-plugin-api.version>3.8.4</maven-plugin-api.version>
         <maven-reporting-api.version>3.0</maven-reporting-api.version>
         <maven-reporting-impl.version>3.0.0</maven-reporting-impl.version>
         <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
-        <jersey.version>2.35</jersey.version>
-        <activation.version>1.1.1</activation.version>
+        <mockito.version>4.1.0</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -105,11 +106,6 @@
                 <groupId>org.glassfish.jersey.inject</groupId>
                 <artifactId>jersey-hk2</artifactId>
                 <version>${jersey.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>activation</artifactId>
-                <version>${activation.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -200,7 +196,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>4.0.0</version>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -212,6 +208,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
+                <version>${maven-plugin-plugin.version}</version>
                 <configuration>
                     <goalPrefix>update</goalPrefix>
                 </configuration>
@@ -231,6 +228,7 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin-maven-plugin.version}</version>
                 <configuration>
                     <jvmTarget>${maven.compiler.target}</jvmTarget>
                 </configuration>
@@ -238,6 +236,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <compilerVersion>${maven.compiler.target}</compilerVersion>
                 </configuration>

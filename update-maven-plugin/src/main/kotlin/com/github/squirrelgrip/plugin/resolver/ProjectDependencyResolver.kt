@@ -1,7 +1,6 @@
 package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
-import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
@@ -27,7 +26,7 @@ class ProjectDependencyResolver(
         getArtifactDetails(
             project.getProjectDependencies(processDependencies, processTransitive),
             project.getProjectManagedDependencies(processDependencyManagement, processTransitive)
-        ).toArtifactDetails()
+        ).toArtifactDetails(false)
 
     override fun getPluginArtifacts(
         project: MavenProject,
@@ -37,7 +36,7 @@ class ProjectDependencyResolver(
         getArtifactDetails(
             project.getProjectPlugins(processPluginDependencies),
             project.getProjectManagedPlugins(processPluginDependenciesInPluginManagement)
-        ).toArtifactDetails()
+        ).toArtifactDetails(true)
 
 }
 

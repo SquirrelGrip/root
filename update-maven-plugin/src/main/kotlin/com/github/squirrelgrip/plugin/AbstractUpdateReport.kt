@@ -4,10 +4,8 @@ import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.resolver.AbstractMavenDependencyResolver
 import com.github.squirrelgrip.plugin.resolver.DependencyResolver
 import com.github.squirrelgrip.plugin.resolver.VersionsDependencyResolver
-import org.apache.maven.artifact.metadata.ArtifactMetadataSource
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
-import org.apache.maven.plugins.annotations.Component
 import org.apache.maven.plugins.annotations.Parameter
 import java.util.*
 
@@ -67,11 +65,11 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     }
 
     override fun logParameters() {
-        log.info("processDependencies: $processDependencies")
-        log.info("processDependencyManagement: $processDependencyManagement")
-        log.info("processPluginDependencies: $processPluginDependencies")
-        log.info("processPluginDependenciesInPluginManagement: $processPluginDependenciesInPluginManagement")
-        log.info("processTransitive: $processTransitive")
+        log.debug("processDependencies: $processDependencies")
+        log.debug("processDependencyManagement: $processDependencyManagement")
+        log.debug("processPluginDependencies: $processPluginDependencies")
+        log.debug("processPluginDependenciesInPluginManagement: $processPluginDependenciesInPluginManagement")
+        log.debug("processTransitive: $processTransitive")
     }
 
     abstract fun getMavenDependencyResolver(): AbstractMavenDependencyResolver
