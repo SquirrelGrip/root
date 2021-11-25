@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.41-SNAPSHOT</version>
+        <version>1.2.40</version>
     </parent>
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
@@ -269,7 +269,7 @@
                 <plugin>
                     <groupId>com.github.squirrelgrip</groupId>
                     <artifactId>update-maven-plugin</artifactId>
-                    <version>1.2.41-SNAPSHOT</version>
+                    <version>1.2.40</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -279,7 +279,7 @@
             <plugin>
                 <groupId>com.github.squirrelgrip</groupId>
                 <artifactId>update-maven-plugin</artifactId>
-                <version>1.2.41-SNAPSHOT</version>
+                <version>1.2.40</version>
                 <configuration>
                     <processTransitive>true</processTransitive>
                 </configuration>
