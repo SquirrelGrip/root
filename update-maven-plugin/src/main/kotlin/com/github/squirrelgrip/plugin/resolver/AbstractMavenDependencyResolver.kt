@@ -9,6 +9,7 @@ import org.apache.maven.model.Dependency
 import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
+import java.util.*
 
 abstract class AbstractMavenDependencyResolver(
     localRepository: ArtifactRepository,
@@ -18,6 +19,7 @@ abstract class AbstractMavenDependencyResolver(
 ) : DependencyResolver {
     companion object {
         val defaultArtifactHandler = DefaultArtifactHandler()
+        val regex = "\\\$\\{(.+)\\}".toRegex()
     }
 
     val localArtifactDetailsFactory =
@@ -29,11 +31,18 @@ abstract class AbstractMavenDependencyResolver(
     val pluginArtifactDetailsFactory =
         RemoteArtifactDetailsFactory(localRepository, pluginRepositories, log)
 
-    fun Plugin.toArtifact(): Artifact =
-        DefaultArtifact(groupId, artifactId, version ?: "0.0", "", "", "", defaultArtifactHandler)
+    fun Plugin.toArtifact(properties: Properties): Artifact =
+        DefaultArtifact(groupId, artifactId, getCurrentVersion(version, properties), "", "", "", defaultArtifactHandler)
 
-    fun Dependency.toArtifact(): Artifact =
-        DefaultArtifact(groupId, artifactId, version ?: "0.0", "", "", "", defaultArtifactHandler)
+    fun Dependency.toArtifact(properties: Properties): Artifact =
+        DefaultArtifact(groupId, artifactId, getCurrentVersion(version, properties), "", "", "", defaultArtifactHandler)
+
+    private fun getCurrentVersion(version: String?, properties: Properties): String =
+        (version ?: "0.0").let { raw ->
+            regex.find(raw)?.let {
+                properties.get(it.groupValues[1]).toString()
+            } ?: raw
+        }
 
     fun MavenProject.getProjectDependencies(
         processDependencies: Boolean,
@@ -43,11 +52,12 @@ abstract class AbstractMavenDependencyResolver(
             if (processTransitive) {
                 dependencies
             } else {
-                originalModel.dependencies.map {
-                    it.getEquivalentDependency(this.dependencies)
-                }
+                originalModel.dependencies
+                    .map {
+                        it.getEquivalentDependency(this.dependencies)
+                    }
             }.map {
-                it.toArtifact()
+                it.toArtifact(properties)
             }
         } else {
             emptyList()
@@ -67,13 +77,13 @@ abstract class AbstractMavenDependencyResolver(
         if (processDependencyManagement) {
             if (processTransitive) {
                 (dependencyManagement?.dependencies ?: emptyList()).map {
-                    it.toArtifact()
+                    it.toArtifact(properties)
                 }
             } else {
                 (originalModel.dependencyManagement?.dependencies ?: emptyList()).map {
                     it.getEquivalentDependency(this.dependencies)
                 }.map {
-                    it.toArtifact()
+                    it.toArtifact(properties)
                 }
             }
         } else {
@@ -84,7 +94,7 @@ abstract class AbstractMavenDependencyResolver(
         processPluginDependencies: Boolean,
     ): List<Artifact> =
         if (processPluginDependencies) {
-            buildPlugins.map { it.toArtifact() }
+            buildPlugins.map { it.toArtifact(properties) }
         } else {
             emptyList()
         }
@@ -94,7 +104,7 @@ abstract class AbstractMavenDependencyResolver(
     ): List<Artifact> =
         if (processPluginDependenciesInPluginManagement) {
             (pluginManagement?.plugins ?: emptyList()).map {
-                it.toArtifact()
+                it.toArtifact(properties)
             }
         } else {
             emptyList()
