@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.40-SNAPSHOT</version>
+        <version>1.2.41-SNAPSHOT</version>
     </parent>
     <artifactId>update-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
