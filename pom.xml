@@ -3,14 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.2.40</version>
+    <version>1.2.41</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
     <modules>
-        <module>update-maven-plugin</module>
         <module>dependencies</module>
-<!--        <module>update-maven-plugin-test</module>-->
+        <module>update-maven-plugin</module>
     </modules>
 
     <name>${project.artifactId}</name>
@@ -46,7 +45,7 @@
         <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-jxr-plugin.version>3.1.1</maven-jxr-plugin.version>
-        <maven-plugin-plugin.version>3.6.1</maven-plugin-plugin.version>
+        <maven-plugin-plugin.version>3.6.2</maven-plugin-plugin.version>
         <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
         <maven-release-plugin.version>3.0.0-M4</maven-release-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
