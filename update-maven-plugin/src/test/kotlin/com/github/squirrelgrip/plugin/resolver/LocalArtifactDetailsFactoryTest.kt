@@ -11,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
-import org.sonatype.aether.repository.LocalRepository
 
 @ExtendWith(MockitoExtension::class)
 internal class LocalArtifactDetailsFactoryTest {
