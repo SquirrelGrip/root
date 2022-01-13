@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.42</version>
+        <version>1.2.43</version>
         <relativePath>../</relativePath>
     </parent>
     <artifactId>dependencies</artifactId>
@@ -14,35 +14,45 @@
         <activation.version>1.1.1</activation.version>
         <annotations.version>23.0.0</annotations.version>
         <antlr4.version>4.9.3</antlr4.version>
-        <assertj.version>3.21.0</assertj.version>
+        <assertj.version>3.22.0</assertj.version>
         <awaitility.version>4.1.1</awaitility.version>
         <beanutils.version>1.9.4</beanutils.version>
-        <bouncycastle.version>1.69</bouncycastle.version>
+        <bouncycastle.version>1.70</bouncycastle.version>
         <commons-beanutils.version>3.2</commons-beanutils.version>
         <commons-collections.version>4.4</commons-collections.version>
+        <doxia.version>1.11.1</doxia.version>
+        <doxia-sink-api.version>1.11.1</doxia-sink-api.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <elasticsearch.version>7.15.2</elasticsearch.version>
+        <elasticsearch.version>7.16.2</elasticsearch.version>
         <httpclient.version>4.5.13</httpclient.version>
         <guava.version>31.0.1-jre</guava.version>
-        <jackson.version>2.13.0</jackson.version>
+        <jackson.version>2.13.1</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jersey.version>2.35</jersey.version>
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
         <junit-pioneer.version>1.5.0</junit-pioneer.version>
-        <kotlinx-coroutines.version>1.5.2</kotlinx-coroutines.version>
-        <logback.version>1.2.7</logback.version>
-        <micrometer.version>1.8.0</micrometer.version>
-        <mockito.version>4.1.0</mockito.version>
+        <kotlinx-coroutines.version>1.6.0</kotlinx-coroutines.version>
+        <logback.version>1.2.10</logback.version>
+        <maven-core.version>3.8.4</maven-core.version>
+        <maven-model.version>3.8.4</maven-model.version>
+        <maven-plugin-annotations.version>3.6.2</maven-plugin-annotations.version>
+        <maven-plugin-api.version>3.8.4</maven-plugin-api.version>
+        <maven-reporting-api.version>3.0</maven-reporting-api.version>
+        <maven-reporting-impl.version>3.0.0</maven-reporting-impl.version>
+        <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
+        <micrometer.version>1.8.1</micrometer.version>
+        <mockito.version>4.2.0</mockito.version>
         <mockito-kotlin.version>2.2.0</mockito-kotlin.version>
-        <mongodb.version>4.4.0</mongodb.version>
-        <reactor.version>2020.0.13</reactor.version>
+        <mongodb.version>4.4.1</mongodb.version>
+        <reactor.version>2020.0.15</reactor.version>
         <slf4j.version>1.7.32</slf4j.version>
         <spring-batch.version>4.3.4</spring-batch.version>
-        <spring-boot.version>2.6.0</spring-boot.version>
+        <spring-boot.version>2.6.2</spring-boot.version>
         <spring-data.version>2021.1.0</spring-data.version>
-        <spring-framework.version>5.3.13</spring-framework.version>
-        <spring-integration.version>5.5.6</spring-integration.version>
-        <spring-security.version>5.6.0</spring-security.version>
+        <spring-framework.version>5.3.14</spring-framework.version>
+        <spring-integration.version>5.5.7</spring-integration.version>
+        <spring-security.version>5.6.1</spring-security.version>
+        <springdoc-openapi.version>1.6.4</springdoc-openapi.version>
         <velocity.version>1.7</velocity.version>
         <zjsonpatch.version>0.4.11</zjsonpatch.version>
     </properties>
@@ -193,6 +203,51 @@
                 <version>${httpclient.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-core</artifactId>
+                <version>${maven-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-model</artifactId>
+                <version>${maven-model.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-plugin-api</artifactId>
+                <version>${maven-plugin-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.doxia</groupId>
+                <artifactId>doxia-sink-api</artifactId>
+                <version>${doxia-sink-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.doxia</groupId>
+                <artifactId>doxia-site-renderer</artifactId>
+                <version>${doxia.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-annotations</artifactId>
+                <version>${maven-plugin-annotations.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.reporting</groupId>
+                <artifactId>maven-reporting-api</artifactId>
+                <version>${maven-reporting-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.reporting</groupId>
+                <artifactId>maven-reporting-impl</artifactId>
+                <version>${maven-reporting-impl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.shared</groupId>
+                <artifactId>maven-shared-utils</artifactId>
+                <version>${maven-shared-utils.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
                 <version>${velocity.version}</version>
@@ -276,6 +331,11 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc-openapi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.batch</groupId>
