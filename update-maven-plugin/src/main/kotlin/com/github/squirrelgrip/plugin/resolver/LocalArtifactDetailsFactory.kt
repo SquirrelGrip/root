@@ -11,7 +11,8 @@ import java.time.Instant
 
 class LocalArtifactDetailsFactory(
     val localRepository: ArtifactRepository,
-    val log: Log
+    val log: Log,
+    val updateInterval: Long = 60 * 60 * 24,
 ) : ArtifactDetailsFactory {
     companion object {
         val regex = "maven-metadata-.*\\.xml".toRegex()
@@ -42,7 +43,7 @@ class LocalArtifactDetailsFactory(
         val lastUpdateInstant = getMavenMetaData(artifact).map {
             it.versioning.updatedDateTime
         }.maxOrNull() ?: Instant.MIN
-        return lastUpdateInstant.plusSeconds(3600).isAfter(Instant.now())
+        return lastUpdateInstant.plusSeconds(updateInterval).isAfter(Instant.now())
     }
 
 }

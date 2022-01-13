@@ -11,6 +11,9 @@ data class Version(
         val VERSION_REGEX = Regex("\\D+")
         val PROPERTY_REGEX = Regex(".*\\$\\{(.+?)\\}.*")
 
+        val INVALID_REGEX = """\d{8}\.\d+""".toRegex()
+
+
         fun versionCompare(v1: String, v2: String): Int {
             // vnum stores each numeric part of version
             var vnum1 = 0
@@ -58,17 +61,18 @@ data class Version(
     override fun toString(): String =
         value
 
-    fun isValid(): Boolean =
-        !value.uppercase().contains("LPHA") &&
-        !value.contains("ndroid") &&
-        !value.uppercase().contains("B") &&
-        !value.uppercase().contains("C") &&
-        !value.uppercase().contains("ETA") &&
-        !value.contains("enkin") &&
-        !value.uppercase().contains("M") &&
-        !value.contains("ative") &&
-        !(value.contains("r") && !value.contains("jre")) &&
-        !value.contains("SNAPSHOT")
+    fun isValid(): Boolean {
+        return !value.uppercase().contains("LPHA") &&
+                !value.contains("ndroid") &&
+                !value.uppercase().contains("B") &&
+                !value.uppercase().contains("C") &&
+                !value.uppercase().contains("ETA") &&
+                !value.contains("enkin") &&
+                !value.contains("ative") &&
+                !(value.contains("r") && !value.contains("jre")) &&
+                !value.contains("SNAPSHOT") &&
+                !value.matches(INVALID_REGEX)
+    }
 
     fun resolve(project: MavenProject): Version =
         Version(value.replace(PROPERTY_REGEX) {
