@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.2.43-SNAPSHOT</version>
+    <version>1.2.44-SNAPSHOT</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
@@ -295,14 +295,14 @@
                     </dependencies>
                     <configuration>
                         <rules>
-                            <banDuplicatePomDependencyVersions/>
+                            <banDuplicatePomDependencyVersions />
                             <bannedDependencies>
                                 <searchTransitive>true</searchTransitive>
                                 <excludes>
                                     <exclude>org.apache.logging.log4j</exclude>
                                 </excludes>
                             </bannedDependencies>
-                            <dependencyConvergence/>
+                            <dependencyConvergence />
                             <requireJavaVersion>
                                 <version>11</version>
                             </requireJavaVersion>
