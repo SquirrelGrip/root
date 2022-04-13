@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>root</artifactId>
@@ -13,48 +14,52 @@
     <properties>
         <activation.version>1.1.1</activation.version>
         <annotations.version>23.0.0</annotations.version>
-        <antlr4.version>4.9.3</antlr4.version>
+        <antlr4.version>4.10</antlr4.version>
         <assertj.version>3.22.0</assertj.version>
-        <awaitility.version>4.1.1</awaitility.version>
+        <awaitility.version>4.2.0</awaitility.version>
         <beanutils.version>1.9.4</beanutils.version>
         <bouncycastle.version>1.70</bouncycastle.version>
+        <brave.version>5.13.7</brave.version>
         <commons-beanutils.version>3.2</commons-beanutils.version>
         <commons-collections.version>4.4</commons-collections.version>
-        <doxia.version>1.11.1</doxia.version>
-        <doxia-sink-api.version>1.11.1</doxia-sink-api.version>
+        <doxia.version>2.0.0-M2</doxia.version>
+        <doxia-sink-api.version>2.0.0-M2</doxia-sink-api.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <elasticsearch.version>7.16.2</elasticsearch.version>
+        <elasticsearch.version>7.17.2</elasticsearch.version>
+        <feign.version>11.8</feign.version>
         <httpclient.version>4.5.13</httpclient.version>
-        <guava.version>31.0.1-jre</guava.version>
-        <jackson.version>2.13.1</jackson.version>
+        <guava.version>31.1-jre</guava.version>
+        <jackson.version>2.13.2</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jersey.version>2.35</jersey.version>
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
-        <junit-pioneer.version>1.5.0</junit-pioneer.version>
-        <kotlinx-coroutines.version>1.6.0</kotlinx-coroutines.version>
-        <logback.version>1.2.10</logback.version>
-        <maven-core.version>3.8.4</maven-core.version>
-        <maven-model.version>3.8.4</maven-model.version>
-        <maven-plugin-annotations.version>3.6.2</maven-plugin-annotations.version>
-        <maven-plugin-api.version>3.8.4</maven-plugin-api.version>
-        <maven-reporting-api.version>3.0</maven-reporting-api.version>
-        <maven-reporting-impl.version>3.0.0</maven-reporting-impl.version>
+        <junit-pioneer.version>1.7.0</junit-pioneer.version>
+        <kotlinx-coroutines.version>1.6.1</kotlinx-coroutines.version>
+        <logback.version>1.2.11</logback.version>
+        <maven-core.version>3.8.5</maven-core.version>
+        <maven-model.version>3.8.5</maven-model.version>
+        <maven-plugin-annotations.version>3.6.4</maven-plugin-annotations.version>
+        <maven-plugin-api.version>3.8.5</maven-plugin-api.version>
+        <maven-reporting-api.version>3.1.0</maven-reporting-api.version>
+        <maven-reporting-impl.version>3.1.0</maven-reporting-impl.version>
         <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
-        <micrometer.version>1.8.1</micrometer.version>
-        <mockito.version>4.2.0</mockito.version>
-        <mockito-kotlin.version>2.2.0</mockito-kotlin.version>
-        <mongodb.version>4.4.1</mongodb.version>
+        <micrometer.version>1.8.4</micrometer.version>
+        <mockito.version>4.4.0</mockito.version>
+        <mockito-kotlin.version>4.0.0</mockito-kotlin.version>
+        <mongodb.version>4.5.1</mongodb.version>
         <reactor.version>2020.0.15</reactor.version>
-        <slf4j.version>1.7.32</slf4j.version>
-        <spring-batch.version>4.3.4</spring-batch.version>
-        <spring-boot.version>2.6.2</spring-boot.version>
-        <spring-data.version>2021.1.0</spring-data.version>
-        <spring-framework.version>5.3.14</spring-framework.version>
-        <spring-integration.version>5.5.7</spring-integration.version>
-        <spring-security.version>5.6.1</spring-security.version>
-        <springdoc-openapi.version>1.6.4</springdoc-openapi.version>
+        <resilience4j.version>1.7.0</resilience4j.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <spring-batch.version>4.3.5</spring-batch.version>
+        <spring-boot.version>2.6.6</spring-boot.version>
+        <spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
+        <spring-framework.version>5.3.19</spring-framework.version>
+        <spring-integration.version>5.5.10</spring-integration.version>
+        <spring-security.version>5.6.2</spring-security.version>
+        <springdoc-openapi.version>1.6.7</springdoc-openapi.version>
+        <svnkit.version>1.10.5</svnkit.version>
         <velocity.version>1.7</velocity.version>
-        <zjsonpatch.version>0.4.11</zjsonpatch.version>
+        <zjsonpatch.version>0.4.12</zjsonpatch.version>
     </properties>
 
     <dependencyManagement>
@@ -80,13 +85,34 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <dependency>
-                <groupId>io.projectreactor</groupId>
-                <artifactId>reactor-bom</artifactId>
-                <version>${reactor.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>io.github.openfeign</groupId>-->
+<!--                <artifactId>feign-bom</artifactId>-->
+<!--                <version>${feign.version}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>io.github.resilience4j</groupId>-->
+<!--                <artifactId>resilience4j-bom</artifactId>-->
+<!--                <version>${resilience4j.version}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>io.projectreactor</groupId>-->
+<!--                <artifactId>reactor-bom</artifactId>-->
+<!--                <version>${reactor.version}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>io.zipkin.brave</groupId>-->
+<!--                <artifactId>brave-bom</artifactId>-->
+<!--                <version>${brave.version}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>org.glassfish.jersey</groupId>
                 <artifactId>jersey-bom</artifactId>
@@ -115,13 +141,20 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-bom</artifactId>
-                <version>${spring-data.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-dependencies</artifactId>-->
+<!--                <version>${spring-cloud.version}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.data</groupId>-->
+<!--                <artifactId>spring-data-bom</artifactId>-->
+<!--                <version>${spring-data.version}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>org.springframework.integration</groupId>
                 <artifactId>spring-integration-bom</artifactId>
@@ -151,11 +184,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nhaarman.mockitokotlin2</groupId>
-                <artifactId>mockito-kotlin</artifactId>
-                <version>${mockito-kotlin.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-beanutils</groupId>
@@ -323,6 +351,11 @@
                 <version>${mockito.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.mockito.kotlin</groupId>
+                <artifactId>mockito-kotlin</artifactId>
+                <version>${mockito-kotlin.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.mongodb</groupId>
                 <artifactId>mongodb-driver-sync</artifactId>
                 <version>${mongodb.version}</version>
@@ -486,6 +519,16 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-zipkin</artifactId>
+                <version>${spring-cloud-starter-zipkin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tmatesoft.svnkit</groupId>
+                <artifactId>svnkit</artifactId>
+                <version>${svnkit.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
