@@ -3,18 +3,30 @@ package com.github.squirrelgrip.plugin.model
 import org.apache.maven.project.MavenProject
 
 data class Version(
-    val value: String
+    val value: String,
 ) : Comparable<Version> {
     companion object {
         val NO_VERSION = Version("")
         val VALID_CHARS = (0..9).map { it.toString()[0] }
         val VERSION_REGEX = Regex("\\D+")
         val PROPERTY_REGEX = Regex(".*\\$\\{(.+?)\\}.*")
-
         val INVALID_REGEX = """\d{8}\.\d+""".toRegex()
+        val PRE_RELEASE_REGEX = """(.*)-\w+(\d+)""".toRegex()
 
+        fun versionCompare(version1: String, version2: String): Int {
+            val isV1PreRelease = version1.matches(PRE_RELEASE_REGEX)
+            val isV2PreRelease = version2.matches(PRE_RELEASE_REGEX)
 
-        fun versionCompare(v1: String, v2: String): Int {
+            val v1 = if (isV1PreRelease != isV2PreRelease && isV1PreRelease) {
+                PRE_RELEASE_REGEX.find(version1)!!.groupValues.get(1)
+            } else {
+                version1
+            }
+            val v2 = if (isV1PreRelease != isV2PreRelease && isV2PreRelease) {
+                PRE_RELEASE_REGEX.find(version2)!!.groupValues.get(1)
+            } else {
+                version2
+            }
             // vnum stores each numeric part of version
             var vnum1 = 0
             var vnum2 = 0
@@ -24,7 +36,6 @@ data class Version(
             var j = 0
             while (i < v1.length || j < v2.length) {
                 // Storing numeric part of version 1 in vnum1
-
                 while (i < v1.length && v1[i] in VALID_CHARS) {
                     vnum1 = (vnum1 * 10 + (v1[i] - '0'))
                     i++
@@ -44,7 +55,15 @@ data class Version(
                 i++
                 j++
             }
-            return 0
+            return if(isV1PreRelease != isV2PreRelease) {
+                if (isV1PreRelease) {
+                    -1
+                } else {
+                    1
+                }
+            } else {
+                0
+            }
         }
     }
 

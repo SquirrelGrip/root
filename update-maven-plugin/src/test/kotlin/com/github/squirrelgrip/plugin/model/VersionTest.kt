@@ -22,6 +22,10 @@ class VersionTest {
         assertThat("30.1-jre", "31.0.1-jre")
         assertThat("30.1-jre", "30.1.1-jre")
         assertThat("30.1-jre", "30.1.0-jre")
+        assertThat("1.6.20-M1", "1.6.20-M2")
+        assertThat("1.6.20-M1", "1.6.20")
+        assertThat("1.6.20-ALPHA1", "1.6.20-BETA1")
+        assertThat("1.6.20-ALPHA2", "1.6.20-BETA1")
     }
 
     @Test
@@ -47,20 +51,20 @@ class VersionTest {
 
     @Test
     fun parts() {
-        partsEquals("0", 0,0,0)
-        partsEquals("0", 0,0,0)
-        partsEquals("1", 1,0,0)
-        partsEquals("2", 2,0,0)
-        partsEquals("10", 10,0,0)
-        partsEquals("4.0",4,0,0)
-        partsEquals("2.31", 2,31,0)
-        partsEquals("2.31", 2,31,0)
-        partsEquals("2.31.0", 2,31,0)
-        partsEquals("2.31.1", 2,31,1)
-        partsEquals("5.8.0-RC1", 5,8,0)
-        partsEquals("5.8.1-RC1", 5,8,1)
-        partsEquals("31.0.1-jre", 31,0,1)
-        partsEquals("31.1-jre", 31,1,0)
+        partsEquals("0", 0, 0, 0)
+        partsEquals("0", 0, 0, 0)
+        partsEquals("1", 1, 0, 0)
+        partsEquals("2", 2, 0, 0)
+        partsEquals("10", 10, 0, 0)
+        partsEquals("4.0", 4, 0, 0)
+        partsEquals("2.31", 2, 31, 0)
+        partsEquals("2.31", 2, 31, 0)
+        partsEquals("2.31.0", 2, 31, 0)
+        partsEquals("2.31.1", 2, 31, 1)
+        partsEquals("5.8.0-RC1", 5, 8, 0)
+        partsEquals("5.8.1-RC1", 5, 8, 1)
+        partsEquals("31.0.1-jre", 31, 0, 1)
+        partsEquals("31.1-jre", 31, 1, 0)
     }
 
     fun partsEquals(version: String, major: Int, minor: Int, increment: Int) {
