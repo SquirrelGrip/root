@@ -21,13 +21,14 @@ import javax.ws.rs.client.ClientBuilder
 class RemoteArtifactDetailsFactory(
     val localRepository: ArtifactRepository,
     val remoteRepositories: List<ArtifactRepository>,
-    val log: Log
+    val log: Log,
 ) : ArtifactDetailsFactory {
     companion object {
         val sslContext = SSLContext.getInstance("TLSv1.2").also {
             it.init(null, arrayOf(InsecureTrustManager()), SecureRandom())
         }
-        val client: Client = ClientBuilder.newBuilder().sslContext(sslContext).hostnameVerifier(InsecureHostnameVerifier()).build()
+        val client: Client =
+            ClientBuilder.newBuilder().sslContext(sslContext).hostnameVerifier(InsecureHostnameVerifier()).build()
     }
 
     override fun getAvailableVersions(artifact: ArtifactDetails): List<Version> =
@@ -39,11 +40,13 @@ class RemoteArtifactDetailsFactory(
                 try {
                     entity.toInstance()
                 } catch (e: Exception) {
-                    MavenMetaData(artifact.groupId,
+                    MavenMetaData(
+                        artifact.groupId,
                         artifact.artifactId,
                         null,
                         artifact.currentVersion.value,
-                        Versioning())
+                        Versioning()
+                    )
                 }.apply {
                     try {
                         val file = File(localRepository.basedir, artifact.getMavenMetaDataFile(repository.id)).also {

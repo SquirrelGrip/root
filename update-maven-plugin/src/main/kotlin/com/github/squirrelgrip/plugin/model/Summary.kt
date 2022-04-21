@@ -2,7 +2,7 @@ package com.github.squirrelgrip.plugin.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class Summary (
+data class Summary(
     @JsonProperty("usingLastVersion")
     val usingLastVersion: Int = 0,
     @JsonProperty("nextVersionAvailable")

@@ -9,7 +9,7 @@ class ProjectDependencyResolver(
     localRepository: ArtifactRepository,
     remoteRepositories: List<ArtifactRepository>,
     pluginRepositories: List<ArtifactRepository>,
-    log: Log
+    log: Log,
 ) : AbstractMavenDependencyResolver(
     localRepository,
     remoteRepositories,
@@ -21,7 +21,7 @@ class ProjectDependencyResolver(
         project: MavenProject,
         processDependencies: Boolean,
         processDependencyManagement: Boolean,
-        processTransitive: Boolean
+        processTransitive: Boolean,
     ): List<ArtifactDetails> =
         getArtifactDetails(
             project.getProjectDependencies(processDependencies, processTransitive),
@@ -31,16 +31,10 @@ class ProjectDependencyResolver(
     override fun getPluginArtifacts(
         project: MavenProject,
         processPluginDependencies: Boolean,
-        processPluginDependenciesInPluginManagement: Boolean
+        processPluginDependenciesInPluginManagement: Boolean,
     ): List<ArtifactDetails> =
         getArtifactDetails(
             project.getProjectPlugins(processPluginDependencies),
             project.getProjectManagedPlugins(processPluginDependenciesInPluginManagement)
         ).toArtifactDetails(true)
-
 }
-
-
-
-
-

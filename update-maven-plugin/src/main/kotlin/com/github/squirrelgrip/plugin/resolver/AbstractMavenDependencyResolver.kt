@@ -139,8 +139,4 @@ abstract class AbstractMavenDependencyResolver(
             this.copy(versions = remoteArtifactDetailsFactory.getAvailableVersions(this))
         }
     }
-
 }
-
-
-

@@ -75,8 +75,23 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     abstract fun getMavenDependencyResolver(): AbstractMavenDependencyResolver
 
     override fun body(locale: Locale) {
-        reportTable("Dependencies", dependencyResolver.getDependencyArtifacts(project, processDependencies, processDependencyManagement, processTransitive))
-        reportTable("Plugins", dependencyResolver.getPluginArtifacts(project, processPluginDependencies, processPluginDependenciesInPluginManagement))
+        reportTable(
+            "Dependencies",
+            dependencyResolver.getDependencyArtifacts(
+                project,
+                processDependencies,
+                processDependencyManagement,
+                processTransitive
+            )
+        )
+        reportTable(
+            "Plugins",
+            dependencyResolver.getPluginArtifacts(
+                project,
+                processPluginDependencies,
+                processPluginDependenciesInPluginManagement
+            )
+        )
     }
 
     private fun reportTable(tableHeading: String, artifacts: Collection<ArtifactDetails>) {
@@ -104,5 +119,4 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
         sink.table_()
         sink.paragraph_()
     }
-
 }

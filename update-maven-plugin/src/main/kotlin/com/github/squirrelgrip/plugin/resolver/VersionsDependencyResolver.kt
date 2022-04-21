@@ -7,13 +7,13 @@ import org.apache.maven.project.MavenProject
 import java.io.File
 
 class VersionsDependencyResolver(
-    val outputDirectory: File
-): DependencyResolver {
+    val outputDirectory: File,
+) : DependencyResolver {
     override fun getDependencyArtifacts(
         project: MavenProject,
         processDependencies: Boolean,
         processDependencyManagement: Boolean,
-        processTransitive: Boolean
+        processTransitive: Boolean,
     ): Collection<ArtifactDetails> =
         File(
             outputDirectory.parentFile,
@@ -23,11 +23,10 @@ class VersionsDependencyResolver(
     override fun getPluginArtifacts(
         project: MavenProject,
         processPluginDependencies: Boolean,
-        processPluginDependenciesInPluginManagement: Boolean
+        processPluginDependenciesInPluginManagement: Boolean,
     ): Collection<ArtifactDetails> =
         File(
             outputDirectory.parentFile,
             "plugin-updates-report.xml"
         ).toInstance<PluginUpdatesReport>().getDependencies(project)
-
 }

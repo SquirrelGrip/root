@@ -30,25 +30,24 @@ class ProjectCheckerReportMojo : AbstractDoxiaReport() {
     override fun logParameters() {}
 
     override fun body(locale: Locale) {
-        /// This is the content
-        //More information
-        //CIManagement not defined
-        //License not defined
-        //Issue Management not defined
-        //Mailing List not defined
-        //Name not defined
-        //Organisation not defined
-        //Packaging not defined
+        // / This is the content
+        // More information
+        // CIManagement not defined
+        // License not defined
+        // Issue Management not defined
+        // Mailing List not defined
+        // Name not defined
+        // Organisation not defined
+        // Packaging not defined
         //
         //
-        //Properties not used
-        //Dependencies without DependencyManagement
-        //Unused dependencies
-        //Unused dependency managements
-        //Unused plugin managements
-        //Duplicate repositories
+        // Properties not used
+        // Dependencies without DependencyManagement
+        // Unused dependencies
+        // Unused dependency managements
+        // Unused plugin managements
+        // Duplicate repositories
         duplicateRepositoriesSection()
-
     }
 
     private fun duplicateRepositoriesSection() {

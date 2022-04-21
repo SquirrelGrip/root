@@ -8,7 +8,7 @@ import org.apache.maven.reporting.AbstractMavenReport
 import org.apache.maven.reporting.MavenReportException
 import java.util.*
 
-abstract class AbstractDoxiaReport() : AbstractMavenReport() {
+abstract class AbstractDoxiaReport : AbstractMavenReport() {
     abstract val reportHeading: String
 
     abstract fun body(locale: Locale)
@@ -41,12 +41,13 @@ abstract class AbstractDoxiaReport() : AbstractMavenReport() {
     }
 
     init {
-        Xml.xmlMapper.registerModule(SimpleModule().apply {
-            addDeserializer(
-                Version::class.java,
-                VersionDeserializer()
-            )
-        })
+        Xml.xmlMapper.registerModule(
+            SimpleModule().apply {
+                addDeserializer(
+                    Version::class.java,
+                    VersionDeserializer()
+                )
+            }
+        )
     }
-
 }
