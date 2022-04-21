@@ -12,7 +12,7 @@ data class MavenMetaData(
     @JsonProperty("version")
     val version: String?,
     @JsonProperty("versioning")
-    val versioning: Versioning
+    val versioning: Versioning,
 ) {
     fun updateTime(): MavenMetaData =
         copy(versioning = versioning.updateTime())

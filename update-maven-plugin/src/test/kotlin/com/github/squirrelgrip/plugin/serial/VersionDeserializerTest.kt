@@ -3,9 +3,9 @@ package com.github.squirrelgrip.plugin.serial
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
-import com.github.squirrelgrip.plugin.model.Version
 import com.github.squirrelgrip.extension.xml.Xml
 import com.github.squirrelgrip.extension.xml.toInstance
+import com.github.squirrelgrip.plugin.model.Version
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -15,12 +15,14 @@ class VersionDeserializerTest {
         @JvmStatic
         @BeforeAll
         fun beforeAll() {
-            Xml.xmlMapper.registerModule(SimpleModule().apply {
-                addDeserializer(
-                    Version::class.java,
-                    VersionDeserializer()
-                )
-            })
+            Xml.xmlMapper.registerModule(
+                SimpleModule().apply {
+                    addDeserializer(
+                        Version::class.java,
+                        VersionDeserializer()
+                    )
+                }
+            )
         }
     }
     @Test

@@ -31,5 +31,4 @@ interface ArtifactDetailsFactory {
     fun getAvailableVersions(artifact: ArtifactDetails): List<Version>
     fun hasMetaData(artifact: ArtifactDetails): Boolean
     fun metaDataUp2Date(artifact: ArtifactDetails): Boolean
-
 }

@@ -26,7 +26,6 @@ class LocalArtifactDetailsFactory(
             it.toInstance()
         }
 
-
     fun getFiles(artifact: ArtifactDetails): Array<File> {
         val directory = File(localRepository.basedir, artifact.getDirectory())
         return if (directory.exists()) {
@@ -45,5 +44,4 @@ class LocalArtifactDetailsFactory(
         }.maxOrNull() ?: Instant.MIN
         return lastUpdateInstant.plusSeconds(updateInterval).isAfter(Instant.now())
     }
-
 }

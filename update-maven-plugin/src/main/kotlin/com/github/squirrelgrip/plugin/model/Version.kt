@@ -55,7 +55,7 @@ data class Version(
                 i++
                 j++
             }
-            return if(isV1PreRelease != isV2PreRelease) {
+            return if (isV1PreRelease != isV2PreRelease) {
                 if (isV1PreRelease) {
                     -1
                 } else {
@@ -82,25 +82,26 @@ data class Version(
 
     fun isValid(): Boolean {
         return !value.uppercase().contains("LPHA") &&
-                !value.contains("ndroid") &&
-                !value.uppercase().contains("B") &&
-                !value.uppercase().contains("C") &&
-                !value.uppercase().contains("ETA") &&
-                !value.contains("enkin") &&
-                !value.contains("ative") &&
-                !(value.contains("r") && !value.contains("jre")) &&
-                !value.contains("SNAPSHOT") &&
-                !value.matches(INVALID_REGEX)
+            !value.contains("ndroid") &&
+            !value.uppercase().contains("B") &&
+            !value.uppercase().contains("C") &&
+            !value.uppercase().contains("ETA") &&
+            !value.contains("enkin") &&
+            !value.contains("ative") &&
+            !(value.contains("r") && !value.contains("jre")) &&
+            !value.contains("SNAPSHOT") &&
+            !value.matches(INVALID_REGEX)
     }
 
     fun resolve(project: MavenProject): Version =
-        Version(value.replace(PROPERTY_REGEX) {
-            val key = it.groupValues[1]
-            val replacement = project.properties[key.trim()]?.toString() ?: "\${$key}"
-            value.replace(PROPERTY_REGEX, replacement)
-        })
+        Version(
+            value.replace(PROPERTY_REGEX) {
+                val key = it.groupValues[1]
+                val replacement = project.properties[key.trim()]?.toString() ?: "\${$key}"
+                value.replace(PROPERTY_REGEX, replacement)
+            }
+        )
 
     override fun compareTo(other: Version): Int =
         versionCompare(value, other.value)
-
 }

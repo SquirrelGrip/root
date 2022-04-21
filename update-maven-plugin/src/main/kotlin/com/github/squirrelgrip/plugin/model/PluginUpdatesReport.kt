@@ -3,7 +3,7 @@ package com.github.squirrelgrip.plugin.model
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.apache.maven.project.MavenProject
 
-data class PluginUpdatesReport (
+data class PluginUpdatesReport(
     @JsonProperty("summary")
     var summary: Summary,
     @JsonProperty("pluginManagements")

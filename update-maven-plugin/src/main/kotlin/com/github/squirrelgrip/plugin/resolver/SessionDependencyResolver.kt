@@ -11,7 +11,7 @@ class SessionDependencyResolver(
     remoteRepositories: List<ArtifactRepository>,
     pluginRepositories: List<ArtifactRepository>,
     private val session: MavenSession,
-    log: Log
+    log: Log,
 ) : AbstractMavenDependencyResolver(
     localRepository,
     remoteRepositories,
@@ -22,7 +22,7 @@ class SessionDependencyResolver(
         project: MavenProject,
         processDependencies: Boolean,
         processDependencyManagement: Boolean,
-        processTransitive: Boolean
+        processTransitive: Boolean,
     ): List<ArtifactDetails> {
         val dependencies = session.projects.flatMap {
             it.getProjectDependencies(processDependencies, processTransitive)
@@ -36,7 +36,7 @@ class SessionDependencyResolver(
     override fun getPluginArtifacts(
         project: MavenProject,
         processPluginDependencies: Boolean,
-        processPluginDependenciesInPluginManagement: Boolean
+        processPluginDependenciesInPluginManagement: Boolean,
     ): List<ArtifactDetails> {
         val plugins = session.projects.flatMap {
             it.getProjectPlugins(processPluginDependencies)
@@ -47,6 +47,3 @@ class SessionDependencyResolver(
         return getArtifactDetails(plugins, managedPlugins).toArtifactDetails(true)
     }
 }
-
-
-

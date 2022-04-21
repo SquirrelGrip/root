@@ -77,5 +77,4 @@ data class ArtifactDetails(
             primaryComparison
         }
     }
-
 }

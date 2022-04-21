@@ -16,4 +16,3 @@ data class DependencyUpdatesReport(
             it.toArtifactDetails(project)
         }
 }
-
