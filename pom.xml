@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.2.49</version>
+    <version>1.2.50-SNAPSHOT</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
