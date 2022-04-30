@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.github.squirrelgrip</groupId>
         <artifactId>dependencies</artifactId>
-        <version>1.2.49</version>
+        <version>1.2.50</version>
         <relativePath>../dependencies</relativePath>
     </parent>
     <artifactId>update-maven-plugin</artifactId>
@@ -33,6 +33,18 @@
         <dependency>
             <groupId>com.github.squirrelgrip</groupId>
             <artifactId>kotlin-extensions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-slf4j</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.activation</groupId>
@@ -83,14 +95,6 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.inject</groupId>
-            <artifactId>jersey-hk2</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>

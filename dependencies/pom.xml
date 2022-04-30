@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.49</version>
+        <version>1.2.50</version>
         <relativePath>../</relativePath>
     </parent>
     <artifactId>dependencies</artifactId>
@@ -30,7 +30,6 @@
         <guava.version>31.1-jre</guava.version>
         <jackson.version>2.13.2.20220328</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-        <jersey.version>2.35</jersey.version>
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
         <junit-pioneer.version>1.7.0</junit-pioneer.version>
         <kotlinx-coroutines.version>1.6.1</kotlinx-coroutines.version>
@@ -39,8 +38,8 @@
         <maven-model.version>3.8.5</maven-model.version>
         <maven-plugin-annotations.version>3.6.4</maven-plugin-annotations.version>
         <maven-plugin-api.version>3.8.5</maven-plugin-api.version>
-        <maven-reporting-api.version>3.1.0</maven-reporting-api.version>
-        <maven-reporting-impl.version>3.1.0</maven-reporting-impl.version>
+        <maven-reporting-api.version>4.0.0-M1</maven-reporting-api.version>
+        <maven-reporting-impl.version>4.0.0-M1</maven-reporting-impl.version>
         <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
         <micrometer.version>1.8.5</micrometer.version>
         <mockito.version>4.5.1</mockito.version>
@@ -55,7 +54,7 @@
         <spring-framework.version>5.3.19</spring-framework.version>
         <spring-integration.version>5.5.11</spring-integration.version>
         <spring-security.version>5.6.3</spring-security.version>
-        <springdoc-openapi.version>1.6.7</springdoc-openapi.version>
+        <springdoc-openapi.version>1.6.8</springdoc-openapi.version>
         <svnkit.version>1.10.5</svnkit.version>
         <velocity.version>1.7</velocity.version>
         <zjsonpatch.version>0.4.12</zjsonpatch.version>
@@ -84,41 +83,6 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>io.github.openfeign</groupId>-->
-<!--                <artifactId>feign-bom</artifactId>-->
-<!--                <version>${feign.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>io.github.resilience4j</groupId>-->
-<!--                <artifactId>resilience4j-bom</artifactId>-->
-<!--                <version>${resilience4j.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>io.projectreactor</groupId>-->
-<!--                <artifactId>reactor-bom</artifactId>-->
-<!--                <version>${reactor.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>io.zipkin.brave</groupId>-->
-<!--                <artifactId>brave-bom</artifactId>-->
-<!--                <version>${brave.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-            <dependency>
-                <groupId>org.glassfish.jersey</groupId>
-                <artifactId>jersey-bom</artifactId>
-                <version>${jersey.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-bom</artifactId>
@@ -140,20 +104,6 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.cloud</groupId>-->
-<!--                <artifactId>spring-cloud-dependencies</artifactId>-->
-<!--                <version>${spring-cloud.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.data</groupId>-->
-<!--                <artifactId>spring-data-bom</artifactId>-->
-<!--                <version>${spring-data.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
             <dependency>
                 <groupId>org.springframework.integration</groupId>
                 <artifactId>spring-integration-bom</artifactId>
@@ -193,6 +143,21 @@
                 <groupId>io.dropwizard.metrics5</groupId>
                 <artifactId>metrics-core</artifactId>
                 <version>${dropwizard-metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-jackson</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-slf4j</artifactId>
+                <version>${feign.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.micrometer</groupId>
@@ -303,21 +268,6 @@
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>elasticsearch-rest-high-level-client</artifactId>
                 <version>${elasticsearch.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.glassfish.jersey.core</groupId>
-                <artifactId>jersey-client</artifactId>
-                <version>${jersey.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.glassfish.jersey.core</groupId>
-                <artifactId>jersey-common</artifactId>
-                <version>${jersey.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.glassfish.jersey.inject</groupId>
-                <artifactId>jersey-hk2</artifactId>
-                <version>${jersey.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains</groupId>
@@ -479,11 +429,11 @@
                 <artifactId>spring-boot-starter-data-mongodb</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-jersey</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-jersey</artifactId>-->
+<!--                <version>${spring-boot.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jetty</artifactId>
