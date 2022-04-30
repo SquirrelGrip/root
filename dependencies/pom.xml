@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.51-SNAPSHOT</version>
+        <version>1.2.52-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
     <artifactId>dependencies</artifactId>
