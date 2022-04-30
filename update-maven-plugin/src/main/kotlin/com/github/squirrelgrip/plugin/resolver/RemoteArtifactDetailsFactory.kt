@@ -6,6 +6,8 @@ import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.MavenMetaData
 import com.github.squirrelgrip.plugin.model.Version
 import com.github.squirrelgrip.plugin.model.Versioning
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.plugin.logging.Log
 import java.io.File
@@ -15,8 +17,6 @@ import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLSession
 import javax.net.ssl.X509TrustManager
-import javax.ws.rs.client.Client
-import javax.ws.rs.client.ClientBuilder
 
 class RemoteArtifactDetailsFactory(
     val localRepository: ArtifactRepository,
@@ -27,38 +27,42 @@ class RemoteArtifactDetailsFactory(
         val sslContext = SSLContext.getInstance("TLSv1.2").also {
             it.init(null, arrayOf(InsecureTrustManager()), SecureRandom())
         }
-        val client: Client =
-            ClientBuilder.newBuilder().sslContext(sslContext).hostnameVerifier(InsecureHostnameVerifier()).build()
+
+        val client: OkHttpClient = OkHttpClient()
+
+        // val client: Client =
+        //     ClientBuilder.newBuilder().sslContext(sslContext).hostnameVerifier(InsecureHostnameVerifier()).build()
     }
 
     override fun getAvailableVersions(artifact: ArtifactDetails): List<Version> =
-        remoteRepositories.associateWith {
-            client.target(it.url)
-        }.map { (repository, target) ->
-            target.path(artifact.getMavenMetaDataFile()).request().get().use {
-                val entity = it.readEntity(String::class.java)
-                try {
-                    entity.toInstance()
-                } catch (e: Exception) {
-                    MavenMetaData(
-                        artifact.groupId,
-                        artifact.artifactId,
-                        null,
-                        artifact.currentVersion.value,
-                        Versioning()
-                    )
-                }.apply {
+        remoteRepositories
+            .associateWith {
+                Request.Builder().url("${it.url}/${artifact.getMavenMetaDataFile()}").build()
+            }.map { (repository, request) ->
+                client.newCall(request).execute().use {
                     try {
-                        val file = File(localRepository.basedir, artifact.getMavenMetaDataFile(repository.id)).also {
-                            it.parentFile.mkdirs()
-                        }
-                        updateTime().toXml(file)
+                        it.body?.string()?.toInstance() ?: throw Exception()
                     } catch (e: Exception) {
-                        // Ignore
+                        MavenMetaData(
+                            artifact.groupId,
+                            artifact.artifactId,
+                            null,
+                            artifact.currentVersion.value,
+                            Versioning()
+                        )
+                    }.apply {
+                        try {
+                            val file =
+                                File(localRepository.basedir, artifact.getMavenMetaDataFile(repository.id)).also { file ->
+                                    file.parentFile.mkdirs()
+                                }
+                            updateTime().toXml(file)
+                        } catch (e: Exception) {
+                            // Ignore
+                        }
                     }
                 }
-            }
-        }.toVersions()
+            }.toVersions()
 
     override fun hasMetaData(artifact: ArtifactDetails): Boolean =
         true
