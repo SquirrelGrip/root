@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.github.squirrelgrip</groupId>
         <artifactId>dependencies</artifactId>
-        <version>1.2.52-SNAPSHOT</version>
+        <version>1.2.52</version>
         <relativePath>../dependencies</relativePath>
     </parent>
     <artifactId>update-maven-plugin</artifactId>
