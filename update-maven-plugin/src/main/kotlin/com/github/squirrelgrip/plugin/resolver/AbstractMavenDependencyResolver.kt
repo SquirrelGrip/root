@@ -1,6 +1,10 @@
 package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
 import org.apache.maven.artifact.Artifact
 import org.apache.maven.artifact.DefaultArtifact
 import org.apache.maven.artifact.handler.DefaultArtifactHandler
@@ -9,7 +13,7 @@ import org.apache.maven.model.Dependency
 import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
-import java.util.*
+import java.util.Properties
 
 abstract class AbstractMavenDependencyResolver(
     localRepository: ArtifactRepository,
@@ -117,12 +121,16 @@ abstract class AbstractMavenDependencyResolver(
         artifacts + managedArtifacts
 
     fun List<Artifact>.toArtifactDetails(pluginArtifact: Boolean): List<ArtifactDetails> =
-        distinctBy {
-            "${it.groupId}:${it.artifactId}"
-        }.sortedBy {
-            "${it.groupId}:${it.artifactId}"
-        }.map {
-            it.getArtifactDetails(pluginArtifact)
+        runBlocking(Dispatchers.Default) {
+            distinctBy {
+                "${it.groupId}:${it.artifactId}"
+            }.sortedBy {
+                "${it.groupId}:${it.artifactId}"
+            }.let {
+                it.map {
+                    async { it.getArtifactDetails(pluginArtifact) }
+                }.awaitAll()
+            }
         }
 
     private fun Artifact.getArtifactDetails(pluginArtifact: Boolean): ArtifactDetails =
