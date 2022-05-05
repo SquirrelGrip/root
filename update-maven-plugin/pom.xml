@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.github.squirrelgrip</groupId>
         <artifactId>dependencies</artifactId>
-        <version>1.2.52</version>
+        <version>1.2.53</version>
         <relativePath>../dependencies</relativePath>
     </parent>
     <artifactId>update-maven-plugin</artifactId>
@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <kotlin-extensions.version>1.2.12</kotlin-extensions.version>
+        <kotlin-extensions.version>1.2.13</kotlin-extensions.version>
     </properties>
 
     <dependencyManagement>
@@ -35,16 +35,8 @@
             <artifactId>kotlin-extensions</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-okhttp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-slf4j</artifactId>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.activation</groupId>
@@ -107,7 +99,6 @@
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-coroutines-jdk9</artifactId>
-            <version>1.5.2</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
