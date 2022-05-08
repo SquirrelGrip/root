@@ -48,6 +48,7 @@ class RemoteArtifactDetailsFactory(
                     try {
                         it.entity.content.toInstance()
                     } catch (e: Exception) {
+                        e.printStackTrace()
                         MavenMetaData(
                             artifact.groupId,
                             artifact.artifactId,
@@ -56,6 +57,7 @@ class RemoteArtifactDetailsFactory(
                             Versioning()
                         )
                     }.apply {
+                        println(this)
                         try {
                             val file =
                                 File(
