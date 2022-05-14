@@ -41,9 +41,13 @@ class RemoteArtifactDetailsFactory(
 
     override fun getAvailableVersions(artifact: ArtifactDetails): List<Version> =
         remoteRepositories
+            .filter {
+                it.releases?.isEnabled ?: true
+            }
             .associateWith {
                 HttpGet("${it.url}/${artifact.getMavenMetaDataFile()}")
-            }.map { (repository, request) ->
+            }
+            .map { (repository, request) ->
                 client.execute(request).use {
                     try {
                         it.entity.content.toInstance()

@@ -3,6 +3,9 @@ package com.github.squirrelgrip.plugin.resolver
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.Version
 import org.apache.maven.artifact.repository.ArtifactRepository
+import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy
+import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy.CHECKSUM_POLICY_IGNORE
+import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy.UPDATE_POLICY_DAILY
 import org.apache.maven.plugin.logging.Log
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -24,6 +27,7 @@ internal class RemoteArtifactDetailsFactoryTest {
     fun getAvailableVersions() {
         given(localRepository.basedir).willReturn("${System.getProperty("user.home")}/.m2/repository")
         given(remoteRepository.url).willReturn("https://repo1.maven.org/maven2")
+        given(remoteRepository.releases).willReturn(ArtifactRepositoryPolicy(true, UPDATE_POLICY_DAILY, CHECKSUM_POLICY_IGNORE))
         val artifact = ArtifactDetails("com.google.guava", "guava", Version("30.1-jre"))
 
         val testSubject = RemoteArtifactDetailsFactory(localRepository, listOf(remoteRepository), log)
