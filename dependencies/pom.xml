@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.54</version>
+        <version>1.2.55</version>
         <relativePath>../</relativePath>
     </parent>
     <artifactId>dependencies</artifactId>
@@ -41,7 +41,7 @@
         <maven-reporting-api.version>4.0.0-M1</maven-reporting-api.version>
         <maven-reporting-impl.version>4.0.0-M1</maven-reporting-impl.version>
         <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
-        <micrometer.version>1.8.5</micrometer.version>
+        <micrometer.version>1.9.0</micrometer.version>
         <mockito.version>4.5.1</mockito.version>
         <mockito-kotlin.version>4.0.0</mockito-kotlin.version>
         <mongodb.version>4.6.0</mongodb.version>
@@ -51,7 +51,7 @@
         <spring-batch.version>4.3.5</spring-batch.version>
         <spring-boot.version>2.6.7</spring-boot.version>
         <spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
-        <spring-framework.version>5.3.19</spring-framework.version>
+        <spring-framework.version>5.3.20</spring-framework.version>
         <spring-integration.version>5.5.11</spring-integration.version>
         <spring-security.version>5.6.3</spring-security.version>
         <springdoc-openapi.version>1.6.8</springdoc-openapi.version>
