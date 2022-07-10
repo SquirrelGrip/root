@@ -10,7 +10,6 @@ import org.apache.hc.client5.http.classic.methods.HttpGet
 import org.apache.hc.client5.http.impl.classic.HttpClients
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactoryBuilder
-import org.apache.hc.core5.http.ssl.TLS
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.plugin.logging.Log
 import java.io.File
@@ -45,8 +44,9 @@ class RemoteArtifactDetailsFactory(
                 it.releases?.isEnabled ?: true
             }
             .associateWith {
-                log.debug("${it.url}/${artifact.getMavenMetaDataFile()}")
-                HttpGet("${it.url}/${artifact.getMavenMetaDataFile()}")
+                val url = getUrl(it.url, artifact.getMavenMetaDataFile())
+                log.debug(url)
+                HttpGet(url)
             }
             .map { (repository, request) ->
                 client.execute(request).use {
@@ -78,6 +78,17 @@ class RemoteArtifactDetailsFactory(
                     }
                 }
             }.toVersions()
+
+    fun getUrl(
+        repositoryUrl: String,
+        artifactPath: String
+    ) =
+        if (repositoryUrl.endsWith("/")) {
+            "${repositoryUrl}${artifactPath}"
+        } else {
+            "${repositoryUrl}/${artifactPath}"
+        }
+
 
     override fun hasMetaData(artifact: ArtifactDetails): Boolean =
         true
