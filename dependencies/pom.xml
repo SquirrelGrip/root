@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.57</version>
+        <version>1.2.58</version>
         <relativePath>../</relativePath>
     </parent>
     <artifactId>dependencies</artifactId>
@@ -24,7 +24,7 @@
         <doxia.version>2.0.0-M3</doxia.version>
         <doxia-sink-api.version>2.0.0-M3</doxia-sink-api.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <elasticsearch.version>7.17.4</elasticsearch.version>
+        <elasticsearch.version>7.17.5</elasticsearch.version>
         <feign.version>11.8</feign.version>
         <httpclient.version>4.5.13</httpclient.version>
         <guava.version>31.1-jre</guava.version>
@@ -38,8 +38,8 @@
         <maven-model.version>${maven-core.version}</maven-model.version>
         <maven-plugin-annotations.version>3.6.4</maven-plugin-annotations.version>
         <maven-plugin-api.version>${maven-core.version}</maven-plugin-api.version>
-        <maven-reporting-api.version>4.0.0-M1</maven-reporting-api.version>
-        <maven-reporting-impl.version>4.0.0-M1</maven-reporting-impl.version>
+        <maven-reporting-api.version>4.0.0-M2</maven-reporting-api.version>
+        <maven-reporting-impl.version>4.0.0-M2</maven-reporting-impl.version>
         <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
         <micrometer.version>1.9.1</micrometer.version>
         <mockito.version>4.6.1</mockito.version>
@@ -55,7 +55,7 @@
         <spring-integration.version>5.5.13</spring-integration.version>
         <spring-security.version>5.7.2</spring-security.version>
         <springdoc-openapi.version>1.6.9</springdoc-openapi.version>
-        <svnkit.version>1.10.6</svnkit.version>
+        <svnkit.version>1.10.7</svnkit.version>
         <velocity.version>1.7</velocity.version>
         <zjsonpatch.version>0.4.12</zjsonpatch.version>
         <httpclient5.version>5.1.3</httpclient5.version>
