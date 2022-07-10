@@ -42,4 +42,15 @@ internal class RemoteArtifactDetailsFactoryTest {
         assertThat(enrichedArtifact.nextMajor.value).isEqualTo("31.0-jre")
         assertThat(enrichedArtifact.latest.value).isEqualTo("31.1-jre")
     }
+
+    @Test
+    fun getUrl() {
+        val testSubject = RemoteArtifactDetailsFactory(localRepository, listOf(remoteRepository), log)
+        assertThat(testSubject.getUrl("http://0.0.0.0/", "org/something/maven-metadata.xml")).isEqualTo(
+            "http://0.0.0.0/org/something/maven-metadata.xml"
+        )
+        assertThat(testSubject.getUrl("http://0.0.0.0", "org/something/maven-metadata.xml")).isEqualTo(
+            "http://0.0.0.0/org/something/maven-metadata.xml"
+        )
+    }
 }
