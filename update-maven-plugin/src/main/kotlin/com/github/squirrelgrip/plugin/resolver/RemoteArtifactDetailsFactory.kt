@@ -45,6 +45,7 @@ class RemoteArtifactDetailsFactory(
                 it.releases?.isEnabled ?: true
             }
             .associateWith {
+                log.debug("${it.url}/${artifact.getMavenMetaDataFile()}")
                 HttpGet("${it.url}/${artifact.getMavenMetaDataFile()}")
             }
             .map { (repository, request) ->
@@ -61,7 +62,7 @@ class RemoteArtifactDetailsFactory(
                             Versioning()
                         )
                     }.apply {
-                        println(this)
+                        log.debug("$this")
                         try {
                             val file =
                                 File(
