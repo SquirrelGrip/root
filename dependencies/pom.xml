@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.2.59</version>
+        <version>1.2.60</version>
         <relativePath>../</relativePath>
     </parent>
     <artifactId>dependencies</artifactId>
@@ -13,7 +13,7 @@
     <properties>
         <activation.version>1.1.1</activation.version>
         <annotations.version>23.0.0</annotations.version>
-        <antlr4.version>4.10.1</antlr4.version>
+        <antlr4.version>4.11.1</antlr4.version>
         <assertj.version>3.23.1</assertj.version>
         <awaitility.version>4.2.0</awaitility.version>
         <beanutils.version>1.9.4</beanutils.version>
@@ -24,16 +24,16 @@
         <doxia.version>2.0.0-M3</doxia.version>
         <doxia-sink-api.version>2.0.0-M3</doxia-sink-api.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <elasticsearch.version>7.17.5</elasticsearch.version>
+        <elasticsearch.version>7.17.6</elasticsearch.version>
         <feign.version>11.8</feign.version>
         <httpclient.version>4.5.13</httpclient.version>
         <guava.version>31.1-jre</guava.version>
-        <jackson.version>2.13.3</jackson.version>
+        <jackson.version>2.13.4</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-        <junit-jupiter.version>5.9.0-M1</junit-jupiter.version>
+        <junit-jupiter.version>5.9.0</junit-jupiter.version>
         <junit-pioneer.version>1.7.1</junit-pioneer.version>
-        <kotlinx-coroutines.version>1.6.3</kotlinx-coroutines.version>
-        <logback.version>1.2.11</logback.version>
+        <kotlinx-coroutines.version>1.6.4</kotlinx-coroutines.version>
+        <logback.version>1.4.0</logback.version>
         <maven-core.version>3.8.6</maven-core.version>
         <maven-model.version>${maven-core.version}</maven-model.version>
         <maven-plugin-annotations.version>3.6.4</maven-plugin-annotations.version>
@@ -41,21 +41,21 @@
         <maven-reporting-api.version>4.0.0-M2</maven-reporting-api.version>
         <maven-reporting-impl.version>4.0.0-M2</maven-reporting-impl.version>
         <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
-        <micrometer.version>1.9.1</micrometer.version>
-        <mockito.version>4.6.1</mockito.version>
+        <micrometer.version>1.9.3</micrometer.version>
+        <mockito.version>4.8.0</mockito.version>
         <mockito-kotlin.version>4.0.0</mockito-kotlin.version>
-        <mongodb.version>4.6.1</mongodb.version>
+        <mongodb.version>4.7.1</mongodb.version>
         <reactor.version>2020.0.15</reactor.version>
         <resilience4j.version>1.7.0</resilience4j.version>
-        <slf4j.version>1.7.36</slf4j.version>
+        <slf4j.version>2.0.0</slf4j.version>
         <spring-batch.version>4.3.6</spring-batch.version>
-        <spring-boot.version>2.7.1</spring-boot.version>
+        <spring-boot.version>2.7.3</spring-boot.version>
         <spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
-        <spring-framework.version>5.3.21</spring-framework.version>
-        <spring-integration.version>5.5.13</spring-integration.version>
-        <spring-security.version>5.7.2</spring-security.version>
-        <springdoc-openapi.version>1.6.9</springdoc-openapi.version>
-        <svnkit.version>1.10.7</svnkit.version>
+        <spring-framework.version>5.3.22</spring-framework.version>
+        <spring-integration.version>5.5.14</spring-integration.version>
+        <spring-security.version>5.7.3</spring-security.version>
+        <springdoc-openapi.version>1.6.11</springdoc-openapi.version>
+        <svnkit.version>1.10.8</svnkit.version>
         <velocity.version>1.7</velocity.version>
         <zjsonpatch.version>0.4.12</zjsonpatch.version>
         <httpclient5.version>5.1.3</httpclient5.version>
