@@ -10,6 +10,7 @@
     <modules>
         <module>dependencies</module>
         <module>update-maven-plugin</module>
+        <module>update-report</module>
     </modules>
 
     <name>${project.artifactId}</name>
@@ -568,11 +569,6 @@
             <timezone>Asia/Singapore</timezone>
         </developer>
     </developers>
-
-    <ciManagement>
-        <system>travis-ci</system>
-        <url>https://travis-ci.com/github/SquirrelGrip/${project.name}</url>
-    </ciManagement>
 
     <profiles>
         <profile>
