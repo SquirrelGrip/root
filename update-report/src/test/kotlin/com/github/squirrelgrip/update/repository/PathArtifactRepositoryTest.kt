@@ -15,6 +15,7 @@ import org.eclipse.aether.spi.connector.transport.TransporterFactory
 import org.eclipse.aether.transport.file.FileTransporterFactory
 import org.eclipse.aether.transport.http.HttpTransporterFactory
 import org.eclipse.aether.util.graph.visitor.PreorderNodeListGenerator
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class PathArtifactRepositoryTest {
@@ -37,6 +38,7 @@ internal class PathArtifactRepositoryTest {
     }
 
     @Test
+    @Disabled
     fun find() {
         val repoSystem = newRepositorySystem()
 
