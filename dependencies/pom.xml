@@ -26,7 +26,6 @@
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
         <elasticsearch.version>7.17.7</elasticsearch.version>
         <feign.version>11.8</feign.version>
-        <httpclient.version>4.5.13</httpclient.version>
         <httpclient5.version>5.2</httpclient5.version>
         <guava.version>31.1-jre</guava.version>
         <jackson.version>2.14.1</jackson.version>
@@ -49,12 +48,12 @@
         <reactor.version>2020.0.15</reactor.version>
         <resilience4j.version>1.7.0</resilience4j.version>
         <slf4j.version>2.0.5</slf4j.version>
-        <spring-batch.version>4.3.7</spring-batch.version>
-        <spring-boot.version>2.7.6</spring-boot.version>
+        <spring-batch.version>5.0.0</spring-batch.version>
+        <spring-boot.version>3.0.0</spring-boot.version>
         <spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
-        <spring-framework.version>5.3.24</spring-framework.version>
-        <spring-integration.version>5.5.15</spring-integration.version>
-        <spring-security.version>5.8.0</spring-security.version>
+        <spring-framework.version>6.0.2</spring-framework.version>
+        <spring-integration.version>6.0.0</spring-integration.version>
+        <spring-security.version>6.0.0</spring-security.version>
         <springdoc-openapi.version>1.6.13</springdoc-openapi.version>
         <svnkit.version>1.10.9</svnkit.version>
         <velocity.version>1.7</velocity.version>

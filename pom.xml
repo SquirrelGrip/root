@@ -67,7 +67,7 @@
         <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
         <pitest-maven-plugin.version>1.10.1</pitest-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
-        <spring-boot-maven-plugin.version>2.7.6</spring-boot-maven-plugin.version>
+        <spring-boot-maven-plugin.version>3.0.0</spring-boot-maven-plugin.version>
         <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
         <tidy-maven-plugin.version>1.2.0</tidy-maven-plugin.version>
         <travis-maven-plugin.version>1.0.0</travis-maven-plugin.version>
