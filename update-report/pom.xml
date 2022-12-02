@@ -11,7 +11,7 @@
     <artifactId>update-report</artifactId>
 
     <properties>
-        <kotlin-extensions.version>1.2.18</kotlin-extensions.version>
+        <kotlin-extensions.version>1.2.19</kotlin-extensions.version>
         <aether.version>1.0.0.v20140518</aether.version>
         <maven.version>3.3.9</maven.version>
         <wagon.version>1.0</wagon.version>
