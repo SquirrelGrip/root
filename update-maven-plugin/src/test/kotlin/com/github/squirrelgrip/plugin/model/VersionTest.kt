@@ -43,7 +43,7 @@ class VersionTest {
             Version("3.0.0"),
             Version("3.0.0-M6"),
         ).sorted().first {
-            it.isValid() && it > current
+            !it.isIgnored(emptyList()) && it > current
         }
 
         assertThat(version).isEqualTo(Version("2.31"))
@@ -65,6 +65,15 @@ class VersionTest {
         partsEquals("5.8.1-RC1", 5, 8, 1)
         partsEquals("31.0.1-jre", 31, 0, 1)
         partsEquals("31.1-jre", 31, 1, 0)
+    }
+
+    @Test
+    fun isIgnored() {
+       assertThat(Version("").isIgnored(listOf("5\\.8\\.1-RC1"))).isFalse()
+       assertThat(Version("").isIgnored(emptyList())).isFalse()
+       assertThat(Version("5.8.1-RC1").isIgnored(emptyList())).isFalse()
+       assertThat(Version("5.8.1-RC1").isIgnored(listOf("5\\.8\\.1-RC1"))).isTrue()
+       assertThat(Version("5.8.1-RC1").isIgnored(listOf("5\\.8\\.1-RC2"))).isFalse()
     }
 
     fun partsEquals(version: String, major: Int, minor: Int, increment: Int) {

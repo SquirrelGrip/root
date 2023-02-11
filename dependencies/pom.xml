@@ -16,35 +16,36 @@
         <antlr4.version>4.11.1</antlr4.version>
         <assertj.version>3.24.2</assertj.version>
         <awaitility.version>4.2.0</awaitility.version>
-        <beanutils.version>1.9.4</beanutils.version>
         <bouncycastle.version>1.70</bouncycastle.version>
         <brave.version>5.13.7</brave.version>
-        <commons-beanutils.version>3.2</commons-beanutils.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-collections.version>4.4</commons-collections.version>
-        <doxia.version>2.0.0-M4</doxia.version>
-        <doxia-sink-api.version>2.0.0-M4</doxia-sink-api.version>
+        <doxia.version>2.0.0-M5</doxia.version>
+        <doxia-sink-api.version>2.0.0-M5</doxia-sink-api.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <elasticsearch.version>7.17.8</elasticsearch.version>
+        <elasticsearch.version>7.17.9</elasticsearch.version>
         <feign.version>11.8</feign.version>
         <httpclient5.version>5.2.1</httpclient5.version>
         <guava.version>31.1-jre</guava.version>
-        <jackson.version>2.14.1</jackson.version>
+        <jackson.version>2.14.2</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
-        <junit-pioneer.version>1.9.1</junit-pioneer.version>
+        <junit-pioneer.version>2.0.0</junit-pioneer.version>
+        <kotlin-extensions.version>1.3.2</kotlin-extensions.version>
         <kotlinx-coroutines.version>1.6.4</kotlinx-coroutines.version>
         <logback.version>1.4.5</logback.version>
-        <maven-core.version>3.8.7</maven-core.version>
+        <maven-artifact.version>3.9.0</maven-artifact.version>
+        <maven-core.version>3.9.0</maven-core.version>
         <maven-model.version>${maven-core.version}</maven-model.version>
         <maven-plugin-annotations.version>3.7.1</maven-plugin-annotations.version>
         <maven-plugin-api.version>${maven-core.version}</maven-plugin-api.version>
-        <maven-reporting-api.version>4.0.0-M3</maven-reporting-api.version>
+        <maven-reporting-api.version>4.0.0-M4</maven-reporting-api.version>
         <maven-reporting-impl.version>4.0.0-M3</maven-reporting-impl.version>
         <maven-shared-utils.version>3.3.4</maven-shared-utils.version>
         <micrometer.version>1.10.3</micrometer.version>
-        <mockito.version>5.0.0</mockito.version>
+        <mockito.version>5.1.1</mockito.version>
         <mockito-kotlin.version>4.1.0</mockito-kotlin.version>
-        <mongodb.version>4.8.2</mongodb.version>
+        <mongodb.version>4.9.0</mongodb.version>
         <reactor.version>2020.0.15</reactor.version>
         <resilience4j.version>1.7.0</resilience4j.version>
         <slf4j.version>2.0.6</slf4j.version>
@@ -178,6 +179,11 @@
                 <groupId>org.apache.httpcomponents.client5</groupId>
                 <artifactId>httpclient5</artifactId>
                 <version>${httpclient5.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-artifact</artifactId>
+                <version>${maven-artifact.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven</groupId>

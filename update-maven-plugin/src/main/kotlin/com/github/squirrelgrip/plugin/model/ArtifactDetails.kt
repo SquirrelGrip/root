@@ -11,11 +11,15 @@ data class ArtifactDetails(
     val currentVersion: Version,
     @JsonProperty("versions")
     val versions: Collection<Version> = emptyList(),
+    @JsonProperty("versions")
+    val ignoredVersions: Collection<String> = emptyList(),
 ) : Comparable<ArtifactDetails> {
 
     val sortedVersions: List<Version> by lazy {
         versions
-            .filter { it > currentVersion && it.isValid() }
+            .filter {
+                it > currentVersion && !it.isIgnored(ignoredVersions)
+            }
             .sorted()
     }
 

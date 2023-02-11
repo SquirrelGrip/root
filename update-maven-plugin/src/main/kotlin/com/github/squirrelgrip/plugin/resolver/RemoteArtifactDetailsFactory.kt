@@ -2,14 +2,18 @@ package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.extension.xml.toInstance
 import com.github.squirrelgrip.extension.xml.toXml
+import com.github.squirrelgrip.plugin.IgnoreVersions
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.MavenMetaData
 import com.github.squirrelgrip.plugin.model.Version
 import com.github.squirrelgrip.plugin.model.Versioning
 import org.apache.hc.client5.http.classic.methods.HttpGet
+import org.apache.hc.client5.http.impl.classic.AbstractHttpClientResponseHandler
 import org.apache.hc.client5.http.impl.classic.HttpClients
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactoryBuilder
+import org.apache.hc.core5.http.HttpEntity
+import org.apache.hc.core5.http.io.HttpClientResponseHandler
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.plugin.logging.Log
 import java.io.File
@@ -19,10 +23,11 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.X509TrustManager
 
 class RemoteArtifactDetailsFactory(
-    val localRepository: ArtifactRepository,
-    val remoteRepositories: List<ArtifactRepository>,
-    val log: Log,
-) : ArtifactDetailsFactory {
+    localRepository: ArtifactRepository,
+    ignoredVersions: List<IgnoreVersions> = emptyList(),
+    log: Log,
+    val remoteRepositories: List<ArtifactRepository>
+) : AbstractArtifactDetailsFactory(localRepository, log, ignoredVersions) {
     companion object {
         private val sslContext = SSLContext.getInstance("TLSv1.2").also {
             it.init(null, arrayOf(InsecureTrustManager()), SecureRandom())
@@ -38,7 +43,13 @@ class RemoteArtifactDetailsFactory(
             .build()
     }
 
-    override fun getAvailableVersions(artifact: ArtifactDetails): List<Version> =
+    override fun create(groupId: String, artifactId: String, version: String): ArtifactDetails =
+        ArtifactDetails(groupId, artifactId, Version(version), emptyList(), )
+
+
+    override fun getAvailableVersions(
+        artifact: ArtifactDetails
+    ): List<Version> =
         remoteRepositories
             .filter {
                 it.releases?.isEnabled ?: true
@@ -49,35 +60,44 @@ class RemoteArtifactDetailsFactory(
                 HttpGet(url)
             }
             .map { (repository, request) ->
-                client.execute(request).use {
+                client.execute(request, getHttpClientResponseHandler(artifact, repository))
+            }.toVersions()
+
+    private fun getHttpClientResponseHandler(
+        artifact: ArtifactDetails,
+        repository: ArtifactRepository
+    ): HttpClientResponseHandler<MavenMetaData> =
+        object : AbstractHttpClientResponseHandler<MavenMetaData>() {
+            override fun handleEntity(entity: HttpEntity): MavenMetaData =
+                try {
+                    val content = entity.content
+                    println(content)
+                    content.toInstance()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    MavenMetaData(
+                        artifact.groupId,
+                        artifact.artifactId,
+                        null,
+                        artifact.currentVersion.value,
+                        Versioning()
+                    )
+                }.apply {
+                    log.debug("$this")
                     try {
-                        it.entity.content.toInstance()
+                        val file =
+                            File(
+                                localRepository.basedir,
+                                artifact.getMavenMetaDataFile(repository.id)
+                            ).also { file ->
+                                file.parentFile.mkdirs()
+                            }
+                        updateTime().toXml(file)
                     } catch (e: Exception) {
-                        e.printStackTrace()
-                        MavenMetaData(
-                            artifact.groupId,
-                            artifact.artifactId,
-                            null,
-                            artifact.currentVersion.value,
-                            Versioning()
-                        )
-                    }.apply {
-                        log.debug("$this")
-                        try {
-                            val file =
-                                File(
-                                    localRepository.basedir,
-                                    artifact.getMavenMetaDataFile(repository.id)
-                                ).also { file ->
-                                    file.parentFile.mkdirs()
-                                }
-                            updateTime().toXml(file)
-                        } catch (e: Exception) {
-                            // Ignore
-                        }
+                        // Ignore
                     }
                 }
-            }.toVersions()
+        }
 
     fun getUrl(
         repositoryUrl: String,
@@ -88,7 +108,6 @@ class RemoteArtifactDetailsFactory(
         } else {
             "${repositoryUrl}/${artifactPath}"
         }
-
 
     override fun hasMetaData(artifact: ArtifactDetails): Boolean =
         true

@@ -1,6 +1,7 @@
 package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.extension.xml.toInstance
+import com.github.squirrelgrip.plugin.IgnoreVersions
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.MavenMetaData
 import com.github.squirrelgrip.plugin.model.Version
@@ -10,10 +11,11 @@ import java.io.File
 import java.time.Instant
 
 class LocalArtifactDetailsFactory(
-    val localRepository: ArtifactRepository,
-    val log: Log,
-    val updateInterval: Long = 60 * 60 * 24,
-) : ArtifactDetailsFactory {
+    localRepository: ArtifactRepository,
+    ignoredVersions: List<IgnoreVersions> = emptyList(),
+    log: Log,
+    val updateInterval: Long = 60 * 60 * 24
+) : AbstractArtifactDetailsFactory(localRepository, log, ignoredVersions) {
     companion object {
         val regex = "maven-metadata-.*\\.xml".toRegex()
     }
@@ -26,7 +28,7 @@ class LocalArtifactDetailsFactory(
             it.toInstance()
         }
 
-    fun getFiles(artifact: ArtifactDetails): Array<File> {
+    private fun getFiles(artifact: ArtifactDetails): Array<File> {
         val directory = File(localRepository.basedir, artifact.getDirectory())
         return if (directory.exists()) {
             directory.listFiles { _, name -> name.matches(regex) }
@@ -38,10 +40,8 @@ class LocalArtifactDetailsFactory(
     override fun hasMetaData(artifact: ArtifactDetails): Boolean =
         getFiles(artifact).isNotEmpty()
 
-    override fun metaDataUp2Date(artifact: ArtifactDetails): Boolean {
-        val lastUpdateInstant = getMavenMetaData(artifact).map {
+    override fun metaDataUp2Date(artifact: ArtifactDetails): Boolean =
+        (getMavenMetaData(artifact).maxOfOrNull {
             it.versioning.updatedDateTime
-        }.maxOrNull() ?: Instant.MIN
-        return lastUpdateInstant.plusSeconds(updateInterval).isAfter(Instant.now())
-    }
+        } ?: Instant.MIN).plusSeconds(updateInterval).isAfter(Instant.now())
 }

@@ -30,7 +30,11 @@ internal class RemoteArtifactDetailsFactoryTest {
         given(remoteRepository.releases).willReturn(ArtifactRepositoryPolicy(true, UPDATE_POLICY_DAILY, CHECKSUM_POLICY_IGNORE))
         val artifact = ArtifactDetails("com.google.guava", "guava", Version("30.1-jre"))
 
-        val testSubject = RemoteArtifactDetailsFactory(localRepository, listOf(remoteRepository), log)
+        val testSubject = RemoteArtifactDetailsFactory(
+            localRepository,
+            log = log,
+            remoteRepositories = listOf(remoteRepository)
+        )
 
         val availableVersions = testSubject.getAvailableVersions(artifact)
 
@@ -45,7 +49,11 @@ internal class RemoteArtifactDetailsFactoryTest {
 
     @Test
     fun getUrl() {
-        val testSubject = RemoteArtifactDetailsFactory(localRepository, listOf(remoteRepository), log)
+        val testSubject = RemoteArtifactDetailsFactory(
+            localRepository,
+            log = log,
+            remoteRepositories = listOf(remoteRepository)
+        )
         assertThat(testSubject.getUrl("http://0.0.0.0/", "org/something/maven-metadata.xml")).isEqualTo(
             "http://0.0.0.0/org/something/maven-metadata.xml"
         )

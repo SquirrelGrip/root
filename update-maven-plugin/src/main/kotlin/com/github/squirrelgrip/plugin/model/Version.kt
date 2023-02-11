@@ -1,11 +1,24 @@
 package com.github.squirrelgrip.plugin.model
 
+import com.github.squirrelgrip.plugin.resolver.AbstractArtifactDetailsFactory
 import org.apache.maven.project.MavenProject
 
 data class Version(
     val value: String,
 ) : Comparable<Version> {
     companion object {
+        val STANDARD_IGNORED_VERSION: List<String> = listOf(
+            ".*android",
+            ".+ALPHA.*",
+            ".+alpha.*",
+            ".+jenkins.*",
+            ".+beta.*",
+            ".+Beta.*",
+            ".+BETA.*",
+            ".+native.*",
+            ".*-SNAPSHOT",
+            """\d{8}\.\d+"""
+        )
         val NO_VERSION = Version("")
         val VALID_CHARS = (0..9).map { it.toString()[0] }
         val VERSION_REGEX = Regex("\\D+")
@@ -80,18 +93,10 @@ data class Version(
     override fun toString(): String =
         value
 
-    fun isValid(): Boolean {
-        return !value.uppercase().contains("LPHA") &&
-            !value.contains("ndroid") &&
-            !value.uppercase().contains("B") &&
-            !value.uppercase().contains("C") &&
-            !value.uppercase().contains("ETA") &&
-            !value.contains("enkin") &&
-            !value.contains("ative") &&
-            !(value.contains("r") && !value.contains("jre")) &&
-            !value.contains("SNAPSHOT") &&
-            !value.matches(INVALID_REGEX)
-    }
+    fun isIgnored(ignoreList: Collection<String>): Boolean =
+        (ignoreList + STANDARD_IGNORED_VERSION).any {
+            it.toRegex().matches(value)
+        }
 
     fun resolve(project: MavenProject): Version =
         Version(

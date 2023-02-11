@@ -23,7 +23,7 @@ internal class LocalArtifactDetailsFactoryTest {
         given(localRepository.basedir).willReturn("${System.getProperty("user.home")}/.m2/repository")
         val artifact = ArtifactDetails("com.google.guava", "guava", Version("30.1-jre"))
 
-        val testSubject = LocalArtifactDetailsFactory(localRepository, log)
+        val testSubject = LocalArtifactDetailsFactory(localRepository, log = log)
 
         val availableVersions = testSubject.getAvailableVersions(artifact)
 

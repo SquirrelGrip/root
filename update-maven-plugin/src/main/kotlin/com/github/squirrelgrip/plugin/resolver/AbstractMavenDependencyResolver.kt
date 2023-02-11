@@ -27,13 +27,13 @@ abstract class AbstractMavenDependencyResolver(
     }
 
     val localArtifactDetailsFactory =
-        LocalArtifactDetailsFactory(localRepository, log)
+        LocalArtifactDetailsFactory(localRepository, log = log)
 
     val remoteArtifactDetailsFactory =
-        RemoteArtifactDetailsFactory(localRepository, remoteRepositories, log)
+        RemoteArtifactDetailsFactory(localRepository, log = log, remoteRepositories = remoteRepositories)
 
     val pluginArtifactDetailsFactory =
-        RemoteArtifactDetailsFactory(localRepository, pluginRepositories, log)
+        RemoteArtifactDetailsFactory(localRepository, log = log, remoteRepositories = pluginRepositories)
 
     fun Plugin.toArtifact(properties: Properties): Artifact =
         DefaultArtifact(groupId, artifactId, getCurrentVersion(version, properties), "", "", "", defaultArtifactHandler)

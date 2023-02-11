@@ -36,6 +36,9 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     @Parameter(defaultValue = "\${session}", readonly = true)
     lateinit var session: MavenSession
 
+    @Parameter(property = "ignoredVersions")
+    private var ignoredVersions: List<IgnoreVersions> = emptyList()
+
     @Parameter(property = "processDependencies", defaultValue = "true")
     private var processDependencies = true
 
