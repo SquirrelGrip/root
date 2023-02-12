@@ -17,9 +17,20 @@ interface ArtifactDetailsFactory {
         }
 
     fun List<MavenMetaData>.toVersions(): List<Version> =
-        this.flatMap {
-            it.versioning.versions
-        }
+        this
+            .flatMap { metaData ->
+                val ignoredVersions = getIgnoredVersions(metaData.groupId, metaData.artifactId)
+                val versions = metaData.versioning.versions
+                if (ignoredVersions.isNotEmpty()) {
+                    versions.filter {  version ->
+                        !ignoredVersions.any {
+                            it.toRegex().matches(version)
+                        }
+                    }
+                } else {
+                    versions
+                }
+            }
             .distinct()
             .map {
                 Version(it)
@@ -31,4 +42,5 @@ interface ArtifactDetailsFactory {
     fun getAvailableVersions(artifact: ArtifactDetails): List<Version>
     fun hasMetaData(artifact: ArtifactDetails): Boolean
     fun metaDataUp2Date(artifact: ArtifactDetails): Boolean
+    fun getIgnoredVersions(groupId: String, artifactId: String): Collection<String>
 }

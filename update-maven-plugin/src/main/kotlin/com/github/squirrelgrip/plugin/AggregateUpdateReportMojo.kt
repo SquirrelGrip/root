@@ -22,7 +22,8 @@ class AggregateUpdateReportMojo : AbstractUpdateReport() {
             remoteRepositories,
             pluginArtifactRepositories,
             session,
-            log
+            log,
+            ignoredVersions
         )
 
     override val reportHeading = "Aggregated Update Report"

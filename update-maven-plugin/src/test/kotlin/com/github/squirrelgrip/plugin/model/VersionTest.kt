@@ -43,7 +43,7 @@ class VersionTest {
             Version("3.0.0"),
             Version("3.0.0-M6"),
         ).sorted().first {
-            it.isValid() && it > current
+            it > current
         }
 
         assertThat(version).isEqualTo(Version("2.31"))

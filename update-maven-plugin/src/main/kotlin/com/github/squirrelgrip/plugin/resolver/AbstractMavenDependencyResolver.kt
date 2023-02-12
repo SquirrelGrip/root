@@ -1,6 +1,7 @@
 package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
+import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -20,6 +21,7 @@ abstract class AbstractMavenDependencyResolver(
     remoteRepositories: List<ArtifactRepository>,
     pluginRepositories: List<ArtifactRepository>,
     val log: Log,
+    val ignoredVersions: List<IgnoredVersion>
 ) : DependencyResolver {
     companion object {
         val defaultArtifactHandler = DefaultArtifactHandler()
@@ -27,13 +29,13 @@ abstract class AbstractMavenDependencyResolver(
     }
 
     val localArtifactDetailsFactory =
-        LocalArtifactDetailsFactory(localRepository, log)
+        LocalArtifactDetailsFactory(localRepository, ignoredVersions, log)
 
     val remoteArtifactDetailsFactory =
-        RemoteArtifactDetailsFactory(localRepository, remoteRepositories, log)
+        RemoteArtifactDetailsFactory(localRepository, ignoredVersions, log, remoteRepositories)
 
     val pluginArtifactDetailsFactory =
-        RemoteArtifactDetailsFactory(localRepository, pluginRepositories, log)
+        RemoteArtifactDetailsFactory(localRepository, ignoredVersions, log, pluginRepositories)
 
     fun Plugin.toArtifact(properties: Properties): Artifact =
         DefaultArtifact(groupId, artifactId, getCurrentVersion(version, properties), "", "", "", defaultArtifactHandler)

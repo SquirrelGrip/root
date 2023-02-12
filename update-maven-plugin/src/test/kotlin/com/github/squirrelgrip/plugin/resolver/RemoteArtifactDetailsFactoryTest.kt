@@ -1,5 +1,6 @@
 package com.github.squirrelgrip.plugin.resolver
 
+import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.Version
 import org.apache.maven.artifact.repository.ArtifactRepository
@@ -30,7 +31,12 @@ internal class RemoteArtifactDetailsFactoryTest {
         given(remoteRepository.releases).willReturn(ArtifactRepositoryPolicy(true, UPDATE_POLICY_DAILY, CHECKSUM_POLICY_IGNORE))
         val artifact = ArtifactDetails("com.google.guava", "guava", Version("30.1-jre"))
 
-        val testSubject = RemoteArtifactDetailsFactory(localRepository, listOf(remoteRepository), log)
+        val testSubject = RemoteArtifactDetailsFactory(
+            localRepository,
+            listOf(IgnoredVersion("com.google.guava", "guava", ".*-android")),
+            log,
+            listOf(remoteRepository)
+        )
 
         val availableVersions = testSubject.getAvailableVersions(artifact)
 
@@ -45,7 +51,12 @@ internal class RemoteArtifactDetailsFactoryTest {
 
     @Test
     fun getUrl() {
-        val testSubject = RemoteArtifactDetailsFactory(localRepository, listOf(remoteRepository), log)
+        val testSubject = RemoteArtifactDetailsFactory(
+            localRepository,
+            listOf(IgnoredVersion("com.google.guava", "guava", ".*-android")),
+            log,
+            listOf(remoteRepository)
+        )
         assertThat(testSubject.getUrl("http://0.0.0.0/", "org/something/maven-metadata.xml")).isEqualTo(
             "http://0.0.0.0/org/something/maven-metadata.xml"
         )

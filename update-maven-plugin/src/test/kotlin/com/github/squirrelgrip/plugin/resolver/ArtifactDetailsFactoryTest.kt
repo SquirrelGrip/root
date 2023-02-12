@@ -21,14 +21,23 @@ internal class ArtifactDetailsFactoryTest {
     @Test
     fun getRemoteAvailableVersions() {
         val repository: ArtifactRepository = MavenArtifactRepository("remote", "https://repo1.maven.org/maven2", DefaultRepositoryLayout(), ArtifactRepositoryPolicy(true, null, null), ArtifactRepositoryPolicy(true, null, null))
-        val testSubject = RemoteArtifactDetailsFactory(localRepository, listOf(repository), log)
+        val testSubject = RemoteArtifactDetailsFactory(
+            localRepository,
+            emptyList(),
+            log,
+            listOf(repository)
+        )
         val availableVersions = testSubject.getAvailableVersions(artifact)
         assertThat(availableVersions).isNotEmpty
     }
 
     @Test
     fun getLocalAvailableVersions() {
-        val testSubject = LocalArtifactDetailsFactory(localRepository, log)
+        val testSubject = LocalArtifactDetailsFactory(
+            localRepository,
+            emptyList(),
+            log,
+        )
         val availableVersions = testSubject.getAvailableVersions(artifact)
         assertThat(availableVersions).isNotEmpty
     }

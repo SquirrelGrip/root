@@ -10,12 +10,14 @@ data class ArtifactDetails(
     @JsonProperty("currentVersion")
     val currentVersion: Version,
     @JsonProperty("versions")
-    val versions: Collection<Version> = emptyList(),
+    val versions: Collection<Version> = emptyList()
 ) : Comparable<ArtifactDetails> {
 
     val sortedVersions: List<Version> by lazy {
         versions
-            .filter { it > currentVersion && it.isValid() }
+            .filter {
+                it > currentVersion
+            }
             .sorted()
     }
 

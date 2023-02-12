@@ -29,7 +29,7 @@ data class UpdateArtifact(
     val minors: List<Version>? = emptyList(),
     @JacksonXmlElementWrapper(useWrapping = true, localName = "majors")
     @JsonProperty("majors")
-    val majors: List<Version>? = emptyList(),
+    val majors: List<Version>? = emptyList()
 ) {
     fun toArtifactDetails(project: MavenProject): ArtifactDetails =
         ArtifactDetails(
