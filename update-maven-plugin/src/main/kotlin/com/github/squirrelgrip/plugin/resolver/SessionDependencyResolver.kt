@@ -1,6 +1,7 @@
 package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
+import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
 import org.apache.maven.plugin.logging.Log
@@ -12,11 +13,13 @@ class SessionDependencyResolver(
     pluginRepositories: List<ArtifactRepository>,
     private val session: MavenSession,
     log: Log,
+    ignoredVersions: List<IgnoredVersion>
 ) : AbstractMavenDependencyResolver(
     localRepository,
     remoteRepositories,
     pluginRepositories,
-    log
+    log,
+    ignoredVersions
 ) {
     override fun getDependencyArtifacts(
         project: MavenProject,

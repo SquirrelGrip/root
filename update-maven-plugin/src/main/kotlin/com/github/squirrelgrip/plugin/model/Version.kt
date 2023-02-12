@@ -7,23 +7,10 @@ data class Version(
     val value: String,
 ) : Comparable<Version> {
     companion object {
-        val STANDARD_IGNORED_VERSION: List<String> = listOf(
-            ".*android",
-            ".+ALPHA.*",
-            ".+alpha.*",
-            ".+jenkins.*",
-            ".+beta.*",
-            ".+Beta.*",
-            ".+BETA.*",
-            ".+native.*",
-            ".*-SNAPSHOT",
-            """\d{8}\.\d+"""
-        )
         val NO_VERSION = Version("")
         val VALID_CHARS = (0..9).map { it.toString()[0] }
         val VERSION_REGEX = Regex("\\D+")
         val PROPERTY_REGEX = Regex(".*\\$\\{(.+?)\\}.*")
-        val INVALID_REGEX = """\d{8}\.\d+""".toRegex()
         val PRE_RELEASE_REGEX = """(.*)-\w+(\d+)""".toRegex()
 
         fun versionCompare(version1: String, version2: String): Int {
@@ -92,11 +79,6 @@ data class Version(
 
     override fun toString(): String =
         value
-
-    fun isIgnored(ignoreList: Collection<String>): Boolean =
-        (ignoreList + STANDARD_IGNORED_VERSION).any {
-            it.toRegex().matches(value)
-        }
 
     fun resolve(project: MavenProject): Version =
         Version(

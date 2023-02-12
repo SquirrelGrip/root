@@ -1,6 +1,7 @@
 package com.github.squirrelgrip.plugin
 
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
+import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import com.github.squirrelgrip.plugin.resolver.AbstractMavenDependencyResolver
 import com.github.squirrelgrip.plugin.resolver.DependencyResolver
 import com.github.squirrelgrip.plugin.resolver.VersionsDependencyResolver
@@ -37,7 +38,7 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     lateinit var session: MavenSession
 
     @Parameter(property = "ignoredVersions")
-    private var ignoredVersions: List<IgnoreVersions> = emptyList()
+    var ignoredVersions: List<IgnoredVersion> = emptyList()
 
     @Parameter(property = "processDependencies", defaultValue = "true")
     private var processDependencies = true
@@ -73,6 +74,7 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
         log.debug("processPluginDependencies: $processPluginDependencies")
         log.debug("processPluginDependenciesInPluginManagement: $processPluginDependenciesInPluginManagement")
         log.debug("processTransitive: $processTransitive")
+        log.debug("ignoredVersions: $ignoredVersions")
     }
 
     abstract fun getMavenDependencyResolver(): AbstractMavenDependencyResolver

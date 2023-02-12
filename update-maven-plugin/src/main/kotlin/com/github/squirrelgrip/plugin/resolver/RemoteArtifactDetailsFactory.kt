@@ -2,7 +2,7 @@ package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.extension.xml.toInstance
 import com.github.squirrelgrip.extension.xml.toXml
-import com.github.squirrelgrip.plugin.IgnoreVersions
+import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.MavenMetaData
 import com.github.squirrelgrip.plugin.model.Version
@@ -24,7 +24,7 @@ import javax.net.ssl.X509TrustManager
 
 class RemoteArtifactDetailsFactory(
     localRepository: ArtifactRepository,
-    ignoredVersions: List<IgnoreVersions> = emptyList(),
+    ignoredVersions: List<IgnoredVersion> = emptyList(),
     log: Log,
     val remoteRepositories: List<ArtifactRepository>
 ) : AbstractArtifactDetailsFactory(localRepository, log, ignoredVersions) {
@@ -44,8 +44,7 @@ class RemoteArtifactDetailsFactory(
     }
 
     override fun create(groupId: String, artifactId: String, version: String): ArtifactDetails =
-        ArtifactDetails(groupId, artifactId, Version(version), emptyList(), )
-
+        ArtifactDetails(groupId, artifactId, Version(version))
 
     override fun getAvailableVersions(
         artifact: ArtifactDetails
@@ -70,9 +69,7 @@ class RemoteArtifactDetailsFactory(
         object : AbstractHttpClientResponseHandler<MavenMetaData>() {
             override fun handleEntity(entity: HttpEntity): MavenMetaData =
                 try {
-                    val content = entity.content
-                    println(content)
-                    content.toInstance()
+                    entity.content.toInstance()
                 } catch (e: Exception) {
                     e.printStackTrace()
                     MavenMetaData(

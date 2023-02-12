@@ -7,7 +7,7 @@ import com.github.squirrelgrip.plugin.model.Version
 interface ArtifactDetailsFactory {
 
     fun create(groupId: String, artifactId: String, version: String): ArtifactDetails =
-        ArtifactDetails(groupId, artifactId, Version(version), emptyList(), getIgnoredVersions(groupId, artifactId))
+        ArtifactDetails(groupId, artifactId, Version(version))
 
     fun ArtifactDetails.getMavenMetaDataFile(id: String = ""): String =
         if (id.isNotBlank()) {
@@ -17,11 +17,24 @@ interface ArtifactDetailsFactory {
         }
 
     fun List<MavenMetaData>.toVersions(): List<Version> =
-        this.flatMap {
-            it.versioning.versions
-        }.distinct().map {
-            Version(it)
-        }
+        this
+            .flatMap { metaData ->
+                val ignoredVersions = getIgnoredVersions(metaData.groupId, metaData.artifactId)
+                val versions = metaData.versioning.versions
+                if (ignoredVersions.isNotEmpty()) {
+                    versions.filter {  version ->
+                        !ignoredVersions.any {
+                            it.toRegex().matches(version)
+                        }
+                    }
+                } else {
+                    versions
+                }
+            }
+            .distinct()
+            .map {
+                Version(it)
+            }
 
     fun ArtifactDetails.getDirectory(): String =
         "${groupId.replace(".", "/")}/$artifactId"

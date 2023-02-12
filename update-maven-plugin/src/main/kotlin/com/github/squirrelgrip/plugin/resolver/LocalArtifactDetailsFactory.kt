@@ -1,7 +1,7 @@
 package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.extension.xml.toInstance
-import com.github.squirrelgrip.plugin.IgnoreVersions
+import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.MavenMetaData
 import com.github.squirrelgrip.plugin.model.Version
@@ -12,7 +12,7 @@ import java.time.Instant
 
 class LocalArtifactDetailsFactory(
     localRepository: ArtifactRepository,
-    ignoredVersions: List<IgnoreVersions> = emptyList(),
+    ignoredVersions: List<IgnoredVersion> = emptyList(),
     log: Log,
     val updateInterval: Long = 60 * 60 * 24
 ) : AbstractArtifactDetailsFactory(localRepository, log, ignoredVersions) {

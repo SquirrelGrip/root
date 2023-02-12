@@ -22,7 +22,8 @@ class ProjectUpdateReportMojo : AbstractUpdateReport() {
             localRepository,
             remoteRepositories,
             pluginArtifactRepositories,
-            log
+            log,
+            ignoredVersions
         )
 
     override fun getOutputName(): String {
