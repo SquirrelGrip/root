@@ -185,6 +185,21 @@
                             <artifactId>maven-site-plugin</artifactId>
                             <version>.*-M4</version>
                         </ignoredVersion>
+                        <ignoredVersion>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactIdRegEx>.*</artifactIdRegEx>
+                            <version>.*-Beta</version>
+                        </ignoredVersion>
+                        <ignoredVersion>
+                            <groupId>org.apache.maven</groupId>
+                            <artifactIdRegEx>.*</artifactIdRegEx>
+                            <version>.*-alpha-\d</version>
+                        </ignoredVersion>
+                        <ignoredVersion>
+                            <groupId>org.elasticsearch.client</groupId>
+                            <artifactIdRegEx>.*</artifactIdRegEx>
+                            <version>.*-alpha\d</version>
+                        </ignoredVersion>
                     </ignoredVersions>
                 </configuration>
             </plugin>

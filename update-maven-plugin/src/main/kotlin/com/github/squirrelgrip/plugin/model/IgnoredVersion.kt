@@ -3,10 +3,14 @@ package com.github.squirrelgrip.plugin.model
 import org.apache.maven.plugins.annotations.Parameter
 
 class IgnoredVersion() {
-    @Parameter(property = "groupId", required = true)
-    lateinit var groupId: String
-    @Parameter(property = "artifactId", required = true)
-    lateinit var artifactId: String
+    @Parameter(property = "groupId")
+    var groupId: String? = null
+    @Parameter(property = "groupIdRegEx")
+    var groupIdRegEx: String? = null
+    @Parameter(property = "artifactId")
+    var artifactId: String? = null
+    @Parameter(property = "artifactIdRegEx")
+    var artifactIdRegEx: String? = null
     @Parameter(property = "version", required = true)
     lateinit var version: String
 
