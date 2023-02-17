@@ -12,6 +12,7 @@ import org.apache.hc.client5.http.impl.classic.AbstractHttpClientResponseHandler
 import org.apache.hc.client5.http.impl.classic.HttpClients
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactoryBuilder
+import org.apache.hc.core5.http.ClassicHttpResponse
 import org.apache.hc.core5.http.HttpEntity
 import org.apache.hc.core5.http.io.HttpClientResponseHandler
 import org.apache.maven.artifact.repository.ArtifactRepository
@@ -67,34 +68,37 @@ class RemoteArtifactDetailsFactory(
         repository: ArtifactRepository
     ): HttpClientResponseHandler<MavenMetaData> =
         object : AbstractHttpClientResponseHandler<MavenMetaData>() {
-            override fun handleEntity(entity: HttpEntity): MavenMetaData =
+            override fun handleResponse(response: ClassicHttpResponse?): MavenMetaData =
                 try {
-                    entity.content.toInstance()
+                    super.handleResponse(response)
                 } catch (e: Exception) {
-                    e.printStackTrace()
-                    MavenMetaData(
-                        artifact.groupId,
-                        artifact.artifactId,
-                        null,
-                        artifact.currentVersion.value,
-                        Versioning()
-                    )
-                }.apply {
+                    getDefaultMavenMetaData(artifact)
+                }
+
+            override fun handleEntity(entity: HttpEntity): MavenMetaData =
+                entity.content.toInstance<MavenMetaData>().apply {
                     log.debug("$this")
                     try {
-                        val file =
-                            File(
-                                localRepository.basedir,
-                                artifact.getMavenMetaDataFile(repository.id)
-                            ).also { file ->
-                                file.parentFile.mkdirs()
-                            }
-                        updateTime().toXml(file)
+                        updateTime().toXml(File(
+                            localRepository.basedir,
+                            artifact.getMavenMetaDataFile(repository.id)
+                        ).also {
+                            it.parentFile.mkdirs()
+                        })
                     } catch (e: Exception) {
                         // Ignore
                     }
                 }
         }
+
+    private fun getDefaultMavenMetaData(artifact: ArtifactDetails) =
+        MavenMetaData(
+            artifact.groupId,
+            artifact.artifactId,
+            null,
+            artifact.currentVersion.value,
+            Versioning()
+        )
 
     fun getUrl(
         repositoryUrl: String,

@@ -100,11 +100,11 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     }
 
     private fun reportTable(tableHeading: String, artifacts: Collection<ArtifactDetails>) {
-        sink.paragraph()
         sink.sectionTitle2()
         sink.text(tableHeading)
         sink.sectionTitle2_()
         sink.table()
+        sink.tableRows()
         sink.tableRow()
         headings.forEach {
             sink.tableHeaderCell()
@@ -121,7 +121,7 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
             }
             sink.tableRow_()
         }
+        sink.tableRows_()
         sink.table_()
-        sink.paragraph_()
     }
 }
