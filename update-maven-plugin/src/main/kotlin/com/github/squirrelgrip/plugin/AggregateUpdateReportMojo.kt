@@ -5,7 +5,8 @@ import com.github.squirrelgrip.plugin.resolver.SessionDependencyResolver
 import org.apache.maven.plugins.annotations.LifecyclePhase
 import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.plugins.annotations.ResolutionScope
-import java.util.*
+import org.eclipse.aether.RepositorySystemSession
+import java.util.Locale
 
 @Mojo(
     name = "aggregate",
@@ -18,7 +19,7 @@ import java.util.*
 class AggregateUpdateReportMojo : AbstractUpdateReport() {
     override fun getMavenDependencyResolver(): AbstractMavenDependencyResolver =
         SessionDependencyResolver(
-            localRepository,
+            repositorySystemSession.localRepository,
             remoteRepositories,
             pluginArtifactRepositories,
             session,
@@ -28,15 +29,12 @@ class AggregateUpdateReportMojo : AbstractUpdateReport() {
 
     override val reportHeading = "Aggregated Update Report"
 
-    override fun getOutputName(): String {
-        return "update-aggregate-report"
-    }
+    override fun getOutputName(): String =
+        "update-aggregate-report"
 
-    override fun getName(locale: Locale): String {
-        return "Aggregated Update Report"
-    }
+    override fun getName(locale: Locale): String =
+        "Aggregated Update Report"
 
-    override fun getDescription(locale: Locale): String {
-        return "Builds a Aggregated Update Report for All Projects"
-    }
+    override fun getDescription(locale: Locale): String =
+        "Builds an Aggregated Update Report for all modules in the project"
 }

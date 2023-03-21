@@ -9,6 +9,7 @@
 
     <modules>
         <module>dependencies</module>
+        <module>rectify-maven-plugin</module>
         <module>update-maven-plugin</module>
         <module>update-report</module>
     </modules>
@@ -34,8 +35,8 @@
         <yarn.version>v1.22.7</yarn.version>
 
         <clirr-maven-plugin.version>2.8</clirr-maven-plugin.version>
-        <dependency-check-maven.version>8.1.0</dependency-check-maven.version>
-        <dokka-maven-plugin.version>1.7.20</dokka-maven-plugin.version>
+        <dependency-check-maven.version>8.1.2</dependency-check-maven.version>
+        <dokka-maven-plugin.version>1.8.10</dokka-maven-plugin.version>
         <extra-enforcer-rules.version>1.3</extra-enforcer-rules.version>
         <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
@@ -45,9 +46,9 @@
         <kotlin-maven-plugin.version>${kotlin.version}</kotlin-maven-plugin.version>
         <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
         <maven-archetype-plugin.version>3.2.1</maven-archetype-plugin.version>
-        <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.5.0</maven-assembly-plugin.version>
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
         <maven-deploy-plugin.version>3.1.0</maven-deploy-plugin.version>
         <maven-enforcer-plugin.version>3.2.1</maven-enforcer-plugin.version>
@@ -55,23 +56,23 @@
         <maven-install-plugin.version>3.1.0</maven-install-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <maven-jxr-plugin.version>3.3.0</maven-jxr-plugin.version>
-        <maven-plugin-plugin.version>3.7.1</maven-plugin-plugin.version>
+        <maven-plugin-plugin.version>3.8.1</maven-plugin-plugin.version>
         <maven-project-info-reports-plugin.version>3.4.2</maven-project-info-reports-plugin.version>
-        <maven-release-plugin.version>3.0.0-M7</maven-release-plugin.version>
+        <maven-release-plugin.version>3.0.0</maven-release-plugin.version>
         <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
-        <maven-scm-plugin.version>2.0.0-M3</maven-scm-plugin.version>
+        <maven-scm-plugin.version>2.0.0</maven-scm-plugin.version>
         <maven-site-plugin.version>4.0.0-M5</maven-site-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
-        <pitest-maven-plugin.version>1.11.0</pitest-maven-plugin.version>
+        <pitest-maven-plugin.version>1.11.5</pitest-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
-        <spring-boot-maven-plugin.version>3.0.2</spring-boot-maven-plugin.version>
+        <spring-boot-maven-plugin.version>3.0.4</spring-boot-maven-plugin.version>
         <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
         <tidy-maven-plugin.version>1.2.0</tidy-maven-plugin.version>
         <travis-maven-plugin.version>1.0.0</travis-maven-plugin.version>
-        <versions-maven-plugin.version>2.14.2</versions-maven-plugin.version>
+        <versions-maven-plugin.version>2.15.0</versions-maven-plugin.version>
     </properties>
 
     <distributionManagement>

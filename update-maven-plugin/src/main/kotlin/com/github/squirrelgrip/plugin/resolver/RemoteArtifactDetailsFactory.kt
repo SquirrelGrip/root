@@ -17,6 +17,7 @@ import org.apache.hc.core5.http.HttpEntity
 import org.apache.hc.core5.http.io.HttpClientResponseHandler
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.plugin.logging.Log
+import org.eclipse.aether.repository.LocalRepository
 import java.io.File
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -24,7 +25,7 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.X509TrustManager
 
 class RemoteArtifactDetailsFactory(
-    localRepository: ArtifactRepository,
+    localRepository: LocalRepository,
     ignoredVersions: List<IgnoredVersion> = emptyList(),
     log: Log,
     val remoteRepositories: List<ArtifactRepository>

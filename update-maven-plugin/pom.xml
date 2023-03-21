@@ -95,7 +95,7 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <artifactId>kotlin-stdlib</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
@@ -176,9 +176,24 @@
                     <processTransitive>true</processTransitive>
                     <ignoredVersions>
                         <ignoredVersion>
+                            <groupId>com.fasterxml.jackson.*</groupId>
+                            <artifactId>jackson-.*</artifactId>
+                            <version>.*-rc\d+</version>
+                        </ignoredVersion>
+                        <ignoredVersion>
                             <groupId>com.google.guava</groupId>
                             <artifactId>guava</artifactId>
                             <version>.*-android</version>
+                        </ignoredVersion>
+                        <ignoredVersion>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-.*</artifactId>
+                            <version>.*-RC</version>
+                        </ignoredVersion>
+                        <ignoredVersion>
+                            <groupId>org.jetbrains.kotlinx</groupId>
+                            <artifactId>kotlinx-.*</artifactId>
+                            <version>.*-Beta</version>
                         </ignoredVersion>
                         <ignoredVersion>
                             <groupId>org.apache.maven.plugins</groupId>
@@ -193,7 +208,7 @@
                         <ignoredVersion>
                             <groupId>org.apache.maven</groupId>
                             <artifactIdRegEx>.*</artifactIdRegEx>
-                            <version>.*-alpha-\d</version>
+                            <version>.*-alpha-\d+</version>
                         </ignoredVersion>
                         <ignoredVersion>
                             <groupId>org.elasticsearch.client</groupId>

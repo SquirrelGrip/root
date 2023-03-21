@@ -11,11 +11,13 @@ import org.apache.maven.plugin.logging.Log
 import org.assertj.core.api.Assertions.assertThat
 import org.codehaus.plexus.logging.Logger.LEVEL_DISABLED
 import org.codehaus.plexus.logging.console.ConsoleLogger
+import org.eclipse.aether.repository.LocalRepository
 import org.junit.jupiter.api.Test
+import java.io.File
 
 internal class ArtifactDetailsFactoryTest {
     val artifact = ArtifactDetails("com.github.squirrelgrip", "extensions", Version("1.2.6"))
-    val localRepository: ArtifactRepository = MavenArtifactRepository("local", "file:///Users/adrian/.m2/repository", DefaultRepositoryLayout(), ArtifactRepositoryPolicy(true, null, null), ArtifactRepositoryPolicy(true, null, null))
+    val localRepository: LocalRepository = LocalRepository(File("${System.getProperty("user.home")}/.m2/repository"))
     val log: Log = DefaultLog(ConsoleLogger(LEVEL_DISABLED, "TestLoggetr"))
 
     @Test

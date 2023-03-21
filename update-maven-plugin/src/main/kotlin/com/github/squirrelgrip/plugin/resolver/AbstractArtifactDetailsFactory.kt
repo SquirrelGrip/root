@@ -3,10 +3,11 @@ package com.github.squirrelgrip.plugin.resolver
 import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.plugin.logging.Log
+import org.eclipse.aether.repository.LocalRepository
 import java.lang.IllegalArgumentException
 
 abstract class AbstractArtifactDetailsFactory(
-    val localRepository: ArtifactRepository,
+    val localRepository: LocalRepository,
     val log: Log,
     private val ignoredVersions: List<IgnoredVersion> = emptyList()
 ) : ArtifactDetailsFactory {
