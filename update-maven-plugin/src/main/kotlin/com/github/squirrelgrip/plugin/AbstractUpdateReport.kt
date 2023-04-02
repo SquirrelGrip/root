@@ -29,6 +29,9 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     @Parameter(defaultValue = "\${repositorySystemSession}", readonly = true)
     lateinit var repositorySystemSession: RepositorySystemSession
 
+    @Parameter(defaultValue = "\${project.remoteArtifactRepositories}", readonly = true)
+    lateinit var remoteRepositories: List<ArtifactRepository>
+
     @Parameter(defaultValue = "\${project.pluginArtifactRepositories}", readonly = true)
     lateinit var pluginArtifactRepositories: List<ArtifactRepository>
 

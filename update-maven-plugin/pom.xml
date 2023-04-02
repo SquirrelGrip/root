@@ -176,9 +176,9 @@
                     <processTransitive>true</processTransitive>
                     <ignoredVersions>
                         <ignoredVersion>
-                            <groupId>com.fasterxml.jackson.*</groupId>
-                            <artifactId>jackson-.*</artifactId>
-                            <version>.*-rc\d+</version>
+                            <groupIdRegEx>com.fasterxml.jackson.*</groupIdRegEx>
+                            <artifactIdRegEx>jackson-.*</artifactIdRegEx>
+                            <version>.*-rc\d*</version>
                         </ignoredVersion>
                         <ignoredVersion>
                             <groupId>com.google.guava</groupId>
@@ -187,23 +187,13 @@
                         </ignoredVersion>
                         <ignoredVersion>
                             <groupId>org.jetbrains.kotlin</groupId>
-                            <artifactId>kotlin-.*</artifactId>
-                            <version>.*-RC</version>
+                            <artifactIdRegEx>kotlin-.*</artifactIdRegEx>
+                            <version>.*-(?:Alpha|Beta|RC)\d*</version>
                         </ignoredVersion>
                         <ignoredVersion>
                             <groupId>org.jetbrains.kotlinx</groupId>
-                            <artifactId>kotlinx-.*</artifactId>
-                            <version>.*-Beta</version>
-                        </ignoredVersion>
-                        <ignoredVersion>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-site-plugin</artifactId>
-                            <version>.*-M4</version>
-                        </ignoredVersion>
-                        <ignoredVersion>
-                            <groupId>org.jetbrains.kotlin</groupId>
-                            <artifactIdRegEx>.*</artifactIdRegEx>
-                            <version>.*-Beta</version>
+                            <artifactIdRegEx>kotlinx-.*</artifactIdRegEx>
+                            <version>.*-(?:Alpha|Beta|RC)\d*</version>
                         </ignoredVersion>
                         <ignoredVersion>
                             <groupId>org.apache.maven</groupId>
