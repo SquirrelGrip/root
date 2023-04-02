@@ -14,10 +14,11 @@ import org.apache.maven.model.Dependency
 import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
+import org.eclipse.aether.repository.LocalRepository
 import java.util.Properties
 
 abstract class AbstractMavenDependencyResolver(
-    localRepository: ArtifactRepository,
+    localRepository: LocalRepository,
     remoteRepositories: List<ArtifactRepository>,
     pluginRepositories: List<ArtifactRepository>,
     val log: Log,

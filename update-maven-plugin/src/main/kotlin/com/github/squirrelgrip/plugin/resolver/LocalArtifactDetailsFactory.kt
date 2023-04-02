@@ -7,11 +7,12 @@ import com.github.squirrelgrip.plugin.model.MavenMetaData
 import com.github.squirrelgrip.plugin.model.Version
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.plugin.logging.Log
+import org.eclipse.aether.repository.LocalRepository
 import java.io.File
 import java.time.Instant
 
 class LocalArtifactDetailsFactory(
-    localRepository: ArtifactRepository,
+    localRepository: LocalRepository,
     ignoredVersions: List<IgnoredVersion> = emptyList(),
     log: Log,
     val updateInterval: Long = 60 * 60 * 24

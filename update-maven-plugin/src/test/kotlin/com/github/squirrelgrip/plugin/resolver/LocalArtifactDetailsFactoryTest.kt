@@ -6,16 +6,18 @@ import com.github.squirrelgrip.plugin.model.Version
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.plugin.logging.Log
 import org.assertj.core.api.Assertions.assertThat
+import org.eclipse.aether.repository.LocalRepository
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import java.io.File
 
 @ExtendWith(MockitoExtension::class)
 internal class LocalArtifactDetailsFactoryTest {
     @Mock
-    lateinit var localRepository: ArtifactRepository
+    lateinit var localRepository: LocalRepository
 
     @Mock
     lateinit var log: Log
@@ -25,7 +27,7 @@ internal class LocalArtifactDetailsFactoryTest {
 
     @Test
     fun getAvailableVersions() {
-        given(localRepository.basedir).willReturn("${System.getProperty("user.home")}/.m2/repository")
+        given(localRepository.basedir).willReturn(File("${System.getProperty("user.home")}/.m2/repository"))
         val artifact = ArtifactDetails(guavaGroupId, guavaArtifactId, Version("30.1-jre"))
 
         val testSubject = LocalArtifactDetailsFactory(

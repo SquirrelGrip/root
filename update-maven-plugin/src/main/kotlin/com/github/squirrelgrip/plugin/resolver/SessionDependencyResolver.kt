@@ -6,9 +6,10 @@ import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
+import org.eclipse.aether.repository.LocalRepository
 
 class SessionDependencyResolver(
-    localRepository: ArtifactRepository,
+    localRepository: LocalRepository,
     remoteRepositories: List<ArtifactRepository>,
     pluginRepositories: List<ArtifactRepository>,
     private val session: MavenSession,

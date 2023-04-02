@@ -9,16 +9,18 @@ import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy.CHECKSUM_PO
 import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy.UPDATE_POLICY_DAILY
 import org.apache.maven.plugin.logging.Log
 import org.assertj.core.api.Assertions.assertThat
+import org.eclipse.aether.repository.LocalRepository
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import java.io.File
 
 @ExtendWith(MockitoExtension::class)
 internal class RemoteArtifactDetailsFactoryTest {
     @Mock
-    lateinit var localRepository: ArtifactRepository
+    lateinit var localRepository: LocalRepository
     @Mock
     lateinit var remoteRepository: ArtifactRepository
     @Mock
@@ -26,7 +28,7 @@ internal class RemoteArtifactDetailsFactoryTest {
 
     @Test
     fun getAvailableVersions() {
-        given(localRepository.basedir).willReturn("${System.getProperty("user.home")}/.m2/repository")
+        given(localRepository.basedir).willReturn(File("${System.getProperty("user.home")}/.m2/repository"))
         given(remoteRepository.url).willReturn("https://repo1.maven.org/maven2")
         given(remoteRepository.releases).willReturn(ArtifactRepositoryPolicy(true, UPDATE_POLICY_DAILY, CHECKSUM_POLICY_IGNORE))
         val artifact = ArtifactDetails("com.google.guava", "guava", Version("30.1-jre"))

@@ -19,22 +19,19 @@ class ProjectUpdateReportMojo : AbstractUpdateReport() {
 
     override fun getMavenDependencyResolver(): AbstractMavenDependencyResolver =
         ProjectDependencyResolver(
-            localRepository,
+            repositorySystemSession.localRepository,
             remoteRepositories,
             pluginArtifactRepositories,
             log,
             ignoredVersions
         )
 
-    override fun getOutputName(): String {
-        return "update-report"
-    }
+    override fun getOutputName(): String =
+        "update-report"
 
-    override fun getName(locale: Locale): String {
-        return "Update Report"
-    }
+    override fun getName(locale: Locale): String =
+        "Update Report"
 
-    override fun getDescription(locale: Locale): String {
-        return "Builds a update report"
-    }
+    override fun getDescription(locale: Locale): String =
+        "Builds a update report"
 }

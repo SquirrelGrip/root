@@ -8,6 +8,7 @@ import com.github.squirrelgrip.plugin.resolver.VersionsDependencyResolver
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.execution.MavenSession
 import org.apache.maven.plugins.annotations.Parameter
+import org.eclipse.aether.RepositorySystemSession
 import java.util.*
 
 abstract class AbstractUpdateReport : AbstractDoxiaReport() {
@@ -25,8 +26,8 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
         )
     }
 
-    @Parameter(defaultValue = "\${localRepository}", readonly = true)
-    lateinit var localRepository: ArtifactRepository
+    @Parameter(defaultValue = "\${repositorySystemSession}", readonly = true)
+    lateinit var repositorySystemSession: RepositorySystemSession
 
     @Parameter(defaultValue = "\${project.remoteArtifactRepositories}", readonly = true)
     lateinit var remoteRepositories: List<ArtifactRepository>
