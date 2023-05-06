@@ -9,9 +9,7 @@
 
     <modules>
         <module>dependencies</module>
-        <module>rectify-maven-plugin</module>
         <module>update-maven-plugin</module>
-        <module>update-report</module>
     </modules>
 
     <name>${project.artifactId}</name>
