@@ -73,21 +73,6 @@
         <versions-maven-plugin.version>2.15.0</versions-maven-plugin.version>
     </properties>
 
-    <distributionManagement>
-        <site>
-            <id>root</id>
-            <url>http://localhost</url>
-        </site>
-        <snapshotRepository>
-            <id>oss-snapshot</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>oss-release</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-    </distributionManagement>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -118,7 +103,7 @@
                 <plugin><groupId>org.codehaus.mojo</groupId><artifactId>versions-maven-plugin</artifactId><version>${versions-maven-plugin.version}</version><configuration><processPlugins>false</processPlugins><processDependencies>false</processDependencies><formats>xml</formats></configuration></plugin>
                 <plugin><groupId>org.eclipse.sisu</groupId><artifactId>sisu-maven-plugin</artifactId><version>0.3.5</version><executions><execution><id>generate-index</id><goals><goal>main-index</goal></goals></execution></executions></plugin>
                 <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>${jacoco-maven-plugin.version}</version></plugin>
-                <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version><executions><execution><id>javadocJar</id><phase>deploy</phase><goals><goal>javadocJar</goal></goals></execution></executions></plugin>
+                <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version><executions><execution><id>javadocJar</id><phase>package</phase><goals><goal>javadocJar</goal></goals></execution></executions></plugin>
                 <plugin>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-maven-plugin</artifactId>

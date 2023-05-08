@@ -3,6 +3,6 @@
     <extension>
         <groupId>com.github.squirrelgrip</groupId>
         <artifactId>build-metrics-extension</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.7-SNAPSHOT</version>
     </extension>
 </extensions>
