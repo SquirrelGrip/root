@@ -66,6 +66,7 @@
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
         <pitest-maven-plugin.version>1.13.1</pitest-maven-plugin.version>
+        <sisu-maven-plugin.version>0.9.0.M2</sisu-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <spring-boot-maven-plugin.version>3.0.6</spring-boot-maven-plugin.version>
         <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
@@ -103,7 +104,7 @@
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-report-plugin</artifactId><version>${maven-surefire-plugin.version}</version></plugin>
                 <plugin><groupId>org.codehaus.mojo</groupId><artifactId>tidy-maven-plugin</artifactId><version>${tidy-maven-plugin.version}</version></plugin>
                 <plugin><groupId>org.codehaus.mojo</groupId><artifactId>versions-maven-plugin</artifactId><version>${versions-maven-plugin.version}</version><configuration><processPlugins>false</processPlugins><processDependencies>false</processDependencies><formats>xml</formats></configuration></plugin>
-                <plugin><groupId>org.eclipse.sisu</groupId><artifactId>sisu-maven-plugin</artifactId><version>0.3.5</version><executions><execution><id>generate-index</id><goals><goal>main-index</goal></goals></execution></executions></plugin>
+                <plugin><groupId>org.eclipse.sisu</groupId><artifactId>sisu-maven-plugin</artifactId><version>${sisu-maven-plugin.version}</version><executions><execution><id>generate-index</id><goals><goal>main-index</goal></goals></execution></executions></plugin>
                 <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>${jacoco-maven-plugin.version}</version></plugin>
                 <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version><executions><execution><id>javadocJar</id><phase>package</phase><goals><goal>javadocJar</goal></goals></execution></executions></plugin>
                 <plugin><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-plugin</artifactId><version>${kotlin-maven-plugin.version}</version><configuration><args><arg>-Xjsr305=strict</arg></args><jvmTarget>${maven.compiler.target}</jvmTarget><compilerPlugins><plugin>spring</plugin></compilerPlugins></configuration><dependencies><dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-allopen</artifactId><version>${kotlin.version}</version></dependency></dependencies><executions><execution><id>compile</id><phase>compile</phase><goals><goal>compile</goal></goals></execution><execution><id>test-compile</id><phase>test-compile</phase><goals><goal>test-compile</goal></goals></execution></executions></plugin><plugin><groupId>org.pitest</groupId><artifactId>pitest-maven</artifactId><version>${pitest-maven-plugin.version}</version><dependencies><dependency><groupId>org.pitest</groupId><artifactId>pitest-junit5-plugin</artifactId><version>${pitest-junit5-plugin.version}</version></dependency></dependencies></plugin>
@@ -116,16 +117,18 @@
 
         <plugins>
             <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version></plugin>
-            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId><version>${maven-deploy-plugin.version}</version></plugin>
-            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>${maven-gpg-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-scm-plugin</artifactId><version>${maven-scm-plugin.version}</version></plugin>
-            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version></plugin>
             <plugin><groupId>org.codehaus.mojo</groupId><artifactId>versions-maven-plugin</artifactId><version>${versions-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>${jacoco-maven-plugin.version}</version></plugin>
-            <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.owasp</groupId><artifactId>dependency-check-maven</artifactId><version>${dependency-check-maven.version}</version></plugin>
             <plugin><groupId>org.sonarsource.scanner.maven</groupId><artifactId>sonar-maven-plugin</artifactId><version>${sonar-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version></plugin>
+
+            <!-- Deploy Phase -->
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version></plugin>
+            <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version></plugin>
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>${maven-gpg-plugin.version}</version></plugin>
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId><version>${maven-deploy-plugin.version}</version></plugin>
         </plugins>
     </build>
 
