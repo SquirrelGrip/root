@@ -118,17 +118,17 @@
         <plugins>
             <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-scm-plugin</artifactId><version>${maven-scm-plugin.version}</version></plugin>
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version></plugin>
             <plugin><groupId>org.codehaus.mojo</groupId><artifactId>versions-maven-plugin</artifactId><version>${versions-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>${jacoco-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.owasp</groupId><artifactId>dependency-check-maven</artifactId><version>${dependency-check-maven.version}</version></plugin>
             <plugin><groupId>org.sonarsource.scanner.maven</groupId><artifactId>sonar-maven-plugin</artifactId><version>${sonar-maven-plugin.version}</version></plugin>
-            <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version></plugin>
 
             <!-- Deploy Phase -->
-            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version></plugin>
             <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>${maven-gpg-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId><version>${maven-deploy-plugin.version}</version></plugin>
+            <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version></plugin>
         </plugins>
     </build>
 
