@@ -43,6 +43,6 @@ internal class LocalArtifactDetailsFactoryTest {
         assertThat(enrichedArtifact.currentVersion.value).isEqualTo("30.1-jre")
         assertThat(enrichedArtifact.nextVersion.value).isEqualTo("30.1.1-jre")
         assertThat(enrichedArtifact.nextMajor.value).isEqualTo("31.0-jre")
-        assertThat(enrichedArtifact.latest.value).isEqualTo("32.0.0-jre")
+        assertThat(enrichedArtifact.latest.value).isEqualTo("32.0.1-jre")
     }
 }
