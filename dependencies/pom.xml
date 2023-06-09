@@ -29,7 +29,7 @@
         <elasticsearch.version>7.17.10</elasticsearch.version>
         <feign.version>11.8</feign.version>
         <httpclient5.version>5.2.1</httpclient5.version>
-        <guava.version>32.0.0-jre</guava.version>
+        <guava.version>32.0.1-jre</guava.version>
         <jackson.version>2.15.2</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <junit-jupiter.version>5.9.3</junit-jupiter.version>
