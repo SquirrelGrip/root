@@ -13,54 +13,54 @@
     <properties>
         <activation.version>1.1.1</activation.version>
         <annotations.version>24.0.1</annotations.version>
-        <antlr4.version>4.13.0</antlr4.version>
+        <antlr4.version>4.13.1</antlr4.version>
         <assertj.version>3.24.2</assertj.version>
         <awaitility.version>4.2.0</awaitility.version>
         <bouncycastle.version>1.70</bouncycastle.version>
         <brave.version>5.13.7</brave.version>
-        <byte-buddy.version>1.14.5</byte-buddy.version>
+        <byte-buddy.version>1.14.7</byte-buddy.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-lang3.version>3.13.0</commons-lang3.version>
         <commons-logging.version>1.2</commons-logging.version>
         <commons-collections.version>4.4</commons-collections.version>
-        <doxia.version>2.0.0-M10</doxia.version>
-        <doxia-sink-api.version>2.0.0-M6</doxia-sink-api.version>
+        <doxia.version>2.0.0-M11</doxia.version>
+        <doxia-sink-api.version>2.0.0-M7</doxia-sink-api.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <elasticsearch.version>7.17.10</elasticsearch.version>
+        <elasticsearch.version>7.17.13</elasticsearch.version>
         <feign.version>11.8</feign.version>
         <httpclient5.version>5.2.1</httpclient5.version>
-        <guava.version>32.0.1-jre</guava.version>
+        <guava.version>32.1.2-jre</guava.version>
         <jackson.version>2.15.2</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-        <junit-jupiter.version>5.9.3</junit-jupiter.version>
-        <junit-pioneer.version>2.0.1</junit-pioneer.version>
-        <kotlin-extensions.version>1.3.8</kotlin-extensions.version>
-        <kotlinx-coroutines.version>1.7.1</kotlinx-coroutines.version>
-        <logback.version>1.4.7</logback.version>
-        <maven-artifact.version>3.9.2</maven-artifact.version>
-        <maven-core.version>3.9.2</maven-core.version>
+        <junit-jupiter.version>5.10.0</junit-jupiter.version>
+        <junit-pioneer.version>2.1.0</junit-pioneer.version>
+        <kotlin-extensions.version>1.3.10</kotlin-extensions.version>
+        <kotlinx-coroutines.version>1.7.3</kotlinx-coroutines.version>
+        <logback.version>1.4.11</logback.version>
+        <maven-artifact.version>3.9.4</maven-artifact.version>
+        <maven-core.version>3.9.3</maven-core.version>
         <maven-model.version>${maven-core.version}</maven-model.version>
         <maven-plugin-annotations.version>3.9.0</maven-plugin-annotations.version>
         <maven-plugin-api.version>${maven-core.version}</maven-plugin-api.version>
-        <maven-reporting-api.version>4.0.0-M6</maven-reporting-api.version>
-        <maven-reporting-impl.version>4.0.0-M8</maven-reporting-impl.version>
+        <maven-reporting-api.version>4.0.0-M7</maven-reporting-api.version>
+        <maven-reporting-impl.version>4.0.0-M9</maven-reporting-impl.version>
         <maven-shared-utils.version>3.4.2</maven-shared-utils.version>
-        <micrometer.version>1.11.0</micrometer.version>
-        <mockito.version>5.3.1</mockito.version>
-        <mockito-kotlin.version>5.0.0</mockito-kotlin.version>
-        <mongodb.version>4.9.1</mongodb.version>
+        <micrometer.version>1.11.3</micrometer.version>
+        <mockito.version>5.5.0</mockito.version>
+        <mockito-kotlin.version>5.1.0</mockito-kotlin.version>
+        <mongodb.version>4.10.2</mongodb.version>
         <plexus-classworlds.version>2.7.0</plexus-classworlds.version>
         <plexus-component-annotations.version>2.1.1</plexus-component-annotations.version>
         <plexus-utils.version>4.0.0</plexus-utils.version>
         <reactor.version>2020.0.15</reactor.version>
         <resilience4j.version>1.7.0</resilience4j.version>
-        <slf4j.version>2.0.7</slf4j.version>
-        <spring-batch.version>5.0.2</spring-batch.version>
-        <spring-boot.version>3.0.6</spring-boot.version>
+        <slf4j.version>2.0.9</slf4j.version>
+        <spring-batch.version>5.0.3</spring-batch.version>
+        <spring-boot.version>3.1.3</spring-boot.version>
         <spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
-        <spring-framework.version>6.0.9</spring-framework.version>
-        <spring-integration.version>6.1.0</spring-integration.version>
-        <spring-security.version>6.1.0</spring-security.version>
+        <spring-framework.version>6.0.11</spring-framework.version>
+        <spring-integration.version>6.1.2</spring-integration.version>
+        <spring-security.version>6.1.3</spring-security.version>
         <springdoc-openapi.version>1.7.0</springdoc-openapi.version>
         <svnkit.version>1.10.11</svnkit.version>
         <velocity.version>1.7</velocity.version>

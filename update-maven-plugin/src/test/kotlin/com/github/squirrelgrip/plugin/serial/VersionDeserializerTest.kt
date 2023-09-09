@@ -15,7 +15,7 @@ class VersionDeserializerTest {
         @JvmStatic
         @BeforeAll
         fun beforeAll() {
-            Xml.xmlMapper.registerModule(
+            Xml.objectMapper.registerModule(
                 SimpleModule().apply {
                     addDeserializer(
                         Version::class.java,

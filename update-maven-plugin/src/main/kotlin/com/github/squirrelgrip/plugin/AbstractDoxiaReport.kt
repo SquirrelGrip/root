@@ -41,7 +41,7 @@ abstract class AbstractDoxiaReport : AbstractMavenReport() {
     }
 
     init {
-        Xml.xmlMapper.registerModule(
+        Xml.objectMapper.registerModule(
             SimpleModule().apply {
                 addDeserializer(
                     Version::class.java,
