@@ -5,7 +5,7 @@ import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import com.github.squirrelgrip.plugin.resolver.AbstractMavenDependencyResolver
 import com.github.squirrelgrip.plugin.resolver.DependencyResolver
 import com.github.squirrelgrip.plugin.resolver.VersionsDependencyResolver
-import org.apache.maven.artifact.repository.ArtifactRepository
+import org.apache.maven.artifact.repository.MavenArtifactRepository
 import org.apache.maven.execution.MavenSession
 import org.apache.maven.plugins.annotations.Parameter
 import org.eclipse.aether.RepositorySystemSession
@@ -30,10 +30,10 @@ abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     lateinit var repositorySystemSession: RepositorySystemSession
 
     @Parameter(defaultValue = "\${project.remoteArtifactRepositories}", readonly = true)
-    lateinit var remoteRepositories: List<ArtifactRepository>
+    lateinit var remoteRepositories: List<MavenArtifactRepository>
 
     @Parameter(defaultValue = "\${project.pluginArtifactRepositories}", readonly = true)
-    lateinit var pluginArtifactRepositories: List<ArtifactRepository>
+    lateinit var pluginArtifactRepositories: List<MavenArtifactRepository>
 
     @Parameter(defaultValue = "\${session}", readonly = true)
     lateinit var session: MavenSession

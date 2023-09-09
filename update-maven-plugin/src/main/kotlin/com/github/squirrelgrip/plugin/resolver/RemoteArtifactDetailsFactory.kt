@@ -15,9 +15,10 @@ import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactoryBuilder
 import org.apache.hc.core5.http.ClassicHttpResponse
 import org.apache.hc.core5.http.HttpEntity
 import org.apache.hc.core5.http.io.HttpClientResponseHandler
-import org.apache.maven.artifact.repository.ArtifactRepository
+import org.apache.maven.artifact.repository.MavenArtifactRepository
 import org.apache.maven.plugin.logging.Log
 import org.eclipse.aether.repository.LocalRepository
+import org.eclipse.aether.repository.RemoteRepository
 import java.io.File
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -28,7 +29,7 @@ class RemoteArtifactDetailsFactory(
     localRepository: LocalRepository,
     ignoredVersions: List<IgnoredVersion> = emptyList(),
     log: Log,
-    val remoteRepositories: List<ArtifactRepository>
+    val remoteRepositories: List<MavenArtifactRepository>
 ) : AbstractArtifactDetailsFactory(localRepository, log, ignoredVersions) {
     companion object {
         private val sslContext = SSLContext.getInstance("TLSv1.2").also {
@@ -66,7 +67,7 @@ class RemoteArtifactDetailsFactory(
 
     private fun getHttpClientResponseHandler(
         artifact: ArtifactDetails,
-        repository: ArtifactRepository
+        repository: MavenArtifactRepository
     ): HttpClientResponseHandler<MavenMetaData> =
         object : AbstractHttpClientResponseHandler<MavenMetaData>() {
             override fun handleResponse(response: ClassicHttpResponse?): MavenMetaData =

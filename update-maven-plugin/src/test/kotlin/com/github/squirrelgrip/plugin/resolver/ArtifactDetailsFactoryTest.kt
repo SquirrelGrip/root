@@ -12,6 +12,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.codehaus.plexus.logging.Logger.LEVEL_DISABLED
 import org.codehaus.plexus.logging.console.ConsoleLogger
 import org.eclipse.aether.repository.LocalRepository
+import org.eclipse.aether.repository.RemoteRepository
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -22,7 +23,7 @@ internal class ArtifactDetailsFactoryTest {
 
     @Test
     fun getRemoteAvailableVersions() {
-        val repository: ArtifactRepository = MavenArtifactRepository("remote", "https://repo1.maven.org/maven2", DefaultRepositoryLayout(), ArtifactRepositoryPolicy(true, null, null), ArtifactRepositoryPolicy(true, null, null))
+        val repository = MavenArtifactRepository("remote", "https://repo1.maven.org/maven2", DefaultRepositoryLayout(), ArtifactRepositoryPolicy(true, null, null), ArtifactRepositoryPolicy(true, null, null))
         val testSubject = RemoteArtifactDetailsFactory(
             localRepository,
             emptyList(),
