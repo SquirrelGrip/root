@@ -6,7 +6,6 @@ import org.apache.maven.artifact.repository.MavenArtifactRepository
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
 import org.eclipse.aether.repository.LocalRepository
-import org.eclipse.aether.repository.RemoteRepository
 
 class ProjectDependencyResolver(
     localRepository: LocalRepository,

@@ -1,6 +1,5 @@
 package com.github.squirrelgrip.plugin.model
 
-import com.github.squirrelgrip.plugin.resolver.AbstractArtifactDetailsFactory
 import org.apache.maven.project.MavenProject
 
 data class Version(

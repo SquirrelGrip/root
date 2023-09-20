@@ -9,7 +9,7 @@ import org.apache.maven.artifact.repository.MavenArtifactRepository
 import org.apache.maven.execution.MavenSession
 import org.apache.maven.plugins.annotations.Parameter
 import org.eclipse.aether.RepositorySystemSession
-import java.util.*
+import java.util.Locale
 
 abstract class AbstractUpdateReport : AbstractDoxiaReport() {
     companion object {

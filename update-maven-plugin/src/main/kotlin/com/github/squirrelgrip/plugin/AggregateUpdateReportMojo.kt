@@ -5,8 +5,6 @@ import com.github.squirrelgrip.plugin.resolver.SessionDependencyResolver
 import org.apache.maven.plugins.annotations.LifecyclePhase
 import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.plugins.annotations.ResolutionScope
-import org.eclipse.aether.RepositorySystemSession
-import org.eclipse.aether.repository.RemoteRepository
 import java.util.Locale
 
 @Mojo(
