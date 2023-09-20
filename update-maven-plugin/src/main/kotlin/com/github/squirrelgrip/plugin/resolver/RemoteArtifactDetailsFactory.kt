@@ -2,8 +2,8 @@ package com.github.squirrelgrip.plugin.resolver
 
 import com.github.squirrelgrip.extension.xml.toInstance
 import com.github.squirrelgrip.extension.xml.toXml
-import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import com.github.squirrelgrip.plugin.model.ArtifactDetails
+import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import com.github.squirrelgrip.plugin.model.MavenMetaData
 import com.github.squirrelgrip.plugin.model.Version
 import com.github.squirrelgrip.plugin.model.Versioning
@@ -18,7 +18,6 @@ import org.apache.hc.core5.http.io.HttpClientResponseHandler
 import org.apache.maven.artifact.repository.MavenArtifactRepository
 import org.apache.maven.plugin.logging.Log
 import org.eclipse.aether.repository.LocalRepository
-import org.eclipse.aether.repository.RemoteRepository
 import java.io.File
 import java.security.SecureRandom
 import java.security.cert.X509Certificate

@@ -6,7 +6,7 @@ import com.github.squirrelgrip.plugin.model.Version
 import com.github.squirrelgrip.plugin.serial.VersionDeserializer
 import org.apache.maven.reporting.AbstractMavenReport
 import org.apache.maven.reporting.MavenReportException
-import java.util.*
+import java.util.Locale
 
 abstract class AbstractDoxiaReport : AbstractMavenReport() {
     abstract val reportHeading: String
