@@ -69,6 +69,7 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--@formatter:off-->
             <dependency><groupId>ch.qos.logback</groupId><artifactId>logback-classic</artifactId><version>${logback.version}</version></dependency>
             <dependency><groupId>com.fasterxml.jackson</groupId><artifactId>jackson-bom</artifactId><version>${jackson.version}</version><scope>import</scope><type>pom</type><exclusions><exclusion><groupId>com.fasterxml.jackson.module</groupId><artifactId>jackson-module-scala_2.11</artifactId></exclusion><exclusion><groupId>com.fasterxml.jackson.module</groupId><artifactId>jackson-module-scala_2.12</artifactId></exclusion><exclusion><groupId>com.fasterxml.jackson.module</groupId><artifactId>jackson-module-scala_2.13</artifactId></exclusion></exclusions></dependency>
             <dependency><groupId>com.flipkart.zjsonpatch</groupId><artifactId>zjsonpatch</artifactId><version>${zjsonpatch.version}</version></dependency>
@@ -124,6 +125,7 @@
             <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-bom</artifactId><version>${spring-security.version}</version><type>pom</type><scope>import</scope></dependency>
             <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-bom</artifactId><version>${spring-boot.version}</version></dependency>
             <dependency><groupId>org.tmatesoft.svnkit</groupId><artifactId>svnkit</artifactId><version>${svnkit.version}</version></dependency>
+            <!--@formatter:on-->
         </dependencies>
     </dependencyManagement>
 </project>

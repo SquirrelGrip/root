@@ -78,44 +78,127 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin><groupId>com.github.eirslett</groupId><artifactId>frontend-maven-plugin</artifactId><version>${frontend-maven-plugin.version}</version><executions><execution><id>install node and yarn</id><goals><goal>install-node-and-yarn</goal></goals><phase>generate-resources</phase></execution><execution><id>yarn install</id><goals><goal>yarn</goal></goals><configuration><arguments>install</arguments></configuration></execution></executions><configuration><nodeVersion>${node.version}</nodeVersion><yarnVersion>${yarn.version}</yarnVersion></configuration></plugin>
-                <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version><configuration><allowSnapshots>false</allowSnapshots><username>${env.GIT_USER}</username><password>${env.GIT_TOKEN}</password><pullMaster>true</pullMaster><pullDevelop>true</pullDevelop><pushReleases>true</pushReleases><pushHotfixes>true</pushHotfixes><scmCommentPrefix>(CI):</scmCommentPrefix><useReleaseProfile>false</useReleaseProfile></configuration></plugin>
-                <plugin><groupId>org.antlr</groupId><artifactId>antlr4-maven-plugin</artifactId><version>${antlr4-maven-plugin.version}</version><executions><execution><phase>generate-sources</phase><goals><goal>antlr4</goal></goals></execution></executions></plugin>
+                <!--@formatter:off-->
+                <plugin><groupId>com.github.eirslett</groupId><artifactId>frontend-maven-plugin</artifactId><version>${frontend-maven-plugin.version}</version>
+                    <executions>
+                        <execution><id>install node and yarn</id><goals><goal>install-node-and-yarn</goal></goals><phase>generate-resources</phase></execution>
+                        <execution><id>yarn install</id><goals><goal>yarn</goal></goals><configuration><arguments>install</arguments></configuration></execution>
+                    </executions>
+                    <configuration>
+                        <nodeVersion>${node.version}</nodeVersion>
+                        <yarnVersion>${yarn.version}</yarnVersion>
+                    </configuration>
+                </plugin>
+                <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version>
+                    <configuration>
+                        <allowSnapshots>false</allowSnapshots>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <username>${env.GIT_USER}</username>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <password>${env.GIT_TOKEN}</password>
+                        <pullMaster>true</pullMaster>
+                        <pullDevelop>true</pullDevelop>
+                        <pushReleases>true</pushReleases>
+                        <pushHotfixes>true</pushHotfixes>
+                        <scmCommentPrefix>(CI):</scmCommentPrefix>
+                        <useReleaseProfile>false</useReleaseProfile>
+                    </configuration>
+                </plugin>
+                <plugin><groupId>org.antlr</groupId><artifactId>antlr4-maven-plugin</artifactId><version>${antlr4-maven-plugin.version}</version>
+                    <executions><execution><phase>generate-sources</phase><goals><goal>antlr4</goal></goals></execution></executions>
+                </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-antrun-plugin</artifactId><version>${maven-antrun-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-archetype-plugin</artifactId><version>${maven-archetype-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-assembly-plugin</artifactId><version>${maven-assembly-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-clean-plugin</artifactId><version>${maven-clean-plugin.version}</version></plugin>
-                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>${maven-compiler-plugin.version}</version><configuration><release>11</release></configuration></plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>${maven-compiler-plugin.version}</version>
+                    <configuration><release>11</release></configuration>
+                </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId><version>${maven-dependency-plugin.version}</version></plugin>
-                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId><version>${maven-deploy-plugin.version}</version><configuration><deployAtEnd>true</deployAtEnd><retryFailedDeploymentCount>3</retryFailedDeploymentCount></configuration></plugin>
-                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-enforcer-plugin</artifactId><version>${maven-enforcer-plugin.version}</version><dependencies><dependency><groupId>org.codehaus.mojo</groupId><artifactId>extra-enforcer-rules</artifactId><version>${extra-enforcer-rules.version}</version></dependency></dependencies><configuration><rules><banDuplicatePomDependencyVersions /><bannedDependencies><searchTransitive>true</searchTransitive><excludes><exclude>org.apache.logging.log4j</exclude></excludes></bannedDependencies><dependencyConvergence /><requireJavaVersion><version>11</version></requireJavaVersion><requireMavenVersion><version>3.8.4</version></requireMavenVersion></rules><fail>true</fail></configuration></plugin>
-                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>${maven-gpg-plugin.version}</version><configuration><executable>gpg</executable><keyname>${env.GPG_KEYNAME}</keyname><passphrase>${env.GPG_PASSPHRASE}</passphrase></configuration><executions><execution><id>sign-artifacts</id><phase>deploy</phase><goals><goal>sign</goal></goals></execution></executions></plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId><version>${maven-deploy-plugin.version}</version>
+                    <configuration><deployAtEnd>true</deployAtEnd><retryFailedDeploymentCount>3</retryFailedDeploymentCount></configuration></plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-enforcer-plugin</artifactId><version>${maven-enforcer-plugin.version}</version>
+                    <dependencies><dependency><groupId>org.codehaus.mojo</groupId><artifactId>extra-enforcer-rules</artifactId><version>${extra-enforcer-rules.version}</version></dependency></dependencies>
+                    <configuration>
+                        <rules>
+                            <banDuplicatePomDependencyVersions />
+                            <bannedDependencies><searchTransitive>true</searchTransitive><excludes><exclude>org.apache.logging.log4j</exclude></excludes></bannedDependencies>
+                            <dependencyConvergence />
+                            <requireJavaVersion><version>11</version></requireJavaVersion>
+                            <requireMavenVersion><version>3.8.4</version></requireMavenVersion>
+                        </rules>
+                        <fail>true</fail>
+                    </configuration>
+                </plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>${maven-gpg-plugin.version}</version>
+                    <configuration>
+                        <executable>gpg</executable>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <keyname>${env.GPG_KEYNAME}</keyname>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <passphrase>${env.GPG_PASSPHRASE}</passphrase>
+                    </configuration>
+                    <executions><execution><id>sign-artifacts</id><phase>deploy</phase><goals><goal>sign</goal></goals></execution></executions>
+                </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-install-plugin</artifactId><version>${maven-install-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>${maven-jar-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jxr-plugin</artifactId><version>${maven-jxr-plugin.version}</version></plugin>
-                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-plugin-plugin</artifactId><version>${maven-plugin-plugin.version}</version><executions><execution><id>default-descriptor</id><phase>process-classes</phase></execution><execution><id>help-goal</id><goals><goal>helpmojo</goal></goals></execution></executions></plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-plugin-plugin</artifactId><version>${maven-plugin-plugin.version}</version>
+                    <executions><execution><id>default-descriptor</id><phase>process-classes</phase></execution><execution><id>help-goal</id><goals><goal>helpmojo</goal></goals></execution></executions>
+                </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-project-info-reports-plugin</artifactId><version>${maven-project-info-reports-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-release-plugin</artifactId><version>${maven-release-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>${maven-resources-plugin.version}</version></plugin>
-                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-scm-plugin</artifactId><version>${maven-scm-plugin.version}</version><configuration><providerImplementations><git>jgit</git></providerImplementations><username>${env.GIT_USER}</username><password>${env.GIT_TOKEN}</password></configuration><dependencies><dependency><groupId>org.apache.maven.scm</groupId><artifactId>maven-scm-provider-jgit</artifactId><version>${maven-scm-plugin.version}</version></dependency></dependencies></plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-scm-plugin</artifactId><version>${maven-scm-plugin.version}</version>
+                    <configuration><providerImplementations><git>jgit</git></providerImplementations><username>${env.GIT_USER}</username><password>${env.GIT_TOKEN}</password></configuration>
+                    <dependencies><dependency><groupId>org.apache.maven.scm</groupId><artifactId>maven-scm-provider-jgit</artifactId><version>${maven-scm-plugin.version}</version></dependency></dependencies>
+                </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-site-plugin</artifactId><version>${maven-site-plugin.version}</version></plugin>
-                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version><executions><execution><id>attach-sources</id><phase>package</phase><goals><goal>jar</goal></goals></execution></executions></plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version>
+                    <executions><execution><id>attach-sources</id><phase>package</phase><goals><goal>jar</goal></goals></execution></executions></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>${maven-surefire-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-report-plugin</artifactId><version>${maven-surefire-plugin.version}</version></plugin>
                 <plugin><groupId>org.codehaus.mojo</groupId><artifactId>tidy-maven-plugin</artifactId><version>${tidy-maven-plugin.version}</version></plugin>
-                <plugin><groupId>org.codehaus.mojo</groupId><artifactId>versions-maven-plugin</artifactId><version>${versions-maven-plugin.version}</version><configuration><processPlugins>false</processPlugins><processDependencies>false</processDependencies><formats>xml</formats></configuration></plugin>
-                <plugin><groupId>org.eclipse.sisu</groupId><artifactId>sisu-maven-plugin</artifactId><version>${sisu-maven-plugin.version}</version><executions><execution><id>generate-index</id><goals><goal>main-index</goal></goals></execution></executions></plugin>
+                <plugin><groupId>org.codehaus.mojo</groupId><artifactId>versions-maven-plugin</artifactId><version>${versions-maven-plugin.version}</version>
+                    <configuration><processPlugins>false</processPlugins><processDependencies>false</processDependencies><formats>xml</formats></configuration></plugin>
+                <plugin><groupId>org.eclipse.sisu</groupId><artifactId>sisu-maven-plugin</artifactId><version>${sisu-maven-plugin.version}</version>
+                    <executions><execution><id>generate-index</id><goals><goal>main-index</goal></goals></execution></executions>
+                </plugin>
                 <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>${jacoco-maven-plugin.version}</version></plugin>
-                <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version><executions><execution><id>javadocJar</id><phase>deploy</phase><goals><goal>javadocJar</goal></goals></execution></executions></plugin>
-                <plugin><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-plugin</artifactId><version>${kotlin-maven-plugin.version}</version><configuration><args><arg>-Xjsr305=strict</arg></args><jvmTarget>${maven.compiler.target}</jvmTarget><compilerPlugins><plugin>spring</plugin></compilerPlugins></configuration><dependencies><dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-allopen</artifactId><version>${kotlin.version}</version></dependency></dependencies><executions><execution><id>compile</id><phase>compile</phase><goals><goal>compile</goal></goals></execution><execution><id>test-compile</id><phase>test-compile</phase><goals><goal>test-compile</goal></goals></execution></executions></plugin><plugin><groupId>org.pitest</groupId><artifactId>pitest-maven</artifactId><version>${pitest-maven-plugin.version}</version><dependencies><dependency><groupId>org.pitest</groupId><artifactId>pitest-junit5-plugin</artifactId><version>${pitest-junit5-plugin.version}</version></dependency></dependencies></plugin>
+                <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version>
+                    <executions><execution><id>javadocJar</id><phase>deploy</phase><goals><goal>javadocJar</goal></goals></execution></executions>
+                </plugin>
+                <plugin><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-plugin</artifactId><version>${kotlin-maven-plugin.version}</version>
+                    <configuration>
+                        <args><arg>-Xjsr305=strict</arg></args>
+                        <jvmTarget>${maven.compiler.target}</jvmTarget>
+                        <compilerPlugins><plugin>spring</plugin></compilerPlugins></configuration>
+                    <dependencies><dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-allopen</artifactId><version>${kotlin.version}</version></dependency></dependencies>
+                    <executions>
+                        <execution><id>compile</id><phase>compile</phase><goals><goal>compile</goal></goals></execution>
+                        <execution><id>test-compile</id><phase>test-compile</phase><goals><goal>test-compile</goal></goals></execution>
+                    </executions>
+                </plugin>
+                <plugin><groupId>org.pitest</groupId><artifactId>pitest-maven</artifactId><version>${pitest-maven-plugin.version}</version>
+                    <dependencies><dependency><groupId>org.pitest</groupId><artifactId>pitest-junit5-plugin</artifactId><version>${pitest-junit5-plugin.version}</version></dependency></dependencies>
+                </plugin>
                 <plugin><groupId>org.sonarsource.scanner.maven</groupId><artifactId>sonar-maven-plugin</artifactId><version>${sonar-maven-plugin.version}</version></plugin>
-                <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version><extensions>true</extensions><configuration><serverId>ossrh</serverId><nexusUrl>https://oss.sonatype.org/</nexusUrl><autoReleaseAfterClose>true</autoReleaseAfterClose></configuration></plugin>
+                <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
+                </plugin>
                 <plugin><groupId>org.springdoc</groupId><artifactId>springdoc-openapi-maven-plugin</artifactId><version>${springdoc-openapi-maven-plugin.version}</version></plugin>
                 <plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId><version>${spring-boot-maven-plugin.version}</version></plugin>
+                <!--@formatter:on-->
             </plugins>
         </pluginManagement>
 
         <plugins>
+            <!--@formatter:off-->
             <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-scm-plugin</artifactId><version>${maven-scm-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version></plugin>
@@ -129,19 +212,37 @@
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>${maven-gpg-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId><version>${maven-deploy-plugin.version}</version></plugin>
             <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version></plugin>
+            <!--@formatter:on-->
         </plugins>
     </build>
 
     <reporting>
         <plugins>
-            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId><version>${maven-dependency-plugin.version}</version><reportSets><reportSet><reports><report>analyze-report</report></reports></reportSet></reportSets></plugin>
+            <!--@formatter:off-->
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId><version>${maven-dependency-plugin.version}</version>
+                <reportSets>
+                    <reportSet><reports><report>analyze-report</report></reports></reportSet>
+                </reportSets>
+            </plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jxr-plugin</artifactId><version>${maven-jxr-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-report-plugin</artifactId><version>${maven-surefire-plugin.version}</version></plugin>
             <plugin><groupId>org.codehaus.mojo</groupId><artifactId>clirr-maven-plugin</artifactId><version>${clirr-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.codehaus.mojo</groupId><artifactId>javancss-maven-plugin</artifactId><version>${javancss-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.codehaus.mojo</groupId><artifactId>jdepend-maven-plugin</artifactId><version>${jdepend-maven-plugin.version}</version></plugin>
-            <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>${jacoco-maven-plugin.version}</version><reportSets><reportSet><reports><report>report</report></reports></reportSet></reportSets></plugin>
-            <plugin><groupId>org.owasp</groupId><artifactId>dependency-check-maven</artifactId><version>${dependency-check-maven.version}</version><reportSets><reportSet><reports><report>aggregate</report></reports></reportSet></reportSets><configuration><autoUpdate>false</autoUpdate></configuration></plugin>
+            <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>${jacoco-maven-plugin.version}</version>
+                <reportSets>
+                    <reportSet><reports><report>report</report></reports></reportSet>
+                </reportSets>
+            </plugin>
+            <plugin><groupId>org.owasp</groupId><artifactId>dependency-check-maven</artifactId><version>${dependency-check-maven.version}</version>
+                <reportSets>
+                    <reportSet><reports><report>aggregate</report></reports></reportSet>
+                </reportSets>
+                <configuration>
+                    <autoUpdate>true</autoUpdate>
+                </configuration>
+                <!--@formatter:on-->
+            </plugin>
         </plugins>
     </reporting>
 
