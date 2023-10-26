@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.3.20</version>
+        <version>1.3.26</version>
         <relativePath>../</relativePath>
     </parent>
     <artifactId>dependencies</artifactId>
@@ -18,37 +18,37 @@
         <awaitility.version>4.2.0</awaitility.version>
         <bouncycastle.version>1.70</bouncycastle.version>
         <brave.version>5.13.7</brave.version>
-        <byte-buddy.version>1.14.8</byte-buddy.version>
+        <byte-buddy.version>1.14.9</byte-buddy.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-lang3.version>3.13.0</commons-lang3.version>
         <commons-logging.version>1.2</commons-logging.version>
         <commons-collections.version>4.4</commons-collections.version>
-        <doxia.version>2.0.0-M11</doxia.version>
-        <doxia-sink-api.version>2.0.0-M7</doxia-sink-api.version>
+        <doxia.version>2.0.0-M13</doxia.version>
+        <doxia-sink-api.version>2.0.0-M8</doxia-sink-api.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <elasticsearch.version>7.17.13</elasticsearch.version>
+        <elasticsearch.version>7.17.14</elasticsearch.version>
         <feign.version>11.8</feign.version>
         <httpclient5.version>5.2.1</httpclient5.version>
-        <guava.version>32.1.2-jre</guava.version>
-        <jackson.version>2.15.2</jackson.version>
+        <guava.version>32.1.3-jre</guava.version>
+        <jackson.version>2.15.3</jackson.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <junit-jupiter.version>5.10.0</junit-jupiter.version>
         <junit-pioneer.version>2.1.0</junit-pioneer.version>
         <kotlin-extensions.version>1.3.11</kotlin-extensions.version>
         <kotlinx-coroutines.version>1.7.3</kotlinx-coroutines.version>
         <logback.version>1.4.11</logback.version>
-        <maven-artifact.version>3.9.4</maven-artifact.version>
-        <maven-core.version>3.9.4</maven-core.version>
+        <maven-artifact.version>3.9.5</maven-artifact.version>
+        <maven-core.version>3.9.5</maven-core.version>
         <maven-model.version>${maven-core.version}</maven-model.version>
-        <maven-plugin-annotations.version>3.9.0</maven-plugin-annotations.version>
+        <maven-plugin-annotations.version>3.10.1</maven-plugin-annotations.version>
         <maven-plugin-api.version>${maven-core.version}</maven-plugin-api.version>
-        <maven-reporting-api.version>4.0.0-M7</maven-reporting-api.version>
-        <maven-reporting-impl.version>4.0.0-M9</maven-reporting-impl.version>
+        <maven-reporting-api.version>4.0.0-M8</maven-reporting-api.version>
+        <maven-reporting-impl.version>4.0.0-M11</maven-reporting-impl.version>
         <maven-shared-utils.version>3.4.2</maven-shared-utils.version>
-        <micrometer.version>1.11.4</micrometer.version>
-        <mockito.version>5.5.0</mockito.version>
+        <micrometer.version>1.11.5</micrometer.version>
+        <mockito.version>5.6.0</mockito.version>
         <mockito-kotlin.version>5.1.0</mockito-kotlin.version>
-        <mongodb.version>4.10.2</mongodb.version>
+        <mongodb.version>4.11.0</mongodb.version>
         <plexus-classworlds.version>2.7.0</plexus-classworlds.version>
         <plexus-component-annotations.version>2.1.1</plexus-component-annotations.version>
         <plexus-utils.version>4.0.0</plexus-utils.version>
@@ -56,11 +56,11 @@
         <resilience4j.version>1.7.0</resilience4j.version>
         <slf4j.version>2.0.9</slf4j.version>
         <spring-batch.version>5.0.3</spring-batch.version>
-        <spring-boot.version>3.1.3</spring-boot.version>
+        <spring-boot.version>3.1.4</spring-boot.version>
         <spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
-        <spring-framework.version>6.0.12</spring-framework.version>
-        <spring-integration.version>6.1.3</spring-integration.version>
-        <spring-security.version>6.1.4</spring-security.version>
+        <spring-framework.version>6.0.13</spring-framework.version>
+        <spring-integration.version>6.1.4</spring-integration.version>
+        <spring-security.version>6.1.5</spring-security.version>
         <springdoc-openapi.version>1.7.0</springdoc-openapi.version>
         <svnkit.version>1.10.11</svnkit.version>
         <velocity.version>1.7</velocity.version>
@@ -69,6 +69,7 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--@formatter:off-->
             <dependency><groupId>ch.qos.logback</groupId><artifactId>logback-classic</artifactId><version>${logback.version}</version></dependency>
             <dependency><groupId>com.fasterxml.jackson</groupId><artifactId>jackson-bom</artifactId><version>${jackson.version}</version><scope>import</scope><type>pom</type><exclusions><exclusion><groupId>com.fasterxml.jackson.module</groupId><artifactId>jackson-module-scala_2.11</artifactId></exclusion><exclusion><groupId>com.fasterxml.jackson.module</groupId><artifactId>jackson-module-scala_2.12</artifactId></exclusion><exclusion><groupId>com.fasterxml.jackson.module</groupId><artifactId>jackson-module-scala_2.13</artifactId></exclusion></exclusions></dependency>
             <dependency><groupId>com.flipkart.zjsonpatch</groupId><artifactId>zjsonpatch</artifactId><version>${zjsonpatch.version}</version></dependency>
@@ -124,6 +125,7 @@
             <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-bom</artifactId><version>${spring-security.version}</version><type>pom</type><scope>import</scope></dependency>
             <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-bom</artifactId><version>${spring-boot.version}</version></dependency>
             <dependency><groupId>org.tmatesoft.svnkit</groupId><artifactId>svnkit</artifactId><version>${svnkit.version}</version></dependency>
+            <!--@formatter:on-->
         </dependencies>
     </dependencyManagement>
 </project>
