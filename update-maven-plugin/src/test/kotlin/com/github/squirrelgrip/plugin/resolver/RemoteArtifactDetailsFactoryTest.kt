@@ -21,8 +21,10 @@ import java.io.File
 internal class RemoteArtifactDetailsFactoryTest {
     @Mock
     lateinit var localRepository: LocalRepository
+
     @Mock
     lateinit var remoteRepository: MavenArtifactRepository
+
     @Mock
     lateinit var log: Log
 
@@ -30,15 +32,18 @@ internal class RemoteArtifactDetailsFactoryTest {
     fun getAvailableVersions() {
         given(localRepository.basedir).willReturn(File("${System.getProperty("user.home")}/.m2/repository"))
         given(remoteRepository.url).willReturn("https://repo1.maven.org/maven2")
-        given(remoteRepository.releases).willReturn(ArtifactRepositoryPolicy(true, UPDATE_POLICY_DAILY, CHECKSUM_POLICY_IGNORE))
+        given(
+            remoteRepository.releases
+        ).willReturn(ArtifactRepositoryPolicy(true, UPDATE_POLICY_DAILY, CHECKSUM_POLICY_IGNORE))
         val artifact = ArtifactDetails("com.google.guava", "guava", Version("30.1-jre"))
 
-        val testSubject = RemoteArtifactDetailsFactory(
-            localRepository,
-            listOf(IgnoredVersion("com.google.guava", "guava", ".*-android")),
-            log,
-            listOf(remoteRepository)
-        )
+        val testSubject =
+            RemoteArtifactDetailsFactory(
+                localRepository,
+                listOf(IgnoredVersion("com.google.guava", "guava", ".*-android")),
+                log,
+                listOf(remoteRepository)
+            )
 
         val availableVersions = testSubject.getAvailableVersions(artifact)
 
@@ -53,12 +58,13 @@ internal class RemoteArtifactDetailsFactoryTest {
 
     @Test
     fun getUrl() {
-        val testSubject = RemoteArtifactDetailsFactory(
-            localRepository,
-            listOf(IgnoredVersion("com.google.guava", "guava", ".*-android")),
-            log,
-            listOf(remoteRepository)
-        )
+        val testSubject =
+            RemoteArtifactDetailsFactory(
+                localRepository,
+                listOf(IgnoredVersion("com.google.guava", "guava", ".*-android")),
+                log,
+                listOf(remoteRepository)
+            )
         assertThat(testSubject.getUrl("http://0.0.0.0/", "org/something/maven-metadata.xml")).isEqualTo(
             "http://0.0.0.0/org/something/maven-metadata.xml"
         )

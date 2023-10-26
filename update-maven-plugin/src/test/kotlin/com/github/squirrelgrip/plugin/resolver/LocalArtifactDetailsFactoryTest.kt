@@ -4,7 +4,6 @@ import com.github.squirrelgrip.plugin.model.ArtifactDetails
 import com.github.squirrelgrip.plugin.model.IgnoredVersion
 import com.github.squirrelgrip.plugin.model.Version
 import org.apache.maven.plugin.logging.Log
-import org.assertj.core.api.Assertions.assertThat
 import org.eclipse.aether.repository.LocalRepository
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -29,11 +28,12 @@ internal class LocalArtifactDetailsFactoryTest {
         given(localRepository.basedir).willReturn(File("${System.getProperty("user.home")}/.m2/repository"))
         val artifact = ArtifactDetails(guavaGroupId, guavaArtifactId, Version("30.1-jre"))
 
-        val testSubject = LocalArtifactDetailsFactory(
-            localRepository,
-            listOf(IgnoredVersion(guavaGroupId, guavaArtifactId, ".*-android")),
-            log
-        )
+        val testSubject =
+            LocalArtifactDetailsFactory(
+                localRepository,
+                listOf(IgnoredVersion(guavaGroupId, guavaArtifactId, ".*-android")),
+                log
+            )
         val availableVersions = testSubject.getAvailableVersions(artifact)
 
 //        assertThat(availableVersions).contains(Version("31.0.1-jre"))
