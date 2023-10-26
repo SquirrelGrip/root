@@ -40,7 +40,7 @@
         <maven-artifact.version>3.9.5</maven-artifact.version>
         <maven-core.version>3.9.5</maven-core.version>
         <maven-model.version>${maven-core.version}</maven-model.version>
-        <maven-plugin-annotations.version>3.9.0</maven-plugin-annotations.version>
+        <maven-plugin-annotations.version>3.10.1</maven-plugin-annotations.version>
         <maven-plugin-api.version>${maven-core.version}</maven-plugin-api.version>
         <maven-reporting-api.version>4.0.0-M8</maven-reporting-api.version>
         <maven-reporting-impl.version>4.0.0-M11</maven-reporting-impl.version>
