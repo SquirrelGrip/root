@@ -146,7 +146,9 @@
                     <configuration>
                         <rules>
                             <banDuplicatePomDependencyVersions />
-                            <bannedDependencies><searchTransitive>true</searchTransitive><excludes><exclude>org.apache.logging.log4j</exclude></excludes></bannedDependencies>
+                            <bannedDependencies><searchTransitive>true</searchTransitive>
+                                <excludes><exclude>org.apache.logging.log4j:*:[2.17]</exclude></excludes>
+                            </bannedDependencies>
                             <dependencyConvergence />
                             <requireJavaVersion><version>11</version></requireJavaVersion>
                             <requireMavenVersion><version>3.8.4</version></requireMavenVersion>
@@ -265,7 +267,7 @@
                     <reportSet><reports><report>aggregate</report></reports></reportSet>
                 </reportSets>
                 <configuration>
-                    <autoUpdate>true</autoUpdate>
+                    <autoUpdate>false</autoUpdate>
                 </configuration>
             </plugin>
         </plugins>
