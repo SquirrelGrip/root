@@ -1,3 +1,6 @@
 [submodule "dependencies"]
 	path = dependencies
 	url = https://github.com/SquirrelGrip/dependencies.git
+[submodule "maven-plugins"]
+	path = maven-plugins
+	url = https://github.com/SquirrelGrip/maven-plugins.git
