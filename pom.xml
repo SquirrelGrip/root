@@ -117,6 +117,7 @@
                 <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version>
                     <configuration>
                         <allowSnapshots>false</allowSnapshots>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
                         <!--suppress UnresolvedMavenProperty -->
                         <username>${env.GIT_USER}</username>
                         <!--suppress UnresolvedMavenProperty -->
