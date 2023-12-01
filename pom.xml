@@ -126,6 +126,7 @@
                         <installProject>true</installProject>
                         <verbose>true</verbose>
                         <skipReleaseMergeProdBranch>true</skipReleaseMergeProdBranch>
+                        <skipTag>true</skipTag>
 <!--                        <gitFlowConfig>-->
 <!--                            <productionBranch>master</productionBranch>-->
 <!--                            <developmentBranch>develop</developmentBranch>-->
