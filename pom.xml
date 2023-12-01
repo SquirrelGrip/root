@@ -9,7 +9,7 @@
 
     <modules>
         <module>dependencies</module>
-        <module>update-maven-plugin</module>
+        <module>maven-plugins</module>
     </modules>
 
     <name>${project.artifactId}</name>
