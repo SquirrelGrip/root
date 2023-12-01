@@ -128,6 +128,7 @@
                         <skipReleaseMergeProdBranch>true</skipReleaseMergeProdBranch>
                         <skipTag>true</skipTag>
                         <pushRemote>true</pushRemote>
+                        <commitDevelopmentVersionAtStart>true</commitDevelopmentVersionAtStart>
 <!--                        <gitFlowConfig>-->
 <!--                            <productionBranch>master</productionBranch>-->
 <!--                            <developmentBranch>develop</developmentBranch>-->
