@@ -125,10 +125,9 @@
 
                         <installProject>true</installProject>
                         <verbose>true</verbose>
-                        <skipReleaseMergeProdBranch>true</skipReleaseMergeProdBranch>
-                        <skipTag>true</skipTag>
+                        <skipReleaseMergeProdBranch>false</skipReleaseMergeProdBranch>
+                        <skipTag>false</skipTag>
                         <pushRemote>true</pushRemote>
-                        <commitDevelopmentVersionAtStart>true</commitDevelopmentVersionAtStart>
 <!--                        <gitFlowConfig>-->
 <!--                            <productionBranch>master</productionBranch>-->
 <!--                            <developmentBranch>develop</developmentBranch>-->
