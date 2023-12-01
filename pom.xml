@@ -125,7 +125,7 @@
 
                         <installProject>true</installProject>
                         <verbose>true</verbose>
-<!--                        <skipReleaseMergeProdBranch>true</skipReleaseMergeProdBranch>-->
+                        <skipReleaseMergeProdBranch>true</skipReleaseMergeProdBranch>
 <!--                        <gitFlowConfig>-->
 <!--                            <productionBranch>master</productionBranch>-->
 <!--                            <developmentBranch>develop</developmentBranch>-->
@@ -137,46 +137,46 @@
 <!--                            <origin>origin</origin>-->
 <!--                        </gitFlowConfig>-->
 
-                        <commitMessages>
-                            <featureStartMessage>Update versions for feature branch</featureStartMessage>
-                            <featureFinishMessage>Update versions for development branch</featureFinishMessage>
+<!--                        <commitMessages>-->
+<!--                            <featureStartMessage>Update versions for feature branch</featureStartMessage>-->
+<!--                            <featureFinishMessage>Update versions for development branch</featureFinishMessage>-->
 
-                            <hotfixStartMessage>Update versions for hotfix</hotfixStartMessage>
-                            <hotfixFinishMessage>Update for next development version</hotfixFinishMessage>
+<!--                            <hotfixStartMessage>Update versions for hotfix</hotfixStartMessage>-->
+<!--                            <hotfixFinishMessage>Update for next development version</hotfixFinishMessage>-->
 
-                            <hotfixVersionUpdateMessage>Update to hotfix version</hotfixVersionUpdateMessage>
+<!--                            <hotfixVersionUpdateMessage>Update to hotfix version</hotfixVersionUpdateMessage>-->
 
-                            <releaseStartMessage>Update versions for release</releaseStartMessage>
-                            <releaseFinishMessage>Update for next development version</releaseFinishMessage>
+<!--                            <releaseStartMessage>Update versions for release</releaseStartMessage>-->
+<!--                            <releaseFinishMessage>Update for next development version</releaseFinishMessage>-->
 
-                            <releaseVersionUpdateMessage>Update for next development version</releaseVersionUpdateMessage>
+<!--                            <releaseVersionUpdateMessage>Update for next development version</releaseVersionUpdateMessage>-->
 
-<!--                            <releaseFinishMergeMessage></releaseFinishMergeMessage>-->
-<!--                            <releaseFinishDevMergeMessage></releaseFinishDevMergeMessage>-->
-<!--                            <featureFinishDevMergeMessage></featureFinishDevMergeMessage>-->
-<!--                            <featureSquashMessage></featureSquashMessage>-->
-<!--                            <hotfixFinishMergeMessage></hotfixFinishMergeMessage>-->
-<!--                            <hotfixFinishDevMergeMessage></hotfixFinishDevMergeMessage>-->
-<!--                            <hotfixFinishReleaseMergeMessage></hotfixFinishReleaseMergeMessage>-->
-<!--                            <hotfixFinishSupportMergeMessage></hotfixFinishSupportMergeMessage>-->
+<!--&lt;!&ndash;                            <releaseFinishMergeMessage></releaseFinishMergeMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <releaseFinishDevMergeMessage></releaseFinishDevMergeMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureFinishDevMergeMessage></featureFinishDevMergeMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureSquashMessage></featureSquashMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <hotfixFinishMergeMessage></hotfixFinishMergeMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <hotfixFinishDevMergeMessage></hotfixFinishDevMergeMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <hotfixFinishReleaseMergeMessage></hotfixFinishReleaseMergeMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <hotfixFinishSupportMergeMessage></hotfixFinishSupportMergeMessage>&ndash;&gt;-->
 
-                            <tagHotfixMessage>Tag hotfix</tagHotfixMessage>
-                            <tagReleaseMessage>Tag release</tagReleaseMessage>
-                            <tagVersionUpdateMessage>Tag version update</tagVersionUpdateMessage>
+<!--                            <tagHotfixMessage>Tag hotfix</tagHotfixMessage>-->
+<!--                            <tagReleaseMessage>Tag release</tagReleaseMessage>-->
+<!--                            <tagVersionUpdateMessage>Tag version update</tagVersionUpdateMessage>-->
 
-                            <updateDevToAvoidConflictsMessage>Update develop to production version to avoid merge conflicts</updateDevToAvoidConflictsMessage>
-                            <updateDevBackPreMergeStateMessage>Update develop version back to pre-merge state</updateDevBackPreMergeStateMessage>
+<!--                            <updateDevToAvoidConflictsMessage>Update develop to production version to avoid merge conflicts</updateDevToAvoidConflictsMessage>-->
+<!--                            <updateDevBackPreMergeStateMessage>Update develop version back to pre-merge state</updateDevBackPreMergeStateMessage>-->
 
-                            <updateReleaseToAvoidConflictsMessage>Update release to hotfix version to avoid merge conflicts</updateReleaseToAvoidConflictsMessage>
-                            <updateReleaseBackPreMergeStateMessage>Update release version back to pre-merge state</updateReleaseBackPreMergeStateMessage>
+<!--                            <updateReleaseToAvoidConflictsMessage>Update release to hotfix version to avoid merge conflicts</updateReleaseToAvoidConflictsMessage>-->
+<!--                            <updateReleaseBackPreMergeStateMessage>Update release version back to pre-merge state</updateReleaseBackPreMergeStateMessage>-->
 
-                            <updateFeatureBackMessage>Update feature branch back to feature version</updateFeatureBackMessage>
-                            <featureFinishIncrementVersionMessage>Increment feature version</featureFinishIncrementVersionMessage>
+<!--                            <updateFeatureBackMessage>Update feature branch back to feature version</updateFeatureBackMessage>-->
+<!--                            <featureFinishIncrementVersionMessage>Increment feature version</featureFinishIncrementVersionMessage>-->
 
-                            <supportStartMessage>Update versions for support branch</supportStartMessage>
+<!--                            <supportStartMessage>Update versions for support branch</supportStartMessage>-->
 
-                            <versionUpdateMessage>Update versions</versionUpdateMessage>
-                        </commitMessages>
+<!--                            <versionUpdateMessage>Update versions</versionUpdateMessage>-->
+<!--                        </commitMessages>-->
                     </configuration>
                 </plugin>
 <!--                <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version>-->
