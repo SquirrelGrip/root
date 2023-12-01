@@ -227,7 +227,8 @@
                     <configuration>
                         <args><arg>-Xjsr305=strict</arg></args>
                         <jvmTarget>${maven.compiler.target}</jvmTarget>
-                        <compilerPlugins><plugin>spring</plugin></compilerPlugins></configuration>
+                        <compilerPlugins><plugin>spring</plugin></compilerPlugins>
+                    </configuration>
                     <dependencies>
                         <dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-allopen</artifactId><version>${kotlin.version}</version></dependency>
                     </dependencies>
@@ -295,14 +296,6 @@
                     <reportSet><reports><report>report</report></reports></reportSet>
                 </reportSets>
             </plugin>
-<!--            <plugin><groupId>org.owasp</groupId><artifactId>dependency-check-maven</artifactId><version>${dependency-check-maven.version}</version>-->
-<!--                <reportSets>-->
-<!--                    <reportSet><reports><report>aggregate</report></reports></reportSet>-->
-<!--                </reportSets>-->
-<!--                <configuration>-->
-<!--                    <autoUpdate>true</autoUpdate>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
         </plugins>
         <!--@formatter:on-->
     </reporting>
