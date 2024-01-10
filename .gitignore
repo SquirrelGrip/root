@@ -218,3 +218,4 @@ travis/all.gpg
 .idea/
 stage/
 /kotlin-extensions/kotlin-extensions-jvm/src/main/antlr4/com/github/squirrelgrip/extension/collection/DrainerLexer.tokens
+/kotlin-extensions/kotlin-extensions-jvm/src/main/antlr4/com/github/squirrelgrip/extension/collection/DrainerLexer.tokens
