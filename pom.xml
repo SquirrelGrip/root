@@ -11,7 +11,6 @@
     <modules>
         <module>dependencies</module>
         <module>kotlin-extensions</module>
-        <module>kotlin-extensions/kotlin-extension-jsonschema</module>
     </modules>
 
     <name>${project.artifactId}</name>
@@ -119,87 +118,87 @@
                         <yarnVersion>${yarn.version}</yarnVersion>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>com.amashchenko.maven.plugin</groupId>
-                    <artifactId>gitflow-maven-plugin</artifactId>
-                    <version>${gitflow-maven-plugin.version}</version>
-                    <configuration>
-<!--                        <mvnExecutable></mvnExecutable>-->
-<!--                        <gitExecutable></gitExecutable>-->
-
-                        <installProject>true</installProject>
-                        <verbose>true</verbose>
-                        <skipReleaseMergeProdBranch>false</skipReleaseMergeProdBranch>
-                        <skipTag>false</skipTag>
-                        <pushRemote>true</pushRemote>
-<!--                        <gitFlowConfig>-->
-<!--                            <productionBranch>master</productionBranch>-->
-<!--                            <developmentBranch>develop</developmentBranch>-->
-<!--                            <featureBranchPrefix>feature/</featureBranchPrefix>-->
-<!--                            <releaseBranchPrefix>release/</releaseBranchPrefix>-->
-<!--                            <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>-->
-<!--                            <supportBranchPrefix>support/</supportBranchPrefix>-->
-<!--                            <versionTagPrefix></versionTagPrefix>-->
-<!--                            <origin>origin</origin>-->
-<!--                        </gitFlowConfig>-->
-
-<!--                        <commitMessages>-->
-<!--                            <featureStartMessage>Update versions for feature branch</featureStartMessage>-->
-<!--                            <featureFinishMessage>Update versions for development branch</featureFinishMessage>-->
-
-<!--                            <hotfixStartMessage>Update versions for hotfix</hotfixStartMessage>-->
-<!--                            <hotfixFinishMessage>Update for next development version</hotfixFinishMessage>-->
-
-<!--                            <hotfixVersionUpdateMessage>Update to hotfix version</hotfixVersionUpdateMessage>-->
-
-<!--                            <releaseStartMessage>Update versions for release</releaseStartMessage>-->
-<!--                            <releaseFinishMessage>Update for next development version</releaseFinishMessage>-->
-
-<!--                            <releaseVersionUpdateMessage>Update for next development version</releaseVersionUpdateMessage>-->
-
-<!--&lt;!&ndash;                            <releaseFinishMergeMessage></releaseFinishMergeMessage>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <releaseFinishDevMergeMessage></releaseFinishDevMergeMessage>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <featureFinishDevMergeMessage></featureFinishDevMergeMessage>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <featureSquashMessage></featureSquashMessage>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <hotfixFinishMergeMessage></hotfixFinishMergeMessage>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <hotfixFinishDevMergeMessage></hotfixFinishDevMergeMessage>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <hotfixFinishReleaseMergeMessage></hotfixFinishReleaseMergeMessage>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <hotfixFinishSupportMergeMessage></hotfixFinishSupportMergeMessage>&ndash;&gt;-->
-
-<!--                            <tagHotfixMessage>Tag hotfix</tagHotfixMessage>-->
-<!--                            <tagReleaseMessage>Tag release</tagReleaseMessage>-->
-<!--                            <tagVersionUpdateMessage>Tag version update</tagVersionUpdateMessage>-->
-
-<!--                            <updateDevToAvoidConflictsMessage>Update develop to production version to avoid merge conflicts</updateDevToAvoidConflictsMessage>-->
-<!--                            <updateDevBackPreMergeStateMessage>Update develop version back to pre-merge state</updateDevBackPreMergeStateMessage>-->
-
-<!--                            <updateReleaseToAvoidConflictsMessage>Update release to hotfix version to avoid merge conflicts</updateReleaseToAvoidConflictsMessage>-->
-<!--                            <updateReleaseBackPreMergeStateMessage>Update release version back to pre-merge state</updateReleaseBackPreMergeStateMessage>-->
-
-<!--                            <updateFeatureBackMessage>Update feature branch back to feature version</updateFeatureBackMessage>-->
-<!--                            <featureFinishIncrementVersionMessage>Increment feature version</featureFinishIncrementVersionMessage>-->
-
-<!--                            <supportStartMessage>Update versions for support branch</supportStartMessage>-->
-
-<!--                            <versionUpdateMessage>Update versions</versionUpdateMessage>-->
-<!--                        </commitMessages>-->
-                    </configuration>
-                </plugin>
-<!--                <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version>-->
+<!--                <plugin>-->
+<!--                    <groupId>com.amashchenko.maven.plugin</groupId>-->
+<!--                    <artifactId>gitflow-maven-plugin</artifactId>-->
+<!--                    <version>${gitflow-maven-plugin.version}</version>-->
 <!--                    <configuration>-->
-<!--                        <allowSnapshots>false</allowSnapshots>-->
-<!--                        &lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
-<!--                        <username>${env.GIT_USER}</username>-->
-<!--                        &lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
-<!--                        <password>${env.GIT_TOKEN}</password>-->
-<!--                        <pullMaster>true</pullMaster>-->
-<!--                        <pullDevelop>true</pullDevelop>-->
-<!--                        <pushReleases>true</pushReleases>-->
-<!--                        <pushHotfixes>true</pushHotfixes>-->
-<!--                        <scmCommentPrefix>(CI):</scmCommentPrefix>-->
-<!--                        <useReleaseProfile>false</useReleaseProfile>-->
+<!--&lt;!&ndash;                        <mvnExecutable></mvnExecutable>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <gitExecutable></gitExecutable>&ndash;&gt;-->
+
+<!--                        <installProject>true</installProject>-->
+<!--                        <verbose>true</verbose>-->
+<!--                        <skipReleaseMergeProdBranch>false</skipReleaseMergeProdBranch>-->
+<!--                        <skipTag>false</skipTag>-->
+<!--                        <pushRemote>true</pushRemote>-->
+<!--&lt;!&ndash;                        <gitFlowConfig>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <productionBranch>master</productionBranch>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <developmentBranch>develop</developmentBranch>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureBranchPrefix>feature/</featureBranchPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <releaseBranchPrefix>release/</releaseBranchPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <supportBranchPrefix>support/</supportBranchPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <versionTagPrefix></versionTagPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <origin>origin</origin>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </gitFlowConfig>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <commitMessages>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureStartMessage>Update versions for feature branch</featureStartMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureFinishMessage>Update versions for development branch</featureFinishMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <hotfixStartMessage>Update versions for hotfix</hotfixStartMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <hotfixFinishMessage>Update for next development version</hotfixFinishMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <hotfixVersionUpdateMessage>Update to hotfix version</hotfixVersionUpdateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <releaseStartMessage>Update versions for release</releaseStartMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <releaseFinishMessage>Update for next development version</releaseFinishMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <releaseVersionUpdateMessage>Update for next development version</releaseVersionUpdateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <releaseFinishMergeMessage></releaseFinishMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <releaseFinishDevMergeMessage></releaseFinishDevMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <featureFinishDevMergeMessage></featureFinishDevMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <featureSquashMessage></featureSquashMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <hotfixFinishMergeMessage></hotfixFinishMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <hotfixFinishDevMergeMessage></hotfixFinishDevMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <hotfixFinishReleaseMergeMessage></hotfixFinishReleaseMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <hotfixFinishSupportMergeMessage></hotfixFinishSupportMergeMessage>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <tagHotfixMessage>Tag hotfix</tagHotfixMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tagReleaseMessage>Tag release</tagReleaseMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tagVersionUpdateMessage>Tag version update</tagVersionUpdateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <updateDevToAvoidConflictsMessage>Update develop to production version to avoid merge conflicts</updateDevToAvoidConflictsMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <updateDevBackPreMergeStateMessage>Update develop version back to pre-merge state</updateDevBackPreMergeStateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <updateReleaseToAvoidConflictsMessage>Update release to hotfix version to avoid merge conflicts</updateReleaseToAvoidConflictsMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <updateReleaseBackPreMergeStateMessage>Update release version back to pre-merge state</updateReleaseBackPreMergeStateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <updateFeatureBackMessage>Update feature branch back to feature version</updateFeatureBackMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureFinishIncrementVersionMessage>Increment feature version</featureFinishIncrementVersionMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <supportStartMessage>Update versions for support branch</supportStartMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <versionUpdateMessage>Update versions</versionUpdateMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </commitMessages>&ndash;&gt;-->
 <!--                    </configuration>-->
 <!--                </plugin>-->
+                <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version>
+                    <configuration>
+                        <allowSnapshots>false</allowSnapshots>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <username>${env.GIT_USER}</username>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <password>${env.GIT_TOKEN}</password>
+                        <pullMaster>true</pullMaster>
+                        <pullDevelop>true</pullDevelop>
+                        <pushReleases>true</pushReleases>
+                        <pushHotfixes>true</pushHotfixes>
+                        <scmCommentPrefix>(CI):</scmCommentPrefix>
+                        <useReleaseProfile>false</useReleaseProfile>
+                    </configuration>
+                </plugin>
                 <plugin><groupId>org.antlr</groupId><artifactId>antlr4-maven-plugin</artifactId><version>${antlr4-maven-plugin.version}</version>
                     <executions><execution><phase>generate-sources</phase><goals><goal>antlr4</goal></goals></execution></executions>
                 </plugin>
