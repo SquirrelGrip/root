@@ -1,9 +1,6 @@
 [submodule "dependencies"]
 	path = dependencies
 	url = https://github.com/SquirrelGrip/dependencies.git
-[submodule "maven-plugins"]
-	path = maven-plugins
-	url = https://github.com/SquirrelGrip/maven-plugins.git
 [submodule "kotlin-extensions"]
 	path = kotlin-extensions
 	url = git@github.com:SquirrelGrip/kotlin-extensions.git

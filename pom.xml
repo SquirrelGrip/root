@@ -57,6 +57,7 @@
         <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
         <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
+        <maven-invoker-plugin.version>3.6.0</maven-invoker-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <maven-jxr-plugin.version>3.3.1</maven-jxr-plugin.version>
         <maven-plugin-plugin.version>3.11.0</maven-plugin-plugin.version>
@@ -69,17 +70,14 @@
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-        <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
-        <pitest-maven-plugin.version>1.15.3</pitest-maven-plugin.version>
         <sisu-maven-plugin.version>0.9.0.M2</sisu-maven-plugin.version>
         <sonar-maven-plugin.version>3.10.0.2594</sonar-maven-plugin.version>
         <spotless-maven-plugin.version>2.41.0</spotless-maven-plugin.version>
         <spring-boot-maven-plugin.version>3.2.0</spring-boot-maven-plugin.version>
         <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
         <tidy-maven-plugin.version>1.2.0</tidy-maven-plugin.version>
-        <travis-maven-plugin.version>1.0.0</travis-maven-plugin.version>
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-        <maven-invoker-plugin.version>3.6.0</maven-invoker-plugin.version>
+        <update-maven-plugin.version>2.0.0</update-maven-plugin.version>
     </properties>
 
     <build>
@@ -353,10 +351,18 @@
     <reporting>
         <!--@formatter:off-->
         <plugins>
-            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId><version>${maven-dependency-plugin.version}</version>
-                <reportSets>
-                    <reportSet><reports><report>analyze-report</report></reports></reportSet>
-                </reportSets>
+            <plugin><groupId>com.github.squirrelgrip</groupId><artifactId>update-maven-plugin</artifactId><version>2.0.0</version>
+                <configuration>
+                    <processTransitive>false</processTransitive>
+                    <ignoredVersions>
+                        <ignoredVersion><groupIdRegEx>com.fasterxml.jackson.*</groupIdRegEx><artifactIdRegEx>jackson-.*</artifactIdRegEx><version>.*-rc\d*</version></ignoredVersion>
+                        <ignoredVersion><groupId>com.google.guava</groupId><artifactId>guava</artifactId><version>.*-android</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.jetbrains.kotlin</groupId><artifactIdRegEx>kotlin-.*</artifactIdRegEx><version>.*-(?:Alpha|Beta|RC)\d*</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.jetbrains.kotlinx</groupId><artifactIdRegEx>kotlinx-.*</artifactIdRegEx><version>.*-(?:Alpha|Beta|RC)\d*</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.apache.maven</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-alpha-\d+</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.elasticsearch.client</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-alpha\d</version></ignoredVersion>
+                    </ignoredVersions>
+                </configuration>
             </plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jxr-plugin</artifactId><version>${maven-jxr-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-report-plugin</artifactId><version>${maven-surefire-plugin.version}</version></plugin>
