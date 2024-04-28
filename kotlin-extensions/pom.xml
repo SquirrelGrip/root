@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>dependencies</artifactId>
+        <groupId>com.github.squirrelgrip</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+        <relativePath>../dependencies</relativePath>
+    </parent>
+    <artifactId>kotlin-extensions</artifactId>
+    <description>A collection of useful kotlin extensions</description>
+    <name>${project.artifactId}</name>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId></dependency>
+        <dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-stdlib</artifactId></dependency>
+    </dependencies>
+
+    <modules>
+        <module>kotlin-extensions-csv</module>
+        <module>kotlin-extensions-format</module>
+        <module>kotlin-extensions-javaprops</module>
+        <module>kotlin-extensions-json</module>
+        <module>kotlin-extensions-jsonschema</module>
+        <module>kotlin-extensions-jvm</module>
+        <module>kotlin-extensions-protobuf</module>
+        <module>kotlin-extensions-xml</module>
+        <module>kotlin-extensions-yaml</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-csv</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-format</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-javaprops</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-json</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-jvm</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-protobuf</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-xml</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-yaml</artifactId><version>${project.version}</version></dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
