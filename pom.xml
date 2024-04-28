@@ -3,23 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.3.29</version>
+    <version>1.4.0</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
     <modules>
         <module>dependencies</module>
-        <module>update-maven-plugin</module>
+        <module>kotlin-extensions</module>
     </modules>
 
     <name>${project.artifactId}</name>
     <url>${project.scm.url}</url>
-
-    <scm>
-        <connection>scm:git:https://github.com/SquirrelGrip/root.git</connection>
-        <developerConnection>scm:git:https://github.com/SquirrelGrip/root.git</developerConnection>
-        <url>https://github.com/SquirrelGrip/root</url>
-    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,53 +22,55 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <kotlin.version>1.9.20</kotlin.version>
+        <kotlin.version>1.9.23</kotlin.version>
         <node.version>v16.14.2</node.version>
         <yarn.version>v1.22.7</yarn.version>
 
         <antlr4-maven-plugin.version>4.13.1</antlr4-maven-plugin.version>
         <buildplan-maven-plugin.version>2.2.2</buildplan-maven-plugin.version>
         <clirr-maven-plugin.version>2.8</clirr-maven-plugin.version>
-        <dependency-check-maven.version>8.4.2</dependency-check-maven.version>
-        <dokka-maven-plugin.version>1.9.10</dokka-maven-plugin.version>
+        <dependency-check-maven.version>9.1.0</dependency-check-maven.version>
+        <dokka-maven-plugin.version>1.9.20</dokka-maven-plugin.version>
         <extra-enforcer-rules.version>1.3</extra-enforcer-rules.version>
-        <frontend-maven-plugin.version>1.14.2</frontend-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+        <frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
+        <gitflow-maven-plugin.version>1.20.0</gitflow-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
         <javancss-maven-plugin.version>2.1</javancss-maven-plugin.version>
         <jdepend-maven-plugin.version>2.0</jdepend-maven-plugin.version>
         <jgitflow-maven-plugin.version>1.0.0</jgitflow-maven-plugin.version>
+        <junit-jupiter.version>5.10.1</junit-jupiter.version>
         <kotlin-maven-plugin.version>${kotlin.version}</kotlin-maven-plugin.version>
         <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
         <maven-archetype-plugin.version>3.2.1</maven-archetype-plugin.version>
-        <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
         <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
         <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
         <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
-        <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.2.4</maven-gpg-plugin.version>
         <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
-        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-        <maven-jxr-plugin.version>3.3.1</maven-jxr-plugin.version>
-        <maven-plugin-plugin.version>3.10.2</maven-plugin-plugin.version>
-        <maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
+        <maven-invoker-plugin.version>3.6.1</maven-invoker-plugin.version>
+        <maven-jar-plugin.version>3.4.1</maven-jar-plugin.version>
+        <maven-jxr-plugin.version>3.3.2</maven-jxr-plugin.version>
+        <maven-plugin-plugin.version>3.12.0</maven-plugin-plugin.version>
+        <maven-project-info-reports-plugin.version>3.5.0</maven-project-info-reports-plugin.version>
         <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-scm-plugin.version>2.0.1</maven-scm-plugin.version>
-        <maven-site-plugin.version>4.0.0-M11</maven-site-plugin.version>
-        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
+        <maven-scm-plugin.version>2.1.0</maven-scm-plugin.version>
+        <maven-shade-plugin.version>3.5.3</maven-shade-plugin.version>
+        <maven-site-plugin.version>4.0.0-M13</maven-site-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-        <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
-        <pitest-maven-plugin.version>1.15.3</pitest-maven-plugin.version>
         <sisu-maven-plugin.version>0.9.0.M2</sisu-maven-plugin.version>
-        <sonar-maven-plugin.version>3.10.0.2594</sonar-maven-plugin.version>
-        <spotless-maven-plugin.version>2.40.0</spotless-maven-plugin.version>
-        <spring-boot-maven-plugin.version>3.1.5</spring-boot-maven-plugin.version>
+        <sonar-maven-plugin.version>3.11.0.3922</sonar-maven-plugin.version>
+        <spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
+        <spring-boot-maven-plugin.version>3.2.5</spring-boot-maven-plugin.version>
         <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
         <tidy-maven-plugin.version>1.2.0</tidy-maven-plugin.version>
-        <travis-maven-plugin.version>1.0.0</travis-maven-plugin.version>
-        <versions-maven-plugin.version>2.16.1</versions-maven-plugin.version>
+        <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
+        <update-maven-plugin.version>2.0.0</update-maven-plugin.version>
     </properties>
 
     <build>
@@ -113,6 +109,72 @@
                         <yarnVersion>${yarn.version}</yarnVersion>
                     </configuration>
                 </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>com.amashchenko.maven.plugin</groupId>-->
+<!--                    <artifactId>gitflow-maven-plugin</artifactId>-->
+<!--                    <version>${gitflow-maven-plugin.version}</version>-->
+<!--                    <configuration>-->
+<!--&lt;!&ndash;                        <mvnExecutable></mvnExecutable>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <gitExecutable></gitExecutable>&ndash;&gt;-->
+
+<!--                        <installProject>true</installProject>-->
+<!--                        <verbose>true</verbose>-->
+<!--                        <skipReleaseMergeProdBranch>false</skipReleaseMergeProdBranch>-->
+<!--                        <skipTag>false</skipTag>-->
+<!--                        <pushRemote>true</pushRemote>-->
+<!--&lt;!&ndash;                        <gitFlowConfig>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <productionBranch>master</productionBranch>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <developmentBranch>develop</developmentBranch>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureBranchPrefix>feature/</featureBranchPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <releaseBranchPrefix>release/</releaseBranchPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <supportBranchPrefix>support/</supportBranchPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <versionTagPrefix></versionTagPrefix>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <origin>origin</origin>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </gitFlowConfig>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <commitMessages>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureStartMessage>Update versions for feature branch</featureStartMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureFinishMessage>Update versions for development branch</featureFinishMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <hotfixStartMessage>Update versions for hotfix</hotfixStartMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <hotfixFinishMessage>Update for next development version</hotfixFinishMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <hotfixVersionUpdateMessage>Update to hotfix version</hotfixVersionUpdateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <releaseStartMessage>Update versions for release</releaseStartMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <releaseFinishMessage>Update for next development version</releaseFinishMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <releaseVersionUpdateMessage>Update for next development version</releaseVersionUpdateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <releaseFinishMergeMessage></releaseFinishMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <releaseFinishDevMergeMessage></releaseFinishDevMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <featureFinishDevMergeMessage></featureFinishDevMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <featureSquashMessage></featureSquashMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <hotfixFinishMergeMessage></hotfixFinishMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <hotfixFinishDevMergeMessage></hotfixFinishDevMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <hotfixFinishReleaseMergeMessage></hotfixFinishReleaseMergeMessage>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <hotfixFinishSupportMergeMessage></hotfixFinishSupportMergeMessage>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <tagHotfixMessage>Tag hotfix</tagHotfixMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tagReleaseMessage>Tag release</tagReleaseMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tagVersionUpdateMessage>Tag version update</tagVersionUpdateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <updateDevToAvoidConflictsMessage>Update develop to production version to avoid merge conflicts</updateDevToAvoidConflictsMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <updateDevBackPreMergeStateMessage>Update develop version back to pre-merge state</updateDevBackPreMergeStateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <updateReleaseToAvoidConflictsMessage>Update release to hotfix version to avoid merge conflicts</updateReleaseToAvoidConflictsMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <updateReleaseBackPreMergeStateMessage>Update release version back to pre-merge state</updateReleaseBackPreMergeStateMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <updateFeatureBackMessage>Update feature branch back to feature version</updateFeatureBackMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <featureFinishIncrementVersionMessage>Increment feature version</featureFinishIncrementVersionMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <supportStartMessage>Update versions for support branch</supportStartMessage>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <versionUpdateMessage>Update versions</versionUpdateMessage>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </commitMessages>&ndash;&gt;-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
                 <plugin><groupId>com.manamind.jgitflow</groupId><artifactId>jgitflow-maven-plugin</artifactId><version>${jgitflow-maven-plugin.version}</version>
                     <configuration>
                         <allowSnapshots>false</allowSnapshots>
@@ -140,9 +202,15 @@
                 </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId><version>${maven-dependency-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId><version>${maven-deploy-plugin.version}</version>
-                    <configuration><deployAtEnd>true</deployAtEnd><retryFailedDeploymentCount>3</retryFailedDeploymentCount></configuration></plugin>
+                    <configuration>
+                        <deployAtEnd>true</deployAtEnd>
+                        <retryFailedDeploymentCount>3</retryFailedDeploymentCount>
+                    </configuration>
+                </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-enforcer-plugin</artifactId><version>${maven-enforcer-plugin.version}</version>
-                    <dependencies><dependency><groupId>org.codehaus.mojo</groupId><artifactId>extra-enforcer-rules</artifactId><version>${extra-enforcer-rules.version}</version></dependency></dependencies>
+                    <dependencies>
+                        <dependency><groupId>org.codehaus.mojo</groupId><artifactId>extra-enforcer-rules</artifactId><version>${extra-enforcer-rules.version}</version></dependency>
+                    </dependencies>
                     <configuration>
                         <rules>
                             <banDuplicatePomDependencyVersions />
@@ -164,49 +232,79 @@
                         <!--suppress UnresolvedMavenProperty -->
                         <passphrase>${env.GPG_PASSPHRASE}</passphrase>
                     </configuration>
-                    <executions><execution><id>sign-artifacts</id><phase>deploy</phase><goals><goal>sign</goal></goals></execution></executions>
+                    <executions>
+                        <execution><id>sign-artifacts</id><phase>deploy</phase><goals><goal>sign</goal></goals></execution>
+                    </executions>
                 </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-install-plugin</artifactId><version>${maven-install-plugin.version}</version></plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-invoker-plugin</artifactId><version>${maven-invoker-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>${maven-jar-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jxr-plugin</artifactId><version>${maven-jxr-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-plugin-plugin</artifactId><version>${maven-plugin-plugin.version}</version>
-                    <executions><execution><id>default-descriptor</id><phase>process-classes</phase></execution><execution><id>help-goal</id><goals><goal>helpmojo</goal></goals></execution></executions>
+                    <executions>
+                        <execution><id>default-descriptor</id><phase>process-classes</phase></execution>
+                        <execution><id>help-goal</id><goals><goal>helpmojo</goal></goals></execution>
+                    </executions>
                 </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-project-info-reports-plugin</artifactId><version>${maven-project-info-reports-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-release-plugin</artifactId><version>${maven-release-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>${maven-resources-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-scm-plugin</artifactId><version>${maven-scm-plugin.version}</version>
-                    <configuration><providerImplementations><git>jgit</git></providerImplementations><username>${env.GIT_USER}</username><password>${env.GIT_TOKEN}</password></configuration>
-                    <dependencies><dependency><groupId>org.apache.maven.scm</groupId><artifactId>maven-scm-provider-jgit</artifactId><version>${maven-scm-plugin.version}</version></dependency></dependencies>
+                    <configuration>
+                        <providerImplementations><git>jgit</git></providerImplementations>
+                        <username>${env.GIT_USER}</username>
+                        <password>${env.GIT_TOKEN}</password>
+                    </configuration>
+                    <dependencies>
+                        <dependency><groupId>org.apache.maven.scm</groupId><artifactId>maven-scm-provider-jgit</artifactId><version>${maven-scm-plugin.version}</version></dependency>
+                    </dependencies>
                 </plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>${maven-shade-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-site-plugin</artifactId><version>${maven-site-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version>
-                    <executions><execution><id>attach-sources</id><phase>package</phase><goals><goal>jar</goal></goals></execution></executions></plugin>
+                    <executions>
+                        <execution><id>attach-sources</id><phase>package</phase><goals><goal>jar</goal></goals></execution>
+                    </executions>
+                </plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>${maven-surefire-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-report-plugin</artifactId><version>${maven-surefire-plugin.version}</version></plugin>
                 <plugin><groupId>org.codehaus.mojo</groupId><artifactId>tidy-maven-plugin</artifactId><version>${tidy-maven-plugin.version}</version></plugin>
                 <plugin><groupId>org.codehaus.mojo</groupId><artifactId>versions-maven-plugin</artifactId><version>${versions-maven-plugin.version}</version>
-                    <configuration><processPlugins>false</processPlugins><processDependencies>false</processDependencies><formats>xml</formats></configuration></plugin>
+                    <configuration>
+                        <processPlugins>false</processPlugins>
+                        <processDependencies>false</processDependencies>
+                        <formats>xml</formats>
+                    </configuration>
+                </plugin>
                 <plugin><groupId>org.eclipse.sisu</groupId><artifactId>sisu-maven-plugin</artifactId><version>${sisu-maven-plugin.version}</version>
-                    <executions><execution><id>generate-index</id><goals><goal>main-index</goal></goals></execution></executions>
+                    <executions>
+                        <execution><id>generate-index</id><goals><goal>main-index</goal></goals></execution>
+                    </executions>
                 </plugin>
                 <plugin><groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId><version>${jacoco-maven-plugin.version}</version></plugin>
                 <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version>
-                    <executions><execution><id>javadocJar</id><phase>deploy</phase><goals><goal>javadocJar</goal></goals></execution></executions>
+                    <executions>
+                        <execution><id>javadocJar</id><phase>deploy</phase><goals><goal>javadocJar</goal></goals></execution>
+                    </executions>
                 </plugin>
                 <plugin><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-plugin</artifactId><version>${kotlin-maven-plugin.version}</version>
                     <configuration>
                         <args><arg>-Xjsr305=strict</arg></args>
                         <jvmTarget>${maven.compiler.target}</jvmTarget>
-                        <compilerPlugins><plugin>spring</plugin></compilerPlugins></configuration>
-                    <dependencies><dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-allopen</artifactId><version>${kotlin.version}</version></dependency></dependencies>
+                        <compilerPlugins><plugin>spring</plugin></compilerPlugins>
+                    </configuration>
+                    <dependencies>
+                        <dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-allopen</artifactId><version>${kotlin.version}</version></dependency>
+                    </dependencies>
                     <executions>
                         <execution><id>compile</id><phase>compile</phase><goals><goal>compile</goal></goals></execution>
                         <execution><id>test-compile</id><phase>test-compile</phase><goals><goal>test-compile</goal></goals></execution>
                     </executions>
                 </plugin>
                 <plugin><groupId>org.pitest</groupId><artifactId>pitest-maven</artifactId><version>${pitest-maven-plugin.version}</version>
-                    <dependencies><dependency><groupId>org.pitest</groupId><artifactId>pitest-junit5-plugin</artifactId><version>${pitest-junit5-plugin.version}</version></dependency></dependencies>
+                    <dependencies>
+                        <dependency><groupId>org.pitest</groupId><artifactId>pitest-junit5-plugin</artifactId><version>${pitest-junit5-plugin.version}</version></dependency>
+                    </dependencies>
                 </plugin>
                 <plugin><groupId>org.sonarsource.scanner.maven</groupId><artifactId>sonar-maven-plugin</artifactId><version>${sonar-maven-plugin.version}</version></plugin>
                 <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version>
@@ -246,10 +344,18 @@
     <reporting>
         <!--@formatter:off-->
         <plugins>
-            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId><version>${maven-dependency-plugin.version}</version>
-                <reportSets>
-                    <reportSet><reports><report>analyze-report</report></reports></reportSet>
-                </reportSets>
+            <plugin><groupId>com.github.squirrelgrip</groupId><artifactId>update-maven-plugin</artifactId><version>2.0.0</version>
+                <configuration>
+                    <processTransitive>false</processTransitive>
+                    <ignoredVersions>
+                        <ignoredVersion><groupIdRegEx>com.fasterxml.jackson.*</groupIdRegEx><artifactIdRegEx>jackson-.*</artifactIdRegEx><version>.*-rc\d*</version></ignoredVersion>
+                        <ignoredVersion><groupId>com.google.guava</groupId><artifactId>guava</artifactId><version>.*-android</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.jetbrains.kotlin</groupId><artifactIdRegEx>kotlin-.*</artifactIdRegEx><version>.*-(?:Alpha|Beta|RC)\d*</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.jetbrains.kotlinx</groupId><artifactIdRegEx>kotlinx-.*</artifactIdRegEx><version>.*-(?:Alpha|Beta|RC)\d*</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.apache.maven</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-alpha-\d+</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.elasticsearch.client</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-alpha\d</version></ignoredVersion>
+                    </ignoredVersions>
+                </configuration>
             </plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jxr-plugin</artifactId><version>${maven-jxr-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-report-plugin</artifactId><version>${maven-surefire-plugin.version}</version></plugin>
@@ -262,17 +368,16 @@
                     <reportSet><reports><report>report</report></reports></reportSet>
                 </reportSets>
             </plugin>
-            <plugin><groupId>org.owasp</groupId><artifactId>dependency-check-maven</artifactId><version>${dependency-check-maven.version}</version>
-                <reportSets>
-                    <reportSet><reports><report>aggregate</report></reports></reportSet>
-                </reportSets>
-                <configuration>
-                    <autoUpdate>false</autoUpdate>
-                </configuration>
-            </plugin>
         </plugins>
         <!--@formatter:on-->
     </reporting>
+
+    <scm>
+        <url>https://github.com/SquirrelGrip/root</url>
+        <connection>scm:git:git@github.com:SquirrelGrip/root.git</connection>
+        <developerConnection>scm:git:git@github.com:SquirrelGrip/root.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
     <licenses>
         <license>
@@ -300,6 +405,21 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>com.amashchenko.maven.plugin</groupId>
+                        <artifactId>gitflow-maven-plugin</artifactId>
+                        <version>${gitflow-maven-plugin.version}</version>
+                        <configuration combine.self="append">
+                            <allowSnapshots>true</allowSnapshots>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jgitflowStart</id>
+            <build>
+                <plugins>
+                    <plugin>
                         <groupId>com.manamind.jgitflow</groupId>
                         <artifactId>jgitflow-maven-plugin</artifactId>
                         <version>${jgitflow-maven-plugin.version}</version>
@@ -313,6 +433,5 @@
             </build>
         </profile>
     </profiles>
-
 
 </project>
