@@ -372,6 +372,13 @@
         <!--@formatter:on-->
     </reporting>
 
+    <scm>
+        <url>https://github.com/SquirrelGrip/root</url>
+        <connection>scm:git:git@github.com:SquirrelGrip/root.git</connection>
+        <developerConnection>scm:git:git@github.com:SquirrelGrip/root.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <licenses>
         <license>
             <name>MIT License</name>
