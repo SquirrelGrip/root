@@ -12,22 +12,22 @@ fun Path.toPrintWriter() = this.toWriter().toPrintWriter()
 /**
  * Creates a FileWriter for the given File
  */
-fun Path.toWriter() = FileWriter(this.toFile())
+fun Path.toWriter(): Writer = FileWriter(this.toFile())
 
 /**
  * Creates a FileOutputStream for the given File
  */
-fun Path.toOutputStream() = FileOutputStream(this.toFile())
+fun Path.toOutputStream(): OutputStream = FileOutputStream(this.toFile())
 
 /**
  * Creates a FileReader for the given File
  */
-fun Path.toReader() = FileReader(this.toFile())
+fun Path.toReader(): Reader = FileReader(this.toFile())
 
 /**
  * Creates a FileInputStream for the given File
  */
-fun Path.toInputStream() = FileInputStream(this.toFile())
+fun Path.toInputStream(): InputStream = FileInputStream(this.toFile())
 
 /**
  * Created a Path for a given String
