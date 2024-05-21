@@ -12,13 +12,9 @@
     <name>${project.artifactId}</name>
     <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId></dependency>
-        <dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-stdlib</artifactId></dependency>
-    </dependencies>
-
     <modules>
         <module>kotlin-extensions-csv</module>
+        <module>kotlin-extensions-excel</module>
         <module>kotlin-extensions-format</module>
         <module>kotlin-extensions-javaprops</module>
         <module>kotlin-extensions-json</module>
@@ -27,16 +23,19 @@
         <module>kotlin-extensions-protobuf</module>
         <module>kotlin-extensions-xml</module>
         <module>kotlin-extensions-yaml</module>
+<!--        <module>kotlin-extensions-spring-integration</module>-->
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-csv</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-excel</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-format</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-javaprops</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-json</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-jvm</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-protobuf</artifactId><version>${project.version}</version></dependency>
+<!--            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-spring-integration</artifactId><version>${project.version}</version></dependency>-->
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-xml</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-yaml</artifactId><version>${project.version}</version></dependency>
         </dependencies>
