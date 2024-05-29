@@ -23,7 +23,7 @@
         <module>kotlin-extensions-protobuf</module>
         <module>kotlin-extensions-xml</module>
         <module>kotlin-extensions-yaml</module>
-<!--        <module>kotlin-extensions-spring-integration</module>-->
+        <module>kotlin-extensions-spring-integration</module>
     </modules>
 
     <dependencyManagement>
