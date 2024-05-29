@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.5.0</version>
+    <version>1.5.1</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
@@ -229,19 +229,18 @@
                         <execution><id>javadocJar</id><phase>deploy</phase><goals><goal>javadocJar</goal></goals></execution>
                     </executions>
                 </plugin>
-                <plugin><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-plugin</artifactId><version>${kotlin-maven-plugin.version}</version>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin-maven-plugin.version}</version>
                     <configuration>
                         <args><arg>-Xjsr305=strict</arg></args>
                         <jvmTarget>${maven.compiler.target}</jvmTarget>
-<!--                        <compilerPlugins><plugin>spring</plugin></compilerPlugins>-->
                     </configuration>
-<!--                    <dependencies>-->
-<!--                        <dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-maven-allopen</artifactId><version>${kotlin.version}</version></dependency>-->
-<!--                    </dependencies>-->
-<!--                    <executions>-->
-<!--                        <execution><id>compile</id><phase>compile</phase><goals><goal>compile</goal></goals></execution>-->
-<!--                        <execution><id>test-compile</id><phase>test-compile</phase><goals><goal>test-compile</goal></goals></execution>-->
-<!--                    </executions>-->
+                    <executions>
+                        <execution><id>compile</id><phase>compile</phase><goals><goal>compile</goal></goals></execution>
+                        <execution><id>test-compile</id><phase>test-compile</phase><goals><goal>test-compile</goal></goals></execution>
+                    </executions>
                 </plugin>
                 <plugin><groupId>org.sonarsource.scanner.maven</groupId><artifactId>sonar-maven-plugin</artifactId><version>${sonar-maven-plugin.version}</version></plugin>
                 <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version>
