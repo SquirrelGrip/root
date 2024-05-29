@@ -13,11 +13,11 @@
         <activation.version>1.1.1</activation.version>
         <annotations.version>24.1.0</annotations.version>
         <antlr4.version>4.13.1</antlr4.version>
-        <assertj.version>3.25.3</assertj.version>
+        <assertj.version>3.26.0</assertj.version>
         <awaitility.version>4.2.1</awaitility.version>
         <bouncycastle.version>1.70</bouncycastle.version>
         <brave.version>5.17.0</brave.version>
-        <byte-buddy.version>1.14.15</byte-buddy.version>
+        <byte-buddy.version>1.14.16</byte-buddy.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-lang3.version>3.14.0</commons-lang3.version>
         <commons-logging.version>1.3.2</commons-logging.version>
@@ -27,11 +27,11 @@
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
         <elasticsearch.version>7.17.21</elasticsearch.version>
         <feign.version>11.8</feign.version>
-        <httpclient5.version>5.2.3</httpclient5.version>
+        <httpclient5.version>5.3.1</httpclient5.version>
         <httpcore5.version>5.2.4</httpcore5.version>
         <guava.version>33.2.0-jre</guava.version>
         <jackson.version>2.17.1</jackson.version>
-        <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
+        <jakarta.validation-api.version>3.1.0</jakarta.validation-api.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <json-kotlin-schema.version>0.47</json-kotlin-schema.version>
         <jsonschema.version>4.35.0</jsonschema.version>
@@ -39,6 +39,7 @@
         <junit-pioneer.version>2.2.0</junit-pioneer.version>
         <kotlin-extensions.version>1.3.12</kotlin-extensions.version>
         <kotlinx-coroutines.version>1.8.1</kotlinx-coroutines.version>
+        <log4j-core.version>2.23.1</log4j-core.version>
         <logback.version>1.5.6</logback.version>
 <!--        <maven-artifact.version>3.9.6</maven-artifact.version>-->
 <!--        <maven-core.version>3.9.6</maven-core.version>-->
@@ -60,11 +61,11 @@
         <reactor.version>2020.0.15</reactor.version>
         <resilience4j.version>1.7.0</resilience4j.version>
         <slf4j.version>2.0.13</slf4j.version>
-        <spring-batch.version>5.1.1</spring-batch.version>
-        <spring-boot.version>3.2.5</spring-boot.version>
+        <spring-batch.version>5.1.2</spring-batch.version>
+        <spring-boot.version>3.3.0</spring-boot.version>
         <spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
-        <spring-framework.version>6.1.7</spring-framework.version>
-        <spring-integration.version>6.2.4</spring-integration.version>
+        <spring-framework.version>6.1.8</spring-framework.version>
+        <spring-integration.version>6.3.0</spring-integration.version>
         <spring-security.version>6.3.0</spring-security.version>
         <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
         <svnkit.version>1.10.11</svnkit.version>
@@ -97,6 +98,7 @@
             <dependency><groupId>org.antlr</groupId><artifactId>antlr4</artifactId><version>${antlr4.version}</version></dependency>
             <dependency><groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><version>${commons-collections.version}</version></dependency>
             <dependency><groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${commons-lang3.version}</version></dependency>
+            <dependency><groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId><version>${log4j-core.version}</version></dependency>
             <dependency><groupId>org.apache.poi</groupId><artifactId>poi-ooxml</artifactId><version>${poi.version}</version></dependency>
 <!--            <dependency><groupId>org.apache.maven</groupId><artifactId>maven-artifact</artifactId><version>${maven-artifact.version}</version></dependency>-->
 <!--            <dependency><groupId>org.apache.maven</groupId><artifactId>maven-core</artifactId><version>${maven-core.version}</version></dependency>-->
