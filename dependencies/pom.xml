@@ -29,7 +29,7 @@
         <feign.version>11.8</feign.version>
         <httpclient5.version>5.3.1</httpclient5.version>
         <httpcore5.version>5.2.4</httpcore5.version>
-        <guava.version>33.2.0-jre</guava.version>
+        <guava.version>33.2.1-jre</guava.version>
         <jackson.version>2.17.1</jackson.version>
         <jakarta.validation-api.version>3.1.0</jakarta.validation-api.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>

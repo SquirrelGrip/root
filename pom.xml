@@ -52,13 +52,13 @@
         <maven-invoker-plugin.version>3.7.0</maven-invoker-plugin.version>
         <maven-jar-plugin.version>3.4.1</maven-jar-plugin.version>
         <maven-jxr-plugin.version>3.3.2</maven-jxr-plugin.version>
-        <maven-plugin-plugin.version>3.13.0</maven-plugin-plugin.version>
+        <maven-plugin-plugin.version>3.13.1</maven-plugin-plugin.version>
         <maven-project-info-reports-plugin.version>3.5.0</maven-project-info-reports-plugin.version>
         <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-scm-plugin.version>2.1.0</maven-scm-plugin.version>
-        <maven-shade-plugin.version>3.5.3</maven-shade-plugin.version>
-        <maven-site-plugin.version>4.0.0-M14</maven-site-plugin.version>
+        <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
+        <maven-site-plugin.version>4.0.0-M15</maven-site-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
