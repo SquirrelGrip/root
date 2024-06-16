@@ -10,7 +10,6 @@
     <modules>
         <module>dependencies</module>
         <module>kotlin-extensions</module>
-        <module>kotlin-extensions/kotlin-extensions-bookkeeper</module>
     </modules>
 
     <name>${project.artifactId}</name>
