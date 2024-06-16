@@ -25,7 +25,7 @@
         <doxia.version>2.0.0-M16</doxia.version>
         <doxia-sink-api.version>2.0.0-M8</doxia-sink-api.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <elasticsearch.version>7.17.21</elasticsearch.version>
+        <elasticsearch.version>7.17.22</elasticsearch.version>
         <feign.version>11.8</feign.version>
         <httpclient5.version>5.3.1</httpclient5.version>
         <httpcore5.version>5.2.4</httpcore5.version>
@@ -50,10 +50,10 @@
 <!--        <maven-reporting-api.version>4.0.0-M9</maven-reporting-api.version>-->
 <!--        <maven-reporting-impl.version>4.0.0-M12</maven-reporting-impl.version>-->
 <!--        <maven-shared-utils.version>3.4.2</maven-shared-utils.version>-->
-        <micrometer.version>1.13.0</micrometer.version>
+        <micrometer.version>1.13.1</micrometer.version>
         <mockito.version>5.12.0</mockito.version>
         <mockito-kotlin.version>5.3.1</mockito-kotlin.version>
-        <mongodb.version>5.1.0</mongodb.version>
+        <mongodb.version>5.1.1</mongodb.version>
         <plexus-classworlds.version>2.8.0</plexus-classworlds.version>
         <plexus-component-annotations.version>2.2.0</plexus-component-annotations.version>
         <plexus-utils.version>4.0.1</plexus-utils.version>
@@ -64,7 +64,7 @@
         <spring-batch.version>5.1.2</spring-batch.version>
         <spring-boot.version>3.3.0</spring-boot.version>
         <spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
-        <spring-framework.version>6.1.8</spring-framework.version>
+        <spring-framework.version>6.1.9</spring-framework.version>
         <spring-integration.version>6.3.0</spring-integration.version>
         <spring-security.version>6.3.0</spring-security.version>
         <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
