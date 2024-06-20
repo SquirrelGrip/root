@@ -4,7 +4,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>com.github.squirrelgrip</groupId>
-        <version>1.5.2</version>
+        <version>1.5.3</version>
     </parent>
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
@@ -25,11 +25,16 @@
         <doxia.version>2.0.0-M16</doxia.version>
         <doxia-sink-api.version>2.0.0-M8</doxia-sink-api.version>
         <dropwizard-metrics.version>5.0.0</dropwizard-metrics.version>
-        <elasticsearch.version>7.17.21</elasticsearch.version>
+        <elasticsearch.version>7.17.22</elasticsearch.version>
         <feign.version>11.8</feign.version>
         <httpclient5.version>5.3.1</httpclient5.version>
         <httpcore5.version>5.2.4</httpcore5.version>
-        <guava.version>33.2.0-jre</guava.version>
+        <guava.version>33.2.1-jre</guava.version>
+        <google-api-client.version>2.6.0</google-api-client.version>
+        <google-api-services-gmail.version>v1-rev20240520-2.0.0</google-api-services-gmail.version>
+        <google-cloud-libraries-bom.version>26.42.0</google-cloud-libraries-bom.version>
+        <google-cloud-pubsub.version>1.130.1</google-cloud-pubsub.version>
+        <google-oauth-client-jetty.version>1.36.0</google-oauth-client-jetty.version>
         <jackson.version>2.17.1</jackson.version>
         <jakarta.validation-api.version>3.1.0</jakarta.validation-api.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
@@ -41,19 +46,11 @@
         <kotlinx-coroutines.version>1.8.1</kotlinx-coroutines.version>
         <log4j-core.version>2.23.1</log4j-core.version>
         <logback.version>1.5.6</logback.version>
-<!--        <maven-artifact.version>3.9.6</maven-artifact.version>-->
-<!--        <maven-core.version>3.9.6</maven-core.version>-->
-<!--        <maven-model.version>${maven-core.version}</maven-model.version>-->
-<!--        <maven-plugin-annotations.version>3.10.2</maven-plugin-annotations.version>-->
-<!--        <maven-plugin-api.version>${maven-core.version}</maven-plugin-api.version>-->
-<!--        <maven-release-manager.version>3.0.1</maven-release-manager.version>-->
-<!--        <maven-reporting-api.version>4.0.0-M9</maven-reporting-api.version>-->
-<!--        <maven-reporting-impl.version>4.0.0-M12</maven-reporting-impl.version>-->
-<!--        <maven-shared-utils.version>3.4.2</maven-shared-utils.version>-->
-        <micrometer.version>1.13.0</micrometer.version>
+        <mail.version>1.4.7</mail.version>
+        <micrometer.version>1.13.1</micrometer.version>
         <mockito.version>5.12.0</mockito.version>
         <mockito-kotlin.version>5.3.1</mockito-kotlin.version>
-        <mongodb.version>5.1.0</mongodb.version>
+        <mongodb.version>5.1.1</mongodb.version>
         <plexus-classworlds.version>2.8.0</plexus-classworlds.version>
         <plexus-component-annotations.version>2.2.0</plexus-component-annotations.version>
         <plexus-utils.version>4.0.1</plexus-utils.version>
@@ -63,10 +60,11 @@
         <slf4j.version>2.0.13</slf4j.version>
         <spring-batch.version>5.1.2</spring-batch.version>
         <spring-boot.version>3.3.0</spring-boot.version>
-        <spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
-        <spring-framework.version>6.1.8</spring-framework.version>
-        <spring-integration.version>6.3.0</spring-integration.version>
-        <spring-security.version>6.3.0</spring-security.version>
+        <spring-cloud-starter-bootstrap.version>4.1.3</spring-cloud-starter-bootstrap.version>
+        <spring-cloud-starter-zookeeper-config.version>4.1.1</spring-cloud-starter-zookeeper-config.version>
+        <spring-framework.version>6.1.10</spring-framework.version>
+        <spring-integration.version>6.3.1</spring-integration.version>
+        <spring-security.version>6.3.1</spring-security.version>
         <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
         <svnkit.version>1.10.11</svnkit.version>
         <velocity.version>1.7</velocity.version>
@@ -84,13 +82,18 @@
             <dependency><groupId>com.github.victools</groupId><artifactId>jsonschema-generator</artifactId><version>${jsonschema.version}</version></dependency>
             <dependency><groupId>com.github.victools</groupId><artifactId>jsonschema-module-jackson</artifactId><version>${jsonschema.version}</version></dependency>
             <dependency><groupId>com.github.victools</groupId><artifactId>jsonschema-module-jakarta-validation</artifactId><version>${jsonschema.version}</version></dependency>
+            <dependency><groupId>com.google.api-client</groupId><artifactId>google-api-client</artifactId><version>${google-api-client.version}</version></dependency>
+            <dependency><groupId>com.google.apis</groupId><artifactId>google-api-services-gmail</artifactId><version>${google-api-services-gmail.version}</version></dependency>
+            <dependency><groupId>com.google.cloud</groupId><artifactId>google-cloud-pubsub</artifactId><version>${google-cloud-pubsub.version}</version></dependency>
             <dependency><groupId>com.google.guava</groupId><artifactId>guava</artifactId><version>${guava.version}</version></dependency>
+            <dependency><groupId>com.google.oauth-client</groupId><artifactId>google-oauth-client-jetty</artifactId><version>${google-oauth-client-jetty.version}</version></dependency>
             <dependency><groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId><version>${commons-beanutils.version}</version></dependency>
             <dependency><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId><version>${commons-logging.version}</version></dependency>
             <dependency><groupId>io.dropwizard.metrics5</groupId><artifactId>metrics-core</artifactId><version>${dropwizard-metrics.version}</version></dependency>
             <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId><version>${micrometer.version}</version></dependency>
             <dependency><groupId>jakarta.validation</groupId><artifactId>jakarta.validation-api</artifactId><version>${jakarta.validation-api.version}</version></dependency>
             <dependency><groupId>javax.activation</groupId><artifactId>activation</artifactId><version>${activation.version}</version></dependency>
+            <dependency><groupId>javax.mail</groupId><artifactId>mail</artifactId><version>${mail.version}</version></dependency>
             <dependency><groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><version>${javax.servlet-api.version}</version></dependency>
             <dependency><groupId>net.bytebuddy</groupId><artifactId>byte-buddy</artifactId><version>${byte-buddy.version}</version></dependency>
             <dependency><groupId>net.pwall.json</groupId><artifactId>json-kotlin-schema</artifactId><version>${json-kotlin-schema.version}</version></dependency>
@@ -100,17 +103,6 @@
             <dependency><groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${commons-lang3.version}</version></dependency>
             <dependency><groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId><version>${log4j-core.version}</version></dependency>
             <dependency><groupId>org.apache.poi</groupId><artifactId>poi-ooxml</artifactId><version>${poi.version}</version></dependency>
-<!--            <dependency><groupId>org.apache.maven</groupId><artifactId>maven-artifact</artifactId><version>${maven-artifact.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven</groupId><artifactId>maven-core</artifactId><version>${maven-core.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven</groupId><artifactId>maven-model</artifactId><version>${maven-model.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven</groupId><artifactId>maven-plugin-api</artifactId><version>${maven-plugin-api.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven.doxia</groupId><artifactId>doxia-sink-api</artifactId><version>${doxia-sink-api.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven.doxia</groupId><artifactId>doxia-site-renderer</artifactId><version>${doxia.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven.plugin-tools</groupId><artifactId>maven-plugin-annotations</artifactId><version>${maven-plugin-annotations.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven.release</groupId><artifactId>maven-release-manager</artifactId><version>${maven-release-manager.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven.reporting</groupId><artifactId>maven-reporting-api</artifactId><version>${maven-reporting-api.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven.reporting</groupId><artifactId>maven-reporting-impl</artifactId><version>${maven-reporting-impl.version}</version></dependency>-->
-<!--            <dependency><groupId>org.apache.maven.shared</groupId><artifactId>maven-shared-utils</artifactId><version>${maven-shared-utils.version}</version></dependency>-->
             <dependency><groupId>org.apache.velocity</groupId><artifactId>velocity</artifactId><version>${velocity.version}</version></dependency>
             <dependency><groupId>org.assertj</groupId><artifactId>assertj-core</artifactId><version>${assertj.version}</version></dependency>
             <dependency><groupId>org.awaitility</groupId><artifactId>awaitility</artifactId><version>${awaitility.version}</version></dependency>
@@ -135,6 +127,7 @@
             <dependency><groupId>org.tmatesoft.svnkit</groupId><artifactId>svnkit</artifactId><version>${svnkit.version}</version></dependency>
 
             <!--Import POMs-->
+            <dependency><groupId>com.google.cloud</groupId><artifactId>libraries-bom</artifactId><version>${google-cloud-libraries-bom.version}</version><type>pom</type><scope>import</scope></dependency>
             <dependency><groupId>org.jetbrains.kotlin</groupId><artifactId>kotlin-bom</artifactId><version>${kotlin.version}</version><scope>import</scope><type>pom</type></dependency>
             <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>${junit-jupiter.version}</version><scope>import</scope><type>pom</type></dependency>
             <dependency><groupId>com.fasterxml.jackson</groupId><artifactId>jackson-bom</artifactId><version>${jackson.version}</version><scope>import</scope><type>pom</type>
@@ -146,11 +139,33 @@
             </dependency>
             <dependency><groupId>org.apache.httpcomponents.client5</groupId><artifactId>httpclient5-parent</artifactId><version>${httpclient5.version}</version><scope>import</scope><type>pom</type></dependency>
             <dependency><groupId>org.springframework</groupId><artifactId>spring-framework-bom</artifactId><version>${spring-framework.version}</version><scope>import</scope><type>pom</type></dependency>
-            <dependency><groupId>org.springframework.cloud</groupId><artifactId>spring-cloud-starter-zipkin</artifactId><version>${spring-cloud-starter-zipkin.version}</version></dependency>
+            <dependency><groupId>org.springframework.cloud</groupId><artifactId>spring-cloud-starter-bootstrap</artifactId><version>${spring-cloud-starter-bootstrap.version}</version></dependency>
+            <dependency><groupId>org.springframework.cloud</groupId><artifactId>spring-cloud-starter-zookeeper-config</artifactId><version>${spring-cloud-starter-zookeeper-config.version}</version></dependency>
+            <dependency><groupId>org.springframework.cloud</groupId><artifactId>spring-cloud-starter-zookeeper-discovery</artifactId><version>${spring-cloud-starter-zookeeper-config.version}</version></dependency>
             <dependency><groupId>org.springframework.integration</groupId><artifactId>spring-integration-bom</artifactId><version>${spring-integration.version}</version><type>pom</type><scope>import</scope></dependency>
             <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-bom</artifactId><version>${spring-security.version}</version><type>pom</type><scope>import</scope></dependency>
             <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-parent</artifactId><version>${spring-boot.version}</version><type>pom</type><scope>import</scope></dependency>
             <!--@formatter:on-->
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin><groupId>org.codehaus.mojo</groupId><artifactId>properties-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>
+                                ${project.build.outputDirectory}/app.properties
+                            </outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
