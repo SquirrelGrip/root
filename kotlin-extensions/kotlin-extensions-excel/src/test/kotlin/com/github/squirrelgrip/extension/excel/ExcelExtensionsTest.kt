@@ -8,13 +8,12 @@ class ExcelExtensionsTest {
     fun loadWorkbook() {
         val workbook = javaClass.classLoader.getResourceAsStream("ISIN.xls")!!.toWorkbook()
         assertThat(workbook.numberOfSheets).isEqualTo(1)
-        workbook.dump()
     }
 
     @Test
     fun loadSheet() {
         val sheet = javaClass.classLoader.getResourceAsStream("ISIN.xls")!!.getSheetAt(0)
-        sheet.dump()
+        assertThat(sheet.physicalNumberOfRows).isEqualTo(15685)
     }
 
 }
