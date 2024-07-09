@@ -29,7 +29,7 @@
         <antlr4-maven-plugin.version>4.13.1</antlr4-maven-plugin.version>
         <buildplan-maven-plugin.version>2.2.2</buildplan-maven-plugin.version>
         <clirr-maven-plugin.version>2.8</clirr-maven-plugin.version>
-        <dependency-check-maven.version>10.0.1</dependency-check-maven.version>
+        <dependency-check-maven.version>10.0.2</dependency-check-maven.version>
         <dokka-maven-plugin.version>1.9.20</dokka-maven-plugin.version>
         <extra-enforcer-rules.version>1.8.0</extra-enforcer-rules.version>
         <frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
