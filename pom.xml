@@ -297,6 +297,7 @@
                         <ignoredVersion><groupId>org.jetbrains.kotlinx</groupId><artifactIdRegEx>kotlinx-.*</artifactIdRegEx><version>.*-(?:Alpha|Beta|RC)\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.junit.jupiter</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-M\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.slf4j</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:alpha|beta)\d*</version></ignoredVersion>
+                        <ignoredVersion><groupId>javax.mail</groupId><artifactId>mail</artifactId><version>.*-b\d*</version></ignoredVersion>
                         <ignoredVersion><groupIdRegEx>com.fasterxml.jackson.*</groupIdRegEx><artifactIdRegEx>jackson-.*</artifactIdRegEx><version>.*-rc\d*</version></ignoredVersion>
                     </ignoredVersions>
                 </configuration>

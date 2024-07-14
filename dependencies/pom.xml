@@ -63,7 +63,7 @@
         <spring-boot.version>3.3.1</spring-boot.version>
         <spring-cloud-starter-bootstrap.version>4.1.4</spring-cloud-starter-bootstrap.version>
         <spring-cloud-starter-zookeeper-config.version>4.1.2</spring-cloud-starter-zookeeper-config.version>
-        <spring-data-rest-hal-explorer.version>4.3.1</spring-data-rest-hal-explorer.version>
+        <spring-data-rest-hal-explorer.version>4.3.2</spring-data-rest-hal-explorer.version>
         <spring-framework.version>6.1.11</spring-framework.version>
         <spring-integration.version>6.3.1</spring-integration.version>
         <spring-security.version>6.3.1</spring-security.version>
