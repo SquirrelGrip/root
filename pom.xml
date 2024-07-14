@@ -60,7 +60,7 @@
         <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
         <maven-site-plugin.version>4.0.0-M15</maven-site-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.3.0</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
         <sisu-maven-plugin.version>0.9.0.M3</sisu-maven-plugin.version>
@@ -285,11 +285,13 @@
                 <configuration>
                     <processTransitive>false</processTransitive>
                     <ignoredVersions>
+                        <ignoredVersion><groupId>com.diffplug.spotless</groupId><artifactId>spotless-maven-plugin</artifactId><version>.*\.BETA\d</version></ignoredVersion>
                         <ignoredVersion><groupId>com.google.guava</groupId><artifactId>guava</artifactId><version>.*-android</version></ignoredVersion>
                         <ignoredVersion><groupId>org.apache.commons</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-M\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.apache.httpcomponents.client5</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:alpha|beta)\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.apache.logging.log4j</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:alpha|beta)\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.apache.maven</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:alpha|beta)-\d+</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.apache.maven.plugins</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:alpha|beta)-\d+</version></ignoredVersion>
                         <ignoredVersion><groupId>org.elasticsearch.client</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-alpha\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.jetbrains.kotlin</groupId><artifactIdRegEx>kotlin-.*</artifactIdRegEx><version>.*-(?:Alpha|Beta|RC)\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.jetbrains.kotlinx</groupId><artifactIdRegEx>kotlinx-.*</artifactIdRegEx><version>.*-(?:Alpha|Beta|RC)\d*</version></ignoredVersion>
