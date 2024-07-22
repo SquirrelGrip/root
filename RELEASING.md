@@ -1,6 +1,6 @@
 # Manual Release
 ```
-./mvnw --batch-mode -s settings.xml -U clean jgitflow:release-start -PgitflowStart && ./mvnw --batch-mode -s settings.xml -U jgitflow:release-finish
+./mvnw --batch-mode -s settings.xml -U clean jgitflow:release-start -PjgitflowStart && ./mvnw --batch-mode -s settings.xml -U jgitflow:release-finish
 ```
 
 # Cleaning a Failed Deploy
