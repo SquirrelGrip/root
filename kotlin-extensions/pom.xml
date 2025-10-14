@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.github.squirrelgrip</groupId>
         <artifactId>dependencies</artifactId>
-        <version>1.6.0-SNAPSHOT</version>
+        <version>1.6.0</version>
         <relativePath>../dependencies</relativePath>
     </parent>
     <artifactId>kotlin-extensions</artifactId>
