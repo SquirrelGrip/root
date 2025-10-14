@@ -30,9 +30,16 @@ fun Any.toYaml(dataOutput: DataOutput) = Yaml.objectMapper.writeValue(dataOutput
 inline fun <reified T> String.toInstance(): T = Yaml.objectMapper.readValue(this, T::class.java)
 inline fun <reified T> InputStream.toInstance(): T = Yaml.objectMapper.readValue(this, T::class.java)
 inline fun <reified T> Reader.toInstance(): T = Yaml.objectMapper.readValue(this, T::class.java)
-inline fun <reified T> URL.toInstance(): T = Yaml.objectMapper.readValue(this, T::class.java)
+
+inline fun <reified T> URL.toInstance(): T =
+    this.openStream().use {
+        Yaml.objectMapper.readValue(it, T::class.java)
+    }
+
 inline fun <reified T> ByteArray.toInstance(): T = Yaml.objectMapper.readValue(this, T::class.java)
-inline fun <reified T> ByteArray.toInstance(offset: Int, len: Int): T = Yaml.objectMapper.readValue(this, offset, len, T::class.java)
+inline fun <reified T> ByteArray.toInstance(offset: Int, len: Int): T =
+    Yaml.objectMapper.readValue(this, offset, len, T::class.java)
+
 inline fun <reified T> DataInput.toInstance(): T = Yaml.objectMapper.readValue(this, T::class.java)
 inline fun <reified T> File.toInstance(): T = Yaml.objectMapper.readValue(this, T::class.java)
 inline fun <reified T> Path.toInstance(): T = Yaml.objectMapper.readValue(this.toFile(), T::class.java)
@@ -40,7 +47,14 @@ inline fun <reified T> Path.toInstance(): T = Yaml.objectMapper.readValue(this.t
 fun String.isYaml(): Boolean = notCatching { this.toJsonNode() }
 fun InputStream.isYaml(): Boolean = notCatching { this.toJsonNode() }
 fun Reader.isYaml(): Boolean = notCatching { this.toJsonNode() }
-fun URL.isYaml(): Boolean = notCatching { this.toJsonNode() }
+
+fun URL.isYaml(): Boolean =
+    notCatching {
+        this.openStream().use {
+            it.toJsonNode()
+        }
+    }
+
 fun ByteArray.isYaml(): Boolean = notCatching { this.toJsonNode() }
 fun ByteArray.isYaml(offset: Int, length: Int): Boolean = notCatching { this.toJsonNode(offset, length) }
 fun JsonParser.isYaml(): Boolean = notCatching { this.toJsonNode() }
@@ -50,7 +64,12 @@ fun Path.isYaml(): Boolean = notCatching { this.toFile().toJsonNode() }
 fun String.toJsonNode(): JsonNode = Yaml.objectMapper.readTree(this)
 fun InputStream.toJsonNode(): JsonNode = Yaml.objectMapper.readTree(this)
 fun Reader.toJsonNode(): JsonNode = Yaml.objectMapper.readTree(this)
-fun URL.toJsonNode(): JsonNode = Yaml.objectMapper.readTree(this)
+
+fun URL.toJsonNode(): JsonNode =
+    this.openStream().use {
+        Yaml.objectMapper.readTree(it)
+    }
+
 fun ByteArray.toJsonNode(): JsonNode = Yaml.objectMapper.readTree(this)
 fun ByteArray.toJsonNode(offset: Int, length: Int): JsonNode = Yaml.objectMapper.readTree(this, offset, length)
 fun JsonParser.toJsonNode(): JsonNode = Yaml.objectMapper.readTree(this)
@@ -60,7 +79,12 @@ fun Path.toJsonNode(): JsonNode = Yaml.objectMapper.readTree(this.toFile())
 fun String.toJsonParser(): JsonParser = Yaml.objectMapper.createParser(this)
 fun InputStream.toJsonParser(): JsonParser = Yaml.objectMapper.createParser(this)
 fun Reader.toJsonParser(): JsonParser = Yaml.objectMapper.createParser(this)
-fun URL.toJsonParser(): JsonParser = Yaml.objectMapper.createParser(this)
+
+fun URL.toJsonParser(): JsonParser =
+    this.openStream().use {
+        Yaml.objectMapper.createParser(it)
+    }
+
 fun ByteArray.toJsonParser(): JsonParser = Yaml.objectMapper.createParser(this)
 fun ByteArray.toJsonParser(offset: Int, length: Int): JsonParser = Yaml.objectMapper.createParser(this, offset, length)
 fun File.toJsonParser(): JsonParser = Yaml.objectMapper.createParser(this)

@@ -2,50 +2,50 @@ package com.github.squirrelgrip.extension.collection
 
 import org.antlr.v4.runtime.*
 
-object StringCompiler : Compiler<String>() {
-    override fun matches(
-        control: String,
-        candidate: String
-    ): Boolean =
-        control == candidate
+sealed class Compiler<T> {
+    object StringCompiler : Compiler<String>() {
+        override fun matches(
+            control: String,
+            candidate: String
+        ): Boolean =
+            control == candidate
 
-    override fun matchesRegex(regex: Regex, candidate: String): Boolean =
-        regex.matches(candidate)
-}
+        override fun matchesRegex(regex: Regex, candidate: String): Boolean =
+            regex.matches(candidate)
+    }
 
-object CollectionStringCompiler : Compiler<Collection<String>>() {
-    override fun matches(
-        control: String,
-        candidate: Collection<String>
-    ): Boolean =
-        control in candidate
+    object CollectionStringCompiler : Compiler<Collection<String>>() {
+        override fun matches(
+            control: String,
+            candidate: Collection<String>
+        ): Boolean =
+            control in candidate
 
-    override fun matchesRegex(
-        regex: Regex,
-        candidate: Collection<String>
-    ): Boolean =
-        candidate.any {
-            regex.matches(it)
-        }
-}
+        override fun matchesRegex(
+            regex: Regex,
+            candidate: Collection<String>
+        ): Boolean =
+            candidate.any {
+                regex.matches(it)
+            }
+    }
 
-object SequenceStringCompiler : Compiler<Sequence<String>>() {
-    override fun matches(
-        control: String,
-        candidate: Sequence<String>
-    ): Boolean =
-        control in candidate
+    object SequenceStringCompiler : Compiler<Sequence<String>>() {
+        override fun matches(
+            control: String,
+            candidate: Sequence<String>
+        ): Boolean =
+            control in candidate
 
-    override fun matchesRegex(
-        regex: Regex,
-        candidate: Sequence<String>
-    ): Boolean =
-        candidate.any {
-            regex.matches(it)
-        }
-}
+        override fun matchesRegex(
+            regex: Regex,
+            candidate: Sequence<String>
+        ): Boolean =
+            candidate.any {
+                regex.matches(it)
+            }
+    }
 
-abstract class Compiler<T> {
     private val visitor: DrainerParserBaseVisitor<(T) -> Boolean> =
         object : DrainerParserBaseVisitor<(T) -> Boolean>() {
             override fun visitPredicate(ctx: DrainerParser.PredicateContext): (T) -> Boolean = {
@@ -139,7 +139,14 @@ abstract class Compiler<T> {
             }
         } + '$').toRegex()
 
-    fun compile(expression: String): (T) -> Boolean =
+    private val cache: LRUCache<String, ((T) -> Boolean)?> = LRUCache()
+
+    fun getOrCompile(expression: String): (T) -> Boolean =
+        cache.computeIfAbsent(expression) {
+            compile(expression)
+        } ?: {false}
+
+    private fun compile(expression: String): ((T) -> Boolean)? =
         if (expression.isNotBlank()) {
             visitor.visit(
                 DrainerParser(
@@ -165,10 +172,10 @@ abstract class Compiler<T> {
                 }.predicate()
             )
         } else {
-            { false }
+            null
         }
 
-    private fun prepare(
+    fun prepare(
         expression: String?,
         aliases: Map<String, String>
     ): ((T) -> Boolean)? =
@@ -178,6 +185,6 @@ abstract class Compiler<T> {
                     expression.replace(variable, "(${value})")
                 }
         }?.let {
-            compile(it)
+            getOrCompile(it)
         }
 }

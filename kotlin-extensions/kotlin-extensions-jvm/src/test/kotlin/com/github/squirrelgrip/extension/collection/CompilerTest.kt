@@ -1,7 +1,7 @@
 package com.github.squirrelgrip.extension.collection
 
+import com.github.squirrelgrip.extension.collection.Compiler.CollectionStringCompiler
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -36,6 +36,7 @@ internal class CompilerTest {
             9 to setOfEmpty,
         )
 
+        val LARGE_LIST = (32..126).map { it.toChar().toString() }
 
         data class TestClass(val value: String)
 
@@ -349,7 +350,7 @@ internal class CompilerTest {
             }.flatten()
 
         fun assertValues(expression: String, vararg index: Int) {
-            val compile = testSubject.compile(expression)
+            val compile = testSubject.getOrCompile(expression)
             collection.forEach { pair ->
                 assertThat(compile.invoke(pair.second)).apply {
                     if (pair.first in index) {
@@ -393,7 +394,15 @@ internal class CompilerTest {
     @ParameterizedTest
     @MethodSource
     fun validExpression(expression: String) {
-        testSubject.compile(expression)
+        testSubject.getOrCompile(expression)
+    }
+
+    @Test
+    fun validLargeList() {
+        assertThat(LARGE_LIST.filterByExpression("A")).hasSize(1)
+        assertThat(LARGE_LIST.filterByExpression("A|B")).hasSize(2)
+        assertThat(LARGE_LIST.findByExpression("A|B")).contains("A")
+        assertThat(LARGE_LIST.findByExpression("B|A")).contains("A")
     }
 
     private fun escape(a: String): String =
