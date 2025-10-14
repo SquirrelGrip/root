@@ -1,5 +1,6 @@
 package com.github.squirrelgrip.extension.collection
 
+import com.github.squirrelgrip.extension.collection.Compiler.StringCompiler
 import java.util.*
 
 inline fun <reified E : Enum<E>> Collection<E>?.toEnumSet(): EnumSet<E> =

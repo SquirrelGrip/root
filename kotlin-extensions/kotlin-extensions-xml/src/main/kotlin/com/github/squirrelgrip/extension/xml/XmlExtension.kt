@@ -30,9 +30,16 @@ fun Any.toXml(dataOutput: DataOutput) = Xml.objectMapper.writeValue(dataOutput, 
 inline fun <reified T> String.toInstance(): T = Xml.objectMapper.readValue(this, T::class.java)
 inline fun <reified T> InputStream.toInstance(): T = Xml.objectMapper.readValue(this, T::class.java)
 inline fun <reified T> Reader.toInstance(): T = Xml.objectMapper.readValue(this, T::class.java)
-inline fun <reified T> URL.toInstance(): T = Xml.objectMapper.readValue(this, T::class.java)
+
+inline fun <reified T> URL.toInstance(): T =
+    this.openStream().use {
+        Xml.objectMapper.readValue(it, T::class.java)
+    }
+
 inline fun <reified T> ByteArray.toInstance(): T = Xml.objectMapper.readValue(this, T::class.java)
-inline fun <reified T> ByteArray.toInstance(offset: Int, len: Int): T = Xml.objectMapper.readValue(this, offset, len, T::class.java)
+inline fun <reified T> ByteArray.toInstance(offset: Int, len: Int): T =
+    Xml.objectMapper.readValue(this, offset, len, T::class.java)
+
 inline fun <reified T> DataInput.toInstance(): T = Xml.objectMapper.readValue(this, T::class.java)
 inline fun <reified T> File.toInstance(): T = Xml.objectMapper.readValue(this, T::class.java)
 inline fun <reified T> Path.toInstance(): T = Xml.objectMapper.readValue(this.toFile(), T::class.java)
@@ -40,7 +47,12 @@ inline fun <reified T> Path.toInstance(): T = Xml.objectMapper.readValue(this.to
 fun String.toJsonNode(): JsonNode = Xml.objectMapper.readTree(this)
 fun InputStream.toJsonNode(): JsonNode = Xml.objectMapper.readTree(this)
 fun Reader.toJsonNode(): JsonNode = Xml.objectMapper.readTree(this)
-fun URL.toJsonNode(): JsonNode = Xml.objectMapper.readTree(this)
+
+fun URL.toJsonNode(): JsonNode =
+    this.openStream().use {
+        Xml.objectMapper.readTree(it)
+    }
+
 fun ByteArray.toJsonNode(): JsonNode = Xml.objectMapper.readTree(this)
 fun ByteArray.toJsonNode(offset: Int, length: Int): JsonNode = Xml.objectMapper.readTree(this, offset, length)
 fun JsonParser.toJsonNode(): JsonNode = Xml.objectMapper.readTree(this)
@@ -50,7 +62,14 @@ fun Path.toJsonNode(): JsonNode = Xml.objectMapper.readTree(this.toFile())
 fun String.isXml(): Boolean = notCatching { this.toJsonNode() }
 fun InputStream.isXml(): Boolean = notCatching { this.toJsonNode() }
 fun Reader.isXml(): Boolean = notCatching { this.toJsonNode() }
-fun URL.isXml(): Boolean = notCatching { this.toJsonNode() }
+
+fun URL.isXml(): Boolean =
+    notCatching {
+        this.openStream().use {
+            it.toJsonNode()
+        }
+    }
+
 fun ByteArray.isXml(): Boolean = notCatching { this.toJsonNode() }
 fun ByteArray.isXml(offset: Int, length: Int): Boolean = notCatching { this.toJsonNode(offset, length) }
 fun JsonParser.isXml(): Boolean = notCatching { this.toJsonNode() }
@@ -60,7 +79,12 @@ fun Path.isXml(): Boolean = notCatching { this.toFile().toJsonNode() }
 fun String.toJsonParser(): JsonParser = Xml.objectMapper.createParser(this)
 fun InputStream.toJsonParser(): JsonParser = Xml.objectMapper.createParser(this)
 fun Reader.toJsonParser(): JsonParser = Xml.objectMapper.createParser(this)
-fun URL.toJsonParser(): JsonParser = Xml.objectMapper.createParser(this)
+
+fun URL.toJsonParser(): JsonParser =
+    this.openStream().use {
+        Xml.objectMapper.createParser(it)
+    }
+
 fun ByteArray.toJsonParser(): JsonParser = Xml.objectMapper.createParser(this)
 fun ByteArray.toJsonParser(offset: Int, length: Int): JsonParser = Xml.objectMapper.createParser(this, offset, length)
 fun File.toJsonParser(): JsonParser = Xml.objectMapper.createParser(this)

@@ -1,5 +1,7 @@
 package com.github.squirrelgrip.extension.collection
 
+import com.github.squirrelgrip.extension.collection.Compiler.*
+
 class SequenceHandler<T, U>(
     expression: String?,
     private val source: Sequence<T>,
@@ -9,12 +11,11 @@ class SequenceHandler<T, U>(
 ) {
     private val predicate: ((U) -> Boolean)? =
         expression?.let {
-            aliases.asSequence()
-                .fold(it) { expression, (variable, value) ->
-                    expression.replace(variable, "(${value})")
-                }
-        }?.let {
-            compiler.compile(it)
+            if(aliases.isEmpty()) {
+                compiler.getOrCompile(it)
+            } else {
+                compiler.prepare(it, aliases)
+            }
         }
 
     private inline fun evaluate(predicate: (U) -> Boolean, it: T): Boolean =

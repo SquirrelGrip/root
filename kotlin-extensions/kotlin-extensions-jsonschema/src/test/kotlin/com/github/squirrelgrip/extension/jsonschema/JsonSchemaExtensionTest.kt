@@ -307,18 +307,18 @@ data class BasicClass(
 )
 
 data class JacksonClass(
-    @JsonProperty(value = "s", required = true) @JsonPropertyDescription("s") val s: String,
-    @JsonProperty(value = "i", required = true) val i: Int,
-    @JsonProperty(value = "f", required = true) val f: Float,
-    @JsonProperty(value = "d", required = true) val d: Double,
-    @JsonProperty(value = "sNull", required = false) val sNull: String?,
-    @JsonProperty(value = "iNull", required = false) val iNull: Int?,
-    @JsonProperty(value = "fNull", required = false) val fNull: Float?,
-    @JsonProperty(value = "dNull", required = false) val dNull: Double?,
-    @JsonProperty(value = "listString", required = false) val listString: List<String>,
-    @JsonProperty(value = "listInt", required = false) val listInt: List<Int>,
-    @JsonProperty(value = "listFloat", required = false) val listFloat: List<Float>,
-    @JsonProperty(value = "listDouble", required = false) val listDouble: List<Double>,
+    @param:JsonProperty(value = "s", required = true) @param:JsonPropertyDescription("s") val s: String,
+    @param:JsonProperty(value = "i", required = true) val i: Int,
+    @param:JsonProperty(value = "f", required = true) val f: Float,
+    @param:JsonProperty(value = "d", required = true) val d: Double,
+    @param:JsonProperty(value = "sNull", required = false) val sNull: String?,
+    @param:JsonProperty(value = "iNull", required = false) val iNull: Int?,
+    @param:JsonProperty(value = "fNull", required = false) val fNull: Float?,
+    @param:JsonProperty(value = "dNull", required = false) val dNull: Double?,
+    @param:JsonProperty(value = "listString", required = false) val listString: List<String>,
+    @param:JsonProperty(value = "listInt", required = false) val listInt: List<Int>,
+    @param:JsonProperty(value = "listFloat", required = false) val listFloat: List<Float>,
+    @param:JsonProperty(value = "listDouble", required = false) val listDouble: List<Double>,
 )
 
 data class SubClass(
@@ -349,17 +349,17 @@ class ArbitraryClass {
 
 @JsonTypeName("Person")
 data class ArbitraryDataClass(
-    @JsonProperty(value = "firstName", required = true)
-    @JsonPropertyDescription("The person's first name.")
+    @param:JsonProperty(value = "firstName", required = true)
+    @param:JsonPropertyDescription("The person's first name.")
     val first: String,
 
-    @JsonProperty(value = "lastName", required = true)
-    @JsonPropertyDescription("The person's last name.")
+    @param:JsonProperty(value = "lastName", required = true)
+    @param:JsonPropertyDescription("The person's last name.")
     val last: String,
 
-    @JsonProperty(value = "age", required = true)
-    @JsonPropertyDescription("Age in years which must be equal to or greater than zero.")
-    @Min(value = 0)
+    @param:JsonProperty(value = "age", required = true)
+    @param:JsonPropertyDescription("Age in years which must be equal to or greater than zero.")
+    @param:Min(value = 0)
     val age: Int
 )
 

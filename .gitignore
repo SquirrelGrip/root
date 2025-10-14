@@ -4,10 +4,10 @@ $RECYCLE.BIN/
 *.class
 *.ctxt
 *.ear
-*.ear*.iml
+*.iml
 *.iws
 *.jar
-*.jar*.launch
+*.launch
 *.lnk
 *.log
 *.msi
