@@ -8,6 +8,8 @@
     </parent>
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <url>${project.scm.url}</url>
 
     <properties>
         <activation.version>1.1.1</activation.version>

@@ -9,6 +9,8 @@
     <artifactId>kotlin-extensions-jvm</artifactId>
     <description>A collection of useful kotlin extensions</description>
     <name>${project.artifactId}</name>
+    <url>${project.scm.url}</url>
+
 
     <dependencies>
         <dependency><groupId>com.fasterxml.jackson.core</groupId><artifactId>jackson-databind</artifactId></dependency>

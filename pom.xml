@@ -28,6 +28,7 @@
 
         <antlr4-maven-plugin.version>4.13.2</antlr4-maven-plugin.version>
         <buildplan-maven-plugin.version>2.2.2</buildplan-maven-plugin.version>
+        <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
         <clirr-maven-plugin.version>2.8</clirr-maven-plugin.version>
         <dependency-check-maven.version>12.1.7</dependency-check-maven.version>
         <dokka-maven-plugin.version>2.0.0</dokka-maven-plugin.version>
@@ -63,7 +64,7 @@
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
-        <sisu-maven-plugin.version>0.9.0.M4</sisu-maven-plugin.version>
+        <sisu-maven-plugin.version>${central-publishing-maven-plugin.version}.M4</sisu-maven-plugin.version>
         <sonar-maven-plugin.version>5.2.0.4988</sonar-maven-plugin.version>
         <spotless-maven-plugin.version>3.0.0</spotless-maven-plugin.version>
         <spring-boot-maven-plugin.version>3.5.6</spring-boot-maven-plugin.version>
@@ -244,17 +245,27 @@
                     </executions>
                 </plugin>
                 <plugin><groupId>org.sonarsource.scanner.maven</groupId><artifactId>sonar-maven-plugin</artifactId><version>${sonar-maven-plugin.version}</version></plugin>
-                <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version>
+<!--                <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version>-->
+<!--                    <extensions>true</extensions>-->
+<!--                    <configuration>-->
+<!--                        <serverId>ossrh</serverId>-->
+<!--                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+<!--                        <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
+                <plugin>
+                    <groupId>org.sonatype.central</groupId><artifactId>central-publishing-maven-plugin</artifactId><version>${central-publishing-maven-plugin.version}</version>
                     <extensions>true</extensions>
                     <configuration>
-                        <serverId>ossrh</serverId>
-                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        <autoPublish>true</autoPublish>
+                        <publishingServerId>central</publishingServerId>
+                        <waitUntil>published</waitUntil>
                     </configuration>
                 </plugin>
                 <plugin><groupId>org.springdoc</groupId><artifactId>springdoc-openapi-maven-plugin</artifactId><version>${springdoc-openapi-maven-plugin.version}</version></plugin>
                 <plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId><version>${spring-boot-maven-plugin.version}</version></plugin>
                 <!--@formatter:on-->
+
             </plugins>
         </pluginManagement>
 
@@ -273,7 +284,8 @@
             <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>${maven-gpg-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId><version>${maven-deploy-plugin.version}</version></plugin>
-            <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version></plugin>
+<!--            <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version></plugin>-->
+            <plugin><groupId>org.sonatype.central</groupId><artifactId>central-publishing-maven-plugin</artifactId><version>${central-publishing-maven-plugin.version}</version></plugin>
             <!--@formatter:on-->
         </plugins>
     </build>
