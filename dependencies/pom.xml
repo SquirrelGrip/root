@@ -50,7 +50,7 @@
         <log4j-core.version>2.25.2</log4j-core.version>
         <logback.version>1.5.19</logback.version>
         <mail.version>1.4.7</mail.version>
-        <micrometer.version>1.15.4</micrometer.version>
+        <micrometer.version>1.15.5</micrometer.version>
         <mockito.version>5.20.0</mockito.version>
         <mockito-kotlin.version>6.1.0</mockito-kotlin.version>
         <mongodb.version>5.6.1</mongodb.version>
