@@ -94,4 +94,4 @@ fi
 # Placeholders for additional repo checks
 section "Post-release repo checks"
 echo "(TODO) Verify release branch removal and git tag presence for ${VERSION}"
-git rev-parse --verify "release/$VERSION" && echo "Branch release/$VERSION still exists."; exit 1;
+git rev-parse --verify "release/$VERSION" > /dev/null 2> /dev/null && echo "Branch release/$VERSION still exists."; exit 1;
