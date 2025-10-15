@@ -54,6 +54,8 @@ BASIC_TOKEN=$(printf '%s' "${OSSRH_TOKEN_NAME}:${OSSRH_TOKEN_PASSWORD}" | base64
 
 # SpotlessCheck
 section "Checking spotless"
+./mvnw spotless:check || { echo "ERROR: Spotless check failed. Run './mvnw spotless:apply' to fix." >&2; exit 1; };
+
 # Check if the current version is already deployed
 section "Checking if version ${VERSION} is already published on Central"
 PUBLISHED=$(curl -s "https://central.sonatype.com/api/v1/publisher/published?namespace=com.github.squirrelgrip&name=root&version=${VERSION}" \
@@ -66,7 +68,7 @@ fi
 
 # Start the Release (intentionally commented; run manually once checks pass)
 section "Starting release via jgitflow"
-echo "./mvnw --batch-mode -s settings.xml -U clean jgitflow:release-start -PjgitflowStart"
+./mvnw --batch-mode -s settings.xml -U clean jgitflow:release-start -PjgitflowStart
 if [ $? != 0 ]; then
     echo "Artifact failed to prepare for release"
     exit 1
@@ -74,7 +76,7 @@ fi
 
 # Finish the Release (intentionally commented; run manually once checks pass)
 section "Finishing release via jgitflow"
-echo "./mvnw --batch-mode -s settings.xml -U jgitflow:release-finish"
+./mvnw --batch-mode -s settings.xml -U jgitflow:release-finish
 if [ $? != 0 ]; then
     echo "Artifact failed to complete release"
     exit 1
@@ -92,3 +94,4 @@ fi
 # Placeholders for additional repo checks
 section "Post-release repo checks"
 echo "(TODO) Verify release branch removal and git tag presence for ${VERSION}"
+git rev-parse --verify "release/$VERSION" && echo "Branch release/$VERSION still exists."; exit 1;
