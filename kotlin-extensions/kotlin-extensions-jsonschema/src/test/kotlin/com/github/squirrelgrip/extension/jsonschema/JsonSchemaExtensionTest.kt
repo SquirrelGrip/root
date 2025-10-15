@@ -170,7 +170,9 @@ class JsonSchemaExtensionTest {
 
     @Test
     fun toJsonSchema_WithSubClass_WithDefinition() {
-        assertThat(WithSubClass::class.java.toJsonSchema(JsonSchema.with(Option.DEFINITIONS_FOR_ALL_OBJECTS))).isEqualTo(
+        assertThat(
+            WithSubClass::class.java.toJsonSchema(JsonSchema.with(Option.DEFINITIONS_FOR_ALL_OBJECTS))
+        ).isEqualTo(
             """
                 {
                     "${"\$"}schema":"https://json-schema.org/draft/2020-12/schema",
@@ -303,7 +305,7 @@ data class BasicClass(
     val listString: List<String>,
     val listInt: List<Int>,
     val listFloat: List<Float>,
-    val listDouble: List<Double>,
+    val listDouble: List<Double>
 )
 
 data class JacksonClass(
@@ -318,7 +320,7 @@ data class JacksonClass(
     @param:JsonProperty(value = "listString", required = false) val listString: List<String>,
     @param:JsonProperty(value = "listInt", required = false) val listInt: List<Int>,
     @param:JsonProperty(value = "listFloat", required = false) val listFloat: List<Float>,
-    @param:JsonProperty(value = "listDouble", required = false) val listDouble: List<Double>,
+    @param:JsonProperty(value = "listDouble", required = false) val listDouble: List<Double>
 )
 
 data class SubClass(
@@ -352,14 +354,11 @@ data class ArbitraryDataClass(
     @param:JsonProperty(value = "firstName", required = true)
     @param:JsonPropertyDescription("The person's first name.")
     val first: String,
-
     @param:JsonProperty(value = "lastName", required = true)
     @param:JsonPropertyDescription("The person's last name.")
     val last: String,
-
     @param:JsonProperty(value = "age", required = true)
     @param:JsonPropertyDescription("Age in years which must be equal to or greater than zero.")
     @param:Min(value = 0)
     val age: Int
 )
-

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
@@ -168,10 +168,8 @@
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>${maven-gpg-plugin.version}</version>
                     <configuration>
                         <executable>gpg</executable>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <keyname>${env.GPG_KEYNAME}</keyname>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <passphrase>${env.GPG_PASSPHRASE}</passphrase>
+                        <keyEnvName>GPG_KEYNAME</keyEnvName>
+                        <passphraseEnvName>GPG_PASSPHRASE</passphraseEnvName>
                     </configuration>
                     <executions>
                         <execution><id>sign-artifacts</id><phase>deploy</phase><goals><goal>sign</goal></goals></execution>
@@ -304,6 +302,7 @@
                         <ignoredVersion><groupId>org.apache.logging.log4j</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:alpha|beta)\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.apache.maven</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:alpha|beta)-\d+</version></ignoredVersion>
                         <ignoredVersion><groupId>org.apache.maven.plugins</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:alpha|beta)-\d+</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.assertj</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:M)\d+</version></ignoredVersion>
                         <ignoredVersion><groupId>org.elasticsearch.client</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-alpha\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.jetbrains.kotlin</groupId><artifactIdRegEx>kotlin-.*</artifactIdRegEx><version>.*-(?:Alpha|Beta|RC)\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>org.jetbrains.kotlinx</groupId><artifactIdRegEx>kotlinx-.*</artifactIdRegEx><version>.*-(?:Alpha|Beta|RC)\d*</version></ignoredVersion>
@@ -311,6 +310,10 @@
                         <ignoredVersion><groupId>org.slf4j</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:alpha|beta)\d*</version></ignoredVersion>
                         <ignoredVersion><groupId>javax.mail</groupId><artifactId>mail</artifactId><version>.*-b\d*</version></ignoredVersion>
                         <ignoredVersion><groupIdRegEx>com.fasterxml.jackson.*</groupIdRegEx><artifactIdRegEx>jackson-.*</artifactIdRegEx><version>.*-rc\d*</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.flywaydb</groupId><artifactId>flyway-commandline</artifactId><version>.*</version></ignoredVersion>
+                        <ignoredVersion><groupIdRegEx>org.springframework.*</groupIdRegEx><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:M)\d+</version></ignoredVersion>
+                        <ignoredVersion><groupId>io.micrometer</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:M)\d+</version></ignoredVersion>
+                        <ignoredVersion><groupId>org.jetbrains.dokka</groupId><artifactIdRegEx>.*</artifactIdRegEx><version>.*-(?:Beta)</version></ignoredVersion>
                     </ignoredVersions>
                 </configuration>
             </plugin>

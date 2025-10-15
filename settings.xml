@@ -18,8 +18,8 @@
             </activation>
             <properties>
                 <gpg.executable>gpg</gpg.executable>
-                <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
-                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+                <gpg.keyEnvName>GPG_KEYNAME</gpg.keyEnvName>
+                <gpg.passphraseEnvName>GPG_PASSPHRASE</gpg.passphraseEnvName>
             </properties>
             <repositories>
                 <repository>

@@ -7,18 +7,22 @@ import com.fasterxml.jackson.dataformat.protobuf.schema.ProtobufSchema
 import com.github.squirrelgrip.format.ObjectMapperFactory
 import com.github.squirrelgrip.format.SchemaDataFormat
 import com.github.squirrelgrip.util.notCatching
-import java.io.*
+import java.io.DataInput
+import java.io.DataOutput
+import java.io.File
+import java.io.InputStream
+import java.io.OutputStream
+import java.io.Reader
+import java.io.Writer
 import java.net.URL
 import java.nio.file.Path
 
 object Protobuf : SchemaDataFormat<ProtobufMapper, ProtobufMapper.Builder, ProtobufSchema>(
     object : ObjectMapperFactory<ProtobufMapper, ProtobufMapper.Builder> {
-        override fun builder(): ProtobufMapper.Builder =
-            ProtobufMapper.builder()
+        override fun builder(): ProtobufMapper.Builder = ProtobufMapper.builder()
     }
 ) {
-    override fun getSchema(clazz: Class<*>): ProtobufSchema =
-        objectMapper.generateSchemaFor(clazz)
+    override fun getSchema(clazz: Class<*>): ProtobufSchema = objectMapper.generateSchemaFor(clazz)
 }
 
 /**
@@ -27,20 +31,30 @@ object Protobuf : SchemaDataFormat<ProtobufMapper, ProtobufMapper.Builder, Proto
 fun Any.toProtobuf(schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)): ByteArray =
     Protobuf.objectWriter(schema).writeValueAsBytes(this)
 
-fun Any.toProtobuf(file: File, schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)) =
-    Protobuf.objectWriter(schema).writeValue(file, this)
+fun Any.toProtobuf(
+    file: File,
+    schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)
+) = Protobuf.objectWriter(schema).writeValue(file, this)
 
-fun Any.toProtobuf(path: Path, schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)) =
-    Protobuf.objectWriter(schema).writeValue(path.toFile(), this)
+fun Any.toProtobuf(
+    path: Path,
+    schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)
+) = Protobuf.objectWriter(schema).writeValue(path.toFile(), this)
 
-fun Any.toProtobuf(outputStream: OutputStream, schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)) =
-    Protobuf.objectWriter(schema).writeValue(outputStream, this)
+fun Any.toProtobuf(
+    outputStream: OutputStream,
+    schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)
+) = Protobuf.objectWriter(schema).writeValue(outputStream, this)
 
-fun Any.toProtobuf(writer: Writer, schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)) =
-    Protobuf.objectWriter(schema).writeValue(writer, this)
+fun Any.toProtobuf(
+    writer: Writer,
+    schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)
+) = Protobuf.objectWriter(schema).writeValue(writer, this)
 
-fun Any.toProtobuf(dataOutput: DataOutput, schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)) =
-    Protobuf.objectWriter(schema).writeValue(dataOutput, this)
+fun Any.toProtobuf(
+    dataOutput: DataOutput,
+    schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)
+) = Protobuf.objectWriter(schema).writeValue(dataOutput, this)
 
 inline fun <reified T> String.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T =
     Protobuf.objectReader<T>(schema).readValue(this)
@@ -107,7 +121,9 @@ inline fun <reified T> Path.toInstanceList(schema: ProtobufSchema = Protobuf.get
     Protobuf.listObjectReader<T>(schema).readValue(this.toFile())
 
 fun String.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this)
+
 fun InputStream.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this)
+
 fun Reader.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this)
 
 fun URL.toJsonNode(): JsonNode =
@@ -116,13 +132,22 @@ fun URL.toJsonNode(): JsonNode =
     }
 
 fun ByteArray.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this)
-fun ByteArray.toJsonNode(offset: Int, length: Int): JsonNode = Protobuf.objectMapper.readTree(this, offset, length)
+
+fun ByteArray.toJsonNode(
+    offset: Int,
+    length: Int
+): JsonNode = Protobuf.objectMapper.readTree(this, offset, length)
+
 fun JsonParser.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this)
+
 fun File.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this)
+
 fun Path.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this.toFile())
 
 fun String.isProtobuf(): Boolean = notCatching { this.toJsonNode() }
+
 fun InputStream.isProtobuf(): Boolean = notCatching { this.toJsonNode() }
+
 fun Reader.isProtobuf(): Boolean = notCatching { this.toJsonNode() }
 
 fun URL.isProtobuf(): Boolean =
@@ -133,7 +158,14 @@ fun URL.isProtobuf(): Boolean =
     }
 
 fun ByteArray.isProtobuf(): Boolean = notCatching { this.toJsonNode() }
-fun ByteArray.isProtobuf(offset: Int, length: Int): Boolean = notCatching { this.toJsonNode(offset, length) }
+
+fun ByteArray.isProtobuf(
+    offset: Int,
+    length: Int
+): Boolean = notCatching { this.toJsonNode(offset, length) }
+
 fun JsonParser.isProtobuf(): Boolean = notCatching { this.toJsonNode() }
+
 fun File.isProtobuf(): Boolean = notCatching { this.toJsonNode() }
+
 fun Path.isProtobuf(): Boolean = notCatching { this.toFile().toJsonNode() }
