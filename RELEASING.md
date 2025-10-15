@@ -1,3 +1,27 @@
+# Pre Release Steps
+- Get current version
+```
+VERSION=./mvnw help:evaluate -Dexpression=project.version | grep -v '\[INFO\]' | sed 's/-SNAPSHOT//g'
+```
+
+- Confirm GPG is configured
+```
+./mvnw --batch-mode -s settings.xml -U package gpg:sign -Dgpg.keyEnvName=GPG_KEYNAME -Dgpg.passphraseEnvName=GPG_PASSPHRASE
+```
+
+- Confirm GITHUB token is valid
+```
+curl -H "Authorization: token $GIT_TOKEN" https://api.github.com/user
+```
+- Confirm OSS token is valid
+```
+BEARER_TOKEN=$(printf "$OSSRG_TOKEN_NAME:$OSSRH_TOKEN_PASSWORD"| base64)
+curl -X 'GET' \
+  'https://central.sonatype.com/api/v1/publisher/published?namespace=com.github.squirrelgrip&name=root&version=$VERSION' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Basic $BEARER_TOKEN'
+```
+
 # Manual Release
 ```
 ./mvnw --batch-mode -s settings.xml -U clean jgitflow:release-start -PjgitflowStart && ./mvnw --batch-mode -s settings.xml -U jgitflow:release-finish
@@ -9,6 +33,10 @@ There are situations where the artifact has been deployed, however the changes h
 ./mvnw --batch-mode -U clean jgitflow:release-finish -DnoDeploy=true -DskipPublishing=true
 ```
 
+# Verify Deployment
+```
+curl -H 'accept: application/json' -H 'Authorization: Basic cXF5N1FtOm5uTHByMFVMNlJSM2JPVWs3SFdmYllVRXNZS3BPU0JTMA==' 'https://central.sonatype.com/api/v1/publisher/published?namespace=com.github.squirrelgrip&name=root&version=$VERSION'
+```
 # Getting a new GitHub token (Personal Access Token)
 If you need to authenticate Git operations during a release (push branches/tags, trigger workflows, or access GitHub Packages), create a new GitHub Personal Access Token (PAT). As of 2025, GitHub recommends Fine-grained PATs.
 

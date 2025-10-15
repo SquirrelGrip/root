@@ -1,25 +1,29 @@
 package com.github.squirrelgrip.extension.collection
 
-import org.antlr.v4.runtime.*
+import org.antlr.v4.runtime.BaseErrorListener
+import org.antlr.v4.runtime.CharStreams
+import org.antlr.v4.runtime.CommonTokenStream
+import org.antlr.v4.runtime.RecognitionException
+import org.antlr.v4.runtime.Recognizer
 
 sealed class Compiler<T> {
     object StringCompiler : Compiler<String>() {
         override fun matches(
             control: String,
             candidate: String
-        ): Boolean =
-            control == candidate
+        ): Boolean = control == candidate
 
-        override fun matchesRegex(regex: Regex, candidate: String): Boolean =
-            regex.matches(candidate)
+        override fun matchesRegex(
+            regex: Regex,
+            candidate: String
+        ): Boolean = regex.matches(candidate)
     }
 
     object CollectionStringCompiler : Compiler<Collection<String>>() {
         override fun matches(
             control: String,
             candidate: Collection<String>
-        ): Boolean =
-            control in candidate
+        ): Boolean = control in candidate
 
         override fun matchesRegex(
             regex: Regex,
@@ -34,8 +38,7 @@ sealed class Compiler<T> {
         override fun matches(
             control: String,
             candidate: Sequence<String>
-        ): Boolean =
-            control in candidate
+        ): Boolean = control in candidate
 
         override fun matchesRegex(
             regex: Regex,
@@ -48,9 +51,10 @@ sealed class Compiler<T> {
 
     private val visitor: DrainerParserBaseVisitor<(T) -> Boolean> =
         object : DrainerParserBaseVisitor<(T) -> Boolean>() {
-            override fun visitPredicate(ctx: DrainerParser.PredicateContext): (T) -> Boolean = {
-                visit(ctx.expression()).invoke(it)
-            }
+            override fun visitPredicate(ctx: DrainerParser.PredicateContext): (T) -> Boolean =
+                {
+                    visit(ctx.expression()).invoke(it)
+                }
 
             override fun visitLiteralExpression(ctx: DrainerParser.LiteralExpressionContext): (T) -> Boolean =
                 {
@@ -110,14 +114,12 @@ sealed class Compiler<T> {
     fun matchesGlob(
         globString: String,
         candidate: T
-    ): Boolean =
-        matchesRegex(globToRegEx(globString), candidate)
+    ): Boolean = matchesRegex(globToRegEx(globString), candidate)
 
     fun matchesRegex(
         regexString: String,
         candidate: T
-    ): Boolean =
-        matchesRegex(regexString.toRegex(), candidate)
+    ): Boolean = matchesRegex(regexString.toRegex(), candidate)
 
     abstract fun matchesRegex(
         regex: Regex,
@@ -130,21 +132,24 @@ sealed class Compiler<T> {
     ): Boolean
 
     private fun globToRegEx(glob: String): Regex =
-        (glob.foldIndexed("^") { _, acc, next ->
-            acc + when (next) {
-                '*' -> ".*"
-                '?' -> '.'
-                '.' -> "\\."
-                else -> next
-            }
-        } + '$').toRegex()
+        (
+            glob.foldIndexed("^") { _, acc, next ->
+                acc +
+                    when (next) {
+                        '*' -> ".*"
+                        '?' -> '.'
+                        '.' -> "\\."
+                        else -> next
+                    }
+            } + '$'
+        ).toRegex()
 
     private val cache: LRUCache<String, ((T) -> Boolean)?> = LRUCache()
 
     fun getOrCompile(expression: String): (T) -> Boolean =
         cache.computeIfAbsent(expression) {
             compile(expression)
-        } ?: {false}
+        } ?: { false }
 
     private fun compile(expression: String): ((T) -> Boolean)? =
         if (expression.isNotBlank()) {
@@ -156,19 +161,20 @@ sealed class Compiler<T> {
                         )
                     )
                 ).also {
-                    it.addErrorListener(object : BaseErrorListener() {
-                        override fun syntaxError(
-                            recognizer: Recognizer<*, *>?,
-                            offendingSymbol: Any?,
-                            line: Int,
-                            charPositionInLine: Int,
-                            message: String?,
-                            recognitionException: RecognitionException?
-                        ) {
-                            throw Exception("Invalid Expression: $message")
+                    it.addErrorListener(
+                        object : BaseErrorListener() {
+                            override fun syntaxError(
+                                recognizer: Recognizer<*, *>?,
+                                offendingSymbol: Any?,
+                                line: Int,
+                                charPositionInLine: Int,
+                                message: String?,
+                                recognitionException: RecognitionException?
+                            ) {
+                                throw Exception("Invalid Expression: $message")
+                            }
                         }
-
-                    })
+                    )
                 }.predicate()
             )
         } else {
@@ -182,7 +188,7 @@ sealed class Compiler<T> {
         expression?.let {
             aliases.asSequence()
                 .fold(it) { expression, (variable, value) ->
-                    expression.replace(variable, "(${value})")
+                    expression.replace(variable, "($value)")
                 }
         }?.let {
             getOrCompile(it)
