@@ -88,6 +88,8 @@ inline fun <reified T> File.toInstance(schema: JavaPropsSchema = JavaProps.getSc
 inline fun <reified T> Path.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T =
     JavaProps.objectReader<T>(schema).readValue(this.toFile(), T::class.java)
 
+fun Any.toJsonNode(): JsonNode = JavaProps.objectMapper.valueToTree(this)
+
 fun String.toJsonNode(): JsonNode = JavaProps.objectMapper.readTree(this)
 
 fun InputStream.toJsonNode(): JsonNode = JavaProps.objectMapper.readTree(this)

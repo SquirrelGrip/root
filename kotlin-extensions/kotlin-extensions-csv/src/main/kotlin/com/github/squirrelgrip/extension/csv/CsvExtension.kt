@@ -148,6 +148,8 @@ inline fun <reified T> File.toInstanceList(schema: CsvSchema = Csv.getSchema(T::
 inline fun <reified T> Path.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> =
     Csv.listObjectReader<T>(schema).readValue(this.toFile())
 
+fun Any.toJsonNode(): JsonNode = Csv.objectMapper.valueToTree(this)
+
 fun String.toJsonNode(): JsonNode = Csv.objectMapper.readTree(this)
 
 fun InputStream.toJsonNode(): JsonNode = Csv.objectMapper.readTree(this)

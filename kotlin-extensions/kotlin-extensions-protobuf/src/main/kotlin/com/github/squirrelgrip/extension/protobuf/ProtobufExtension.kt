@@ -120,6 +120,8 @@ inline fun <reified T> File.toInstanceList(schema: ProtobufSchema = Protobuf.get
 inline fun <reified T> Path.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> =
     Protobuf.listObjectReader<T>(schema).readValue(this.toFile())
 
+fun Any.toJsonNode(): JsonNode = Protobuf.objectMapper.valueToTree(this)
+
 fun String.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this)
 
 fun InputStream.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this)

@@ -61,6 +61,8 @@ inline fun <reified T> File.toInstance(): T = Xml.objectMapper.readValue(this, T
 
 inline fun <reified T> Path.toInstance(): T = Xml.objectMapper.readValue(this.toFile(), T::class.java)
 
+fun Any.toJsonNode(): JsonNode = Xml.objectMapper.valueToTree(this)
+
 fun String.toJsonNode(): JsonNode = Xml.objectMapper.readTree(this)
 
 fun InputStream.toJsonNode(): JsonNode = Xml.objectMapper.readTree(this)

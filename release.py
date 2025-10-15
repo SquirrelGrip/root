@@ -71,6 +71,21 @@ def resolve_version() -> str:
     return version
 
 
+def resolve_project_name() -> str:
+    section("Resolving project name")
+    # Use -DforceStdout and strip trailing -SNAPSHOT only
+    proc = run([
+        "./mvnw", "-q", "-Dexec.skip=true", "help:evaluate",
+        "-Dexpression=project.artifactId", "-DforceStdout"
+    ], check=True, quiet=True)
+    name = (proc.stdout or "").strip()
+    print(f"name={name}")
+    if not name:
+        sys.stderr.write("ERROR: Could not resolve project.name\n")
+        sys.exit(1)
+    return name
+
+
 def verify_gpg_and_build():
     section("Verifying GPG signing setup by building and signing")
     cmd = [
@@ -130,10 +145,10 @@ def spotless_check():
         sys.exit(1)
 
 
-def is_published(version: str, basic_token: str) -> bool:
+def is_published(name: str, version: str, basic_token: str) -> bool:
     url = (
         "https://central.sonatype.com/api/v1/publisher/published"
-        f"?namespace=com.github.squirrelgrip&name=root&version={urllib.parse.quote(version)}"
+        f"?namespace=com.github.squirrelgrip&name={name}&version={urllib.parse.quote(version)}"
     )
     code, body = http_get(url, headers={
         "accept": "application/json",
@@ -182,13 +197,14 @@ def main():
     need("gpg")
 
     version = resolve_version()
+    name = resolve_project_name()
     verify_gpg_and_build()
     github_auth_check()
     basic_token = ossrh_validate_and_basic_token()
     spotless_check()
 
     section(f"Checking if version {version} is already published on Central")
-    if is_published(version, basic_token):
+    if is_published(name, version, basic_token):
         sys.stderr.write("Artifact already published. You need to update the version using './mvnw versions:set'\n")
         sys.exit(1)
 
@@ -197,7 +213,7 @@ def main():
     jgitflow_release_finish()
 
     section(f"Re-checking publication status for version {version}")
-    if not is_published(version, basic_token):
+    if not is_published(name, version, basic_token):
         sys.stderr.write("Artifact was not published.\n")
         sys.exit(1)
 

@@ -178,6 +178,8 @@ fun File.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
 
 fun Path.toJsonParser(): JsonParser = Json.objectMapper.createParser(this.toFile())
 
+fun Any.toJsonNode(): JsonNode = Json.objectMapper.valueToTree(this)
+
 fun String.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
 
 fun InputStream.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
