@@ -85,8 +85,8 @@ fi
 # Check if the artifact is deployed successfully (repeat published check)
 section "Re-checking publication status for version ${VERSION}"
 PUBLISHED=$(curl -s "https://central.sonatype.com/api/v1/publisher/published?namespace=com.github.squirrelgrip&name=root&version=${VERSION}" \
-  -H "accept: application/json" -H "Authorization: Basic ${BASIC_TOKEN}" | jq -r '.published // false')
-if [ PUBLISHED == 'true' ]; then
+  -H "accept: application/json" -H "Authorization: Basic ${BASIC_TOKEN}" | jq -r '.published')
+if [ "$PUBLISHED" == "false" ]; then
     echo "Artifact was not published."
     exit 1
 fi
