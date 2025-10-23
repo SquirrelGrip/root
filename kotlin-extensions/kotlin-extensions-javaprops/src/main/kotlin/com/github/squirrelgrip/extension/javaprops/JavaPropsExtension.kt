@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsSchema
-import com.github.squirrelgrip.format.ObjectMapperFactory
-import com.github.squirrelgrip.format.SchemaDataFormat
+import com.github.squirrelgrip.extension.jackson.ObjectMapperFactory
+import com.github.squirrelgrip.extension.jackson.SchemaDataFormat
 import com.github.squirrelgrip.util.notCatching
 import java.io.DataInput
 import java.io.DataOutput
@@ -28,8 +28,7 @@ object JavaProps : SchemaDataFormat<JavaPropsMapper, JavaPropsMapper.Builder, Ja
 /**
  * Converts Any to a JavaProps representation
  */
-fun Any.toJavaProps(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): String =
-    JavaProps.objectWriter(schema).writeValueAsString(this)
+fun Any.toJavaProps(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): String = JavaProps.objectWriter(schema).writeValueAsString(this)
 
 fun Any.toJavaProps(
     file: File,
@@ -56,22 +55,18 @@ fun Any.toJavaProps(
     schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)
 ) = JavaProps.objectWriter(schema).writeValue(dataOutput, this)
 
-inline fun <reified T> String.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T =
-    JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> String.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T = JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
 
-inline fun <reified T> InputStream.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T =
-    JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> InputStream.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T = JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
 
-inline fun <reified T> Reader.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T =
-    JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> Reader.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T = JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
 
 inline fun <reified T> URL.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T =
     this.openStream().use {
         JavaProps.objectReader<T>(schema).readValue(it, T::class.java)
     }
 
-inline fun <reified T> ByteArray.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T =
-    JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> ByteArray.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T = JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
 
 inline fun <reified T> ByteArray.toInstance(
     offset: Int,
@@ -79,14 +74,13 @@ inline fun <reified T> ByteArray.toInstance(
     schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)
 ): T = JavaProps.objectReader<T>(schema).readValue(this, offset, len, T::class.java)
 
-inline fun <reified T> DataInput.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T =
-    JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> DataInput.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T = JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
 
-inline fun <reified T> File.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T =
-    JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> File.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T = JavaProps.objectReader<T>(schema).readValue(this, T::class.java)
 
-inline fun <reified T> Path.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T =
-    JavaProps.objectReader<T>(schema).readValue(this.toFile(), T::class.java)
+inline fun <reified T> Path.toInstance(schema: JavaPropsSchema = JavaProps.getSchema(this.javaClass)): T = JavaProps.objectReader<T>(schema).readValue(this.toFile(), T::class.java)
+
+fun Any.toJsonNode(): JsonNode = JavaProps.objectMapper.valueToTree(this)
 
 fun String.toJsonNode(): JsonNode = JavaProps.objectMapper.readTree(this)
 

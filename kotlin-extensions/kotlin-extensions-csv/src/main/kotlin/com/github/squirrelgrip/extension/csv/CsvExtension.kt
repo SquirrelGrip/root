@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.dataformat.csv.CsvMapper
 import com.fasterxml.jackson.dataformat.csv.CsvSchema
-import com.github.squirrelgrip.format.ObjectMapperFactory
-import com.github.squirrelgrip.format.SchemaDataFormat
+import com.github.squirrelgrip.extension.jackson.ObjectMapperFactory
+import com.github.squirrelgrip.extension.jackson.SchemaDataFormat
 import com.github.squirrelgrip.util.notCatching
 import java.io.DataInput
 import java.io.DataOutput
@@ -28,8 +28,7 @@ object Csv : SchemaDataFormat<CsvMapper, CsvMapper.Builder, CsvSchema>(
 /**
  * Converts Any to a CSV representation
  */
-fun Any.toCsv(schema: CsvSchema = Csv.getSchema(this.javaClass)): String =
-    Csv.objectWriter(schema).writeValueAsString(this)
+fun Any.toCsv(schema: CsvSchema = Csv.getSchema(this.javaClass)): String = Csv.objectWriter(schema).writeValueAsString(this)
 
 fun Any.toCsv(
     file: File,
@@ -56,8 +55,7 @@ fun Any.toCsv(
     schema: CsvSchema = Csv.getSchema(this.javaClass)
 ) = Csv.objectWriter(schema).writeValue(dataOutput, this)
 
-inline fun <reified T> Iterable<T>.toCsv(schema: CsvSchema = Csv.getSchema(T::class.java)): String =
-    Csv.objectWriter(schema).writeValueAsString(this)
+inline fun <reified T> Iterable<T>.toCsv(schema: CsvSchema = Csv.getSchema(T::class.java)): String = Csv.objectWriter(schema).writeValueAsString(this)
 
 inline fun <reified T> Iterable<T>.toCsv(
     file: File,
@@ -84,22 +82,18 @@ inline fun <reified T> Iterable<T>.toCsv(
     schema: CsvSchema = Csv.getSchema(T::class.java)
 ) = Csv.objectWriter(schema).writeValue(dataOutput, this)
 
-inline fun <reified T> String.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T =
-    Csv.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> String.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T = Csv.objectReader<T>(schema).readValue(this, T::class.java)
 
-inline fun <reified T> InputStream.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T =
-    Csv.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> InputStream.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T = Csv.objectReader<T>(schema).readValue(this, T::class.java)
 
-inline fun <reified T> Reader.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T =
-    Csv.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> Reader.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T = Csv.objectReader<T>(schema).readValue(this, T::class.java)
 
 inline fun <reified T> URL.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T =
     this.openStream().use {
         Csv.objectReader<T>(schema).readValue(it, T::class.java)
     }
 
-inline fun <reified T> ByteArray.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T =
-    Csv.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> ByteArray.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T = Csv.objectReader<T>(schema).readValue(this, T::class.java)
 
 inline fun <reified T> ByteArray.toInstance(
     offset: Int,
@@ -107,31 +101,24 @@ inline fun <reified T> ByteArray.toInstance(
     schema: CsvSchema = Csv.getSchema(T::class.java)
 ): T = Csv.objectReader<T>(schema).readValue(this, offset, len, T::class.java)
 
-inline fun <reified T> DataInput.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T =
-    Csv.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> DataInput.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T = Csv.objectReader<T>(schema).readValue(this, T::class.java)
 
-inline fun <reified T> File.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T =
-    Csv.objectReader<T>(schema).readValue(this, T::class.java)
+inline fun <reified T> File.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T = Csv.objectReader<T>(schema).readValue(this, T::class.java)
 
-inline fun <reified T> Path.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T =
-    Csv.objectReader<T>(schema).readValue(this.toFile(), T::class.java)
+inline fun <reified T> Path.toInstance(schema: CsvSchema = Csv.getSchema(T::class.java)): T = Csv.objectReader<T>(schema).readValue(this.toFile(), T::class.java)
 
-inline fun <reified T> String.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> =
-    Csv.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> String.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> = Csv.listObjectReader<T>(schema).readValue(this)
 
-inline fun <reified T> InputStream.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> =
-    Csv.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> InputStream.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> = Csv.listObjectReader<T>(schema).readValue(this)
 
-inline fun <reified T> Reader.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> =
-    Csv.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> Reader.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> = Csv.listObjectReader<T>(schema).readValue(this)
 
 inline fun <reified T> URL.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> =
     this.openStream().use {
         Csv.listObjectReader<T>(schema).readValue(it)
     }
 
-inline fun <reified T> ByteArray.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> =
-    Csv.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> ByteArray.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> = Csv.listObjectReader<T>(schema).readValue(this)
 
 inline fun <reified T> ByteArray.toInstanceList(
     offset: Int,
@@ -139,14 +126,13 @@ inline fun <reified T> ByteArray.toInstanceList(
     schema: CsvSchema = Csv.getSchema(T::class.java)
 ): List<T> = Csv.listObjectReader<T>(schema).readValue(this, offset, len)
 
-inline fun <reified T> DataInput.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> =
-    Csv.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> DataInput.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> = Csv.listObjectReader<T>(schema).readValue(this)
 
-inline fun <reified T> File.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> =
-    Csv.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> File.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> = Csv.listObjectReader<T>(schema).readValue(this)
 
-inline fun <reified T> Path.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> =
-    Csv.listObjectReader<T>(schema).readValue(this.toFile())
+inline fun <reified T> Path.toInstanceList(schema: CsvSchema = Csv.getSchema(T::class.java)): List<T> = Csv.listObjectReader<T>(schema).readValue(this.toFile())
+
+fun Any.toJsonNode(): JsonNode = Csv.objectMapper.valueToTree(this)
 
 fun String.toJsonNode(): JsonNode = Csv.objectMapper.readTree(this)
 

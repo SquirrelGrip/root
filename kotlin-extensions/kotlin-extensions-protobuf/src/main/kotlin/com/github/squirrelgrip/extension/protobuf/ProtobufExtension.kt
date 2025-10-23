@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.dataformat.protobuf.ProtobufMapper
 import com.fasterxml.jackson.dataformat.protobuf.schema.ProtobufSchema
-import com.github.squirrelgrip.format.ObjectMapperFactory
-import com.github.squirrelgrip.format.SchemaDataFormat
+import com.github.squirrelgrip.extension.jackson.ObjectMapperFactory
+import com.github.squirrelgrip.extension.jackson.SchemaDataFormat
 import com.github.squirrelgrip.util.notCatching
 import java.io.DataInput
 import java.io.DataOutput
@@ -28,8 +28,7 @@ object Protobuf : SchemaDataFormat<ProtobufMapper, ProtobufMapper.Builder, Proto
 /**
  * Converts Any to a Protobuf representation
  */
-fun Any.toProtobuf(schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)): ByteArray =
-    Protobuf.objectWriter(schema).writeValueAsBytes(this)
+fun Any.toProtobuf(schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)): ByteArray = Protobuf.objectWriter(schema).writeValueAsBytes(this)
 
 fun Any.toProtobuf(
     file: File,
@@ -56,22 +55,18 @@ fun Any.toProtobuf(
     schema: ProtobufSchema = Protobuf.getSchema(this.javaClass)
 ) = Protobuf.objectWriter(schema).writeValue(dataOutput, this)
 
-inline fun <reified T> String.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T =
-    Protobuf.objectReader<T>(schema).readValue(this)
+inline fun <reified T> String.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T = Protobuf.objectReader<T>(schema).readValue(this)
 
-inline fun <reified T> InputStream.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T =
-    Protobuf.objectReader<T>(schema).readValue(this)
+inline fun <reified T> InputStream.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T = Protobuf.objectReader<T>(schema).readValue(this)
 
-inline fun <reified T> Reader.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T =
-    Protobuf.objectReader<T>(schema).readValue(this)
+inline fun <reified T> Reader.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T = Protobuf.objectReader<T>(schema).readValue(this)
 
 inline fun <reified T> URL.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T =
     this.openStream().use {
         Protobuf.objectReader<T>(schema).readValue(it)
     }
 
-inline fun <reified T> ByteArray.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T =
-    Protobuf.objectReader<T>(schema).readValue(this)
+inline fun <reified T> ByteArray.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T = Protobuf.objectReader<T>(schema).readValue(this)
 
 inline fun <reified T> ByteArray.toInstance(
     offset: Int,
@@ -79,31 +74,24 @@ inline fun <reified T> ByteArray.toInstance(
     schema: ProtobufSchema = Protobuf.getSchema(T::class.java)
 ): T = Protobuf.objectReader<T>(schema).readValue(this, offset, len)
 
-inline fun <reified T> DataInput.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T =
-    Protobuf.objectReader<T>(schema).readValue(this)
+inline fun <reified T> DataInput.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T = Protobuf.objectReader<T>(schema).readValue(this)
 
-inline fun <reified T> File.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T =
-    Protobuf.objectReader<T>(schema).readValue(this)
+inline fun <reified T> File.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T = Protobuf.objectReader<T>(schema).readValue(this)
 
-inline fun <reified T> Path.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T =
-    Protobuf.objectReader<T>(schema).readValue(this.toFile())
+inline fun <reified T> Path.toInstance(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): T = Protobuf.objectReader<T>(schema).readValue(this.toFile())
 
-inline fun <reified T> String.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> =
-    Protobuf.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> String.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> = Protobuf.listObjectReader<T>(schema).readValue(this)
 
-inline fun <reified T> InputStream.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> =
-    Protobuf.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> InputStream.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> = Protobuf.listObjectReader<T>(schema).readValue(this)
 
-inline fun <reified T> Reader.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> =
-    Protobuf.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> Reader.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> = Protobuf.listObjectReader<T>(schema).readValue(this)
 
 inline fun <reified T> URL.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> =
     this.openStream().use {
         Protobuf.listObjectReader<T>(schema).readValue(it)
     }
 
-inline fun <reified T> ByteArray.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> =
-    Protobuf.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> ByteArray.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> = Protobuf.listObjectReader<T>(schema).readValue(this)
 
 inline fun <reified T> ByteArray.toInstanceList(
     offset: Int,
@@ -111,14 +99,13 @@ inline fun <reified T> ByteArray.toInstanceList(
     schema: ProtobufSchema = Protobuf.getSchema(T::class.java)
 ): List<T> = Protobuf.listObjectReader<T>(schema).readValue(this, offset, len)
 
-inline fun <reified T> DataInput.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> =
-    Protobuf.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> DataInput.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> = Protobuf.listObjectReader<T>(schema).readValue(this)
 
-inline fun <reified T> File.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> =
-    Protobuf.listObjectReader<T>(schema).readValue(this)
+inline fun <reified T> File.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> = Protobuf.listObjectReader<T>(schema).readValue(this)
 
-inline fun <reified T> Path.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> =
-    Protobuf.listObjectReader<T>(schema).readValue(this.toFile())
+inline fun <reified T> Path.toInstanceList(schema: ProtobufSchema = Protobuf.getSchema(T::class.java)): List<T> = Protobuf.listObjectReader<T>(schema).readValue(this.toFile())
+
+fun Any.toJsonNode(): JsonNode = Protobuf.objectMapper.valueToTree(this)
 
 fun String.toJsonNode(): JsonNode = Protobuf.objectMapper.readTree(this)
 

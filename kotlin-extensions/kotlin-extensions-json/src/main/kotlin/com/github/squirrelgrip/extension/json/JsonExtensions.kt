@@ -4,13 +4,11 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.json.JsonMapper
-import com.github.squirrelgrip.format.DataFormat
-import com.github.squirrelgrip.format.ObjectMapperFactory
-import com.github.squirrelgrip.format.toJsonSequence
-import com.github.squirrelgrip.format.toJsonStream
+import com.github.squirrelgrip.extension.jackson.JacksonDataFormat
+import com.github.squirrelgrip.extension.jackson.JsonIterator
+import com.github.squirrelgrip.extension.jackson.JsonSequence
+import com.github.squirrelgrip.extension.jackson.ObjectMapperFactory
 import com.github.squirrelgrip.util.notCatching
-import java.io.DataInput
-import java.io.DataOutput
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
@@ -18,13 +16,19 @@ import java.io.Reader
 import java.io.Writer
 import java.net.URL
 import java.nio.file.Path
+import java.util.Spliterators
 import java.util.stream.Stream
+import java.util.stream.StreamSupport
 
-object Json : DataFormat<JsonMapper, JsonMapper.Builder>(
+object Json : JacksonDataFormat<JsonMapper, JsonMapper.Builder>(
     object : ObjectMapperFactory<JsonMapper, JsonMapper.Builder> {
         override fun builder(): JsonMapper.Builder = JsonMapper.builder()
     }
 )
+
+inline fun <reified T> JsonParser.toJsonStream(): Stream<T> = StreamSupport.stream(Spliterators.spliteratorUnknownSize(JsonIterator(this, T::class.java), 0), false)
+
+inline fun <reified T> JsonParser.toJsonSequence(): Sequence<T> = JsonSequence(this, T::class.java)
 
 /**
  * Converts Any to a JSON String representation
@@ -38,8 +42,6 @@ fun Any.toJson(path: Path) = Json.objectWriter().writeValue(path.toFile(), this)
 fun Any.toJson(outputStream: OutputStream) = Json.objectWriter().writeValue(outputStream, this)
 
 fun Any.toJson(writer: Writer) = Json.objectWriter().writeValue(writer, this)
-
-fun Any.toJson(dataOutput: DataOutput) = Json.objectWriter().writeValue(dataOutput, this)
 
 inline fun <reified T> String.toInstance(): T = Json.objectReader<T>().readValue(this)
 
@@ -64,8 +66,6 @@ inline fun <reified T> ByteArray.toInstance(
         len,
         T::class.java
     )
-
-inline fun <reified T> DataInput.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
 
 inline fun <reified T> JsonParser.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
 
@@ -96,8 +96,6 @@ inline fun <reified T> ByteArray.toInstanceList(
         len
     )
 
-inline fun <reified T> DataInput.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
-
 inline fun <reified T> JsonParser.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
 
 inline fun <reified T> File.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
@@ -121,10 +119,11 @@ inline fun <reified T> ByteArray.toJsonStream(
     offset: Int,
     length: Int
 ): Stream<T> =
-    this.toJsonParser(
-        offset,
-        length
-    ).toJsonStream<T>()
+    this
+        .toJsonParser(
+            offset,
+            length
+        ).toJsonStream<T>()
 
 inline fun <reified T> File.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
 
@@ -147,10 +146,11 @@ inline fun <reified T> ByteArray.toJsonSequence(
     offset: Int,
     length: Int
 ): Sequence<T> =
-    this.toJsonParser(
-        offset,
-        length
-    ).toJsonSequence<T>()
+    this
+        .toJsonParser(
+            offset,
+            length
+        ).toJsonSequence<T>()
 
 inline fun <reified T> File.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
 
@@ -177,6 +177,8 @@ fun ByteArray.toJsonParser(
 fun File.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
 
 fun Path.toJsonParser(): JsonParser = Json.objectMapper.createParser(this.toFile())
+
+fun Any.toJsonNode(): JsonNode = Json.objectMapper.valueToTree(this)
 
 fun String.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
 
@@ -229,7 +231,8 @@ fun File.isJson(): Boolean = notCatching { this.toJsonNode() }
 fun Path.isJson(): Boolean = notCatching { this.toFile().toJsonNode() }
 
 fun Any.convertToMap(): Map<String, *> =
-    Json.objectMapper.convertValue(
-        this,
-        object : TypeReference<Map<String, *>>() {}
-    ).toMap()
+    Json.objectMapper
+        .convertValue(
+            this,
+            object : TypeReference<Map<String, *>>() {}
+        ).toMap()
