@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.dataformat.protobuf.ProtobufMapper
 import com.fasterxml.jackson.dataformat.protobuf.schema.ProtobufSchema
-import com.github.squirrelgrip.format.ObjectMapperFactory
-import com.github.squirrelgrip.format.SchemaDataFormat
+import com.github.squirrelgrip.extension.jackson.ObjectMapperFactory
+import com.github.squirrelgrip.extension.jackson.SchemaDataFormat
 import com.github.squirrelgrip.util.notCatching
 import java.io.DataInput
 import java.io.DataOutput

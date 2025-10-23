@@ -16,11 +16,14 @@
         <module>kotlin-extensions-csv</module>
         <module>kotlin-extensions-excel</module>
         <module>kotlin-extensions-format</module>
+        <module>kotlin-extensions-gson</module>
+        <module>kotlin-extensions-jackson</module>
         <module>kotlin-extensions-javaprops</module>
         <module>kotlin-extensions-json</module>
         <module>kotlin-extensions-jsonschema</module>
         <module>kotlin-extensions-jvm</module>
         <module>kotlin-extensions-protobuf</module>
+        <module>kotlin-extensions-serialization</module>
         <module>kotlin-extensions-xml</module>
         <module>kotlin-extensions-yaml</module>
 <!--        <module>kotlin-extensions-spring-integration</module>-->
@@ -30,7 +33,9 @@
         <dependencies>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-csv</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-excel</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-gson</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-format</artifactId><version>${project.version}</version></dependency>
+            <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-jackson</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-javaprops</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-json</artifactId><version>${project.version}</version></dependency>
             <dependency><groupId>com.github.squirrelgrip</groupId><artifactId>kotlin-extensions-jvm</artifactId><version>${project.version}</version></dependency>

@@ -53,7 +53,7 @@ class JsonExtensionTest {
     @Test
     fun `exception to json`() {
         val diff = JsonDiff.asJson(
-            Exception("Message").toJson().toJsonNode(),
+            Exception("Message").toJsonNode(),
             """{"cause":null,"message":"Message","localizedMessage":"Message","suppressed":[]}""".toJsonNode()
         )
         assertThat(diff).isEmpty()

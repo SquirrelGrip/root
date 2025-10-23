@@ -20,13 +20,6 @@ if [ -z "${VERSION}" ]; then
   exit 1
 fi
 
-# Check if gpg is configured correctly (will try to sign built artifacts)
-section "Verifying GPG signing setup by building and signing"
-./mvnw --batch-mode -s settings.xml -U -q package gpg:sign -Dgpg.keyEnvName=GPG_KEYNAME -Dgpg.passphraseEnvName=GPG_PASSPHRASE -DskipTests || {
-  echo "ERROR: GPG signing failed. Ensure GPG_KEYNAME and GPG_PASSPHRASE env vars are set and key is available." >&2
-  exit 1
-}
-
 # Resolve GitHub token from common env var names
 GITHUB_TOKEN_COMBINED=${GITHUB_TOKEN:-${GH_TOKEN:-${GIT_TOKEN:-}}}
 section "Checking GitHub token authentication"
@@ -52,10 +45,6 @@ if [ -z "${OSSRH_TOKEN_PASSWORD:-}" ]; then
 fi
 BASIC_TOKEN=$(printf '%s' "${OSSRH_TOKEN_NAME}:${OSSRH_TOKEN_PASSWORD}" | base64 | tr -d '\n')
 
-# SpotlessCheck
-section "Checking spotless"
-./mvnw spotless:check || { echo "ERROR: Spotless check failed. Run './mvnw spotless:apply' to fix." >&2; exit 1; };
-
 # Check if the current version is already deployed
 section "Checking if version ${VERSION} is already published on Central"
 PUBLISHED=$(curl -s "https://central.sonatype.com/api/v1/publisher/published?namespace=com.github.squirrelgrip&name=root&version=${VERSION}" \
@@ -65,6 +54,17 @@ if [ PUBLISHED == 'true' ]; then
     echo "Artifact already published. You need to update the version using './mvnw versions:set'"
     exit 1
 fi
+
+# Spotless Check
+section "Checking spotless"
+./mvnw spotless:check || { echo "ERROR: Spotless check failed. Run './mvnw spotless:apply' to fix." >&2; exit 1; };
+
+# Check if gpg is configured correctly (will try to sign built artifacts)
+section "Verifying GPG signing setup by building and signing"
+./mvnw --batch-mode -s settings.xml -U -q package gpg:sign -Dgpg.keyEnvName=GPG_KEYNAME -Dgpg.passphraseEnvName=GPG_PASSPHRASE -DskipTests || {
+  echo "ERROR: GPG signing failed. Ensure GPG_KEYNAME and GPG_PASSPHRASE env vars are set and key is available." >&2
+  exit 1
+}
 
 # Start the Release (intentionally commented; run manually once checks pass)
 section "Starting release via jgitflow"

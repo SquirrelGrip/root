@@ -3,8 +3,8 @@ package com.github.squirrelgrip.extension.xml
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
-import com.github.squirrelgrip.format.DataFormat
-import com.github.squirrelgrip.format.ObjectMapperFactory
+import com.github.squirrelgrip.extension.jackson.JacksonDataFormat
+import com.github.squirrelgrip.extension.jackson.ObjectMapperFactory
 import com.github.squirrelgrip.util.notCatching
 import java.io.DataInput
 import java.io.DataOutput
@@ -16,7 +16,7 @@ import java.io.Writer
 import java.net.URL
 import java.nio.file.Path
 
-object Xml : DataFormat<XmlMapper, XmlMapper.Builder>(
+object Xml : JacksonDataFormat<XmlMapper, XmlMapper.Builder>(
     object : ObjectMapperFactory<XmlMapper, XmlMapper.Builder> {
         override fun builder(): XmlMapper.Builder = XmlMapper.builder()
     }

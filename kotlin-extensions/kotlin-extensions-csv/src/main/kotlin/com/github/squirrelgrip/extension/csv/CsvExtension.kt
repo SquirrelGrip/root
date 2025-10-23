@@ -4,16 +4,10 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.dataformat.csv.CsvMapper
 import com.fasterxml.jackson.dataformat.csv.CsvSchema
-import com.github.squirrelgrip.format.ObjectMapperFactory
-import com.github.squirrelgrip.format.SchemaDataFormat
+import com.github.squirrelgrip.extension.jackson.ObjectMapperFactory
+import com.github.squirrelgrip.extension.jackson.SchemaDataFormat
 import com.github.squirrelgrip.util.notCatching
-import java.io.DataInput
-import java.io.DataOutput
-import java.io.File
-import java.io.InputStream
-import java.io.OutputStream
-import java.io.Reader
-import java.io.Writer
+import java.io.*
 import java.net.URL
 import java.nio.file.Path
 

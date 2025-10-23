@@ -3,8 +3,8 @@ package com.github.squirrelgrip.extension.yaml
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
-import com.github.squirrelgrip.format.DataFormat
-import com.github.squirrelgrip.format.ObjectMapperFactory
+import com.github.squirrelgrip.extension.jackson.JacksonDataFormat
+import com.github.squirrelgrip.extension.jackson.ObjectMapperFactory
 import com.github.squirrelgrip.util.notCatching
 import java.io.DataInput
 import java.io.DataOutput
@@ -16,7 +16,7 @@ import java.io.Writer
 import java.net.URL
 import java.nio.file.Path
 
-object Yaml : DataFormat<YAMLMapper, YAMLMapper.Builder>(
+object Yaml : JacksonDataFormat<YAMLMapper, YAMLMapper.Builder>(
     object : ObjectMapperFactory<YAMLMapper, YAMLMapper.Builder> {
         override fun builder(): YAMLMapper.Builder = YAMLMapper.builder()
     }

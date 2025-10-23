@@ -54,6 +54,8 @@ fun Type.createSchemaReference(
         schemaGeneratorConfig
     )
 
+
+
 //fun Any.toJsonSchema(file: File) = JsonSchema.objectWriter().writeValue(file, this)
 //fun Any.toJsonSchema(path: Path) = JsonSchema.objectWriter().writeValue(path.toFile(), this)
 //fun Any.toJsonSchema(outputStream: OutputStream) = JsonSchema.objectWriter().writeValue(outputStream, this)
