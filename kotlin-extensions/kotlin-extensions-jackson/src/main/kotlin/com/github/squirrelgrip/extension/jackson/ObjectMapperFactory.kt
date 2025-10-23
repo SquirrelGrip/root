@@ -17,8 +17,7 @@ interface ObjectMapperFactory<M : ObjectMapper, B : MapperBuilder<M, B>> {
                 kotlinModule {
                     enable(KotlinFeature.StrictNullChecks)
                 }
-            )
-            .addModule(Jdk8Module())
+            ).addModule(Jdk8Module())
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .addMixIn(Throwable::class.java, ThrowableMixIn::class.java)
             .build()

@@ -2,7 +2,12 @@ package com.github.squirrelgrip.extension.jsonschema
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.github.squirrelgrip.extension.json.Json
-import com.github.victools.jsonschema.generator.*
+import com.github.victools.jsonschema.generator.Option
+import com.github.victools.jsonschema.generator.OptionPreset
+import com.github.victools.jsonschema.generator.SchemaGenerator
+import com.github.victools.jsonschema.generator.SchemaGeneratorConfig
+import com.github.victools.jsonschema.generator.SchemaGeneratorConfigBuilder
+import com.github.victools.jsonschema.generator.SchemaVersion
 import com.github.victools.jsonschema.module.jackson.JacksonModule
 import java.lang.reflect.Type
 
@@ -10,11 +15,12 @@ object JsonSchema {
     val defaultSchemaGeneratorConfig = with()
 
     fun with(vararg options: Option): SchemaGeneratorConfig =
-        defaultSchemaGeneratorConfigBuilder().apply {
-            options.fold(this) { builder, option ->
-                builder.with(option)
-            }
-        }.build()
+        defaultSchemaGeneratorConfigBuilder()
+            .apply {
+                options.fold(this) { builder, option ->
+                    builder.with(option)
+                }
+            }.build()
 
     fun defaultSchemaGeneratorConfigBuilder(): SchemaGeneratorConfigBuilder =
         SchemaGeneratorConfigBuilder(
@@ -28,14 +34,12 @@ object JsonSchema {
     fun generateSchema(
         type: Type,
         schemaGeneratorConfig: SchemaGeneratorConfig = defaultSchemaGeneratorConfig
-    ): JsonNode =
-        SchemaGenerator(schemaGeneratorConfig).generateSchema(type)
+    ): JsonNode = SchemaGenerator(schemaGeneratorConfig).generateSchema(type)
 
     fun createSchemaReference(
         type: Type,
         schemaGeneratorConfig: SchemaGeneratorConfig = defaultSchemaGeneratorConfig
-    ): JsonNode =
-        SchemaGenerator(schemaGeneratorConfig).buildMultipleSchemaDefinitions().createSchemaReference(type)
+    ): JsonNode = SchemaGenerator(schemaGeneratorConfig).buildMultipleSchemaDefinitions().createSchemaReference(type)
 }
 
 fun Type.toJsonSchema(
@@ -54,11 +58,8 @@ fun Type.createSchemaReference(
         schemaGeneratorConfig
     )
 
-
-
-//fun Any.toJsonSchema(file: File) = JsonSchema.objectWriter().writeValue(file, this)
-//fun Any.toJsonSchema(path: Path) = JsonSchema.objectWriter().writeValue(path.toFile(), this)
-//fun Any.toJsonSchema(outputStream: OutputStream) = JsonSchema.objectWriter().writeValue(outputStream, this)
-//fun Any.toJsonSchema(writer: Writer) = JsonSchema.objectWriter().writeValue(writer, this)
-//fun Any.toJsonSchema(dataOutput: DataOutput) = JsonSchema.objectWriter().writeValue(dataOutput, this)
-
+// fun Any.toJsonSchema(file: File) = JsonSchema.objectWriter().writeValue(file, this)
+// fun Any.toJsonSchema(path: Path) = JsonSchema.objectWriter().writeValue(path.toFile(), this)
+// fun Any.toJsonSchema(outputStream: OutputStream) = JsonSchema.objectWriter().writeValue(outputStream, this)
+// fun Any.toJsonSchema(writer: Writer) = JsonSchema.objectWriter().writeValue(writer, this)
+// fun Any.toJsonSchema(dataOutput: DataOutput) = JsonSchema.objectWriter().writeValue(dataOutput, this)

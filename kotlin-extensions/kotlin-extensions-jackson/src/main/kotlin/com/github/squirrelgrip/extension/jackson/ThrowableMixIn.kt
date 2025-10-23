@@ -10,4 +10,3 @@ internal class ThrowableMixIn
     constructor(
         @JsonProperty("message") message: String?
     ) : Throwable(message)
-

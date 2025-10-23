@@ -9,7 +9,11 @@ import com.github.squirrelgrip.extension.jackson.JsonIterator
 import com.github.squirrelgrip.extension.jackson.JsonSequence
 import com.github.squirrelgrip.extension.jackson.ObjectMapperFactory
 import com.github.squirrelgrip.util.notCatching
-import java.io.*
+import java.io.File
+import java.io.InputStream
+import java.io.OutputStream
+import java.io.Reader
+import java.io.Writer
 import java.net.URL
 import java.nio.file.Path
 import java.util.Spliterators
@@ -22,8 +26,7 @@ object Json : JacksonDataFormat<JsonMapper, JsonMapper.Builder>(
     }
 )
 
-inline fun <reified T> JsonParser.toJsonStream(): Stream<T> =
-    StreamSupport.stream(Spliterators.spliteratorUnknownSize(JsonIterator(this, T::class.java), 0), false)
+inline fun <reified T> JsonParser.toJsonStream(): Stream<T> = StreamSupport.stream(Spliterators.spliteratorUnknownSize(JsonIterator(this, T::class.java), 0), false)
 
 inline fun <reified T> JsonParser.toJsonSequence(): Sequence<T> = JsonSequence(this, T::class.java)
 
@@ -116,10 +119,11 @@ inline fun <reified T> ByteArray.toJsonStream(
     offset: Int,
     length: Int
 ): Stream<T> =
-    this.toJsonParser(
-        offset,
-        length
-    ).toJsonStream<T>()
+    this
+        .toJsonParser(
+            offset,
+            length
+        ).toJsonStream<T>()
 
 inline fun <reified T> File.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
 
@@ -142,10 +146,11 @@ inline fun <reified T> ByteArray.toJsonSequence(
     offset: Int,
     length: Int
 ): Sequence<T> =
-    this.toJsonParser(
-        offset,
-        length
-    ).toJsonSequence<T>()
+    this
+        .toJsonParser(
+            offset,
+            length
+        ).toJsonSequence<T>()
 
 inline fun <reified T> File.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
 
@@ -226,7 +231,8 @@ fun File.isJson(): Boolean = notCatching { this.toJsonNode() }
 fun Path.isJson(): Boolean = notCatching { this.toFile().toJsonNode() }
 
 fun Any.convertToMap(): Map<String, *> =
-    Json.objectMapper.convertValue(
-        this,
-        object : TypeReference<Map<String, *>>() {}
-    ).toMap()
+    Json.objectMapper
+        .convertValue(
+            this,
+            object : TypeReference<Map<String, *>>() {}
+        ).toMap()

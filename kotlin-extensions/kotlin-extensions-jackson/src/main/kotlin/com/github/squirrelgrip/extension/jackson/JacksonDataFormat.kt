@@ -8,7 +8,9 @@ import java.util.ServiceLoader
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-abstract class JacksonDataFormat<M : ObjectMapper, B : MapperBuilder<M, B>>(factory: ObjectMapperFactory<M, B>) : DataFormat {
+abstract class JacksonDataFormat<M : ObjectMapper, B : MapperBuilder<M, B>>(
+    factory: ObjectMapperFactory<M, B>
+) : DataFormat {
     val objectMapper: M by object : ReadOnlyProperty<JacksonDataFormat<M, B>, M> {
         lateinit var value: M
         val defaultObjectMapper: M by lazy {

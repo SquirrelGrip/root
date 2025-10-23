@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import java.time.Instant
 
 class GsonExtensionTest {
-
     @Test
     fun toJson() {
         assertThat(Sample().toJson()).isEqualTo("""{"v":0,"s":"A Simple String","m":{"a":"AAA"},"l":["1","AAA"]}""")
@@ -22,12 +21,15 @@ class GsonExtensionTest {
                 Sample(),
                 Sample()
             ).toJson()
-        ).isEqualTo("""[{"v":0,"s":"A Simple String","m":{"a":"AAA"},"l":["1","AAA"]},{"v":0,"s":"A Simple String","m":{"a":"AAA"},"l":["1","AAA"]}]""")
-        assertThat("""[{"v":0,"s":"A Simple String","m":{"a":"AAA"},"l":["1","AAA"]},{"v":0,"s":"A Simple String","m":{"a":"AAA"},"l":["1","AAA"]}]""".toInstanceList<Sample>()).isEqualTo(
+        ).isEqualTo(
+            """[{"v":0,"s":"A Simple String","m":{"a":"AAA"},"l":["1","AAA"]},{"v":0,"s":"A Simple String","m":{"a":"AAA"},"l":["1","AAA"]}]"""
+        )
+        assertThat(
+            """[{"v":0,"s":"A Simple String","m":{"a":"AAA"},"l":["1","AAA"]},{"v":0,"s":"A Simple String","m":{"a":"AAA"},"l":["1","AAA"]}]""".toInstanceList<Sample>()
+        ).isEqualTo(
             listOf(Sample(), Sample())
         )
     }
-
 
     @Test
     fun `write Instant`() {

@@ -11,12 +11,12 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.serializer
 
-val json: Json = Json {
-    isLenient = false
-    prettyPrint = true
-    encodeDefaults = true
-}
-
+val json: Json =
+    Json {
+        isLenient = false
+        prettyPrint = true
+        encodeDefaults = true
+    }
 
 fun <T> toSerializationStrategy(serializer: KSerializer<T>): SerializationStrategy<T> = serializer
 
@@ -29,15 +29,17 @@ fun Any.toJson(): String {
         is Collection<*> -> {
             if (this.isEmpty()) return "[]"
 
-            val first = this.first()
-                ?: throw IllegalArgumentException("Cannot determine element type of empty collection")
+            val first =
+                this.first()
+                    ?: throw IllegalArgumentException("Cannot determine element type of empty collection")
 
             val elementType = first::class
-            val elementSerializer = try {
-                elementType.serializer()
-            } catch (e: SerializationException) {
-                throw IllegalArgumentException("Elements of ${elementType.simpleName} are not @Serializable", e)
-            }
+            val elementSerializer =
+                try {
+                    elementType.serializer()
+                } catch (e: SerializationException) {
+                    throw IllegalArgumentException("Elements of ${elementType.simpleName} are not @Serializable", e)
+                }
 
             @Suppress("UNCHECKED_CAST")
             val listSerializer = ListSerializer(elementSerializer as KSerializer<Any>)
@@ -46,11 +48,12 @@ fun Any.toJson(): String {
         }
 
         else -> {
-            val serializer = try {
-                this::class.serializer()
-            } catch (e: SerializationException) {
-                throw IllegalArgumentException("Class ${this::class.simpleName} is not @Serializable", e)
-            }
+            val serializer =
+                try {
+                    this::class.serializer()
+                } catch (e: SerializationException) {
+                    throw IllegalArgumentException("Class ${this::class.simpleName} is not @Serializable", e)
+                }
 
             @Suppress("UNCHECKED_CAST")
             val strategy = serializer as SerializationStrategy<Any>
@@ -59,34 +62,34 @@ fun Any.toJson(): String {
     }
 }
 
-//fun Any.toJson(file: File) = Json.objectWriter().writeValue(file, this)
+// fun Any.toJson(file: File) = Json.objectWriter().writeValue(file, this)
 //
-//fun Any.toJson(path: Path) = Json.objectWriter().writeValue(path.toFile(), this)
+// fun Any.toJson(path: Path) = Json.objectWriter().writeValue(path.toFile(), this)
 //
-//fun Any.toJson(sink: Sink) = Json.objectWriter().writeValue(outputStream, this)
+// fun Any.toJson(sink: Sink) = Json.objectWriter().writeValue(outputStream, this)
 
-//fun Any.toJson(writer: Writer) = Json.objectWriter().writeValue(writer, this)
+// fun Any.toJson(writer: Writer) = Json.objectWriter().writeValue(writer, this)
 //
-//fun Any.toJson(dataOutput: DataOutput) = Json.objectWriter().writeValue(dataOutput, this)
+// fun Any.toJson(dataOutput: DataOutput) = Json.objectWriter().writeValue(dataOutput, this)
 //
 inline fun <reified T> String.toInstance(): T = Json.decodeFromString<T>(this)
 
 //
-//inline fun <reified T> InputStream.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
+// inline fun <reified T> InputStream.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
 //
-//inline fun <reified T> Reader.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
+// inline fun <reified T> Reader.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
 //
-//inline fun <reified T> URL.toInstance(): T =
+// inline fun <reified T> URL.toInstance(): T =
 //    this.openStream().use {
 //        Json.objectReader<T>().readValue(it, T::class.java)
 //    }
 //
-//inline fun <reified T> ByteArray.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
+// inline fun <reified T> ByteArray.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
 //
-//inline fun <reified T> ByteArray.toInstance(
+// inline fun <reified T> ByteArray.toInstance(
 //    offset: Int,
 //    len: Int
-//): T =
+// ): T =
 //    Json.objectReader<T>().readValue(
 //        this,
 //        offset,
@@ -94,177 +97,176 @@ inline fun <reified T> String.toInstance(): T = Json.decodeFromString<T>(this)
 //        T::class.java
 //    )
 //
-//inline fun <reified T> DataInput.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
+// inline fun <reified T> DataInput.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
 //
-//inline fun <reified T> JsonParser.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
+// inline fun <reified T> JsonParser.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
 //
-//inline fun <reified T> File.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
+// inline fun <reified T> File.toInstance(): T = Json.objectReader<T>().readValue(this, T::class.java)
 //
-//inline fun <reified T> Path.toInstance(): T = Json.objectReader<T>().readValue(this.toFile())
+// inline fun <reified T> Path.toInstance(): T = Json.objectReader<T>().readValue(this.toFile())
 //
 inline fun <reified T> String.toInstanceList(): List<T> = Json.decodeFromString<List<T>>(this)
 
 //
-//inline fun <reified T> InputStream.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
+// inline fun <reified T> InputStream.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
 //
-//inline fun <reified T> Reader.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
+// inline fun <reified T> Reader.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
 //
-//inline fun <reified T> URL.toInstanceList(): List<T> =
+// inline fun <reified T> URL.toInstanceList(): List<T> =
 //    this.openStream().use {
 //        Json.listObjectReader<T>().readValue(it)
 //    }
 //
-//inline fun <reified T> ByteArray.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
+// inline fun <reified T> ByteArray.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
 //
-//inline fun <reified T> ByteArray.toInstanceList(
+// inline fun <reified T> ByteArray.toInstanceList(
 //    offset: Int,
 //    len: Int
-//): List<T> =
+// ): List<T> =
 //    Json.listObjectReader<T>().readValue(
 //        this,
 //        offset,
 //        len
 //    )
 //
-//inline fun <reified T> DataInput.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
+// inline fun <reified T> DataInput.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
 //
-//inline fun <reified T> JsonParser.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
+// inline fun <reified T> JsonParser.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
 //
-//inline fun <reified T> File.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
+// inline fun <reified T> File.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this)
 //
-//inline fun <reified T> Path.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this.toFile())
+// inline fun <reified T> Path.toInstanceList(): List<T> = Json.listObjectReader<T>().readValue(this.toFile())
 //
-//inline fun <reified T> String.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
+// inline fun <reified T> String.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
 //
-//inline fun <reified T> InputStream.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
+// inline fun <reified T> InputStream.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
 //
-//inline fun <reified T> Reader.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
+// inline fun <reified T> Reader.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
 //
-//inline fun <reified T> URL.toJsonStream(): Stream<T> =
+// inline fun <reified T> URL.toJsonStream(): Stream<T> =
 //    this.openStream().use {
 //        it.toJsonParser().toJsonStream<T>()
 //    }
 //
-//inline fun <reified T> ByteArray.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
+// inline fun <reified T> ByteArray.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
 //
-//inline fun <reified T> ByteArray.toJsonStream(
+// inline fun <reified T> ByteArray.toJsonStream(
 //    offset: Int,
 //    length: Int
-//): Stream<T> =
+// ): Stream<T> =
 //    this.toJsonParser(
 //        offset,
 //        length
 //    ).toJsonStream<T>()
 //
-//inline fun <reified T> File.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
+// inline fun <reified T> File.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
 //
-//inline fun <reified T> Path.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
+// inline fun <reified T> Path.toJsonStream(): Stream<T> = this.toJsonParser().toJsonStream<T>()
 //
-//inline fun <reified T> String.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence()
+// inline fun <reified T> String.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence()
 //
-//inline fun <reified T> InputStream.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
+// inline fun <reified T> InputStream.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
 //
-//inline fun <reified T> Reader.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
+// inline fun <reified T> Reader.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
 //
-//inline fun <reified T> URL.toJsonSequence(): Sequence<T> =
+// inline fun <reified T> URL.toJsonSequence(): Sequence<T> =
 //    this.openStream().use {
 //        it.toJsonParser().toJsonSequence<T>()
 //    }
 //
-//inline fun <reified T> ByteArray.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
+// inline fun <reified T> ByteArray.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
 //
-//inline fun <reified T> ByteArray.toJsonSequence(
+// inline fun <reified T> ByteArray.toJsonSequence(
 //    offset: Int,
 //    length: Int
-//): Sequence<T> =
+// ): Sequence<T> =
 //    this.toJsonParser(
 //        offset,
 //        length
 //    ).toJsonSequence<T>()
 //
-//inline fun <reified T> File.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
+// inline fun <reified T> File.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
 //
-//inline fun <reified T> Path.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
+// inline fun <reified T> Path.toJsonSequence(): Sequence<T> = this.toJsonParser().toJsonSequence<T>()
 //
-//fun String.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
+// fun String.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
 //
-//fun InputStream.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
+// fun InputStream.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
 //
-//fun Reader.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
+// fun Reader.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
 //
-//fun URL.toJsonParser(): JsonParser =
+// fun URL.toJsonParser(): JsonParser =
 //    this.openStream().use {
 //        Json.objectMapper.createParser(it)
 //    }
 //
-//fun ByteArray.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
+// fun ByteArray.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
 //
-//fun ByteArray.toJsonParser(
+// fun ByteArray.toJsonParser(
 //    offset: Int,
 //    length: Int
-//): JsonParser = Json.objectMapper.createParser(this, offset, length)
+// ): JsonParser = Json.objectMapper.createParser(this, offset, length)
 //
-//fun File.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
+// fun File.toJsonParser(): JsonParser = Json.objectMapper.createParser(this)
 //
-//fun Path.toJsonParser(): JsonParser = Json.objectMapper.createParser(this.toFile())
+// fun Path.toJsonParser(): JsonParser = Json.objectMapper.createParser(this.toFile())
 //
-//fun Any.toJsonNode(): JsonNode = Json.objectMapper.valueToTree(this)
+// fun Any.toJsonNode(): JsonNode = Json.objectMapper.valueToTree(this)
 //
-//fun String.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
+// fun String.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
 //
-//fun InputStream.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
+// fun InputStream.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
 //
-//fun Reader.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
+// fun Reader.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
 //
-//fun URL.toJsonNode(): JsonNode =
+// fun URL.toJsonNode(): JsonNode =
 //    this.openStream().use {
 //        Json.objectMapper.readTree(it)
 //    }
 //
-//fun ByteArray.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
+// fun ByteArray.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
 //
-//fun ByteArray.toJsonNode(
+// fun ByteArray.toJsonNode(
 //    offset: Int,
 //    length: Int
-//): JsonNode = Json.objectMapper.readTree(this, offset, length)
+// ): JsonNode = Json.objectMapper.readTree(this, offset, length)
 //
-//fun JsonParser.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
+// fun JsonParser.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
 //
-//fun File.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
+// fun File.toJsonNode(): JsonNode = Json.objectMapper.readTree(this)
 //
-//fun Path.toJsonNode(): JsonNode = Json.objectMapper.readTree(this.toFile())
+// fun Path.toJsonNode(): JsonNode = Json.objectMapper.readTree(this.toFile())
 //
 fun String.isJson(): Boolean =
     notCatching {
         Json.decodeFromString<JsonElement>(this)
     }
 
-
-//fun InputStream.isJson(): Boolean = notCatching { this.toJsonNode() }
+// fun InputStream.isJson(): Boolean = notCatching { this.toJsonNode() }
 //
-//fun Reader.isJson(): Boolean = notCatching { this.toJsonNode() }
+// fun Reader.isJson(): Boolean = notCatching { this.toJsonNode() }
 //
-//fun URL.isJson(): Boolean =
+// fun URL.isJson(): Boolean =
 //    notCatching {
 //        this.openStream().use {
 //            it.toJsonNode()
 //        }
 //    }
 //
-//fun ByteArray.isJson(): Boolean = notCatching { this.toJsonNode() }
+// fun ByteArray.isJson(): Boolean = notCatching { this.toJsonNode() }
 //
-//fun ByteArray.isJson(
+// fun ByteArray.isJson(
 //    offset: Int,
 //    length: Int
-//): Boolean = notCatching { this.toJsonNode(offset, length) }
+// ): Boolean = notCatching { this.toJsonNode(offset, length) }
 //
-//fun JsonParser.isJson(): Boolean = notCatching { this.toJsonNode() }
+// fun JsonParser.isJson(): Boolean = notCatching { this.toJsonNode() }
 //
-//fun File.isJson(): Boolean = notCatching { this.toJsonNode() }
+// fun File.isJson(): Boolean = notCatching { this.toJsonNode() }
 //
-//fun Path.isJson(): Boolean = notCatching { this.toFile().toJsonNode() }
+// fun Path.isJson(): Boolean = notCatching { this.toFile().toJsonNode() }
 //
-//fun Any.convertToMap(): Map<String, *> =
+// fun Any.convertToMap(): Map<String, *> =
 //    Json.objectMapper.convertValue(
 //        this,
 //        object : TypeReference<Map<String, *>>() {}
