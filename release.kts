@@ -227,24 +227,23 @@ fun postReleaseRepoChecks(version: String) {
 
 fun checkTagCreated(version: String) {
     val cmd = listOf(
-        "git", "rev-parse", "--verify", "release/$version"
+        "git", "ls-remote", "--tags", "origin", version
     )
     val res = run(cmd, check = false, quiet = true)
-    if (res.exitCode == 0) {
-        if (res.stdout.isNotBlank()) System.err.print(res.stdout)
-        System.err.println("ERROR: Release Branch release/$version not removed.")
+    if (res.stdout.isBlank()) {
+        System.err.println("ERROR: Tag refs/tags/$version not created.")
         exitProcess(1)
     }
 }
 
 fun checkReleaseBranchRemoved(version: String) {
     val cmd = listOf(
-        "git", "rev-parse", "--verify", "refs/tags/$version"
+        "git", "rev-parse", "--verify", "release/$version"
     )
     val res = run(cmd, check = false, quiet = true)
     if (res.exitCode != 0) {
         if (res.stdout.isNotBlank()) System.err.print(res.stdout)
-        System.err.println("ERROR: Tag refs/tags/$version not created.")
+        System.err.println("ERROR: Branch release/$version not removed.")
         exitProcess(1)
     }
 }
@@ -252,6 +251,7 @@ fun checkReleaseBranchRemoved(version: String) {
 fun mainFlow() {
     // Basic requirements
     need("./mvnw")
+    need("git")
     need("gpg")
 
     val version = resolveVersion()
@@ -278,6 +278,8 @@ fun mainFlow() {
         }
 
         postReleaseRepoChecks(version)
+    } else {
+        println("Dry Run Enabled.")
     }
 }
 
