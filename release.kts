@@ -1,7 +1,6 @@
 #!/usr/bin/env kotlin
 @file:Suppress("SameParameterValue")
 
-import java.io.BufferedReader
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.URI
@@ -9,6 +8,9 @@ import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import java.util.Base64
 import kotlin.system.exitProcess
+
+val dryRun: Boolean = false
+val debug: Boolean = false
 
 // ---- Helpers ----
 fun section(title: String) {
@@ -35,20 +37,37 @@ fun need(cmd: String) {
 data class RunResult(val exitCode: Int, val stdout: String)
 
 fun run(cmd: List<String>, check: Boolean = true, quiet: Boolean = false): RunResult {
+    if (debug) {
+        println("> ${cmd.joinToString(" ")}")
+    }
     val pb = ProcessBuilder(cmd)
     pb.redirectErrorStream(true)
     val proc = pb.start()
-    val out = proc.inputStream.bufferedReader().use(BufferedReader::readText)
+
+    val sb = StringBuilder()
+    proc.inputStream.bufferedReader().use {
+        while (true) {
+            val line = it.readLine() ?: break
+            sb.appendLine(line)
+            if (!quiet) println(line)
+        }
+    }
     val code = proc.waitFor()
-    if (!quiet && out.isNotEmpty()) print(out)
+    if (debug) {
+        println("< $code")
+    }
     if (check && code != 0) {
         System.err.println("ERROR: command failed (${cmd.joinToString(" ")}) with code $code")
         exitProcess(code)
     }
-    return RunResult(code, out)
+    return RunResult(code, sb.toString())
 }
 
 fun httpGet(url: String, headers: Map<String, String> = emptyMap()): Pair<Int, String> {
+    if (debug) {
+        println("> GET $url")
+        headers.forEach { (k, v) -> println("> $k: $v") }
+    }
     val conn = (URI.create(url).toURL().openConnection() as HttpURLConnection)
     headers.forEach { (k, v) -> conn.setRequestProperty(k, v) }
     conn.connectTimeout = 15000
@@ -56,8 +75,14 @@ fun httpGet(url: String, headers: Map<String, String> = emptyMap()): Pair<Int, S
     conn.requestMethod = "GET"
     return try {
         val code = conn.responseCode
+        if (debug) {
+            println("< $code ${conn.responseMessage}")
+        }
         val stream = if (code in 200..299) conn.inputStream else conn.errorStream
         val body = (stream ?: conn.inputStream)?.bufferedReader()?.use { it.readText() } ?: ""
+        if (debug) {
+            println("< $body")
+        }
         Pair(code, body)
     } catch (e: Exception) {
         System.err.println("ERROR: HTTP request failed for $url: ${e.message}")
@@ -95,7 +120,7 @@ fun resolveProjectName(): String {
 fun verifyGpg() {
     section("Verifying GPG signing setup by building and signing")
     val cmd = listOf(
-        "./mvnw", "--batch-mode", "-s", "settings.xml", "-U", "-q",
+        "./mvnw", "--batch-mode", "-s", "settings.xml", "-U",
         "package", "gpg:sign",
         "-Dgpg.keyEnvName=GPG_KEYNAME",
         "-Dgpg.passphraseEnvName=GPG_PASSPHRASE",
@@ -196,12 +221,37 @@ fun jgitflowReleaseFinish() {
 
 fun postReleaseRepoChecks(version: String) {
     section("Post-release repo checks")
-    println("(TODO) Verify release branch removal and git tag presence for $version")
+    checkTagCreated(version)
+    checkReleaseBranchRemoved(version)
+}
+
+fun checkTagCreated(version: String) {
+    val cmd = listOf(
+        "git", "ls-remote", "--tags", "origin", version
+    )
+    val res = run(cmd, check = false, quiet = true)
+    if (res.stdout.isBlank()) {
+        System.err.println("ERROR: Tag refs/tags/$version not created.")
+        exitProcess(1)
+    }
+}
+
+fun checkReleaseBranchRemoved(version: String) {
+    val cmd = listOf(
+        "git", "rev-parse", "--verify", "release/$version"
+    )
+    val res = run(cmd, check = false, quiet = true)
+    if (res.exitCode != 0) {
+        if (res.stdout.isNotBlank()) System.err.print(res.stdout)
+        System.err.println("ERROR: Branch release/$version not removed.")
+        exitProcess(1)
+    }
 }
 
 fun mainFlow() {
     // Basic requirements
     need("./mvnw")
+    need("git")
     need("gpg")
 
     val version = resolveVersion()
@@ -217,16 +267,20 @@ fun mainFlow() {
     }
 
     // Run the release
-    jgitflowReleaseStart()
-    jgitflowReleaseFinish()
+    if (!dryRun) {
+        jgitflowReleaseStart()
+        jgitflowReleaseFinish()
 
-    section("Re-checking publication status for version $version")
-    if (!isPublished(name, version)) {
-        System.err.println("Artifact was not published.")
-        exitProcess(1)
+        section("Re-checking publication status for version $version")
+        if (!isPublished(name, version)) {
+            System.err.println("Artifact was not published.")
+            exitProcess(1)
+        }
+
+        postReleaseRepoChecks(version)
+    } else {
+        println("Dry Run Enabled.")
     }
-
-    postReleaseRepoChecks(version)
 }
 
 try {
