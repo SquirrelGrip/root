@@ -233,18 +233,22 @@ fun checkTagCreated(version: String) {
     if (res.stdout.isBlank()) {
         System.err.println("ERROR: Tag refs/tags/$version not created.")
         exitProcess(1)
+    } else {
+        println("SUCCESS: Tag refs/tags/$version created.")
     }
 }
 
 fun checkReleaseBranchRemoved(version: String) {
     val cmd = listOf(
-        "git", "rev-parse", "--verify", "release/$version"
+        "git", "rev-parse", "--verify", "-q", "release/$version"
     )
     val res = run(cmd, check = false, quiet = true)
     if (res.exitCode != 0) {
         if (res.stdout.isNotBlank()) System.err.print(res.stdout)
         System.err.println("ERROR: Branch release/$version not removed.")
         exitProcess(1)
+    } else {
+        println("SUCCESS: Branch release/$version removed.")
     }
 }
 
