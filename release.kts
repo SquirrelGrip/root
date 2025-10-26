@@ -289,7 +289,7 @@ fun mainFlow() {
 
 try {
     mainFlow()
-} catch (e: InterruptedException) {
+} catch (_: InterruptedException) {
     System.err.println("Aborted by user.")
     exitProcess(130)
 }
