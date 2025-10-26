@@ -22,7 +22,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
-        <kotlin.version>2.2.20</kotlin.version>
+        <kotlin.version>2.2.21</kotlin.version>
         <node.version>v22.21.0</node.version>
         <npm.version>v22.21.0</npm.version>
         <yarn.version>v1.22.7</yarn.version>
@@ -54,7 +54,7 @@
         <maven-invoker-plugin.version>3.9.1</maven-invoker-plugin.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
-        <maven-plugin-plugin.version>3.15.1</maven-plugin-plugin.version>
+        <maven-plugin-plugin.version>3.15.2</maven-plugin-plugin.version>
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
         <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
@@ -68,7 +68,7 @@
         <sisu-maven-plugin.version>${central-publishing-maven-plugin.version}.M4</sisu-maven-plugin.version>
         <sonar-maven-plugin.version>5.2.0.4988</sonar-maven-plugin.version>
         <spotless-maven-plugin.version>3.0.0</spotless-maven-plugin.version>
-        <spring-boot-maven-plugin.version>3.5.6</spring-boot-maven-plugin.version>
+        <spring-boot-maven-plugin.version>3.5.7</spring-boot-maven-plugin.version>
         <springdoc-openapi-maven-plugin.version>1.5</springdoc-openapi-maven-plugin.version>
         <tidy-maven-plugin.version>1.4.0</tidy-maven-plugin.version>
         <versions-maven-plugin.version>2.19.1</versions-maven-plugin.version>

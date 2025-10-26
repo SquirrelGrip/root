@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets
 import java.util.Base64
 import kotlin.system.exitProcess
 
-val dryRun: Boolean = true
+val dryRun: Boolean = false
 val debug: Boolean = false
 
 // ---- Helpers ----
