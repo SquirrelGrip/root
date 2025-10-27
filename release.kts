@@ -229,7 +229,7 @@ fun checkTagCreated(version: String) {
     val cmd = listOf(
         "git", "ls-remote", "--tags", "origin", version
     )
-    val res = run(cmd, check = false, quiet = true)
+    val res = run(cmd, check = false, quiet = false)
     if (res.stdout.isBlank()) {
         System.err.println("ERROR: Tag refs/tags/$version not created.")
         exitProcess(1)
@@ -240,7 +240,7 @@ fun checkReleaseBranchRemoved(version: String) {
     val cmd = listOf(
         "git", "rev-parse", "--verify", "release/$version"
     )
-    val res = run(cmd, check = false, quiet = true)
+    val res = run(cmd, check = false, quiet = false)
     if (res.exitCode != 0) {
         if (res.stdout.isNotBlank()) System.err.print(res.stdout)
         System.err.println("ERROR: Branch release/$version not removed.")
