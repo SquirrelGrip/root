@@ -238,7 +238,7 @@ fun checkTagCreated(version: String) {
 
 fun checkReleaseBranchRemoved(version: String) {
     val cmd = listOf(
-        "git", "rev-parse", "--verify", "release/$version"
+        "git", "rev-parse", "--verify", "-q", "release/$version"
     )
     val res = run(cmd, check = false, quiet = false)
     if (res.exitCode != 0) {
