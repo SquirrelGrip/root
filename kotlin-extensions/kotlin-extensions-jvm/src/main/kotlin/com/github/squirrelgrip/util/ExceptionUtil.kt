@@ -9,4 +9,9 @@ inline fun catching(fn: () -> Unit): Boolean =
     }
 
 inline fun notCatching(fn: () -> Unit): Boolean =
-    !catching { fn() }
+    try {
+        fn()
+        true
+    } catch (e: Throwable) {
+        false
+    }
