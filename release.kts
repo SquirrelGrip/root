@@ -136,9 +136,9 @@ fun verifyGpg() {
 
 fun githubAuthCheck() {
     section("Checking GitHub token authentication")
-    val token = System.getenv("GITHUB_TOKEN") ?: System.getenv("GH_TOKEN") ?: System.getenv("GIT_TOKEN")
+    val token = System.getenv("GIT_TOKEN")
     if (token.isNullOrBlank()) {
-        println("WARNING: No GitHub token found (expected GITHUB_TOKEN, GH_TOKEN, or GIT_TOKEN). Skipping GitHub auth check.")
+        println("WARNING: No GitHub token found (expected GIT_TOKEN). Skipping GitHub auth check.")
         return
     }
     val (code, body) = httpGet("https://api.github.com/user", mapOf("Authorization" to "Bearer $token"))
@@ -229,7 +229,7 @@ fun checkTagCreated(version: String) {
     val cmd = listOf(
         "git", "ls-remote", "--tags", "origin", version
     )
-    val res = run(cmd, check = false, quiet = true)
+    val res = run(cmd, check = false, quiet = false)
     if (res.stdout.isBlank()) {
         System.err.println("ERROR: Tag refs/tags/$version not created.")
         exitProcess(1)
@@ -242,7 +242,7 @@ fun checkReleaseBranchRemoved(version: String) {
     val cmd = listOf(
         "git", "rev-parse", "--verify", "-q", "release/$version"
     )
-    val res = run(cmd, check = false, quiet = true)
+    val res = run(cmd, check = false, quiet = false)
     if (res.exitCode != 0) {
         if (res.stdout.isNotBlank()) System.err.print(res.stdout)
         System.err.println("ERROR: Branch release/$version not removed.")

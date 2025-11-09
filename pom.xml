@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.squirrelgrip</groupId>
     <artifactId>root</artifactId>
-    <version>1.6.5-SNAPSHOT</version>
+    <version>1.6.6-SNAPSHOT</version>
     <description>A maven root project for SquirrelGrip projects</description>
     <packaging>pom</packaging>
 
@@ -24,7 +24,7 @@
 
         <kotlin.version>2.2.21</kotlin.version>
         <node.version>v22.21.0</node.version>
-        <npm.version>v22.21.0</npm.version>
+        <npm.version>10.9.4</npm.version>
         <yarn.version>v1.22.7</yarn.version>
 
         <antlr4-maven-plugin.version>4.13.2</antlr4-maven-plugin.version>
@@ -72,7 +72,7 @@
         <springdoc-openapi-maven-plugin.version>1.5</springdoc-openapi-maven-plugin.version>
         <tidy-maven-plugin.version>1.4.0</tidy-maven-plugin.version>
         <versions-maven-plugin.version>2.19.1</versions-maven-plugin.version>
-        <update-maven-plugin.version>2.0.0</update-maven-plugin.version>
+        <update-maven-plugin.version>2.1.0</update-maven-plugin.version>
     </properties>
 
     <build>
@@ -161,8 +161,8 @@
                                 <excludes><exclude>org.apache.logging.log4j:*:[2.17]</exclude></excludes>
                             </bannedDependencies>
                             <dependencyConvergence />
-                            <requireJavaVersion><version>11</version></requireJavaVersion>
-                            <requireMavenVersion><version>3.8.4</version></requireMavenVersion>
+                            <requireJavaVersion><version>${kotlin.compiler.jvmTarget}</version></requireJavaVersion>
+                            <requireMavenVersion><version>3.9.11</version></requireMavenVersion>
                         </rules>
                         <fail>true</fail>
                     </configuration>
@@ -284,7 +284,6 @@
             <plugin><groupId>org.jetbrains.dokka</groupId><artifactId>dokka-maven-plugin</artifactId><version>${dokka-maven-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>${maven-gpg-plugin.version}</version></plugin>
             <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-deploy-plugin</artifactId><version>${maven-deploy-plugin.version}</version></plugin>
-<!--            <plugin><groupId>org.sonatype.plugins</groupId><artifactId>nexus-staging-maven-plugin</artifactId><version>${nexus-staging-maven-plugin.version}</version></plugin>-->
             <plugin><groupId>org.sonatype.central</groupId><artifactId>central-publishing-maven-plugin</artifactId><version>${central-publishing-maven-plugin.version}</version></plugin>
             <!--@formatter:on-->
         </plugins>
