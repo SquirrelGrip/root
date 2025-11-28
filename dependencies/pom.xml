@@ -19,10 +19,10 @@
         <awaitility.version>4.3.0</awaitility.version>
         <bouncycastle.version>1.70</bouncycastle.version>
         <brave.version>5.17.0</brave.version>
-        <byte-buddy.version>1.17.8</byte-buddy.version>
+        <byte-buddy.version>1.18.2</byte-buddy.version>
         <caffeine.version>3.2.3</caffeine.version>
         <commons-beanutils.version>1.11.0</commons-beanutils.version>
-        <commons-lang3.version>3.19.0</commons-lang3.version>
+        <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-logging.version>1.3.5</commons-logging.version>
         <commons-collections.version>4.5.0</commons-collections.version>
         <doxia.version>2.0.0-M16</doxia.version>
@@ -34,9 +34,9 @@
         <httpcore5.version>5.2.4</httpcore5.version>
         <guava.version>33.5.0-jre</guava.version>
         <google-api-client.version>2.8.1</google-api-client.version>
-        <google-api-services-gmail.version>v1-rev20250630-2.0.0</google-api-services-gmail.version>
-        <google-cloud-libraries-bom.version>26.71.0</google-cloud-libraries-bom.version>
-        <google-cloud-pubsub.version>1.143.0</google-cloud-pubsub.version>
+        <google-api-services-gmail.version>v1-rev20251110-2.0.0</google-api-services-gmail.version>
+        <google-cloud-libraries-bom.version>26.72.0</google-cloud-libraries-bom.version>
+        <google-cloud-pubsub.version>1.143.1</google-cloud-pubsub.version>
         <google-oauth-client-jetty.version>1.39.0</google-oauth-client-jetty.version>
         <gson.version>2.13.2</gson.version>
         <jackson.version>2.20.1</jackson.version>
@@ -48,10 +48,10 @@
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <kotlin-extensions.version>1.3.12</kotlin-extensions.version>
         <kotlinx-coroutines.version>1.10.2</kotlinx-coroutines.version>
-        <kotlinx-io.version>0.8.0</kotlinx-io.version>
+        <kotlinx-io.version>0.8.2</kotlinx-io.version>
         <kotlinx-serialization-json.version>1.9.0</kotlinx-serialization-json.version>
         <log4j-core.version>2.25.2</log4j-core.version>
-        <logback.version>1.5.20</logback.version>
+        <logback.version>1.5.21</logback.version>
         <mail.version>1.4.7</mail.version>
         <micrometer.version>1.16.0</micrometer.version>
         <mockito.version>5.20.0</mockito.version>
@@ -60,18 +60,18 @@
         <plexus-classworlds.version>2.9.0</plexus-classworlds.version>
         <plexus-component-annotations.version>2.2.0</plexus-component-annotations.version>
         <plexus-utils.version>4.0.2</plexus-utils.version>
-        <poi.version>5.4.1</poi.version>
+        <poi.version>5.5.0</poi.version>
         <reactor.version>2020.0.15</reactor.version>
         <resilience4j.version>1.7.0</resilience4j.version>
         <slf4j.version>2.0.17</slf4j.version>
-        <spring-batch.version>5.2.4</spring-batch.version>
-        <spring-boot.version>3.5.0</spring-boot.version>
-        <spring-cloud-starter-bootstrap.version>4.3.0</spring-cloud-starter-bootstrap.version>
-        <spring-cloud-starter-zookeeper-config.version>4.3.0</spring-cloud-starter-zookeeper-config.version>
-        <spring-data-rest-hal-explorer.version>4.5.5</spring-data-rest-hal-explorer.version>
-        <spring-framework.version>6.2.12</spring-framework.version>
-        <spring-integration.version>6.5.3</spring-integration.version>
-        <spring-security.version>6.5.6</spring-security.version>
+        <spring-batch.version>6.0.0</spring-batch.version>
+        <spring-boot.version>4.0.0</spring-boot.version>
+        <spring-cloud-starter-bootstrap.version>5.0.0</spring-cloud-starter-bootstrap.version>
+        <spring-cloud-starter-zookeeper-config.version>5.0.0</spring-cloud-starter-zookeeper-config.version>
+        <spring-data-rest-hal-explorer.version>5.0.0</spring-data-rest-hal-explorer.version>
+        <spring-framework.version>7.0.1</spring-framework.version>
+        <spring-integration.version>7.0.0</spring-integration.version>
+        <spring-security.version>7.0.0</spring-security.version>
         <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
         <svnkit.version>1.10.11</svnkit.version>
         <velocity.version>1.7</velocity.version>
@@ -156,7 +156,7 @@
             <dependency><groupId>org.springframework.cloud</groupId><artifactId>spring-cloud-starter-zookeeper-discovery</artifactId><version>${spring-cloud-starter-zookeeper-config.version}</version></dependency>
             <dependency><groupId>org.springframework.integration</groupId><artifactId>spring-integration-bom</artifactId><version>${spring-integration.version}</version><type>pom</type><scope>import</scope></dependency>
             <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-bom</artifactId><version>${spring-security.version}</version><type>pom</type><scope>import</scope></dependency>
-            <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-parent</artifactId><version>${spring-boot.version}</version><type>pom</type><scope>import</scope></dependency>
+            <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-dependencies</artifactId><version>${spring-boot.version}</version><type>pom</type><scope>import</scope></dependency>
             <!--@formatter:on-->
         </dependencies>
     </dependencyManagement>
