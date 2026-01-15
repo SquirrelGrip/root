@@ -233,6 +233,8 @@ fun checkTagCreated(version: String) {
     if (res.stdout.isBlank()) {
         System.err.println("ERROR: Tag refs/tags/$version not created.")
         exitProcess(1)
+    } else {
+        println("SUCCESS: Tag refs/tags/$version created.")
     }
 }
 
@@ -245,6 +247,8 @@ fun checkReleaseBranchRemoved(version: String) {
         if (res.stdout.isNotBlank()) System.err.print(res.stdout)
         System.err.println("ERROR: Branch release/$version not removed.")
         exitProcess(1)
+    } else {
+        println("SUCCESS: Branch release/$version removed.")
     }
 }
 
